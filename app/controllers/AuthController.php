@@ -35,7 +35,7 @@ class AuthController {
         require __DIR__ . '/../views/reset_password.php';
     }
 
-    // REGISTER 
+    // REGISTER PROSES
     public function processRegister(){
 
         $db        = new Database;
