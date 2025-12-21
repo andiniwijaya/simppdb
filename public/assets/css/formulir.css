@@ -1,0 +1,10 @@
+body{
+  background:#eef3ff;
+  font-family:'Poppins',sans-serif;
+}
+
+.container{
+  background:white;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}

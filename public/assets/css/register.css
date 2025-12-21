@@ -1,0 +1,197 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    background:
+        linear-gradient(rgba(0, 35, 70, 0.65), rgba(0, 35, 70, 0.75)),
+        url('../../img/background-daftar.jpg') center/cover no-repeat;
+}
+
+/* === WRAPPER === */
+.register-wrapper{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 0;
+}
+
+/* === CARD DESKTOP SIZE === */
+.register-box{
+    width:460px;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.18);
+    overflow:hidden;
+}
+
+/* === HEADER === */
+.register-header{
+    padding:22px 18px;
+    text-align:center;
+    border-bottom:1px solid #e4e4e4;
+}
+
+.register-header img{
+    height:65px;
+}
+
+.register-header h4{
+    font-weight:700;
+    margin-top:8px;
+    margin-bottom:0;
+}
+
+.register-header p{
+    font-size:14px;
+    margin:0;
+    opacity:.8;
+}
+
+/* === BODY === */
+.register-body{
+    padding:22px 28px;
+}
+
+label{
+    font-weight:600;
+    margin-bottom:5px;
+    font-size:14px;
+}
+
+.form-control{
+    padding:11px;
+    border-radius:6px;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.btn-register{
+    background:#003366;
+    color:#fff;
+    padding:12px;
+    border-radius:6px;
+    font-weight:600;
+    width:100%;
+    margin-top:8px;
+    font-size:15px;
+}
+
+.btn-register:hover{
+    background:#002244;
+}
+
+.register-footer{
+    padding:13px;
+    background:#f2f2f2;
+    text-align:center;
+    font-size:14px;
+}
+
+
+
+/* ================================================================== */
+/* ===================== RESPONSIVE — TABLET ======================== */
+/* ================================================================== */
+
+@media(max-width:1024px){
+
+    .register-wrapper{
+        padding:50px 20px;
+    }
+
+    .register-box{
+        width:420px;
+    }
+
+    .register-body{
+        padding:22px 25px;
+    }
+}
+
+
+
+/* ================================================================== */
+/* ===================== RESPONSIVE — MOBILE ======================== */
+/* ================================================================== */
+
+@media(max-width:768px){
+
+    body{
+        background:
+            linear-gradient(rgba(0, 35, 70, 0.65), rgba(0, 35, 70, 0.75)),
+            url('../../img/background-daftar-mobile.jpg') center/cover no-repeat;
+    }
+
+    .register-wrapper{
+        padding:35px 10px;
+    }
+
+    .register-box{
+        width:100%;
+        max-width:350px;
+        border-radius:10px;
+    }
+
+    .register-header img{
+        height:55px;
+    }
+
+    .register-header h4{
+        font-size:19px;
+    }
+
+    .register-body{
+        padding:20px 18px;
+    }
+
+    label{
+        font-size:13px;
+    }
+
+    .btn-register{
+        padding:11px;
+        font-size:14px;
+    }
+
+    .form-control{
+        font-size:13px;
+        padding:10px;
+    }
+}
+
+
+
+/* ================================================================== */
+/* ===================== RESPONSIVE — SMALL PHONE =================== */
+/* ================================================================== */
+
+@media(max-width:420px){
+
+    .register-box{
+        max-width:300px;
+        padding-bottom:8px;
+    }
+
+    .register-header h4{
+        font-size:18px;
+    }
+
+    .register-body{
+        padding:18px 15px;
+    }
+
+    .register-header img{
+        height:45px;
+    }
+
+    .form-control{
+        font-size:12px;
+        padding:9px;
+    }
+
+    .btn-register{
+        padding:10px;
+        font-size:13px;
+    }
+}

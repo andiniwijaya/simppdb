@@ -1,0 +1,37 @@
+body {
+    background: #f8f9fc;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+    max-width: 550px;
+    background: white;
+    padding: 25px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.rekening-box {
+    background: #e8f5e9;
+    border-left: 5px solid #388e3c;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.rekening-box h6 {
+    font-weight: 700;
+    margin: 0;
+    color: #2e7d32;
+}
+
+.btn-primary {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input, select {
+    margin-top: 5px;
+}
+

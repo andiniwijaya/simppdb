@@ -1,0 +1,68 @@
+/* ============= BODY STYLE ============= */
+
+body{
+    margin:0;
+    background:#e9eff7;
+    font-family:Poppins, system-ui;
+}
+
+/* ============= SIDEBAR ============= */
+
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#1554c0;
+    position:fixed;
+    left:0;
+    top:0;
+    color:white;
+    padding-top:15px;
+}
+
+.sidebar img{
+    width:60px;
+    border-radius:50%;
+}
+
+.sidebar a{
+    color:white;
+    display:block;
+    padding:12px 20px;
+    text-decoration:none;
+    font-size:14px;
+    border-left:4px solid transparent;
+    transition:.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:rgba(255,255,255,0.15);
+    border-left:4px solid white;
+}
+
+/* ============= CONTENT WRAPPER ============= */
+
+.content{
+    margin-left:240px;
+    padding:25px;
+}
+
+/* ============= CARD STYLE ============= */
+
+.card{
+    border:none !important;
+    border-radius:12px !important;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+/* .progress bar */
+.progress{
+    height:26px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    font-size:13px;
+    font-weight:bold;
+}
