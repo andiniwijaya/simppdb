@@ -106,7 +106,7 @@ $base = Config::base_url();
     <div class="container">
         <div class="row">
             <div class="col-md-4"><div class="stat-box">30+</div> Guru</div>
-            <div class="col-md-4"><div class="stat-box">500+</div> Siswa</div>
+            <div class="col-md-4"><div class="stat-box">250+</div> Siswa</div>
             <div class="col-md-4"><div class="stat-box">20+</div> Prestasi</div>
         </div>
     </div>
