@@ -101,7 +101,7 @@ $base = Config::base_url();
     </div>
 </section>
 
-<!-- STATISTIK -->
+
 <section class="statistik">
     <div class="container">
         <div class="row">
