@@ -1,52 +1,74 @@
 <?php $active="berkas"; ?>
-
 <link rel="stylesheet" href="<?= Config::base_url();?>/public/assets/css/berkas.css">
 
 <div class="content">
 
-<h3 class="fw-bold mb-4 text-center">
-  Upload Berkas Pendaftaran
-</h3>
+<h3 class="fw-bold mb-4 text-center">Unggah Berkas Pendaftaran</h3>
 
-<div class="card p-4 shadow-sm">
+<div class="card p-4 shadow-sm mb-5">
 
+<table class="table table-bordered bg-white">
+<thead class="table-light">
+<tr>
+    <th>Jenis Berkas</th>
+    <th>Upload</th>
+    <th>Aksi</th>
+</tr>
+</thead>
+
+<tbody>
+
+<?php 
+$berkasList = [
+    "kartu_keluarga"          => "Kartu Keluarga",
+    "ktp_orang_tua"           => "KTP Orang Tua",
+    "kip"                     => "Kartu Indonesia Pintar",
+    "ijazah_sd"               => "Ijazah SD",
+    "surat_keterangan_lulus"  => "Surat Keterangan Lulus",
+    "akta_kelahiran"          => "Akta Kelahiran",
+    "pas_foto"                => "Pas Foto"
+];
+
+foreach($berkasList as $key => $title): ?>
+
+<tr>
+<td><?= $title ?></td>
+
+<td>
 <form action="/siswa/berkas/upload" 
-      method="post" enctype="multipart/form-data" 
-      id="formUpload">
+      method="post" enctype="multipart/form-data">
 
-    <label class="form-label fw-bold">Jenis Berkas</label>
-    <select name="jenis_berkas" class="form-control mb-3" required>
-        <option></option>
-        <option value="kartu_keluarga">Kartu Keluarga</option>
-        <option value="ktp_orang_tua">KTP Orang Tua</option>
-        <option value="kip">Kartu Indonesia Pintar</option>
-        <option value="ijazah_sd">Ijazah SD</option>
-        <option value="surat_keterangan_lulus">Surat Keterangan Lulus</option>
-        <option value="akta_kelahiran">Akta Kelahiran</option>
-        <option value="pas_foto">Pas Foto</option>
-    </select>
+    <input type="hidden" name="jenis_berkas" value="<?= $key ?>">
 
-    <label class="form-label fw-bold">Pilih File</label>
-    <input type="file" name="file" class="form-control mb-3" required>
+    <input type="file" name="file" class="form-control" required>
+</td>
 
-    <button class="btn btn-primary w-100">
-        Upload Berkas
+<td>
+    <button class="btn btn-primary btn-sm">
+        Unggah
     </button>
-
 </form>
+</td>
+
+</tr>
+
+<?php endforeach; ?>
+
+</tbody>
+</table>
 
 </div>
 
 
-<h5 class="mt-5 fw-bold">Daftar Berkas Terkirim</h5>
+<h5 class="fw-bold">Daftar Berkas Terkirim</h5>
 
 <table class="table table-bordered mt-3 bg-white">
 <thead class="table-light">
-    <tr>
-        <th>Jenis</th>
-        <th>Lokasi</th>
-        <th>Status</th>
-    </tr>
+<tr>
+    <th>Jenis</th>
+    <th>File</th>
+    <th>Status</th>
+</tr>
 </thead>
 
 <tbody>
@@ -55,7 +77,7 @@
     <td><?= $b["jenis_berkas"] ?></td>
     <td>
         <a href="<?= $b["lokasi_berkas"] ?>" target="_blank">
-            Lihat File
+            Lihat
         </a>
     </td>
     <td><?= $b["status_berkas"] ?></td>
