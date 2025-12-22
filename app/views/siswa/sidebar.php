@@ -15,7 +15,7 @@
        <i class="bi bi-file-earmark-text me-2"></i> Formulir
     </a>
 
-    <a href="/siswa/berkas"
+    <a href="/siswa/berkas_pendaftar"
        class="<?= ($active=="berkas"?"active":"") ?>">
        <i class="bi bi-upload me-2"></i> Upload Berkas
     </a>
