@@ -20,51 +20,43 @@ class FormulirController
     }
 
     public function simpan() {
-        
-        session_start();
 
-        if(!isset($_SESSION["id_pengguna"])) {
+        if(!isset($_SESSION["user_id"])) {
             header("Location: /login");
             exit;
         }
 
-        $user_id = $_SESSION["id_pengguna"];
+        $user_id   = $_SESSION["user_id"];
         $pendaftar = new Pendaftar;
-        $ortu = new OrangTua;
+        $ortu      = new OrangTua;
 
         if($_POST["save"] == "siswa"){
 
-            $pendaftar->insert($user_id,$_POST);
+            $pendaftar->saveSiswa($user_id,$_POST);
 
             header("Location: /siswa/formulir?tab=siswa&saved=1");
             exit;
         }
 
-
         if($_POST["save"] == "ortu"){
 
             $id = $pendaftar->getId($user_id);
 
-            $ortu->insertAyah($id,$_POST);
-            $ortu->insertIbu($id,$_POST);
+            $ortu->saveAyah($id,$_POST);
+            $ortu->saveIbu($id,$_POST);
 
             header("Location: /siswa/formulir?tab=ortu&saved=1");
             exit;
         }
 
-
         if($_POST["save"] == "wali"){
 
             $id = $pendaftar->getId($user_id);
 
-            if(!empty($_POST["nama_wali"])){
-                $ortu->insertWali($id,$_POST);
-            }
+            $ortu->saveWali($id,$_POST);
 
             header("Location: /siswa/formulir?tab=wali&saved=1");
             exit;
         }
-
     }
-
 }
