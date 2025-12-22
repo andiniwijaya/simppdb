@@ -15,6 +15,18 @@ class Pendaftar extends Database {
     }
 
 
+    public function getFormDataByUserId($id_pengguna) {
+        
+        $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pengguna);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+
     public function saveSiswa($id_pengguna,$d){
 
         $existId = $this->getId($id_pengguna);
