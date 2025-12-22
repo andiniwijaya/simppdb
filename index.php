@@ -26,6 +26,9 @@ $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/siswa/formulir', 'FormulirController@index');
 $router->post('/siswa/formulir/simpan', 'FormulirController@simpan');
 
+$router->get("/siswa/berkas_pendaftar", "BerkasController@index");
+$router->post("/siswa/berkas/upload", "BerkasController@upload");
+
 $router->get("/pembayaran", "PembayaranController@index");
 $router->post("/pembayaran/upload", "PembayaranController@upload");
 
