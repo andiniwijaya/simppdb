@@ -33,12 +33,12 @@
 
 
 
-<!-- ==========================================================
-    TAB 1 : DATA DIRI SISWA
-=========================================================== -->
+<!--TAB 1 : DATA DIRI SISWA-->
 <div class="tab-pane fade show active" id="dataDiri">
 
     <div class="card p-4 shadow-sm mb-4">
+
+        <h5 class="mb-3 fw-bold">Data Siswa</h5>
 
         <div class="row mb-3">
             <div class="col-md-6">
@@ -121,6 +121,7 @@
             <div class="col-md-3">
                 <label>Status Tinggal</label>
                 <select name="status_tinggal" class="form-control" required>
+                    <option></option>
                     <option>bersama_ortu</option>
                     <option>wali</option>
                     <option>kost</option>
@@ -136,9 +137,16 @@
         </div>
 
 
-        <div class="mb-3 col-md-6">
-            <label>Nomor HP</label>
-            <input name="nomor_hp" class="form-control" required>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label>No HP</label>
+                <input name="nomor_hp" class="form-control" required>
+            </div>
+
+            <div class="col-md-6">
+                <label>Email</label>
+                <input name="email" class="form-control" required>
+            </div>
         </div>
 
     </div>
@@ -148,9 +156,7 @@
 
 
 
-<!-- ==========================================================
-    TAB 2 : DATA AYAH & IBU
-=========================================================== -->
+<!--TAB 2 : DATA AYAH & IBU-->
 <div class="tab-pane fade" id="dataOrtu">
 
     <div class="card p-4 shadow-sm mb-4">
@@ -230,12 +236,12 @@
 
 
 
-<!-- ==========================================================
-    TAB 3 : DATA WALI OPSIONAL
-=========================================================== -->
+<!--TAB 3 : DATA WALI OPSIONAL-->
 <div class="tab-pane fade" id="dataWali">
 
     <div class="card p-4 shadow-sm mb-4">
+
+        <h5 class="mb-3 fw-bold">Data Wali</h5>
 
         <div class="row mb-3">
             <div class="col-md-6">

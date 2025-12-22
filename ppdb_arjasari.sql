@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS ppdb_arjasari;
-CREATE DATABASE ppdb_arjasari;
-USE ppdb_arjasari;
+DROP DATABASE IF EXISTS sim_ppdb_arjasari;
+CREATE DATABASE sim_ppdb_arjasari;
+USE sim_ppdb_arjasari;
 
 -- TABEL LOGIN PENGGUNA
 CREATE TABLE pengguna (
@@ -46,6 +46,7 @@ CREATE TABLE pendaftar (
 
     tahun_lulus YEAR,
     nomor_hp VARCHAR(20),
+    email VARCHAR(100),
 
     tanggal_daftar TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
