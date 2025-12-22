@@ -14,8 +14,8 @@ class User {
         $hash  = hashPassword($password);
 
         $stmt = $this->db->conn->prepare("
-            INSERT INTO pengguna (nama_pengguna,email,kata_sandi,peran,token)
-            VALUES (?,?,?,'siswa',?)
+            INSERT INTO pengguna (nama_pengguna,email,kata_sandi,peran)
+            VALUES (?,?,?,'siswa')
         ");
 
         $stmt->bind_param("ssss", $username,$email,$hash,$token);
