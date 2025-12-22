@@ -32,4 +32,21 @@ class Pendaftar {
 
         return $this->db->conn->insert_id;
     }
+    
+    public function getFormDataByUserId($id_pengguna) {
+        
+        $sql = "
+        SELECT *
+        FROM pendaftar
+        WHERE id_pengguna = ?
+        LIMIT 1
+        ";
+
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pengguna);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_assoc();
+    }
+
 }
