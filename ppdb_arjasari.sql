@@ -2,17 +2,31 @@ DROP DATABASE IF EXISTS sim_ppdb_arjasari;
 CREATE DATABASE sim_ppdb_arjasari;
 USE sim_ppdb_arjasari;
 
+
 -- TABEL LOGIN PENGGUNA
 CREATE TABLE pengguna (
     id_pengguna INT AUTO_INCREMENT PRIMARY KEY,
     nama_pengguna VARCHAR(50) UNIQUE,
     kata_sandi VARCHAR(255),
     email VARCHAR(100),
-    peran ENUM('admin','operator','siswa') DEFAULT 'siswa',
+    peran ENUM('admin','siswa') DEFAULT 'siswa',
     dibuat_pada TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- TABEL PENDAFTAR (DATA SISWA)
+
+-- insert admin default
+INSERT INTO pengguna (nama_pengguna, kata_sandi, email, peran)
+VALUES (
+    'admin',
+    -- password = 11111111
+    '$2y$10$4RcU4Qcu1N9nvT3YRMJuOuZxS6E7S6XWmGkUs/7D6JQBGQyjpOMBe',
+    'admin@gmail.com',
+    'admin'
+);
+
+
+-- TABEL PENDAFTAR
+
 CREATE TABLE pendaftar (
     id_pendaftar INT AUTO_INCREMENT PRIMARY KEY,
     id_pengguna INT UNIQUE,
@@ -44,14 +58,8 @@ CREATE TABLE pendaftar (
     anak_ke INT,
     jumlah_saudara INT,
 
-    -- TAMBAHAN BARU
-    status_anak ENUM(
-        'kandung','tiri','angkat'
-    ) DEFAULT 'kandung',
-
-    yatim_status ENUM(
-        'bukan','yatim','piatu','yatim_piatu'
-    ) DEFAULT 'bukan',
+    status_anak ENUM('kandung','tiri','angkat') DEFAULT 'kandung',
+    yatim_status ENUM('bukan','yatim','piatu','yatim_piatu') DEFAULT 'bukan',
 
     bahasa_rumah VARCHAR(100),
 
@@ -74,8 +82,8 @@ CREATE TABLE pendaftar (
 );
 
 
+-- TABEL ORANG TUA / WALI
 
--- TABEL ORANG TUA/WALI
 CREATE TABLE orang_tua (
     id_orang_tua INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -84,7 +92,6 @@ CREATE TABLE orang_tua (
 
     nama_orang_tua VARCHAR(100),
 
-    -- UPDATE
     pendidikan_terakhir VARCHAR(50),
 
     pekerjaan VARCHAR(100),
@@ -92,7 +99,6 @@ CREATE TABLE orang_tua (
 
     nomor_hp VARCHAR(20),
 
-    -- TAMBAHAN BARU
     tempat_lahir VARCHAR(50),
     tanggal_lahir DATE,
     alamat_rumah TEXT,
@@ -103,8 +109,8 @@ CREATE TABLE orang_tua (
 );
 
 
+-- TABEL BERKAS SISWA
 
--- TABEL BERKAS UPLOAD
 CREATE TABLE berkas_pendaftar (
     id_berkas INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -134,6 +140,7 @@ CREATE TABLE berkas_pendaftar (
 
 
 -- TABEL PEMBAYARAN
+
 CREATE TABLE pembayaran (
     id_pembayaran INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -151,8 +158,8 @@ CREATE TABLE pembayaran (
 );
 
 
+-- TABEL PENGUMUMAN
 
--- TABEL PENGUMUMAN KELULUSAN
 CREATE TABLE pengumuman (
     id_pengumuman INT AUTO_INCREMENT PRIMARY KEY,
 
