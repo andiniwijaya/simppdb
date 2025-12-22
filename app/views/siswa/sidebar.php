@@ -10,19 +10,24 @@
         <i class="bi bi-speedometer2 me-2"></i> Dashboard
     </a>
 
-    <a href="/dashboard/data_formulir"
+    <a href="/siswa/formulir"
        class="<?= ($active=="formulir"?"active":"") ?>">
        <i class="bi bi-file-earmark-text me-2"></i> Formulir
     </a>
 
-    <a href="/dashboard/upload_berkas"
+    <a href="/siswa/berkas_pendaftar"
        class="<?= ($active=="berkas"?"active":"") ?>">
        <i class="bi bi-upload me-2"></i> Upload Berkas
     </a>
 
-    <a href="/dashboard/pembayaran"
+    <a href="/siswa/pembayaran"
        class="<?= ($active=="bayar"?"active":"") ?>">
        <i class="bi bi-cash-coin me-2"></i> Pembayaran
+    </a>
+
+    <a href="/siswa/pengumuman"
+       class="<?= ($active=="pengumuman"?"active":"") ?>">
+       <i class="bi bi-megaphone-fill me-2"></i> Pengumuman
     </a>
 
     <hr style="border-color: rgba(255,255,255,0.2);">

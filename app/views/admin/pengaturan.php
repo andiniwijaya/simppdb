@@ -17,7 +17,7 @@
         <div class="pengaturan-page show" id="profil_admin">
             <table class="pengaturan-table">
                 <tr><th>Nama Admin</th><td>Administrator</td></tr>
-                <tr><th>Username</th><td>admin_ppdb</td></tr>
+                <tr><th>Username</th><td>admin</td></tr>
                 <tr><th>Email Admin</th><td>admin@gmail.com</td></tr>
             </table>
         </div>

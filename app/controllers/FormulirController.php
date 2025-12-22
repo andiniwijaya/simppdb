@@ -1,42 +1,45 @@
 <?php
 
 require_once __DIR__ . '/../models/Pendaftar.php';
+require_once __DIR__ . '/../models/OrangTua.php';
 
-class FormulirController {
+class FormulirController
+{
+    public function index() {
 
-    public function index()
-    {
-        session_start();
-
-        if(!isset($_SESSION['id_pengguna'])){
-            header("Location: /loginsiswa");
+        if(!isset($_SESSION["user_id"])) {
+            header("Location: /login");
             exit;
         }
 
-        $id_pengguna = $_SESSION["id_pengguna"];
+        ob_start();
+        require __DIR__ . '/../views/siswa/formulir.php';
+        $content = ob_get_clean();
 
-        $pendaftarModel = new Pendaftar();
-        $pendaftar = $pendaftarModel->getFormDataByUserId($id_pengguna);
-
-        require __DIR__."/../views/siswa/formulir.php";
+        require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    public function simpan()
-    {
-        session_start();
+    public function simpan() {
 
-        if(!isset($_SESSION['id_pengguna'])){
-            header("Location: /loginsiswa");
+        session_start();
+        if (!isset($_SESSION["id_pengguna"])) {
+            header("Location: /login");
             exit;
         }
 
-        $id_pengguna = $_SESSION["id_pengguna"];
+        $pendaftar = new Pendaftar();
+        $orangtua = new OrangTua();
 
-        $pendaftarModel = new Pendaftar();
-        $pendaftarModel->updateDiri($id_pengguna, $_POST);
+        $id_pendaftar = $pendaftar->insert($_SESSION["id_pengguna"], $_POST);
 
-        header("Location: /formulir");
+        $orangtua->insertAyah($id_pendaftar, $_POST);
+        $orangtua->insertIbu($id_pendaftar, $_POST);
+
+        if (!empty($_POST["nama_wali"])) {
+            $orangtua->insertWali($id_pendaftar, $_POST);
+        }
+
+        header("Location: /siswa/dashboard");
         exit;
     }
-
 }

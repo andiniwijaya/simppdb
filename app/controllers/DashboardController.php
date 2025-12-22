@@ -78,10 +78,13 @@ class DashboardController {
 
             extract($data);
 
+            ob_start();
             require __DIR__ . '/../views/siswa/dashboard.php';
+            $content = ob_get_clean();
+
+            require __DIR__ . '/../views/siswa/layout_siswa.php';
             return;
         }
-
 
         // DASHBOARD ADMIN
         if($role === "admin"){
@@ -116,13 +119,6 @@ class DashboardController {
             extract($data);
 
             require __DIR__ . '/../views/admin/dashboard.php';
-            return;
-        }
-
-        // DASHBOARD OPERATOR
-        if($role === "operator"){
-
-            require __DIR__ . '/../views/operator/dashboard.php';
             return;
         }
 
