@@ -6,11 +6,11 @@
         <small class="opacity-75 d-block mb-3">Siswa PPDB</small>
     </div>
 
-    <a href="/dashboard" class="<?= ($active=="dashboard"?"active":"") ?>">
+    <a href="/siswa/dashboard" class="<?= ($active=="dashboard"?"active":"") ?>">
         <i class="bi bi-speedometer2 me-2"></i> Dashboard
     </a>
 
-    <a href="/dashboard/formulir"
+    <a href="/siswa/formulir"
        class="<?= ($active=="formulir"?"active":"") ?>">
        <i class="bi bi-file-earmark-text me-2"></i> Formulir
     </a>

@@ -119,13 +119,6 @@ class DashboardController {
             return;
         }
 
-        // DASHBOARD OPERATOR
-        if($role === "operator"){
-
-            require __DIR__ . '/../views/operator/dashboard.php';
-            return;
-        }
-
         echo "Role tidak dikenali.";
     }
 

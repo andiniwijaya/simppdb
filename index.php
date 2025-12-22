@@ -18,7 +18,6 @@ $router->post('/register', 'AuthController@processRegister');
 
 //halaman dashboard
 $router->get('/dashboard', 'DashboardController@index');
-$router->get('/dashboard/formulir', 'DashboardController@formulir');
 $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
 $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
 $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
