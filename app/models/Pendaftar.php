@@ -16,7 +16,7 @@ class Pendaftar extends Database {
 
 
     public function getFormDataByUserId($id_pengguna) {
-        
+
         $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
 
         $stmt = $this->conn->prepare($sql);
@@ -45,7 +45,7 @@ class Pendaftar extends Database {
         (id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
         tanggal_lahir, agama, alamat, status_tinggal, asal_sekolah,
         anak_ke, jumlah_saudara, status_anak, yatim_status, bahasa_rumah,
-        tinggi_badan, berat_badan, penyakit, tahun_lusus, nomor_hp, email)
+        tinggi_badan, berat_badan, penyakit, tahun_lulus, nomor_hp, email)
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sql);
