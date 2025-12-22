@@ -45,7 +45,7 @@ ob_start();
         <?php endif; ?>
       </div>
 
-      <a href="/dashboard/data_formulir" class="btn btn-outline-primary btn-sm">
+      <a href="/siswa/formulir" class="btn btn-outline-primary btn-sm">
         Lihat Formulir
       </a>
 
@@ -80,7 +80,7 @@ ob_start();
 
       </div>
 
-      <a href="/dashboard/upload_berkas" class="btn btn-outline-primary btn-sm">
+      <a href="/siswa/berkas_pendaftar" class="btn btn-outline-primary btn-sm">
         Upload Sekarang
       </a>
 
@@ -116,7 +116,7 @@ ob_start();
 
       </div>
 
-      <a href="/dashboard/pembayaran" class="btn btn-outline-primary btn-sm">
+      <a href="/siswa/pembayaran" class="btn btn-outline-primary btn-sm">
         Kirim Bukti
       </a>
 

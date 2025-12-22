@@ -26,6 +26,7 @@ $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 
 $router->get("/formulir", "FormulirController@index");
 $router->post("/formulir/simpan", "FormulirController@simpan");
+
 $router->get("/pembayaran", "PembayaranController@index");
 $router->post("/pembayaran/upload", "PembayaranController@upload");
 
