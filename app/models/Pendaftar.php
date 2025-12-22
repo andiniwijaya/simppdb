@@ -34,7 +34,7 @@ class Pendaftar {
     }
     
     public function getFormDataByUserId($id_pengguna) {
-        
+
         $sql = "
         SELECT *
         FROM pendaftar
@@ -47,6 +47,19 @@ class Pendaftar {
         $stmt->execute();
         
         return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function nisnExists($nisn) {
+
+        $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $nisn);
+        $stmt->execute();
+
+        $res = $stmt->get_result();
+
+        return $res->num_rows > 0;
     }
 
 }
