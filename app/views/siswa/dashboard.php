@@ -1,6 +1,5 @@
 <?php
 $active="dashboard";
-ob_start();
 ?>
 
 <h3 class="mb-3">
@@ -53,8 +52,3 @@ ob_start();
   </div>
 
 </div>
-
-<?php
-$content = ob_get_clean();
-require __DIR__."/layout_siswa.php";
-?>
