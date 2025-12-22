@@ -12,7 +12,6 @@ class User {
 
     public function insert($username,$email,$password){
         $hash  = hashPassword($password);
-        $token = generateToken();
 
         $stmt = $this->db->conn->prepare("
             INSERT INTO pengguna (nama_pengguna,email,kata_sandi,peran,token)
