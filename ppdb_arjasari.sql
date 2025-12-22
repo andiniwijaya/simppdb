@@ -44,6 +44,22 @@ CREATE TABLE pendaftar (
     anak_ke INT,
     jumlah_saudara INT,
 
+    -- TAMBAHAN BARU
+    status_anak ENUM(
+        'kandung','tiri','angkat'
+    ) DEFAULT 'kandung',
+
+    yatim_status ENUM(
+        'bukan','yatim','piatu','yatim_piatu'
+    ) DEFAULT 'bukan',
+
+    bahasa_rumah VARCHAR(100),
+
+    tinggi_badan INT,
+    berat_badan INT,
+
+    penyakit TEXT,
+
     tahun_lulus YEAR,
     nomor_hp VARCHAR(20),
     email VARCHAR(100),
@@ -57,6 +73,8 @@ CREATE TABLE pendaftar (
         ON DELETE CASCADE
 );
 
+
+
 -- TABEL ORANG TUA/WALI
 CREATE TABLE orang_tua (
     id_orang_tua INT AUTO_INCREMENT PRIMARY KEY,
@@ -65,16 +83,26 @@ CREATE TABLE orang_tua (
     jenis ENUM('Ayah','Ibu','Wali') NOT NULL,
 
     nama_orang_tua VARCHAR(100),
-    pendidikan VARCHAR(50),
+
+    -- UPDATE
+    pendidikan_terakhir VARCHAR(50),
+
     pekerjaan VARCHAR(100),
     penghasilan VARCHAR(50),
 
     nomor_hp VARCHAR(20),
 
+    -- TAMBAHAN BARU
+    tempat_lahir VARCHAR(50),
+    tanggal_lahir DATE,
+    alamat_rumah TEXT,
+
     FOREIGN KEY (id_pendaftar)
         REFERENCES pendaftar(id_pendaftar)
         ON DELETE CASCADE
 );
+
+
 
 -- TABEL BERKAS UPLOAD
 CREATE TABLE berkas_pendaftar (
@@ -98,6 +126,8 @@ CREATE TABLE berkas_pendaftar (
         ON DELETE CASCADE
 );
 
+
+
 -- TABEL PEMBAYARAN
 CREATE TABLE pembayaran (
     id_pembayaran INT AUTO_INCREMENT PRIMARY KEY,
@@ -114,6 +144,8 @@ CREATE TABLE pembayaran (
         REFERENCES pendaftar(id_pendaftar)
         ON DELETE CASCADE
 );
+
+
 
 -- TABEL PENGUMUMAN KELULUSAN
 CREATE TABLE pengumuman (
