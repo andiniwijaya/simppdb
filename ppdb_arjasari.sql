@@ -19,7 +19,7 @@ INSERT INTO pengguna (nama_pengguna, kata_sandi, email, peran)
 VALUES (
     'admin',
     -- password = 11111111
-    '$2y$10$4RcU4Qcu1N9nvT3YRMJuOuZxS6E7S6XWmGkUs/7D6JQBGQyjpOMBe',
+    '$2y$10$bqkiHtr4ExZ3lOBbCNdc3Ok1YEp23S9xkMCId0Trk3EhkOOKPwrs6',
     'admin@gmail.com',
     'admin'
 );
