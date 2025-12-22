@@ -1,12 +1,8 @@
-/* ============= BODY STYLE ============= */
-
 body{
     margin:0;
     background:#e9eff7;
     font-family:Poppins, system-ui;
 }
-
-/* ============= SIDEBAR ============= */
 
 .sidebar{
     width:240px;
@@ -40,14 +36,10 @@ body{
     border-left:4px solid white;
 }
 
-/* ============= CONTENT WRAPPER ============= */
-
 .content{
-    margin-left:240px;
-    padding:25px;
+    margin-left:240px !important;
+    padding:30px !important;
 }
-
-/* ============= CARD STYLE ============= */
 
 .card{
     border:none !important;
@@ -55,7 +47,6 @@ body{
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
-/* .progress bar */
 .progress{
     height:26px;
     border-radius:20px;
@@ -65,10 +56,4 @@ body{
 .progress-bar{
     font-size:13px;
     font-weight:bold;
-}
-
-
-.content {
-    margin-left: 240px;
-    padding: 30px;
 }

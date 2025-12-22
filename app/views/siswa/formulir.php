@@ -1,25 +1,31 @@
-<?php $active = "formulir"; ?>
+<?php 
+$active = "formulir"; 
+$base = Config::base_url();
+?>
 
-<div class="content px-4 py-4">
+<div class="content">
 
-<h3 class="mb-4">Formulir PPDB</h3>
+<h3 class="mb-4 fw-bold text-center">Formulir PPDB</h3>
 
 <ul class="nav nav-tabs mb-4" id="formTabs">
 
     <li class="nav-item">
-        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dataDiri">
+        <button class="nav-link <?= ($_GET['tab']??'siswa')=='siswa'?'active':'' ?>"
+            data-bs-toggle="tab" data-bs-target="#tabSiswa">
             Data Diri
         </button>
     </li>
 
     <li class="nav-item">
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dataOrtu">
+        <button class="nav-link <?= ($_GET['tab']??'siswa')=='ortu'?'active':'' ?>"
+            data-bs-toggle="tab" data-bs-target="#tabOrtu">
             Data Orang Tua
         </button>
     </li>
 
     <li class="nav-item">
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dataWali">
+        <button class="nav-link <?= ($_GET['tab']??'siswa')=='wali'?'active':'' ?>"
+            data-bs-toggle="tab" data-bs-target="#tabWali">
             Data Wali
         </button>
     </li>
@@ -27,14 +33,16 @@
 </ul>
 
 
-<form action="/siswa/formulir/simpan" method="post">
-
 <div class="tab-content">
 
 
-
 <!--TAB 1 : DATA DIRI SISWA-->
-<div class="tab-pane fade show active" id="dataDiri">
+<div class="tab-pane fade <?= ($_GET['tab']??'siswa')=='siswa'?'show active':'' ?>"
+     id="tabSiswa">
+
+<form action="/siswa/formulir/simpan" method="post">
+
+<input type="hidden" name="save" value="siswa">
 
     <div class="card p-4 shadow-sm mb-4">
 
@@ -140,7 +148,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label>No HP</label>
-                <input name="nomor_hp" class="form-control" required>
+                <input type="number" name="nomor_hp" class="form-control" required>
             </div>
 
             <div class="col-md-6">
@@ -151,13 +159,23 @@
 
     </div>
 
+<button class="btn btn-primary mb-5 w-100">
+    Simpan Data Diri
+</button>
+
+</form>
+
 </div>
 
 
 
 
 <!--TAB 2 : DATA AYAH & IBU-->
-<div class="tab-pane fade" id="dataOrtu">
+<div class="tab-pane fade <?= ($_GET['tab'] ?? '') == 'ortu' ? 'show active' : '' ?>"
+     id="tabOrtu">
+
+<form action="/siswa/formulir/simpan" method="post">
+<input type="hidden" name="save" value="ortu">
 
     <div class="card p-4 shadow-sm mb-4">
 
@@ -231,13 +249,24 @@
 
     </div>
 
+    
+<button class="btn btn-primary mb-5 w-100">
+    Simpan Data Orang Tua
+</button>
+
+</form>
+
 </div>
 
 
 
 
 <!--TAB 3 : DATA WALI OPSIONAL-->
-<div class="tab-pane fade" id="dataWali">
+<div class="tab-pane fade <?= ($_GET['tab'] ?? '') == 'wali' ? 'show active' : '' ?>"
+     id="tabWali">
+
+<form action="/siswa/formulir/simpan" method="post">
+<input type="hidden" name="save" value="wali">
 
     <div class="card p-4 shadow-sm mb-4">
 
@@ -276,16 +305,14 @@
 
     </div>
 
-</div>
-
-
-</div>
-
-
-<button class="btn btn-primary mt-4">
-    Simpan Semua Data
+<button class="btn btn-primary w-100">
+  Simpan Data Wali
 </button>
 
 </form>
+
+</div>
+
+</div>
 
 </div>
