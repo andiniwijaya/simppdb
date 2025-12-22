@@ -116,6 +116,7 @@ $base = Config::base_url();
     <div class="col-md-4">
         <label>Status Anak</label>
         <select name="status_anak" class="form-control" required>
+            <option></option>
             <option>kandung</option>
             <option>tiri</option>
             <option>angkat</option>
@@ -125,6 +126,7 @@ $base = Config::base_url();
     <div class="col-md-4">
         <label>Status Yatim</label>
         <select name="yatim_status" class="form-control" required>
+            <option></option>
             <option>bukan</option>
             <option>yatim</option>
             <option>piatu</option>
@@ -152,6 +154,7 @@ $base = Config::base_url();
     <div class="col-md-3">
         <label>Status Tinggal</label>
         <select name="status_tinggal" class="form-control" required>
+            <option></option>
             <option>bersama_ortu</option>
             <option>wali</option>
             <option>kost</option>
