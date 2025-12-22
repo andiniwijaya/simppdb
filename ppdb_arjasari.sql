@@ -108,24 +108,29 @@ CREATE TABLE orang_tua (
 CREATE TABLE berkas_pendaftar (
     id_berkas INT AUTO_INCREMENT PRIMARY KEY,
 
-    id_pendaftar INT,
+    id_pendaftar INT NOT NULL,
+
     jenis_berkas ENUM(
         'kartu_keluarga',
+        'ktp_orang_tua',
+        'kip',
+        'ijazah_sd',
+        'surat_keterangan_lulus',
         'akta_kelahiran',
-        'ijazah',
-        'pas_foto',
-        'ktp_orang_tua'
-    ),
-    lokasi_berkas VARCHAR(255),
+        'pas_foto'
+    ) NOT NULL,
+
+    lokasi_berkas VARCHAR(255) NOT NULL,
 
     status_berkas ENUM('menunggu','valid','invalid')
         DEFAULT 'menunggu',
+
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (id_pendaftar)
         REFERENCES pendaftar(id_pendaftar)
         ON DELETE CASCADE
 );
-
 
 
 -- TABEL PEMBAYARAN

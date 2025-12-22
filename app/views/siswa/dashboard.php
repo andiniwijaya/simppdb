@@ -38,7 +38,7 @@ $active="dashboard";
       <h6>Upload Berkas</h6>
       <i class="bi <?= $latest_upload["status_berkas"]=="Belum Upload"?"bi-x-circle-fill text-danger":"bi-check-circle-fill text-success" ?> fs-1 mb-2"></i>
       <small><?= $latest_upload["status_berkas"] ?></small>
-      <a href="/siswa/berkas_pendaftar" class="btn btn-outline-primary btn-sm mt-3">Upload</a>
+      <a href="/siswa/berkas" class="btn btn-outline-primary btn-sm mt-3">Upload</a>
     </div>
   </div>
 
