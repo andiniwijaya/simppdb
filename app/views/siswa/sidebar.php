@@ -6,7 +6,7 @@
         <small class="opacity-75 d-block mb-3">Siswa PPDB</small>
     </div>
 
-    <a href="/siswa/dashboard" class="<?= ($active=="dashboard"?"active":"") ?>">
+    <a href="/dashboard" class="<?= ($active=="dashboard"?"active":"") ?>">
         <i class="bi bi-speedometer2 me-2"></i> Dashboard
     </a>
 

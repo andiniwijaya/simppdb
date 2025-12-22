@@ -5,13 +5,14 @@ require_once __DIR__ . '/../models/OrangTua.php';
 
 class FormulirController
 {
-    public function index()
-    {
-        require __DIR__ . '/../views/siswa/formulir.php';
+    public function index() {
+        $content = __DIR__ . '/../views/siswa/formulir.php';
+        require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    public function simpan()
-    {
+
+    public function simpan() {
+        
         session_start();
         if (!isset($_SESSION["id_pengguna"])) {
             header("Location: /login");

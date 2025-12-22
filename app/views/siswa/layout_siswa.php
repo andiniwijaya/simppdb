@@ -20,7 +20,7 @@
 <?php include "sidebar.php"; ?>
 
 <div class="content">
-    <?= $content ?>
+    <?php include $content; ?>
 </div>
 
 </body>
