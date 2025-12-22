@@ -1,17 +1,16 @@
+<?php 
+$active = "formulir"; 
+?>
+
 <div class="content px-4 py-4">
 
 <h3>Formulir PPDB</h3>
 <hr>
 
-
 <form action="/siswa/formulir/simpan" method="post" id="formPendaftar">
-
-
-<!-- IDENTITAS SISWA -->
 
 <h4>Data Diri Siswa</h4>
 <hr class="mb-4">
-
 
 <div class="row">
 
@@ -88,14 +87,10 @@
 </div>
 
 
-<!-- DATA ORANG TUA -->
-
 <h4 class="mt-5">Data Orang Tua</h4>
 <hr>
 
-
 <div class="row">
-
     <div class="col-md-6">
         <label>Nama Ayah</label>
         <input name="nama_ayah" class="form-control mb-3" required>
@@ -111,12 +106,9 @@
         <label>Pendidikan Ibu</label>
         <input name="pendidikan_ibu" class="form-control mb-3" required>
     </div>
-
 </div>
 
-
 <div class="row">
-
     <div class="col-md-6">
         <label>Pekerjaan Ayah</label>
         <input name="pekerjaan_ayah" class="form-control mb-3" required>
@@ -132,9 +124,7 @@
         <label>Penghasilan Ibu</label>
         <input name="penghasilan_ibu" class="form-control mb-3" required>
     </div>
-
 </div>
-
 
 <div class="row">
 
@@ -150,14 +140,10 @@
 
 </div>
 
-
-<!-- WALI OPSIONAL -->
-
 <h4 class="mt-5">Data Wali (Opsional)</h4>
 <hr>
 
 <div class="row">
-
     <div class="col-md-6">
         <label>Nama Wali</label>
         <input name="nama_wali" class="form-control mb-3">
@@ -167,11 +153,9 @@
         <label>Pendidikan Wali</label>
         <input name="pendidikan_wali" class="form-control mb-3">
     </div>
-
 </div>
 
 <div class="row">
-
     <div class="col-md-6">
         <label>Pekerjaan Wali</label>
         <input name="pekerjaan_wali" class="form-control mb-3">
@@ -181,23 +165,16 @@
         <label>Penghasilan Wali</label>
         <input name="penghasilan_wali" class="form-control mb-3">
     </div>
-
 </div>
 
 <div class="row">
-
     <div class="col-md-6">
         <label>No HP Wali</label>
         <input name="hp_wali" class="form-control mb-3">
     </div>
-
 </div>
 
-
-<button class="btn btn-primary mt-4">
-    Simpan Data
-</button>
+<button class="btn btn-primary mt-4">Simpan Data</button>
 
 </form>
-
 </div>
