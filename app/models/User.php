@@ -18,7 +18,7 @@ class User {
             VALUES (?,?,?,'siswa')
         ");
 
-        $stmt->bind_param("ssss", $username,$email,$hash,$token);
+        $stmt->bind_param("ssss", $username,$email,$hash);
         $stmt->execute();
 
         return $this->db->conn->insert_id;
