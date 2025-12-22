@@ -9,13 +9,26 @@ body{
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* rapatkan konten ke sidebar */
+/* rapatkan content ke sidebar */
 .content {
-    margin-left: -5px;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
-/* spacing antar kolom */
-.form-control {
-    height: 45px;
+/* card agar melebar full */
+.card {
+    width: 100%;
 }
 
+/* tab berada di tengah card */
+.nav-tabs {
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.nav-link.active {
+    background: #fff !important;
+    border-bottom: 3px solid #0d6efd !important;
+    color: #0d6efd !important;
+    font-weight: 600;
+}

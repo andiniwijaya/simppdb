@@ -25,6 +25,11 @@
        <i class="bi bi-cash-coin me-2"></i> Pembayaran
     </a>
 
+    <a href="/siswa/pengumuman"
+       class="<?= ($active=="pengumuman"?"active":"") ?>">
+       <i class="bi bi-megaphone-fill me-2"></i> Pengumuman
+    </a>
+
     <hr style="border-color: rgba(255,255,255,0.2);">
 
     <a href="/logout">
