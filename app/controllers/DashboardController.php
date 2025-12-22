@@ -78,9 +78,9 @@ class DashboardController {
 
             extract($data);
 
-            $view = __DIR__ . '/../views/siswa/dashboard.php';
+            $content = __DIR__ . '/../views/siswa/dashboard.php';
             require __DIR__ . '/../views/siswa/layout_siswa.php';
-            
+
             return;
         }
 
