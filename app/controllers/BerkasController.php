@@ -27,14 +27,15 @@ class BerkasController {
 
         $list = $m->getAll($id_pendaftar);
 
-        $content = __DIR__ . "/../views/siswa/berkas.php";
+        ob_start();
+        require __DIR__ . "/../views/siswa/berkas.php";
+        $content = ob_get_clean();
+
         require __DIR__ . "/../views/siswa/layout_siswa.php";
     }
 
 
     public function upload(){
-
-        session_start();
 
         if(!isset($_SESSION["user_id"])){
             header("Location: /login");
@@ -75,4 +76,5 @@ class BerkasController {
 
         die("Gagal upload berkas");
     }
+
 }
