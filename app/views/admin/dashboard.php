@@ -60,30 +60,6 @@ $base = Config::base_url();
 
     </div>
 
-    <!-- ================= STATISTIK PPDB ================= -->
-    <h3 style="margin-top:30px; margin-bottom:15px;">Statistik PPDB</h3>
-
-    <div class="statistik-box">
-
-        <div class="statistik-item">
-            <span>
-                <b>Data Valid</b>
-                <b><?= $persen_valid ?>%</b>
-            </span>
-            <div class="progress">
-                <div class="progress-bar green" style="width: <?= $persen_valid ?>%"></div>
-            </div>
-        </div>
-
-        <div class="statistik-item">
-            <span>
-                <b>Menunggu Validasi</b>
-                <b><?= $persen_menunggu ?>%</b>
-            </span>
-            <div class="progress">
-                <div class="progress-bar blue" style="width: <?= $persen_menunggu ?>%"></div>
-            </div>
-        </div>
 
         <div class="statistik-item">
             <span>
