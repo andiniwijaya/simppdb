@@ -1,13 +1,18 @@
 <?php 
 $base = Config::base_url();
 
-// ================= STATISTIK =================
-// hindari pembagian nol
-$total = max(1, $total_pendaftar);
+// ================= DATA SISWA PER TAHUN =================
+$siswa_tahun = [
+    2021 => 120,
+    2022 => 165,
+    2023 => 190,
+    2024 => 220,
+    2025 => 140
+];
 
-$persen_valid    = round(($valid / $total) * 100);
-$persen_menunggu = round(($menunggu / $total) * 100);
-$persen_tolak    = round(($tolak / $total) * 100);
+$label_tahun = json_encode(array_keys($siswa_tahun));
+$data_tahun  = json_encode(array_values($siswa_tahun));
+?>
 ?>
 
 <!DOCTYPE html>

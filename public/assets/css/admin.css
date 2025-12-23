@@ -235,6 +235,25 @@ body {
 .progress-bar.red{
     background: linear-gradient(90deg, #f26464, #eb5757);
 }
+/* ======================================================
+   DIAGRAM BATANG (CHART)
+   ====================================================== */
+
+.chart-box{
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    margin: 25px 0;
+}
+
+.chart-title{
+    font-size:16px;
+    font-weight:700;
+    color:#082a5c;
+    margin-bottom:15px;
+}
+
 
 
 /* ======================================================
