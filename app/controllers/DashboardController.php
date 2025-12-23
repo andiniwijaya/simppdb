@@ -6,8 +6,7 @@ require_once __DIR__ . '/../models/Payment.php';
 
 class DashboardController {
 
-    public function index()
-    {
+    public function index() {
         // CEK LOGIN
         if(!isset($_SESSION["user_id"])){
             header("Location: /login");
@@ -128,8 +127,7 @@ class DashboardController {
 
     //KELEMBAGAAN ADMIN
 
-    public function kelembagaan()
-    {
+    public function kelembagaan() {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
             exit;
@@ -140,8 +138,8 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
-        public function dataPPDB()
-    {
+
+    public function dataPPDB() {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
             exit;
@@ -158,8 +156,7 @@ class DashboardController {
     }
 
         //Administrasi Admin
-    public function administrasi()
-    {
+    public function administrasi() {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
             exit;
@@ -187,4 +184,5 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
+
 }
