@@ -157,4 +157,14 @@ class Pendaftar extends Database {
 
         $stmt->execute();
     }
+    public function nisnExists($nisn)
+{
+    $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("s", $nisn);
+    $stmt->execute();
+
+    return $stmt->get_result()->num_rows > 0;
+}
+
 }
