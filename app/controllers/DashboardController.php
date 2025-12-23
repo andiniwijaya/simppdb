@@ -156,8 +156,7 @@ class DashboardController {
 
         echo "Role tidak dikenali.";
     }
-
-    // ================= MENU ADMIN =================
+    // MENU ADMIN 
 
     public function kelembagaan()
     {
