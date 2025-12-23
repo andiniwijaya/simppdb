@@ -1,91 +1,71 @@
-.formulir-wrapper{
-    max-width:1300px;
-    margin:auto;
-}
-
-.nav-tabs{
-    justify-content:center;
-    font-size:17px;
-    font-weight:500;
-}
-
-.nav-link.active{
-    background:#fff !important;
-    border-bottom:3px solid #0d6efd !important;
-    color:#0d6efd !important;
-}
-
+/* ================= GLOBAL ================= */
 body{
   background:#eef3ff;
   font-family:'Poppins',sans-serif;
+  margin:0;
 }
 
-/* container utama */
-.container{
+/* ================= SIDEBAR OFFSET ================= */
+.content{
+  margin-left:240px;   /* SAMA dengan lebar sidebar */
+  padding:25px 30px;
+}
+
+/* ================= WRAPPER FORM ================= */
+.formulir-wrapper{
+  max-width:100%;
+}
+
+/* ================= CARD UTAMA ================= */
+.form-card{
   background:white;
-  border-radius:15px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  padding: 25px;
-}
-
-<<<<<<< HEAD
-/* rapatkan konten ke sidebar (sedikit saja) */
-.content {
-  margin-left: 0;
-  padding: 25px;
+  border-radius:16px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  padding:30px;
 }
 
 /* ================= TAB ================= */
-.nav-tabs {
-  border-bottom: 1px solid #dee2e6;
-  margin-bottom: 20px;
+.nav-tabs{
+  border-bottom:1px solid #dee2e6;
+  margin-bottom:0;
 }
 
-.nav-tabs .nav-link {
-  border: none;
-  color: #0d6efd;
-  font-weight: 500;
-  padding: 10px 20px;
+.nav-tabs .nav-link{
+  border:none;
+  color:#0d6efd;
+  font-size:16px;
+  font-weight:500;
+  padding:10px 22px;
 }
 
-.nav-tabs .nav-link.active {
-  color: #000;
-  background: #fff;
-  border-bottom: 3px solid #0d6efd;
-  font-weight: 600;
+.nav-tabs .nav-link.active{
+  background:#fff;
+  border-bottom:3px solid #0d6efd;
+  color:#0d6efd;
+  font-weight:600;
 }
 
 /* ================= TAB CONTENT ================= */
-.tab-content {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+.tab-content{
+  padding-top:25px;
 }
 
 /* ================= FORM ================= */
-.form-label {
-  font-weight: 500;
-  margin-bottom: 6px;
+.form-label{
+  font-weight:500;
+  margin-bottom:6px;
 }
 
-.form-control {
-  height: 45px;
-  border-radius: 8px;
+.form-control,
+.form-select{
+  height:45px;
+  border-radius:8px;
 }
 
-textarea.form-control {
-  height: auto;
+textarea.form-control{
+  height:auto;
 }
 
-/* spacing antar row */
-.row > div {
-  margin-bottom: 15px;
+.row > div{
+  margin-bottom:15px;
 }
-=======
-.card{
-    width:100% !important;
-    border-radius:20px !important;
-}
-
->>>>>>> dd488cefbfb3dc6e8fa876befeb53841d8a8c80b
