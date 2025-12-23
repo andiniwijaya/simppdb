@@ -32,6 +32,8 @@ $router->post("/siswa/berkas/upload", "BerkasController@upload");
 $router->get("/siswa/pembayaran", "PembayaranController@index");
 $router->post("/siswa/pembayaran/upload", "PembayaranController@upload");
 
+$router->get("/siswa/pengumuman", "PengumumanController@index");
+
 $router->get('/forgot', 'AuthController@forgot');
 $router->post('/forgot', 'AuthController@processForgot');
 
