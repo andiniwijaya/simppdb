@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../models/Pendaftar.php';
 require_once __DIR__ . '/../models/Upload.php';
 require_once __DIR__ . '/../models/Payment.php';
+require_once __DIR__ . '/../models/Pengumuman.php';
+
 
 class DashboardController {
 
@@ -16,39 +18,45 @@ class DashboardController {
 
         $role = $_SESSION["role"];
 
-        // ================= DASHBOARD SISWA =================
+<<<<<<< HEAD
+        // DASHBOARD SISWA
         if ($role === "siswa") {
+
+            if (!isset($_SESSION["user_id"])) {
+                header("Location: /login");
+                exit;
+            }
+
+        // DASHBOARD SISWA 
+        if ($role === "siswa") {
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
 
             $id_pengguna = $_SESSION["user_id"];
 
-            $pendaftar = new Pendaftar;
-            $upload    = new Upload;
-            $payment   = new Payment;
+            $pendaftar = new Pendaftar();
+            $berkas    = new Berkas();
+            $payment   = new Payment();
 
+<<<<<<< HEAD
+            //DATA SISWA 
             // DATA SISWA
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
 
             if (!$siswa) {
                 $siswa = [
-                    "id_pendaftar"   => 0,
-                    "nik"            => "",
-                    "nisn"           => "",
-                    "nama_lengkap"   => "",
-                    "jenis_kelamin"  => "",
-                    "tempat_lahir"   => "",
-                    "tanggal_lahir"  => "",
-                    "agama"          => "",
-                    "alamat"         => "",
-                    "asal_sekolah"   => "",
-                    "nomor_hp"       => "",
-                    "email"          => "",
-                    "status_data"    => "belum_lengkap"
+                    "id_pendaftar"  => 0,
+                    "nama_lengkap"  => "",
+                    "status_data"   => "belum_lengkap"
                 ];
             }
 
+<<<<<<< HEAD
+            $id_pendaftar = (int) $siswa["id_pendaftar"];
+
             $id_pendaftar = (int)$siswa["id_pendaftar"];
 
-            // ================= STATUS UPLOAD BERKAS =================
+            // STATUS UPLOAD BERKAS
             $berkas_wajib = [
                 'kartu_keluarga',
                 'ktp_orang_tua',
@@ -58,10 +66,27 @@ class DashboardController {
                 'akta_kelahiran',
                 'pas_foto'
             ];
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
 
+            // STATUS UPLOAD
             $status_upload = "Belum Upload";
 
             if ($id_pendaftar > 0) {
+<<<<<<< HEAD
+                $status_upload = $berkas->getStatusLengkap($id_pendaftar);
+            }
+
+            // STATUS PEMBAYARAN 
+            $paymentData = ["status_bayar" => "belum"];
+
+            if ($id_pendaftar > 0) {
+                $pm = $payment->lastPayment($id_pendaftar);
+                if ($pm) {
+                    $paymentData = $pm;
+                }
+            }
+
+            // PROGRESS
                 $uploaded = $upload->getStatusLengkap($id_pendaftar);
 
                 if ($uploaded) {
@@ -86,7 +111,7 @@ class DashboardController {
                 }
             }
 
-            // ================= STATUS PEMBAYARAN =================
+            // STATUS PEMBAYARAN
             $paymentData = ["status_bayar" => "belum"];
             if ($id_pendaftar > 0) {
                 $pm = $payment->lastPayment($id_pendaftar);
@@ -95,11 +120,37 @@ class DashboardController {
                 }
             }
 
-            // ================= PROGRESS =================
+            // PROGRESS 
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
             $progress = 0;
             if (!empty($siswa["nama_lengkap"]))        $progress += 40;
             if ($status_upload === "lengkap")          $progress += 30;
             if ($paymentData["status_bayar"] === "lunas") $progress += 30;
+
+<<<<<<< HEAD
+            if (!empty($siswa["nama_lengkap"])) $progress += 40;
+            if ($status_upload === "lengkap")   $progress += 30;
+            if ($paymentData["status_bayar"] === "lunas") $progress += 30;
+
+            // PENGUMUMAN
+            $pengumuman = new Pengumuman();
+
+            $status_pengumuman = "menunggu";
+
+            if($id_pendaftar > 0){
+                $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
+            }
+
+            // KIRIM KE VIEW
+            $data = [
+                "siswa"         => $siswa,
+                "status_upload" => $status_upload,
+                "payment"       => $paymentData,
+                "progress"      => $progress,
+                "status_pengumuman" => $status_pengumuman
+            ];
+
+            extract($data);
 
             extract([
                 "siswa"         => $siswa,
@@ -107,6 +158,7 @@ class DashboardController {
                 "payment"       => $paymentData,
                 "progress"      => $progress
             ]);
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
 
             ob_start();
             require __DIR__ . '/../views/siswa/dashboard.php';
@@ -116,8 +168,15 @@ class DashboardController {
             return;
         }
 
+<<<<<<< HEAD
+
+
+        // DASHBOARD ADMIN
+        if($role === "admin"){
+
         // ================= DASHBOARD ADMIN =================
         if ($role === "admin") {
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
 
             $pendaftar = new Pendaftar;
             $upload    = new Upload;
