@@ -1,5 +1,13 @@
 <?php 
 $base = Config::base_url();
+
+// ================= STATISTIK =================
+// hindari pembagian nol
+$total = max(1, $total_pendaftar);
+
+$persen_valid    = round(($valid / $total) * 100);
+$persen_menunggu = round(($menunggu / $total) * 100);
+$persen_tolak    = round(($tolak / $total) * 100);
 ?>
 
 <!DOCTYPE html>
@@ -7,9 +15,8 @@ $base = Config::base_url();
 <head>
 <meta charset="UTF-8">
 <title>Dashboard Admin PPDB</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="<?= $base ?>/public/assets/css/admin.css">
 
 </head>
@@ -23,7 +30,7 @@ $base = Config::base_url();
     <h2>Dashboard Admin</h2>
     <p>Halo, <b><?= $_SESSION["nama_pengguna"] ?></b></p>
 
-    <!-- TOP STAT BAR -->
+    <!-- ================= TOP STAT BAR ================= -->
     <div class="stat-row">
 
         <div class="stat-card purple">
@@ -60,7 +67,44 @@ $base = Config::base_url();
 
     </div>
 
-    <!-- TABLE TERBARU -->
+    <!-- ================= STATISTIK PPDB ================= -->
+    <h3 style="margin-top:30px; margin-bottom:15px;">Statistik PPDB</h3>
+
+    <div class="statistik-box">
+
+        <div class="statistik-item">
+            <span>
+                <b>Data Valid</b>
+                <b><?= $persen_valid ?>%</b>
+            </span>
+            <div class="progress">
+                <div class="progress-bar green" style="width: <?= $persen_valid ?>%"></div>
+            </div>
+        </div>
+
+        <div class="statistik-item">
+            <span>
+                <b>Menunggu Validasi</b>
+                <b><?= $persen_menunggu ?>%</b>
+            </span>
+            <div class="progress">
+                <div class="progress-bar blue" style="width: <?= $persen_menunggu ?>%"></div>
+            </div>
+        </div>
+
+        <div class="statistik-item">
+            <span>
+                <b>Data Ditolak</b>
+                <b><?= $persen_tolak ?>%</b>
+            </span>
+            <div class="progress">
+                <div class="progress-bar red" style="width: <?= $persen_tolak ?>%"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= TABLE TERBARU ================= -->
     <h3 style="margin-top:30px; margin-bottom:15px;">Pendaftar Terbaru</h3>
 
     <div class="table-box">
@@ -76,9 +120,8 @@ $base = Config::base_url();
             </thead>
 
             <tbody>
-
             <?php if (!empty($latest) && is_array($latest)): ?>
-                <?php foreach($latest as $row): ?>
+                <?php foreach ($latest as $row): ?>
                     <tr>
                         <td><?= $row["nama_lengkap"] ?></td>
                         <td><?= $row["nisn"] ?></td>
@@ -93,7 +136,6 @@ $base = Config::base_url();
                     </td>
                 </tr>
             <?php endif; ?>
-
             </tbody>
 
         </table>
