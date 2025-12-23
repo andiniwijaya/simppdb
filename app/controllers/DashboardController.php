@@ -57,11 +57,39 @@ class DashboardController {
             $id_pendaftar = intval($siswa["id_pendaftar"]);
 
             // === STATUS UPLOAD BERKAS ===
-            $latest_upload = ["status_berkas" => "Belum Upload"];
+            $berkas_wajib = [
+                'kartu_keluarga',
+                'ktp_orang_tua',
+                'kip',
+                'ijazah_sd',
+                'surat_keterangan_lulus',
+                'akta_kelahiran',
+                'pas_foto'
+            ];
+
+            $status_upload = "Belum Upload";
 
             if($id_pendaftar > 0){
-                $up = $upload->lastUpload($id_pendaftar);
-                if($up){ $latest_upload = $up; }
+                $uploaded = $upload->getStatusLengkap($id_pendaftar);
+
+                $map = [];
+                foreach($uploaded as $u){
+                    $map[$u['jenis_berkas']] = $u['status_berkas'];
+                }
+
+                $lengkap = true;
+                foreach($berkas_wajib as $w){
+                    if(!isset($map[$w]) || $map[$w] == 'invalid'){
+                        $lengkap = false;
+                        break;
+                    }
+                }
+
+                if($lengkap){
+                    $status_upload = "lengkap";
+                }elseif(count($uploaded) > 0){
+                    $status_upload = "menunggu";
+                }
             }
 
             // === STATUS PEMBAYARAN ===
@@ -76,7 +104,7 @@ class DashboardController {
             $progress = 0;
 
             if(!empty($siswa["nama_lengkap"]))                       $progress += 40;
-            if($latest_upload["status_berkas"] != "Belum Upload")   $progress += 30;
+            if($status_upload == "lengkap")                          $progress += 30;
             if($paymentData["status_bayar"] === "lunas")            $progress += 30;
 
             // === KIRIM DATA KE VIEW ===

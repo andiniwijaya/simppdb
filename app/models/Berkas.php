@@ -23,4 +23,20 @@ class Berkas extends Database {
         $stmt->bind_param("iss", $id_pendaftar, $jenis, $lokasi);
         return $stmt->execute();
     }
+
+    public function getStatusLengkap($id_pendaftar) {
+        
+        $sql = "
+            SELECT jenis_berkas, status_berkas
+            FROM berkas_pendaftar
+            WHERE id_pendaftar = ?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
