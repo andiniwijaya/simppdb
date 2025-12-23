@@ -60,12 +60,6 @@ $base = Config::base_url();
 
     </div>
 
-
-        <div class="statistik-item">
-            <span>
-                <b>Data Ditolak</b>
-                <b><?= $persen_tolak ?>%</b>
-            </span>
             <div class="progress">
                 <div class="progress-bar red" style="width: <?= $persen_tolak ?>%"></div>
             </div>
