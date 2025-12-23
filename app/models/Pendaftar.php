@@ -4,21 +4,26 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar extends Database {
 
-    public function getId($id_pengguna){
+    // ======================
+    // GET ID PENDAFTAR
+    // ======================
+    public function getId($id_pengguna)
+    {
         $sql = "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna=? LIMIT 1";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i",$id_pengguna);
+        $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
 
         $r = $stmt->get_result()->fetch_assoc();
-        return $r ? intval($r["id_pendaftar"]) : 0;
+        return $r ? (int)$r["id_pendaftar"] : 0;
     }
 
-
-    public function getFormDataByUserId($id_pengguna) {
-
+    // ======================
+    // GET DATA SISWA
+    // ======================
+    public function getFormDataByUserId($id_pengguna)
+    {
         $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
-
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
@@ -26,21 +31,52 @@ class Pendaftar extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-
-    public function saveSiswa($id_pengguna,$d){
-
-        $existId = $this->getId($id_pengguna);
-
-        if($existId > 0){
-            return $this->update($existId,$d);
-        }
-
-        return $this->insert($id_pengguna,$d);
+    // ======================
+    // COUNT ALL PENDAFTAR
+    // ======================
+    public function countAll()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM pendaftar";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return (int)$row['total'];
     }
 
+    // ======================
+    // GET DATA TERBARU
+    // ======================
+    public function getLatest()
+    {
+        $sql = "SELECT * FROM pendaftar ORDER BY id_pendaftar DESC";
+        $result = $this->conn->query($sql);
 
-    private function insert($id_pengguna, $d) {
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
 
+        return $data;
+    }
+
+    // ======================
+    // SIMPAN DATA SISWA
+    // ======================
+    public function saveSiswa($id_pengguna, $d)
+    {
+        $existId = $this->getId($id_pengguna);
+
+        if ($existId > 0) {
+            return $this->update($existId, $d);
+        }
+
+        return $this->insert($id_pengguna, $d);
+    }
+
+    // ======================
+    // INSERT
+    // ======================
+    private function insert($id_pengguna, $d)
+    {
         $sql = "INSERT INTO pendaftar
         (id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
         tanggal_lahir, agama, alamat, status_tinggal, asal_sekolah,
@@ -79,9 +115,11 @@ class Pendaftar extends Database {
         $stmt->execute();
     }
 
-
-    private function update($id,$d){
-
+    // ======================
+    // UPDATE
+    // ======================
+    private function update($id, $d)
+    {
         $sql = "UPDATE pendaftar SET
         nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
         tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,

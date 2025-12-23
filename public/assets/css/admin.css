@@ -15,15 +15,12 @@ body {
 
 
 /* ======================================================
-   SIDEBAR
-   ====================================================== */
-/* ======================================================
    SIDEBAR - SAMA PERSIS DENGAN SISWA
    ====================================================== */
 
 .sidebar{
     width:260px;
-    background:#0f2a48;  /* warna sama siswa */
+    background:#0f2a48;
     height:100vh;
     padding-top:20px;
     position:fixed;
@@ -31,7 +28,7 @@ body {
     top:0;
     overflow-y:auto;
     color:white;
-    border-right:3px solid #00365b; /* garis halus */
+    border-right:3px solid #00365b;
 }
 
 .brand{
@@ -131,13 +128,12 @@ body {
 .content {
     padding: 35px;
     margin-left: 260px;
-    z-index: 10;
     position: relative;
 }
 
 
 /* ======================================================
-   DASHBOARD - STATISTIC BOX
+   DASHBOARD - STAT CARD
    ====================================================== */
 
 .stat-row {
@@ -159,7 +155,6 @@ body {
     font-weight: 600;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     transition: 0.2s;
-    cursor: default;
 }
 
 .stat-card:hover {
@@ -184,6 +179,68 @@ body {
 .stat-icon {
     font-size: 40px;
 }
+
+
+/* ======================================================
+   STATISTIK PPDB
+   ====================================================== */
+
+.statistik-box{
+    background: white;
+    padding: 22px 26px;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    margin: 25px 0;
+}
+
+.statistik-item{
+    margin-bottom: 18px;
+}
+
+.statistik-item:last-child{
+    margin-bottom: 0;
+}
+
+.statistik-item span{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 600;
+    color: #082a5c;
+    margin-bottom: 8px;
+}
+
+.progress{
+    width: 100%;
+    height: 12px;
+    background: #eef3f9;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar{
+    height: 100%;
+    border-radius: 20px;
+    transition: width .4s ease;
+}
+
+.progress-bar.green{
+    background: linear-gradient(90deg, #48d1ac, #2ecc71);
+}
+
+.progress-bar.blue{
+    background: linear-gradient(90deg, #4c98ff, #2f80ed);
+}
+
+.progress-bar.red{
+    background: linear-gradient(90deg, #f26464, #eb5757);
+}
+
+
+/* ======================================================
+   TABLE
+   ====================================================== */
+
 .table-box {
     background: white;
     padding: 15px;
@@ -203,7 +260,6 @@ body {
 }
 
 .table-admin th {
-    text-align: left;
     padding: 12px;
     font-weight: 600;
     color: #333;
@@ -220,120 +276,11 @@ body {
 }
 
 
-
 /* ======================================================
-   KELEMBAGAAN STYLE
+   KELEMBAGAAN & PENGATURAN
    ====================================================== */
 
-.kelembagaan-wrapper{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.1);
-    margin-top:20px;
-}
-
-.kelembagaan-nav{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-    padding-left:0;
-    border-bottom:2px solid #eee;
-    padding-bottom:10px;
-}
-
-.kelembagaan-nav li{
-    list-style:none;
-    padding:10px 20px;
-    background:#f0f4ff;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.2s;
-    color:#082a5c;
-    font-size:15px;
-}
-
-.kelembagaan-nav li:hover,
-.kelembagaan-nav li.active{
-    background:#082a5c;
-    color:white;
-}
-
-.kelembagaan-content{
-    padding:5px;
-}
-
-.kelembagaan-page{
-    display:none;
-}
-
-.kelembagaan-page.show{
-    display:block;
-}
-
-
-/* TABLE DESIGN */
-
-.form-table,
-.pengaturan-table {
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-}
-
-.form-table th,
-.pengaturan-table th{
-    width:220px;
-    padding:12px 15px;
-    background:#f7faff;
-    color:#082a5c;
-    font-weight:700;
-    border-bottom:1px solid #e6edf5;
-    font-size:15px;
-}
-
-.form-table td,
-.pengaturan-table td{
-    padding:12px 15px;
-    background:white;
-    border-bottom:1px solid #eef2f7;
-    font-size:15px;
-}
-
-.form-table tr:hover td,
-.pengaturan-table tr:hover td{
-    background:#fafbff;
-}
-
-
-/* ======================================================
-   RESPONSIVE TABLE
-   ====================================================== */
-
-@media (max-width:900px){
-
-    .form-table th,
-    .form-table td,
-    .pengaturan-table th,
-    .pengaturan-table td{
-        display:block;
-        width:100%;
-    }
-
-    .form-table tr,
-    .pengaturan-table tr{
-        margin-bottom:10px;
-        display:block;
-        border-bottom:2px solid #eee;
-    }
-}
-
-
-/* ======================================================
-   PENGATURAN STYLE 
-   ====================================================== */
-
+.kelembagaan-wrapper,
 .pengaturan-wrapper{
     background:white;
     padding:25px;
@@ -342,6 +289,7 @@ body {
     margin-top:20px;
 }
 
+.kelembagaan-nav,
 .pengaturan-nav{
     display:flex;
     gap:15px;
@@ -351,32 +299,44 @@ body {
     padding-bottom:10px;
 }
 
+.kelembagaan-nav li,
 .pengaturan-nav li{
     list-style:none;
     padding:10px 20px;
-    background:#eaf3ff;
+    background:#f0f4ff;
     border-radius:6px;
     cursor:pointer;
     font-weight:600;
     transition:.2s;
     color:#082a5c;
-    font-size:15px;
 }
 
+.kelembagaan-nav li:hover,
+.kelembagaan-nav li.active,
 .pengaturan-nav li:hover,
 .pengaturan-nav li.active{
     background:#082a5c;
     color:white;
 }
 
-.pengaturan-content{
-    padding:5px;
-}
 
-.pengaturan-page{
-    display:none;
-}
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
 
-.pengaturan-page.show{
-    display:block;
+@media (max-width:900px){
+    .content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .stat-row{
+        flex-direction:column;
+    }
 }

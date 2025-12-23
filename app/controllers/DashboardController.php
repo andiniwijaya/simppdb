@@ -3,19 +3,22 @@
 require_once __DIR__ . '/../models/Pendaftar.php';
 require_once __DIR__ . '/../models/Upload.php';
 require_once __DIR__ . '/../models/Payment.php';
+require_once __DIR__ . '/../models/Pengumuman.php';
+
 
 class DashboardController {
 
     public function index()
     {
         // CEK LOGIN
-        if(!isset($_SESSION["user_id"])){
+        if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
             exit;
         }
 
         $role = $_SESSION["role"];
 
+<<<<<<< HEAD
         // DASHBOARD SISWA
         if ($role === "siswa") {
 
@@ -24,13 +27,20 @@ class DashboardController {
                 exit;
             }
 
+        // DASHBOARD SISWA 
+        if ($role === "siswa") {
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
+
             $id_pengguna = $_SESSION["user_id"];
 
             $pendaftar = new Pendaftar();
             $berkas    = new Berkas();
             $payment   = new Payment();
 
-            // ===== DATA SISWA =====
+<<<<<<< HEAD
+            //DATA SISWA 
+            // DATA SISWA
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
 
             if (!$siswa) {
@@ -41,16 +51,32 @@ class DashboardController {
                 ];
             }
 
+<<<<<<< HEAD
             $id_pendaftar = (int) $siswa["id_pendaftar"];
 
-            // ===== STATUS UPLOAD =====
+            $id_pendaftar = (int)$siswa["id_pendaftar"];
+
+            // STATUS UPLOAD BERKAS
+            $berkas_wajib = [
+                'kartu_keluarga',
+                'ktp_orang_tua',
+                'kip',
+                'ijazah_sd',
+                'surat_keterangan_lulus',
+                'akta_kelahiran',
+                'pas_foto'
+            ];
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
+
+            // STATUS UPLOAD
             $status_upload = "Belum Upload";
 
             if ($id_pendaftar > 0) {
+<<<<<<< HEAD
                 $status_upload = $berkas->getStatusLengkap($id_pendaftar);
             }
 
-            // ===== STATUS PEMBAYARAN =====
+            // STATUS PEMBAYARAN 
             $paymentData = ["status_bayar" => "belum"];
 
             if ($id_pendaftar > 0) {
@@ -60,14 +86,53 @@ class DashboardController {
                 }
             }
 
-            // ===== PROGRESS =====
-            $progress = 0;
+            // PROGRESS
+                $uploaded = $upload->getStatusLengkap($id_pendaftar);
 
+                if ($uploaded) {
+                    $map = [];
+                    foreach ($uploaded as $u) {
+                        $map[$u['jenis_berkas']] = $u['status_berkas'];
+                    }
+
+                    $lengkap = true;
+                    foreach ($berkas_wajib as $w) {
+                        if (!isset($map[$w]) || $map[$w] === 'invalid') {
+                            $lengkap = false;
+                            break;
+                        }
+                    }
+
+                    if ($lengkap) {
+                        $status_upload = "lengkap";
+                    } else {
+                        $status_upload = "menunggu";
+                    }
+                }
+            }
+
+            // STATUS PEMBAYARAN
+            $paymentData = ["status_bayar" => "belum"];
+            if ($id_pendaftar > 0) {
+                $pm = $payment->lastPayment($id_pendaftar);
+                if ($pm) {
+                    $paymentData = $pm;
+                }
+            }
+
+            // PROGRESS 
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
+            $progress = 0;
+            if (!empty($siswa["nama_lengkap"]))        $progress += 40;
+            if ($status_upload === "lengkap")          $progress += 30;
+            if ($paymentData["status_bayar"] === "lunas") $progress += 30;
+
+<<<<<<< HEAD
             if (!empty($siswa["nama_lengkap"])) $progress += 40;
             if ($status_upload === "lengkap")   $progress += 30;
             if ($paymentData["status_bayar"] === "lunas") $progress += 30;
 
-            // ===== PENGUMUMAN =====
+            // PENGUMUMAN
             $pengumuman = new Pengumuman();
 
             $status_pengumuman = "menunggu";
@@ -76,7 +141,7 @@ class DashboardController {
                 $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
             }
 
-            // ===== KIRIM KE VIEW =====
+            // KIRIM KE VIEW
             $data = [
                 "siswa"         => $siswa,
                 "status_upload" => $status_upload,
@@ -87,6 +152,14 @@ class DashboardController {
 
             extract($data);
 
+            extract([
+                "siswa"         => $siswa,
+                "status_upload" => $status_upload,
+                "payment"       => $paymentData,
+                "progress"      => $progress
+            ]);
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
+
             ob_start();
             require __DIR__ . '/../views/siswa/dashboard.php';
             $content = ob_get_clean();
@@ -95,14 +168,19 @@ class DashboardController {
             return;
         }
 
+<<<<<<< HEAD
 
 
         // DASHBOARD ADMIN
         if($role === "admin"){
 
+        // ================= DASHBOARD ADMIN =================
+        if ($role === "admin") {
+>>>>>>> 90f78abe0d631899ae908decc2787dd736c4aa0e
+
             $pendaftar = new Pendaftar;
             $upload    = new Upload;
-            $payment   = new Payment();
+            $payment   = new Payment;
 
             $total_pendaftar = $pendaftar->countAll();
 
@@ -114,9 +192,13 @@ class DashboardController {
             $total_upload = $upload->countUploaded();
             $total_bayar  = $payment->countPaid();
 
-            $latest = $pendaftar->getLatest(10);
+            // NOTE: satu data saja
+            $latest = $pendaftar->getFormDataByUserId(10);
+            if (!$latest) {
+                $latest = [];
+            }
 
-            $data = [
+            extract([
                 "total_pendaftar" => $total_pendaftar,
                 "total_upload"    => $total_upload,
                 "total_bayar"     => $total_bayar,
@@ -125,9 +207,7 @@ class DashboardController {
                 "menunggu"        => $menunggu,
                 "valid"           => $valid,
                 "tolak"           => $tolak
-            ];
-
-            extract($data);
+            ]);
 
             require __DIR__ . '/../views/admin/dashboard.php';
             return;
@@ -136,65 +216,59 @@ class DashboardController {
         echo "Role tidak dikenali.";
     }
 
-    //KELEMBAGAAN ADMIN
+    // ================= MENU ADMIN =================
 
     public function kelembagaan()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
 
         $content = __DIR__ . '/../views/admin/kelembagaan.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
-        return;
     }
-        public function dataPPDB()
+
+    public function dataPPDB()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
 
         $pendaftar = new Pendaftar;
-        $list = $pendaftar->getLatest(); // ambil seluruh data pendaftar
+        $list = $pendaftar->getLatest();
 
         extract(["list" => $list]);
 
         $content = __DIR__ . '/../views/admin/data_ppdb.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-        //Administrasi Admin
     public function administrasi()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
 
         $payment = new Payment;
-        $list    = $payment->getAllPayments(); // ← ambil seluruh pembayaran
+        $list    = $payment->getAllPayments();
+
+        extract(["list" => $list]);
 
         $content = __DIR__ . '/../views/admin/administrasi.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-    // PENGATURAN ADMIN
-
     public function pengaturan()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
 
         $content = __DIR__ . '/../views/admin/pengaturan.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
-        return;
     }
 }

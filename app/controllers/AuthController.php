@@ -80,12 +80,12 @@ class AuthController {
             header("Location: /register?error=email_used");
             exit;
         }
-
         // nisn exist
-        if($pendaftar->nisnExists($nisn)){
+        if ($pendaftar->nisnExists($nisn)) {
             header("Location: /register?error=nisn_used");
             exit;
         }
+
 
         // insert user
         $user->insert($username,$email,$pass);
@@ -93,6 +93,7 @@ class AuthController {
         header("Location: /login?register_ok");
         exit;
     }
+
 
     /* -----------------------------
        LOGIN PROCESS
