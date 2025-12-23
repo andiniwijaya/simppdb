@@ -3,11 +3,11 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Pengumuman extends Database {
 
-    // Ambil status penerimaan berdasarkan pendaftar
-    public function getStatusByPendaftar($id_pendaftar){
+    // ambil 1 baris pengumuman
+    public function getByPendaftar($id_pendaftar){
 
         $sql = "
-            SELECT status_penerimaan
+            SELECT *
             FROM pengumuman
             WHERE id_pendaftar = ?
             LIMIT 1
@@ -17,12 +17,17 @@ class Pengumuman extends Database {
         $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
 
-        $row = $stmt->get_result()->fetch_assoc();
+        return $stmt->get_result()->fetch_assoc();
+    }
 
+    // ambil hanya status (dipakai dashboard)
+    public function getStatusByPendaftar($id_pendaftar){
+
+        $row = $this->getByPendaftar($id_pendaftar);
         return $row["status_penerimaan"] ?? "menunggu";
     }
 
-    // Buat data pengumuman default jika belum ada
+    // buat default pengumuman jika belum ada
     public function createIfNotExists($id_pendaftar){
 
         $sql = "
