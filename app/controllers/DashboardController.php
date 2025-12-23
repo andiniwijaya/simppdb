@@ -71,9 +71,11 @@ class DashboardController {
 
             // PENGUMUMAN
             $pengumuman = new Pengumuman();
+
             $status_pengumuman = "menunggu";
 
-            if($id_pendaftar > 0) {
+            if($id_pendaftar > 0){
+                $pengumuman->createIfNotExists($id_pendaftar);
                 $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
             }
 

@@ -3,24 +3,35 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Pengumuman extends Database {
 
-    public function getByPendaftar($id_pendaftar){
-        $stmt = $this->conn->prepare("
+    // Ambil status penerimaan berdasarkan pendaftar
+    public function getStatusByPendaftar($id_pendaftar){
+
+        $sql = "
             SELECT status_penerimaan
             FROM pengumuman
             WHERE id_pendaftar = ?
             LIMIT 1
-        ");
-        $stmt->bind_param("i",$id_pendaftar);
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+
+        $row = $stmt->get_result()->fetch_assoc();
+
+        return $row["status_penerimaan"] ?? "menunggu";
     }
 
+    // Buat data pengumuman default jika belum ada
     public function createIfNotExists($id_pendaftar){
-        $stmt = $this->conn->prepare("
+
+        $sql = "
             INSERT IGNORE INTO pengumuman (id_pendaftar)
             VALUES (?)
-        ");
-        $stmt->bind_param("i",$id_pendaftar);
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
         return $stmt->execute();
     }
 }
