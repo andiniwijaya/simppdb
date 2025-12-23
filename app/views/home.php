@@ -46,7 +46,7 @@ $base = Config::base_url();
                 <li class="nav-item"><a href="<?= $base ?>/login" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="#profil" class="nav-link">Profil</a></li>
                 <li class="nav-item"><a href="#info" class="nav-link">Informasi</a></li>
-                <li class="nav-item"><a href="#fasilitas" class="nav-link">fasilitas</a></li>
+                 <li class="nav-item"><a href="#info" class="nav-link">Informasi</a></li>
                 <li class="nav-item"><a href="#lokasi" class="nav-link">Lokasi</a></li>
             </ul>
         </div>
@@ -105,7 +105,7 @@ $base = Config::base_url();
 <!-- ================= FASILITAS SEKOLAH ================= -->
 <section class="fasilitas-section">
     <div class="container">
-        <h2 class="section-title text-center">Fasilitas</h2>
+        <h2 class="section-title text-center">Fasilitas Sekolah</h2>
 
         <div class="row g-4 mt-4">
 
@@ -153,11 +153,18 @@ $base = Config::base_url();
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🧪</div>
                     <h6 class="fw-bold">Gedung Aula</h6>
-                    <p>Gedung aula bersih dan nyaman .</p>
+                    <p>Gedung aula .</p>
                 </div>
             </div>
 
-          
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🏥</div>
+                    <h6 class="fw-bold"></h6>
+                    <p>Unit kesehatan siswa.</p>
+                </div>
+            </div>
+
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">📶</div>
