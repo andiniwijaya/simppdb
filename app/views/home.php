@@ -151,8 +151,8 @@ $base = Config::base_url();
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🧪</div>
-                    <h6 class="fw-bold">Lab IPA</h6>
-                    <p>Praktikum sains lengkap.</p>
+                    <h6 class="fw-bold">Gedung Aula</h6>
+                    <p>Gedung aula .</p>
                 </div>
             </div>
 
