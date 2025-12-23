@@ -54,4 +54,40 @@ class Payment extends Database {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+    // Ambil pembayaran terakhir siswa
+    public function lastPayment($id_pendaftar){
+
+        $sql = "
+            SELECT *
+            FROM pembayaran
+            WHERE id_pendaftar = ?
+            ORDER BY tanggal_bayar DESC
+            LIMIT 1
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Total pembayaran lunas
+    public function totalLunas($id_pendaftar){
+
+        $sql = "
+            SELECT SUM(jumlah) total
+            FROM pembayaran
+            WHERE id_pendaftar = ?
+              AND status_bayar = 'lunas'
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc()["total"] ?? 0;
+    }
+
 }
