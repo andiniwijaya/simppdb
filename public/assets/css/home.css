@@ -235,4 +235,36 @@ footer a {
     .section-title{
         font-size: 1.4rem;
     }
+    /* ================= MOBILE FULL MENU ================= */
+@media (max-width: 991px) {
+
+    .mobile-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #ff5a1f; /* mirip contoh oranye */
+        padding-top: 40px;
+        z-index: 999;
+        transition: all .3s ease;
+    }
+
+    .mobile-menu .nav-link {
+        color: #fff !important;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+
+    .mobile-menu .nav-link:hover {
+        background: rgba(255,255,255,.1);
+    }
+
+    .mobile-menu .btn {
+        font-weight: 600;
+    }
+}
+
 }
