@@ -16,14 +16,14 @@ class DashboardController {
 
         $role = $_SESSION["role"];
 
-        // DASHBOARD SISWA
+        // ================= DASHBOARD SISWA =================
         if($role === "siswa"){
 
             $id_pengguna = $_SESSION["user_id"];
 
             $pendaftar = new Pendaftar;
             $upload    = new Upload;
-            $payment   = new Payment();
+            $payment   = new Payment;
 
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
 
@@ -43,8 +43,9 @@ class DashboardController {
                 ];
             }
 
-            $id_pendaftar = intval($siswa["id_pendaftar"]);
+            $id_pendaftar = (int)$siswa["id_pendaftar"];
 
+            // STATUS UPLOAD
             if($id_pendaftar > 0){
                 $latest_upload = $upload->lastUpload($id_pendaftar);
                 if(!$latest_upload){
@@ -54,6 +55,7 @@ class DashboardController {
                 $latest_upload = ["status_berkas" => "Belum Upload"];
             }
 
+            // STATUS BAYAR
             if($id_pendaftar > 0){
                 $bayar = $payment->lastPayment($id_pendaftar);
                 if(!$bayar){
@@ -63,20 +65,18 @@ class DashboardController {
                 $bayar = ["status_bayar" => "belum"];
             }
 
+            // PROGRESS
             $progress = 0;
+            if(!empty($siswa["nama_lengkap"]))                     $progress += 40;
+            if($latest_upload["status_berkas"] != "Belum Upload") $progress += 30;
+            if($bayar["status_bayar"] === "lunas")               $progress += 30;
 
-            if(!empty($siswa["nama_lengkap"]))                       $progress += 40;
-            if($latest_upload["status_berkas"] != "Belum Upload")   $progress += 30;
-            if($bayar["status_bayar"] === "lunas")                  $progress += 30;
-
-            $data = [
+            extract([
                 "siswa"         => $siswa,
                 "latest_upload" => $latest_upload,
                 "payment"       => $bayar,
                 "progress"      => $progress
-            ];
-
-            extract($data);
+            ]);
 
             ob_start();
             require __DIR__ . '/../views/siswa/dashboard.php';
@@ -86,12 +86,12 @@ class DashboardController {
             return;
         }
 
-        // DASHBOARD ADMIN
+        // ================= DASHBOARD ADMIN =================
         if($role === "admin"){
 
             $pendaftar = new Pendaftar;
             $upload    = new Upload;
-            $payment   = new Payment();
+            $payment   = new Payment;
 
             $total_pendaftar = $pendaftar->countAll();
 
@@ -103,9 +103,9 @@ class DashboardController {
             $total_upload = $upload->countUploaded();
             $total_bayar  = $payment->countPaid();
 
-            $latest = $pendaftar->getLatest(10);
+            $latest = $pendaftar->getFormDataByUserId(10);
 
-            $data = [
+            extract([
                 "total_pendaftar" => $total_pendaftar,
                 "total_upload"    => $total_upload,
                 "total_bayar"     => $total_bayar,
@@ -114,9 +114,7 @@ class DashboardController {
                 "menunggu"        => $menunggu,
                 "valid"           => $valid,
                 "tolak"           => $tolak
-            ];
-
-            extract($data);
+            ]);
 
             require __DIR__ . '/../views/admin/dashboard.php';
             return;
@@ -125,7 +123,7 @@ class DashboardController {
         echo "Role tidak dikenali.";
     }
 
-    //KELEMBAGAAN ADMIN
+    // ================= MENU ADMIN =================
 
     public function kelembagaan()
     {
@@ -135,11 +133,10 @@ class DashboardController {
         }
 
         $content = __DIR__ . '/../views/admin/kelembagaan.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
-        return;
     }
-        public function dataPPDB()
+
+    public function dataPPDB()
     {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
@@ -147,16 +144,14 @@ class DashboardController {
         }
 
         $pendaftar = new Pendaftar;
-        $list = $pendaftar->getLatest(); // ambil seluruh data pendaftar
+        $list = $pendaftar->getLatest();
 
         extract(["list" => $list]);
 
         $content = __DIR__ . '/../views/admin/data_ppdb.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-        //Administrasi Admin
     public function administrasi()
     {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
@@ -165,14 +160,13 @@ class DashboardController {
         }
 
         $payment = new Payment;
-        $list    = $payment->getAllPayments(); // ← ambil seluruh pembayaran
+        $list    = $payment->getAllPayments();
+
+        extract(["list" => $list]);
 
         $content = __DIR__ . '/../views/admin/administrasi.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
-
-    // PENGATURAN ADMIN
 
     public function pengaturan()
     {
@@ -182,8 +176,6 @@ class DashboardController {
         }
 
         $content = __DIR__ . '/../views/admin/pengaturan.php';
-
         require __DIR__ . '/../views/admin/layout_admin.php';
-        return;
     }
 }

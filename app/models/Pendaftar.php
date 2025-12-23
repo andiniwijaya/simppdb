@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar {
@@ -29,24 +30,38 @@ class Pendaftar {
         );
 
         $stmt->execute();
-
         return $this->db->conn->insert_id;
     }
-    
-    public function getFormDataByUserId($id_pengguna) {
-        
-        $sql = "
-        SELECT *
-        FROM pendaftar
-        WHERE id_pengguna = ?
-        LIMIT 1
-        ";
 
+    public function getFormDataByUserId($id_pengguna) {
+
+        $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
         $stmt = $this->db->conn->prepare($sql);
         $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
-        
+
         return $stmt->get_result()->fetch_assoc();
     }
 
+    public function countAll()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM pendaftar";
+        $result = $this->db->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
+
+    // ⬇️ TAMBAHAN AGAR TIDAK ERROR (DIPANGGIL CONTROLLER)
+    public function getLatest()
+    {
+        $sql = "SELECT * FROM pendaftar ORDER BY id_pendaftar DESC";
+        $result = $this->db->conn->query($sql);
+
+        $data = [];
+        while($row = $result->fetch_assoc()){
+            $data[] = $row;
+        }
+
+        return $data;
+    }
 }
