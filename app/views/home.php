@@ -101,6 +101,82 @@ $base = Config::base_url();
     </div>
 </section>
 
+<!-- ================= FASILITAS SEKOLAH ================= -->
+<section class="fasilitas-section">
+    <div class="container">
+        <h2 class="section-title text-center">Fasilitas Sekolah</h2>
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🏫</div>
+                    <h6 class="fw-bold">Ruang Kelas Nyaman</h6>
+                    <p>Ruang belajar bersih dan kondusif.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">📚</div>
+                    <h6 class="fw-bold">Perpustakaan</h6>
+                    <p>Koleksi buku lengkap dan ruang baca.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">💻</div>
+                    <h6 class="fw-bold">Lab Komputer</h6>
+                    <p>Fasilitas komputer pembelajaran IT.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">⚽</div>
+                    <h6 class="fw-bold">Lapangan Olahraga</h6>
+                    <p>Futsal & kegiatan olahraga siswa.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🕌</div>
+                    <h6 class="fw-bold">Mushola</h6>
+                    <p>Tempat ibadah nyaman.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🧪</div>
+                    <h6 class="fw-bold">Lab IPA</h6>
+                    <p>Praktikum sains lengkap.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🏥</div>
+                    <h6 class="fw-bold">UKS</h6>
+                    <p>Unit kesehatan siswa.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">📶</div>
+                    <h6 class="fw-bold">WiFi Sekolah</h6>
+                    <p>Akses internet pembelajaran.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
 
 <section class="statistik">
     <div class="container">
