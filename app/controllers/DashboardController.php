@@ -9,7 +9,7 @@ class DashboardController {
     public function index()
     {
         // CEK LOGIN
-        if(!isset($_SESSION["user_id"])){
+        if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
             exit;
         }
@@ -17,13 +17,7 @@ class DashboardController {
         $role = $_SESSION["role"];
 
         // ================= DASHBOARD SISWA =================
-        if($role === "siswa"){
-
-            // CEK LOGIN
-            if(!isset($_SESSION["user_id"])){
-                header("Location: /login");
-                exit;
-            }
+        if ($role === "siswa") {
 
             $id_pengguna = $_SESSION["user_id"];
 
@@ -31,12 +25,10 @@ class DashboardController {
             $upload    = new Upload;
             $payment   = new Payment;
 
-            // === DATA SISWA ===
+            // DATA SISWA
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
 
-            if(!$siswa){
-
-                // default kosong
+            if (!$siswa) {
                 $siswa = [
                     "id_pendaftar"   => 0,
                     "nik"            => "",
@@ -56,55 +48,31 @@ class DashboardController {
 
             $id_pendaftar = (int)$siswa["id_pendaftar"];
 
-<<<<<<< HEAD
             // STATUS UPLOAD
-            if($id_pendaftar > 0){
-                $latest_upload = $upload->lastUpload($id_pendaftar);
-                if(!$latest_upload){
-                    $latest_upload = ["status_berkas" => "Belum Upload"];
-                }
-            } else {
-                $latest_upload = ["status_berkas" => "Belum Upload"];
-            }
-=======
-            // === STATUS UPLOAD BERKAS ===
             $latest_upload = ["status_berkas" => "Belum Upload"];
->>>>>>> dd488cefbfb3dc6e8fa876befeb53841d8a8c80b
-
-            // STATUS BAYAR
-            if($id_pendaftar > 0){
+            if ($id_pendaftar > 0) {
                 $up = $upload->lastUpload($id_pendaftar);
-                if($up){ $latest_upload = $up; }
+                if ($up) {
+                    $latest_upload = $up;
+                }
             }
 
-<<<<<<< HEAD
-            // PROGRESS
-=======
-            // === STATUS PEMBAYARAN ===
+            // STATUS PEMBAYARAN
             $paymentData = ["status_bayar" => "belum"];
-
-            if($id_pendaftar > 0){
+            if ($id_pendaftar > 0) {
                 $pm = $payment->lastPayment($id_pendaftar);
-                if($pm){ $paymentData = $pm; }
+                if ($pm) {
+                    $paymentData = $pm;
+                }
             }
 
-            // === PROGRESS ===
->>>>>>> dd488cefbfb3dc6e8fa876befeb53841d8a8c80b
+            // PROGRESS
             $progress = 0;
-            if(!empty($siswa["nama_lengkap"]))                     $progress += 40;
-            if($latest_upload["status_berkas"] != "Belum Upload") $progress += 30;
-            if($bayar["status_bayar"] === "lunas")               $progress += 30;
+            if (!empty($siswa["nama_lengkap"]))                     $progress += 40;
+            if ($latest_upload["status_berkas"] != "Belum Upload") $progress += 30;
+            if ($paymentData["status_bayar"] === "lunas")          $progress += 30;
 
-<<<<<<< HEAD
             extract([
-=======
-            if(!empty($siswa["nama_lengkap"]))                       $progress += 40;
-            if($latest_upload["status_berkas"] != "Belum Upload")   $progress += 30;
-            if($paymentData["status_bayar"] === "lunas")            $progress += 30;
-
-            // === KIRIM DATA KE VIEW ===
-            $data = [
->>>>>>> dd488cefbfb3dc6e8fa876befeb53841d8a8c80b
                 "siswa"         => $siswa,
                 "latest_upload" => $latest_upload,
                 "payment"       => $paymentData,
@@ -119,13 +87,8 @@ class DashboardController {
             return;
         }
 
-<<<<<<< HEAD
         // ================= DASHBOARD ADMIN =================
-=======
-
-        // DASHBOARD ADMIN
->>>>>>> dd488cefbfb3dc6e8fa876befeb53841d8a8c80b
-        if($role === "admin"){
+        if ($role === "admin") {
 
             $pendaftar = new Pendaftar;
             $upload    = new Upload;
@@ -141,7 +104,11 @@ class DashboardController {
             $total_upload = $upload->countUploaded();
             $total_bayar  = $payment->countPaid();
 
+            // NOTE: ini memang satu data, bukan array
             $latest = $pendaftar->getFormDataByUserId(10);
+            if (!$latest) {
+                $latest = [];
+            }
 
             extract([
                 "total_pendaftar" => $total_pendaftar,
@@ -165,7 +132,7 @@ class DashboardController {
 
     public function kelembagaan()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
@@ -176,7 +143,7 @@ class DashboardController {
 
     public function dataPPDB()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
@@ -192,7 +159,7 @@ class DashboardController {
 
     public function administrasi()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
@@ -208,7 +175,7 @@ class DashboardController {
 
     public function pengaturan()
     {
-        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
             exit;
         }
