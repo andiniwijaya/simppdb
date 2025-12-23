@@ -1,19 +1,7 @@
 <?php 
 $base = Config::base_url();
-
-// ================= DATA SISWA PER TAHUN =================
-$siswa_tahun = [
-    2021 => 120,
-    2022 => 165,
-    2023 => 190,
-    2024 => 220,
-    2025 => 140
-];
-
-$label_tahun = json_encode(array_keys($siswa_tahun));
-$data_tahun  = json_encode(array_values($siswa_tahun));
 ?>
-?>
+
 
 <!DOCTYPE html>
 <html lang="id">
