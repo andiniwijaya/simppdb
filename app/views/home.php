@@ -29,42 +29,29 @@ $base = Config::base_url();
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-
-        <a class="navbar-brand d-flex align-items-center gap-2" href="<?= $base ?>">
-            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo SMP" style="height:50px;">
+        <a class="navbar-brand text-white" href="<?= $base ?>">
+            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo SMP" style="height:55px;">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#nav"
-                aria-controls="nav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+        <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse mobile-menu" id="nav">
-            <ul class="navbar-nav ms-auto text-center">
-
-                <li class="nav-item"><a class="nav-link" href="<?= $base ?>">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#info">Informasi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#fasilitas">Fasilitas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ekstrakurikuler">Ekstrakurikuler</a></li>
-                <li class="nav-item"><a class="nav-link" href="#lokasi">Lokasi</a></li>
-                <li class="nav-item mt-3">
-                    <a class="btn btn-light px-4" href="<?= $base ?>/login">Login</a>
-                </li>
-
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a href="<?= $base ?>" class="nav-link active">Beranda</a></li>
+                <li class="nav-item"><a href="<?= $base ?>/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="#profil" class="nav-link">Profil</a></li>
+                <li class="nav-item"><a href="#info" class="nav-link">Informasi</a></li>
+                <li class="nav-item"><a href="#fasilitas" class="nav-link">Fasilitas</a></li>
+                <li class="nav-item"><a href="#lokasi" class="nav-link">Lokasi</a></li>
             </ul>
         </div>
-
     </div>
 </nav>
-
 
 <!-- HERO -->
 <section class="hero d-flex justify-content-center align-items-center text-center">
