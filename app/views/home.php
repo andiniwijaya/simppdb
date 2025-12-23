@@ -28,18 +28,26 @@ $base = Config::base_url();
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand text-white" href="<?= $base ?>">
+
+        <a class="navbar-brand d-flex align-items-center gap-2" href="<?= $base ?>">
             <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo SMP" style="height:55px;">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#nav">
+        <!-- HAMBURGER -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav"
+                aria-controls="nav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- MENU -->
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a href="<?= $base ?>" class="nav-link active">Beranda</a></li>
@@ -50,10 +58,11 @@ $base = Config::base_url();
                 <li class="nav-item"><a href="#lokasi" class="nav-link">Lokasi</a></li>
             </ul>
         </div>
+
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section class="hero d-flex justify-content-center align-items-center text-center">
     <div>
         <h1>PPDB ONLINE 2026/2027</h1>
@@ -64,7 +73,7 @@ $base = Config::base_url();
     </div>
 </section>
 
-<!-- PROFIL -->
+<!-- ================= PROFIL ================= -->
 <section id="profil" class="container py-5">
     <h2 class="section-title text-center">Tentang Sekolah</h2>
     <p class="text-center">
@@ -74,7 +83,7 @@ $base = Config::base_url();
     </p>
 </section>
 
-<!-- VISI MISI -->
+<!-- ================= VISI MISI ================= -->
 <section class="py-5 visi-section">
     <div class="container">
         <h2 class="section-title text-center">Visi & Misi Sekolah</h2>
@@ -98,17 +107,15 @@ $base = Config::base_url();
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
-<!-- ================= FASILITAS SEKOLAH ================= -->
-<section class="fasilitas-section">
+<!-- ================= FASILITAS ================= -->
+<section class="fasilitas-section" id="fasilitas">
     <div class="container">
         <h2 class="section-title text-center">Fasilitas Sekolah</h2>
 
         <div class="row g-4 mt-4">
-
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🏫</div>
@@ -140,56 +147,11 @@ $base = Config::base_url();
                     <p>Futsal & kegiatan olahraga siswa.</p>
                 </div>
             </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🕌</div>
-                    <h6 class="fw-bold">Mushola</h6>
-                    <p>Tempat ibadah nyaman.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🧪</div>
-                    <h6 class="fw-bold">Gedung Aula</h6>
-                    <p>Gedung aula .</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🏥</div>
-                    <h6 class="fw-bold"></h6>
-                    <p>Unit kesehatan siswa.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">📶</div>
-                    <h6 class="fw-bold">WiFi Sekolah</h6>
-                    <p>Akses internet pembelajaran.</p>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
 
-
-
-<section class="statistik">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"><div class="stat-box">30+</div> Guru</div>
-            <div class="col-md-4"><div class="stat-box">250+</div> Siswa</div>
-            <div class="col-md-4"><div class="stat-box">20+</div> Prestasi</div>
-        </div>
-    </div>
-</section>
-
-<!-- INFO -->
+<!-- ================= INFO ================= -->
 <section id="info" class="container py-5">
     <h2 class="section-title text-center">Informasi PPDB 2026</h2>
 
@@ -219,7 +181,7 @@ $base = Config::base_url();
     </div>
 </section>
 
-<!-- MAP (Lokasi) -->
+<!-- ================= MAP ================= -->
 <section id="lokasi" class="map container mb-5">
     <iframe 
         src="https://www.google.com/maps?q=SMP%20PGRI%20Arjasari&output=embed"
@@ -227,12 +189,25 @@ $base = Config::base_url();
     </iframe>
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer>
     <p>© 2025 SMP PGRI ARJASARI | Sistem PPDB Online</p>
 </footer>
 
+<!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- BONUS: AUTO CLOSE MENU SAAT LINK DIKLIK -->
+<script>
+document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        const nav = document.getElementById('nav');
+        if(nav.classList.contains('show')){
+            new bootstrap.Collapse(nav).hide();
+        }
+    });
+});
+</script>
 
 </body>
 </html>
