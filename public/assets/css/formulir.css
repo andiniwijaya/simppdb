@@ -1,53 +1,53 @@
 /* ================= GLOBAL ================= */
 body{
+  margin:0;
   background:#eef3ff;
   font-family:'Poppins',sans-serif;
-  margin:0;
 }
 
-/* ================= SIDEBAR OFFSET ================= */
+/* ================= CONTENT (OFFSET SIDEBAR) ================= */
 .content{
-  margin-left:240px;   /* SAMA dengan lebar sidebar */
-  padding:25px 30px;
+  margin-left:240px;          /* WAJIB sesuai lebar sidebar */
+  padding:30px;
 }
 
-/* ================= WRAPPER FORM ================= */
-.formulir-wrapper{
-  max-width:100%;
-}
-
-/* ================= CARD UTAMA ================= */
-.form-card{
+/* ================= PROGRESS CARD ================= */
+.progress-card{
   background:white;
   border-radius:16px;
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
-  padding:30px;
+  padding:20px 25px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  margin-bottom:25px;
 }
 
 /* ================= TAB ================= */
 .nav-tabs{
-  border-bottom:1px solid #dee2e6;
-  margin-bottom:0;
+  border:none;
+  gap:10px;
+  margin-bottom:20px;
 }
 
 .nav-tabs .nav-link{
   border:none;
+  background:#e8f0ff;
   color:#0d6efd;
-  font-size:16px;
   font-weight:500;
-  padding:10px 22px;
+  padding:10px 20px;
+  border-radius:10px;
 }
 
 .nav-tabs .nav-link.active{
-  background:#fff;
-  border-bottom:3px solid #0d6efd;
-  color:#0d6efd;
+  background:#0d6efd;
+  color:white;
   font-weight:600;
 }
 
-/* ================= TAB CONTENT ================= */
-.tab-content{
-  padding-top:25px;
+/* ================= FORM CARD ================= */
+.form-card{
+  background:white;
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
 /* ================= FORM ================= */
@@ -67,5 +67,35 @@ textarea.form-control{
 }
 
 .row > div{
-  margin-bottom:15px;
+  margin-bottom:16px;
 }
+.form-wrapper{
+  background:white;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.nav-tabs{
+  border:none;
+  padding:15px 20px 0;
+  gap:10px;
+}
+
+.nav-tabs .nav-link{
+  border:none;
+  background:#e8f0ff;
+  color:#0d6efd;
+  font-weight:500;
+  padding:10px 22px;
+  border-radius:10px;
+}
+
+.nav-tabs .nav-link.active{
+  background:#0d6efd;
+  color:white;
+}
+
+.form-card{
+  padding:30px;
+}
+
