@@ -46,6 +46,7 @@ $base = Config::base_url();
                 <li class="nav-item"><a href="<?= $base ?>/login" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="#profil" class="nav-link">Profil</a></li>
                 <li class="nav-item"><a href="#info" class="nav-link">Informasi</a></li>
+                <li class="nav-item"><a href="#fasilitas" class="nav-link">fasilitas</a></li>
                 <li class="nav-item"><a href="#lokasi" class="nav-link">Lokasi</a></li>
             </ul>
         </div>
@@ -104,7 +105,7 @@ $base = Config::base_url();
 <!-- ================= FASILITAS SEKOLAH ================= -->
 <section class="fasilitas-section">
     <div class="container">
-        <h2 class="section-title text-center">Fasilitas Sekolah</h2>
+        <h2 class="section-title text-center">Fasilitas</h2>
 
         <div class="row g-4 mt-4">
 
