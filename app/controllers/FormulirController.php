@@ -21,25 +21,42 @@ class FormulirController
 
     public function simpan() {
 
-        session_start();
-        if (!isset($_SESSION["id_pengguna"])) {
+        if(!isset($_SESSION["user_id"])) {
             header("Location: /login");
             exit;
         }
 
-        $pendaftar = new Pendaftar();
-        $orangtua = new OrangTua();
+        $user_id   = $_SESSION["user_id"];
+        $pendaftar = new Pendaftar;
+        $ortu      = new OrangTua;
 
-        $id_pendaftar = $pendaftar->insert($_SESSION["id_pengguna"], $_POST);
+        if($_POST["save"] == "siswa"){
 
-        $orangtua->insertAyah($id_pendaftar, $_POST);
-        $orangtua->insertIbu($id_pendaftar, $_POST);
+            $pendaftar->saveSiswa($user_id,$_POST);
 
-        if (!empty($_POST["nama_wali"])) {
-            $orangtua->insertWali($id_pendaftar, $_POST);
+            header("Location: /siswa/formulir?tab=siswa&saved=1");
+            exit;
         }
 
-        header("Location: /siswa/dashboard");
-        exit;
+        if($_POST["save"] == "ortu"){
+
+            $id = $pendaftar->getId($user_id);
+
+            $ortu->saveAyah($id,$_POST);
+            $ortu->saveIbu($id,$_POST);
+
+            header("Location: /siswa/formulir?tab=ortu&saved=1");
+            exit;
+        }
+
+        if($_POST["save"] == "wali"){
+
+            $id = $pendaftar->getId($user_id);
+
+            $ortu->saveWali($id,$_POST);
+
+            header("Location: /siswa/formulir?tab=wali&saved=1");
+            exit;
+        }
     }
 }

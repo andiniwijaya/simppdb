@@ -1,38 +1,94 @@
 <?php
 require_once __DIR__ . "/../../core/Database.php";
 
-class OrangTua {
-
-    private $db;
+class OrangTua extends Database {
 
     public function __construct(){
-        $this->db = new Database;
+        parent::__construct();
     }
 
-    private function insert($jenis, $id, $data){
+    private function exist($id,$jenis)
+    {
+        $q = "SELECT id_orang_tua 
+              FROM orang_tua 
+              WHERE id_pendaftar=? AND jenis=? 
+              LIMIT 1";
 
-        $sql = "INSERT INTO orang_tua
-        (id_pendaftar, jenis, nama_orang_tua, pendidikan,
-        pekerjaan, penghasilan, nomor_hp)
-        VALUES (?,?,?,?,?,?,?)";
+        $stm = $this->conn->prepare($q);
+        $stm->bind_param("is",$id,$jenis);
+        $stm->execute();
 
-        $stmt = $this->db->conn->prepare($sql);
+        return $stm->get_result()->num_rows > 0;
+    }
 
-        $stmt->bind_param(
-            "issssss",
+
+    private function insert($id, $jenis, $d)
+    {
+        $sql = "INSERT INTO orang_tua 
+        (id_pendaftar, jenis, nama_orang_tua, pendidikan_terakhir, pekerjaan,
+         penghasilan, nomor_hp, tempat_lahir, tanggal_lahir, alamat_rumah)
+        VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+        $st = $this->conn->prepare($sql);
+
+        $st->bind_param(
+            "isssssssss",
             $id,
             $jenis,
-            $data['nama_'. strtolower($jenis)],
-            $data['pendidikan_'. strtolower($jenis)],
-            $data['pekerjaan_'. strtolower($jenis)],
-            $data['penghasilan_'. strtolower($jenis)],
-            $data['hp_'. strtolower($jenis)]
+            $d["nama_".strtolower($jenis)],
+            $d["pendidikan_".strtolower($jenis)],
+            $d["pekerjaan_".strtolower($jenis)],
+            $d["penghasilan_".strtolower($jenis)],
+            $d["hp_".strtolower($jenis)],
+            $d["tempat_lahir_".strtolower($jenis)],
+            $d["tanggal_lahir_".strtolower($jenis)],
+            $d["alamat_rumah_".strtolower($jenis)]
         );
 
-        $stmt->execute();
+        return $st->execute();
     }
 
-    public function insertAyah($id,$d){ $this->insert("Ayah",$id,$d); }
-    public function insertIbu($id,$d){ $this->insert("Ibu",$id,$d); }
-    public function insertWali($id,$d){ $this->insert("Wali",$id,$d); }
+
+    private function update($id,$jenis,$d)
+    {
+        $sql = "UPDATE orang_tua SET
+        nama_orang_tua=?, pendidikan_terakhir=?, pekerjaan=?, penghasilan=?,
+        nomor_hp=?, tempat_lahir=?, tanggal_lahir=?, alamat_rumah=?
+        WHERE id_pendaftar=? AND jenis=?";
+
+        $st = $this->conn->prepare($sql);
+
+        $st->bind_param(
+            "ssssssssis",
+            $d["nama_".strtolower($jenis)],
+            $d["pendidikan_".strtolower($jenis)],
+            $d["pekerjaan_".strtolower($jenis)],
+            $d["penghasilan_".strtolower($jenis)],
+            $d["hp_".strtolower($jenis)],
+            $d["tempat_lahir_".strtolower($jenis)],
+            $d["tanggal_lahir_".strtolower($jenis)],
+            $d["alamat_rumah_".strtolower($jenis)],
+            $id,
+            $jenis
+        );
+
+        return $st->execute();
+    }
+
+
+    private function save($id,$jenis,$d)
+    {
+        if($this->exist($id,$jenis))
+        {
+            return $this->update($id,$jenis,$d);
+        }
+
+        return $this->insert($id,$jenis,$d);
+    }
+
+
+    public function saveAyah($id,$d){ return $this->save($id,"Ayah",$d); }
+    public function saveIbu($id,$d){  return $this->save($id,"Ibu" ,$d); }
+    public function saveWali($id,$d){ return $this->save($id,"Wali",$d); }
+
 }

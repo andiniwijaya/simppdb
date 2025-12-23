@@ -4,31 +4,41 @@ require_once __DIR__ . '/../../core/Database.php';
 
 class User {
 
-    private $db;
+    public $conn;
 
     public function __construct(){
-        $this->db = new Database;
+        $db = new Database;
+        $this->conn = $db->conn;
     }
 
-    public function insert($username,$email,$password){
-        $hash  = hashPassword($password);
-        $token = generateToken();
+    // INSERT USER BARU (DEFAULT siswa)
+    public function insert($username, $email, $password){
 
-        $stmt = $this->db->conn->prepare("
-            INSERT INTO pengguna (nama_pengguna,email,kata_sandi,peran,token)
-            VALUES (?,?,?,'siswa',?)
-        ");
+        $hash = hashPassword($password);
 
-        $stmt->bind_param("ssss", $username,$email,$hash,$token);
+        // peran tidak perlu di bind, default siswa
+        $sql = "
+            INSERT INTO pengguna (nama_pengguna, email, kata_sandi)
+            VALUES (?,?,?)
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sss", $username, $email, $hash);
         $stmt->execute();
 
-        return $this->db->conn->insert_id;
+        return $this->conn->insert_id;
     }
 
-    public function findByUsername($username){
-        $username = mysqli_real_escape_string($this->db->conn,$username);
 
-        $sql = "SELECT * FROM pengguna WHERE nama_pengguna='$username' LIMIT 1";
-        return $this->db->conn->query($sql);
+    // CARI USERNAME
+    public function findByUsername($username){
+
+        $sql = "SELECT * FROM pengguna WHERE nama_pengguna = ? LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return $stmt->get_result();
     }
 }

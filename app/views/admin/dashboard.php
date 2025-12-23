@@ -76,7 +76,17 @@ $base = Config::base_url();
             </thead>
 
             <tbody>
-            <?php if(empty($latest)): ?>
+
+            <?php if (!empty($latest) && is_array($latest)): ?>
+                <?php foreach($latest as $row): ?>
+                    <tr>
+                        <td><?= $row["nama_lengkap"] ?></td>
+                        <td><?= $row["nisn"] ?></td>
+                        <td><?= $row["status_data"] ?></td>
+                        <td><?= $row["tanggal_daftar"] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
                     <td colspan="4" style="text-align:center;color:#777;">
                         Belum ada data pendaftar terbaru.
@@ -84,14 +94,6 @@ $base = Config::base_url();
                 </tr>
             <?php endif; ?>
 
-            <?php foreach($latest as $row): ?>
-                <tr>
-                    <td><?= $row["nama_lengkap"] ?></td>
-                    <td><?= $row["nisn"] ?></td>
-                    <td><?= $row["status_data"] ?></td>
-                    <td><?= $row["tanggal_daftar"] ?></td>
-                </tr>
-            <?php endforeach; ?>
             </tbody>
 
         </table>
