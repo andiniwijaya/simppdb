@@ -4,6 +4,8 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 require_once __DIR__ . '/../models/Upload.php';
 require_once __DIR__ . '/../models/Payment.php';
 require_once __DIR__ . '/../models/Berkas.php';
+require_once __DIR__ . '/../models/Pengumuman.php';
+
 
 class DashboardController {
 
@@ -67,12 +69,21 @@ class DashboardController {
             if ($status_upload === "lengkap")   $progress += 30;
             if ($paymentData["status_bayar"] === "lunas") $progress += 30;
 
+            // PENGUMUMAN
+            $pengumuman = new Pengumuman();
+            $status_pengumuman = "menunggu";
+
+            if($id_pendaftar > 0) {
+                $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
+            }
+
             // ===== KIRIM KE VIEW =====
             $data = [
                 "siswa"         => $siswa,
                 "status_upload" => $status_upload,
                 "payment"       => $paymentData,
-                "progress"      => $progress
+                "progress"      => $progress,
+                "status_pengumuman" => $status_pengumuman
             ];
 
             extract($data);
