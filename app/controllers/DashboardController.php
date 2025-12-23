@@ -48,15 +48,7 @@ class DashboardController {
 
             $id_pendaftar = (int)$siswa["id_pendaftar"];
 
-<<<<<<< HEAD
-            // STATUS UPLOAD
-            $latest_upload = ["status_berkas" => "Belum Upload"];
-            if ($id_pendaftar > 0) {
-                $up = $upload->lastUpload($id_pendaftar);
-                if ($up) {
-                    $latest_upload = $up;
-=======
-            // === STATUS UPLOAD BERKAS ===
+            // ================= STATUS UPLOAD BERKAS =================
             $berkas_wajib = [
                 'kartu_keluarga',
                 'ktp_orang_tua',
@@ -69,31 +61,32 @@ class DashboardController {
 
             $status_upload = "Belum Upload";
 
-            if($id_pendaftar > 0){
+            if ($id_pendaftar > 0) {
                 $uploaded = $upload->getStatusLengkap($id_pendaftar);
 
-                $map = [];
-                foreach($uploaded as $u){
-                    $map[$u['jenis_berkas']] = $u['status_berkas'];
-                }
-
-                $lengkap = true;
-                foreach($berkas_wajib as $w){
-                    if(!isset($map[$w]) || $map[$w] == 'invalid'){
-                        $lengkap = false;
-                        break;
+                if ($uploaded) {
+                    $map = [];
+                    foreach ($uploaded as $u) {
+                        $map[$u['jenis_berkas']] = $u['status_berkas'];
                     }
-                }
 
-                if($lengkap){
-                    $status_upload = "lengkap";
-                }elseif(count($uploaded) > 0){
-                    $status_upload = "menunggu";
->>>>>>> 2259d8162f7ab39bae18e4417cd458f193da6a06
+                    $lengkap = true;
+                    foreach ($berkas_wajib as $w) {
+                        if (!isset($map[$w]) || $map[$w] === 'invalid') {
+                            $lengkap = false;
+                            break;
+                        }
+                    }
+
+                    if ($lengkap) {
+                        $status_upload = "lengkap";
+                    } else {
+                        $status_upload = "menunggu";
+                    }
                 }
             }
 
-            // STATUS PEMBAYARAN
+            // ================= STATUS PEMBAYARAN =================
             $paymentData = ["status_bayar" => "belum"];
             if ($id_pendaftar > 0) {
                 $pm = $payment->lastPayment($id_pendaftar);
@@ -102,24 +95,15 @@ class DashboardController {
                 }
             }
 
-            // PROGRESS
+            // ================= PROGRESS =================
             $progress = 0;
-            if (!empty($siswa["nama_lengkap"]))                     $progress += 40;
-            if ($latest_upload["status_berkas"] != "Belum Upload") $progress += 30;
-            if ($paymentData["status_bayar"] === "lunas")          $progress += 30;
+            if (!empty($siswa["nama_lengkap"]))        $progress += 40;
+            if ($status_upload === "lengkap")          $progress += 30;
+            if ($paymentData["status_bayar"] === "lunas") $progress += 30;
 
-<<<<<<< HEAD
             extract([
-=======
-            if(!empty($siswa["nama_lengkap"]))                       $progress += 40;
-            if($status_upload == "lengkap")                          $progress += 30;
-            if($paymentData["status_bayar"] === "lunas")            $progress += 30;
-
-            // === KIRIM DATA KE VIEW ===
-            $data = [
->>>>>>> 2259d8162f7ab39bae18e4417cd458f193da6a06
                 "siswa"         => $siswa,
-                "latest_upload" => $latest_upload,
+                "status_upload" => $status_upload,
                 "payment"       => $paymentData,
                 "progress"      => $progress
             ]);
@@ -149,7 +133,7 @@ class DashboardController {
             $total_upload = $upload->countUploaded();
             $total_bayar  = $payment->countPaid();
 
-            // NOTE: ini memang satu data, bukan array
+            // NOTE: satu data saja
             $latest = $pendaftar->getFormDataByUserId(10);
             if (!$latest) {
                 $latest = [];
