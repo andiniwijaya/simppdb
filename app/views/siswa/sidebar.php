@@ -17,7 +17,7 @@
 
     <a href="/siswa/berkas_pendaftar"
        class="<?= ($active=="berkas"?"active":"") ?>">
-       <i class="bi bi-upload me-2"></i> Upload Berkas
+       <i class="bi bi-upload me-2"></i> Unggah Berkas
     </a>
 
     <a href="/siswa/pembayaran"
