@@ -34,11 +34,31 @@ $active="dashboard";
   </div>
 
   <div class="col-md-4">
-    <div class="card p-3 text-center">
-      <h6>Upload Berkas</h6>
-      <i class="bi <?= $latest_upload["status_berkas"]=="Belum Upload"?"bi-x-circle-fill text-danger":"bi-check-circle-fill text-success" ?> fs-1 mb-2"></i>
-      <small><?= $latest_upload["status_berkas"] ?></small>
-      <a href="/siswa/berkas_pendaftar" class="btn btn-outline-primary btn-sm mt-3">Upload</a>
+    <div class="card text-center p-4">
+
+        <h6 class="fw-bold mb-3">Unggah Berkas</h6>
+
+          <?php if($status_upload == "lengkap"): ?>
+              <i class="bi bi-check-circle-fill text-success fs-1 mb-2"></i>
+              <div class="fw-semibold">Lengkap</div>
+
+          <?php elseif($status_upload == "menunggu"): ?>
+              <i class="bi bi-clock-fill text-warning fs-1 mb-2"></i>
+              <div class="fw-semibold">Menunggu Verifikasi</div>
+
+          <?php else: ?>
+              <i class="bi bi-x-circle-fill text-danger fs-1 mb-2"></i>
+              <div class="fw-semibold">Belum Upload</div>
+          <?php endif; ?>
+
+          <a href="/siswa/berkas_pendaftar"
+            class="btn btn-outline-primary mt-3 w-100">
+            Upload
+          </a>
+
+          <i class="bi <?= $latest_upload["status_berkas"]=="Belum Upload"?"bi-x-circle-fill text-danger":"bi-check-circle-fill text-success" ?> fs-1 mb-2"></i>
+          <small><?= $latest_upload["status_berkas"] ?></small>
+          <a href="/siswa/berkas_pendaftar" class="btn btn-outline-primary btn-sm mt-3">Unggah</a>
     </div>
   </div>
 
