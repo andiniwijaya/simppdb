@@ -143,14 +143,14 @@ CREATE TABLE berkas_pendaftar (
 
 CREATE TABLE pembayaran (
     id_pembayaran INT AUTO_INCREMENT PRIMARY KEY,
+    id_pendaftar INT NOT NULL,
 
-    id_pendaftar INT,
-    tanggal_bayar DATETIME,
-    jumlah INT,
-    bukti_transfer VARCHAR(255),
+    tanggal_bayar DATETIME DEFAULT CURRENT_TIMESTAMP,
+    jumlah INT NOT NULL,
+    bukti_transfer VARCHAR(255) NOT NULL,
 
-    status_bayar ENUM('belum','menunggu','lunas')
-        DEFAULT 'belum',
+    status_bayar ENUM('menunggu','lunas')
+        DEFAULT 'menunggu',
 
     FOREIGN KEY (id_pendaftar)
         REFERENCES pendaftar(id_pendaftar)
