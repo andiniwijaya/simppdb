@@ -176,8 +176,83 @@ $base = Config::base_url();
         </div>
     </div>
 </section>
+<!-- ================= EKSTRAKURIKULER ================= -->
+<section id="ekstrakurikuler" class="py-5" style="background:#f8faff;">
+    <div class="container">
+        <h2 class="section-title text-center">Ekstrakurikuler</h2>
+        <p class="text-center mb-5">
+            Berbagai kegiatan ekstrakurikuler untuk mengembangkan bakat, minat, dan karakter siswa.
+        </p>
 
+        <div class="row g-4">
 
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">⚽</div>
+                    <h6 class="fw-bold">Sepak Bola</h6>
+                    <p>Melatih fisik, kerja sama tim, dan sportivitas.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🥋</div>
+                    <h6 class="fw-bold">Pencak Silat</h6>
+                    <p>Membentuk disiplin, mental, dan bela diri.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🎶</div>
+                    <h6 class="fw-bold">Seni Musik</h6>
+                    <p>Pengembangan bakat musik dan kreativitas siswa.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🎭</div>
+                    <h6 class="fw-bold">Seni Tari</h6>
+                    <p>Melestarikan budaya dan menumbuhkan percaya diri.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🏕️</div>
+                    <h6 class="fw-bold">Pramuka</h6>
+                    <p>Membentuk karakter mandiri dan kepemimpinan.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🧠</div>
+                    <h6 class="fw-bold">Klub Akademik</h6>
+                    <p>Pendalaman pelajaran dan persiapan lomba.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🎨</div>
+                    <h6 class="fw-bold">Seni Lukis</h6>
+                    <p>Mengembangkan kreativitas dan ekspresi seni.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🗣️</div>
+                    <h6 class="fw-bold">English Club</h6>
+                    <p>Meningkatkan kemampuan berbahasa Inggris.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 <section class="statistik">
     <div class="container">
