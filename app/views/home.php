@@ -281,7 +281,7 @@ $base = Config::base_url();
         <div class="col-md-4 mb-4">
             <div class="info-card">
                 <h5>📋 Syarat</h5>
-                <p>Formulir Pendaftaran, KK, Ijazah SD, KTP Ortu, Akta Lahir</p>
+                <p>Kartu Keluarga, KTP Orang Tua, Kartu Indonesia Pintar, Ijazah SD, Surat Keterangan Lulus, Akta Kelahiran, Pas foto</p>
             </div>
         </div>
 
