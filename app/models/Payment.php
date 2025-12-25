@@ -12,6 +12,23 @@ class Payment extends Database {
     return (int) $row['total'];
 
 }
+
+public function getTotalBayar($id_pendaftar)
+{
+    $sql = "
+        SELECT IFNULL(SUM(jumlah), 0) AS total
+        FROM pembayaran
+        WHERE id_pendaftar = ?
+        AND status_bayar = 'lunas'
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+
+    $row = $stmt->get_result()->fetch_assoc();
+    return (int) $row['total'];
+}
 public function getAllPayments()
 {
     $sql = "
