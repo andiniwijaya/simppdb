@@ -1,28 +1,70 @@
+/* =====================================================
+   GLOBAL
+   ===================================================== */
 body {
     font-family: 'Poppins', sans-serif;
     background: #f5f7fb;
+    margin: 0;
+    color: #333;
+    padding-top: 85px; /* ⬅️ PENTING: offset navbar fixed */
 }
 
-/* NAVBAR */
+* {
+    box-sizing: border-box;
+}
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
 .navbar {
     background: #003366;
     padding: 12px 0;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    min-height: 70px;
 }
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .navbar-brand img {
     height: 55px;
 }
+
+.navbar-brand strong {
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
 .nav-link {
     color: #ffffff !important;
     font-weight: 500;
-    margin-left: 12px;
+    margin-left: 14px;
     transition: .3s;
 }
-.nav-link:hover {
+
+.nav-link:hover,
+.nav-link.active {
     color: #ffdd57 !important;
 }
 
-/* HERO */
+/* Dropdown (jika ada profile menu) */
+.dropdown-menu {
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: none;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: #f0f4ff;
+}
+
+/* =====================================================
+   HERO
+   ===================================================== */
 .hero {
     height: 92vh;
     background: 
@@ -35,17 +77,20 @@ body {
     color: #fff;
     padding: 20px;
 }
+
 .hero h1 {
     font-size: 3.4rem;
     font-weight: 700;
     animation: fadeDown 1s ease-in-out;
 }
+
 .hero h3 {
     font-size: 1.8rem;
     margin-top: 10px;
     color: #ffe07a;
     animation: fadeUp 1s ease-in-out;
 }
+
 .btn-daftar {
     background: #FFD700;
     color: #003366;
@@ -55,30 +100,39 @@ body {
     transition: .3s;
     margin-top: 18px;
     display: inline-block;
+    text-decoration: none;
 }
+
 .btn-daftar:hover {
     background: #e6c200;
     transform: translateY(-4px);
 }
 
-/* ANIMATION */
+/* =====================================================
+   ANIMATION
+   ===================================================== */
 @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-40px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(40px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* SECTION TITLE */
+/* =====================================================
+   SECTION TITLE
+   ===================================================== */
 .section-title {
     font-weight: 700;
     color: #003366;
     margin-bottom: 25px;
 }
 
-/* VISI MISI */
+/* =====================================================
+   VISI MISI
+   ===================================================== */
 .card-visi {
     padding: 30px;
     border-radius: 15px;
@@ -86,13 +140,14 @@ body {
     box-shadow: 0 6px 15px rgba(0,0,0,0.08);
     transition: .3s;
 }
+
 .card-visi:hover {
     transform: translateY(-6px);
 }
-/* ======================================================
-   FASILITAS SEKOLAH
-   ====================================================== */
 
+/* =====================================================
+   FASILITAS SEKOLAH
+   ===================================================== */
 .fasilitas-section{
     background:#f8faff;
     padding:70px 0;
@@ -118,20 +173,24 @@ body {
     margin-bottom:15px;
 }
 
-
-/* STATISTIK */
+/* =====================================================
+   STATISTIK
+   ===================================================== */
 .statistik {
     background: #003366;
     padding: 60px 0;
     color: white;
     text-align: center;
 }
+
 .stat-box {
     font-size: 2.7rem;
     font-weight: 700;
 }
 
-/* INFO CARD */
+/* =====================================================
+   INFO CARD
+   ===================================================== */
 .info-card {
     padding: 30px;
     background: white;
@@ -139,11 +198,14 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: .3s;
 }
+
 .info-card:hover {
     transform: translateY(-7px);
 }
 
-/* MAP */
+/* =====================================================
+   MAP
+   ===================================================== */
 .map iframe {
     width: 100%;
     height: 330px;
@@ -151,7 +213,9 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+   ===================================================== */
 footer {
     background: #002244;
     color: white;
@@ -160,21 +224,20 @@ footer {
     margin-top: 50px;
     border-top: 5px solid #FFD700;
 }
+
 footer a {
     color: #FFD700;
 }
 
-/* ===================================================== */
-/* MOBILE RESPONSIVE                                     */
-/* ===================================================== */
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 @media(max-width: 768px){
 
-    /* Navbar brand shrink */
     .navbar-brand img{
         height: 45px;
     }
 
-    /* Hero becomes shorter */
     .hero{
         height: 70vh;
         padding: 15px;
@@ -193,26 +256,22 @@ footer a {
         font-size: 14px;
     }
 
-    /* Statistik goes 1 column */
     .stat-box{
         font-size: 2rem;
         margin-top: 10px;
     }
 
-    /* Card spacing tighten */
     .info-card,
     .card-visi {
         padding: 20px;
         margin-bottom: 20px;
     }
 
-    /* Map smaller */
     .map iframe{
         height: 230px;
     }
 }
 
-/* EXTRA SMALL SCREEN */
 @media(max-width: 450px){
 
     .hero{
@@ -235,5 +294,4 @@ footer a {
     .section-title{
         font-size: 1.4rem;
     }
-    
 }
