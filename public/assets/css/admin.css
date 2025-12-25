@@ -13,17 +13,13 @@ body {
     box-sizing: border-box;
 }
 
-
 /* ======================================================
    SIDEBAR
-   ====================================================== */
-/* ======================================================
-   SIDEBAR - SAMA PERSIS DENGAN SISWA
    ====================================================== */
 
 .sidebar{
     width:260px;
-    background:#0f2a48;  /* warna sama siswa */
+    background:#0f2a48;
     height:100vh;
     padding-top:20px;
     position:fixed;
@@ -31,7 +27,7 @@ body {
     top:0;
     overflow-y:auto;
     color:white;
-    border-right:3px solid #00365b; /* garis halus */
+    border-right:3px solid #00365b;
 }
 
 .brand{
@@ -52,7 +48,6 @@ body {
     margin:4px 0 0 0;
     font-size:15px;
     font-weight:600;
-    letter-spacing:0.4px;
 }
 
 .brand small{
@@ -72,14 +67,12 @@ body {
     border-left:4px solid transparent;
 }
 
-/* HOVER */
 .sidebar-link:hover{
     background:rgba(255,255,255,.15);
     border-left:4px solid white;
     padding-left:28px;
 }
 
-/* ACTIVE */
 .sidebar-link.active{
     background:rgba(255,255,255,.22);
     border-left:4px solid white;
@@ -87,13 +80,6 @@ body {
     font-weight:600;
 }
 
-.sidebar-link i{
-    font-size:18px;
-    width:24px;
-    opacity:.9;
-}
-
-/* LOGOUT */
 .logout-box{
     padding-top:12px;
     margin-top:20px;
@@ -105,8 +91,6 @@ body {
     padding:12px 24px;
     color:#ff6b6b !important;
     font-weight:700;
-    letter-spacing:0.4px;
-    transition:.2s;
 }
 
 .logout-link:hover{
@@ -114,178 +98,33 @@ body {
     background:rgba(255,0,0,0.1);
 }
 
-/* SCROLLBAR */
-.sidebar::-webkit-scrollbar{
-    width:6px;
-}
-.sidebar::-webkit-scrollbar-thumb{
-    background:#003c73;
-    border-radius:50px;
-}
-
-
 /* ======================================================
-   CONTENT WRAPPER
+   CONTENT
    ====================================================== */
 
 .content {
     padding: 35px;
     margin-left: 260px;
-    z-index: 10;
     position: relative;
 }
 
-
 /* ======================================================
-   DASHBOARD - STATISTIC BOX
+   TABLE UMUM
    ====================================================== */
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.stat-card {
-    flex: 1;
-    min-width: 220px;
-    padding: 22px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 16px;
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    transition: 0.2s;
-    cursor: default;
-}
-
-.stat-card:hover {
-    transform: translateY(-6px);
-}
-
-.stat-card.purple { background: #9276d1; }
-.stat-card.blue   { background: #4c98ff; }
-.stat-card.green  { background: #48d1ac; }
-.stat-card.red    { background: #f26464; }
-
-.stat-info h3 {
-    margin: 0;
-    font-size: 38px;
-}
-
-.stat-info p {
-    margin: 0;
-    opacity: 0.9;
-}
-
-.stat-icon {
-    font-size: 40px;
-}
-.table-box {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    margin-top: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-}
-
-.table-admin {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-}
-
-.table-admin thead tr {
-    background: #eef3f9;
-}
-
-.table-admin th {
-    text-align: left;
-    padding: 12px;
-    font-weight: 600;
-    color: #333;
-}
-
-.table-admin td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.table-admin tr:hover {
-    background: #f8fbff;
-    transition: 0.2s;
-}
-
-
-
-/* ======================================================
-   KELEMBAGAAN STYLE
-   ====================================================== */
-
-.kelembagaan-wrapper{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.1);
-    margin-top:20px;
-}
-
-.kelembagaan-nav{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-    padding-left:0;
-    border-bottom:2px solid #eee;
-    padding-bottom:10px;
-}
-
-.kelembagaan-nav li{
-    list-style:none;
-    padding:10px 20px;
-    background:#f0f4ff;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.2s;
-    color:#082a5c;
-    font-size:15px;
-}
-
-.kelembagaan-nav li:hover,
-.kelembagaan-nav li.active{
-    background:#082a5c;
-    color:white;
-}
-
-.kelembagaan-content{
-    padding:5px;
-}
-
-.kelembagaan-page{
-    display:none;
-}
-
-.kelembagaan-page.show{
-    display:block;
-}
-
-
-/* TABLE DESIGN */
 
 .form-table,
 .pengaturan-table {
     width:100%;
     border-collapse:collapse;
-    margin-top:10px;
+    margin-top:15px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
 }
 
 .form-table th,
 .pengaturan-table th{
-    width:220px;
-    padding:12px 15px;
+    padding:14px 16px;
     background:#f7faff;
     color:#082a5c;
     font-weight:700;
@@ -295,88 +134,105 @@ body {
 
 .form-table td,
 .pengaturan-table td{
-    padding:12px 15px;
-    background:white;
+    padding:14px 16px;
     border-bottom:1px solid #eef2f7;
     font-size:15px;
 }
 
-.form-table tr:hover td,
 .pengaturan-table tr:hover td{
     background:#fafbff;
 }
 
-
 /* ======================================================
-   RESPONSIVE TABLE
+   DATA PPDB - ACTION & STATUS (INI TAMBAHANNYA)
    ====================================================== */
 
-@media (max-width:900px){
+/* kolom action */
+.action-col{
+    width:220px;
+    text-align:center;
+}
 
-    .form-table th,
-    .form-table td,
+.action-cell{
+    text-align:center;
+    white-space:nowrap;
+}
+
+/* tombol action */
+.btn-action{
+    display:inline-block;
+    padding:6px 12px;
+    margin:2px;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    color:white;
+    transition:.2s;
+}
+
+.btn-detail{
+    background:#2563eb;
+}
+
+.btn-edit{
+    background:#f59e0b;
+}
+
+.btn-delete{
+    background:#dc2626;
+}
+
+.btn-action:hover{
+    opacity:.85;
+}
+
+/* STATUS BADGE */
+.status-badge{
+    display:inline-block;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.status-badge.belum_lengkap{
+    background:#fde68a;
+    color:#92400e;
+}
+
+.status-badge.lengkap{
+    background:#bbf7d0;
+    color:#166534;
+}
+
+.status-badge.ditolak{
+    background:#fecaca;
+    color:#991b1b;
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+
+@media(max-width:900px){
+    .content{
+        margin-left:0;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
     .pengaturan-table th,
     .pengaturan-table td{
         display:block;
         width:100%;
     }
 
-    .form-table tr,
     .pengaturan-table tr{
-        margin-bottom:10px;
         display:block;
-        border-bottom:2px solid #eee;
+        margin-bottom:10px;
     }
-}
-
-
-/* ======================================================
-   PENGATURAN STYLE 
-   ====================================================== */
-
-.pengaturan-wrapper{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.1);
-    margin-top:20px;
-}
-
-.pengaturan-nav{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-    padding-left:0;
-    border-bottom:2px solid #eee;
-    padding-bottom:10px;
-}
-
-.pengaturan-nav li{
-    list-style:none;
-    padding:10px 20px;
-    background:#eaf3ff;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.2s;
-    color:#082a5c;
-    font-size:15px;
-}
-
-.pengaturan-nav li:hover,
-.pengaturan-nav li.active{
-    background:#082a5c;
-    color:white;
-}
-
-.pengaturan-content{
-    padding:5px;
-}
-
-.pengaturan-page{
-    display:none;
-}
-
-.pengaturan-page.show{
-    display:block;
 }
