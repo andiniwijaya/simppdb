@@ -10,6 +10,18 @@ class Payment extends Database {
     $row = $result->fetch_assoc();
 
     return (int) $row['total'];
+
+}
+public function getAllPayments()
+{
+    $sql = "
+        SELECT *
+        FROM pembayaran
+        ORDER BY tanggal_bayar DESC
+    ";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 
