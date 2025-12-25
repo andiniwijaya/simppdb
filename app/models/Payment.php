@@ -29,6 +29,29 @@ public function getTotalBayar($id_pendaftar)
     $row = $stmt->get_result()->fetch_assoc();
     return (int) $row['total'];
 }
+public function getStatus($id_pendaftar)
+{
+    $sql = "
+        SELECT status_bayar
+        FROM pembayaran
+        WHERE id_pendaftar = ?
+        ORDER BY tanggal_bayar DESC
+        LIMIT 1
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+
+    $row = $stmt->get_result()->fetch_assoc();
+
+    // kalau belum pernah bayar
+    if (!$row) {
+        return "belum";
+    }
+
+    return $row["status_bayar"];
+}
 public function getAllPayments()
 {
     $sql = "
