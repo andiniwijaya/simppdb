@@ -52,6 +52,21 @@ public function getStatus($id_pendaftar)
 
     return $row["status_bayar"];
 }
+public function getRiwayat($id_pendaftar)
+{
+    $sql = "
+        SELECT tanggal_bayar, jumlah, bukti_transfer, status_bayar
+        FROM pembayaran
+        WHERE id_pendaftar = ?
+        ORDER BY tanggal_bayar DESC
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
 public function getAllPayments()
 {
     $sql = "
