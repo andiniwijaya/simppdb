@@ -115,7 +115,7 @@ class DashboardController {
             $tolak    = $pendaftar->getFormDataByUserId('ditolak');
 
             $total_upload = $upload->countUploaded();
-            $total_bayar  = $payment->countAll();
+            $total_bayar  = $payment->count();
 
             $latest = $pendaftar->getLatest();
 

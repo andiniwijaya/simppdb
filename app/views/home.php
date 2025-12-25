@@ -54,7 +54,6 @@ $base = Config::base_url();
     </div>
 </nav>
 
-
 <!-- HERO -->
 <section class="hero d-flex justify-content-center align-items-center text-center">
     <div>
@@ -104,7 +103,7 @@ $base = Config::base_url();
     </div>
 </section>
 
-<!-- ================= FASILITAS SEKOLAH ================= -->
+<!-- FASILITAS SEKOLAH -->
 <section class="fasilitas-section">
     <div class="container">
         <h2 class="section-title text-center">Fasilitas Sekolah</h2>
