@@ -35,24 +35,12 @@ $base = Config::base_url();
 
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="<?= $base ?>">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#profil">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#info">Informasi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#fasilitas">Fasilitas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#lokasi">Lokasi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= $base ?>/login">Login</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" href="<?= $base ?>">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#info">Informasi</a></li>
+                <li class="nav-item"><a class="nav-link" href="#fasilitas">Fasilitas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#lokasi">Lokasi</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= $base ?>/login">Login</a></li>
             </ul>
         </div>
     </div>
@@ -113,6 +101,7 @@ $base = Config::base_url();
         <h2 class="section-title text-center">Fasilitas Sekolah</h2>
 
         <div class="row g-4 mt-4">
+
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🏫</div>
@@ -143,23 +132,24 @@ $base = Config::base_url();
                     <h6 class="fw-bold">Mushola</h6>
                     <p>Tempat ibadah siswa</p>
                 </div>
+            </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
-                    <div class="fasilitas-icon">💻</div>
-                    <h6 class="fw-bold">Lapangan olahraga</h6>
-                    <p>Lapangan olahraga yang bersih dan luasp>
+                    <div class="fasilitas-icon">⚽</div>
+                    <h6 class="fw-bold">Lapangan Olahraga</h6>
+                    <p>Lapangan olahraga yang bersih dan luas</p>
                 </div>
+            </div>
 
-                <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
-                    <div class="fasilitas-icon">💻</div>
-                    <h6 class="fw-bold">Gedung Aula
-                    <p>Gedung Aula yang luas</p>
+                    <div class="fasilitas-icon">🏢</div>
+                    <h6 class="fw-bold">Gedung Aula</h6>
+                    <p>Gedung aula yang luas</p>
                 </div>
             </div>
-            </div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -167,7 +157,7 @@ $base = Config::base_url();
 <!-- ================= STATISTIK ================= -->
 <section class="statistik">
     <div class="container">
-        <div class="row">
+        <div class="row text-center">
             <div class="col-md-4">
                 <div class="stat-box">30+</div>
                 Guru
