@@ -143,6 +143,22 @@ $base = Config::base_url();
                     <h6 class="fw-bold">Mushola</h6>
                     <p>Tempat ibadah siswa</p>
                 </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">💻</div>
+                    <h6 class="fw-bold">Lapangan olahraga</h6>
+                    <p>Lapangan olahraga yang bersih dan luasp>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">💻</div>
+                    <h6 class="fw-bold">Gedung Aula
+                    <p>Gedung Aula yang luas</p>
+                </div>
+            </div>
+            </div>
             </div>
         </div>
     </div>
