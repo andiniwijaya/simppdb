@@ -85,15 +85,17 @@ body {
    ===================================================== */
 .side-menu {
     position: fixed;
-    top: 0;
+    top: 85px;              /* ⬅️ sama dengan padding-top body */
     right: 0;
     width: 300px;
-    height: 100vh;
+    height: calc(100vh - 85px); /* ⬅️ sisa layar setelah navbar */
     background: #003366;
-    padding: 95px 25px 25px;
+    padding: 25px;
     box-shadow: -6px 0 20px rgba(0,0,0,0.25);
-    z-index: 1050;
+    z-index: 1040;
+    overflow-y: auto;
 }
+
 
 /* daftar menu */
 .menu-list {
