@@ -1,10 +1,11 @@
-body{
+/* ================= DASHBOARD ================= */
+.dashboard-page{
     margin:0;
     background:#e9eff7;
     font-family:Poppins, system-ui;
 }
 
-.sidebar{
+.dashboard-page .sidebar{
     width:240px;
     height:100vh;
     background:#1554c0;
@@ -15,12 +16,12 @@ body{
     padding-top:15px;
 }
 
-.sidebar img{
+.dashboard-page .sidebar img{
     width:60px;
     border-radius:50%;
 }
 
-.sidebar a{
+.dashboard-page .sidebar a{
     color:white;
     display:block;
     padding:12px 20px;
@@ -30,30 +31,29 @@ body{
     transition:.2s;
 }
 
-.sidebar a:hover,
-.sidebar a.active{
+.dashboard-page .sidebar a:hover,
+.dashboard-page .sidebar a.active{
     background:rgba(255,255,255,0.15);
     border-left:4px solid white;
 }
 
-.content{
-    margin-left:240px !important;
-    padding:30px !important;
+.dashboard-page .content{
+    margin-left:240px;
+    padding:30px;
 }
 
-.card{
-    border:none !important;
-    border-radius:12px !important;
+.dashboard-page .card{
+    border:none;
+    border-radius:12px;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
-.progress{
+.dashboard-page .progress{
     height:26px;
     border-radius:20px;
-    overflow:hidden;
 }
 
-.progress-bar{
+.dashboard-page .progress-bar{
     font-size:13px;
     font-weight:bold;
 }
