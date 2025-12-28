@@ -22,15 +22,16 @@ $base = Config::base_url();
 <body>
 
 <!-- ================= NAVBAR ================= -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+<nav class="navbar navbar-dark fixed-top">
     <div class="container">
+
         <!-- LOGO -->
         <a class="navbar-brand d-flex align-items-center" href="<?= $base ?>">
             <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo" height="40" class="me-2">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <!-- TOGGLER DENGAN TULISAN MENU -->
+        <!-- TOMBOL MENU (SELALU MUNCUL) -->
         <button class="navbar-toggler d-flex align-items-center gap-2"
                 type="button"
                 data-bs-toggle="collapse"
@@ -42,9 +43,9 @@ $base = Config::base_url();
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- ISI MENU (MUNCUL SAAT DIKLIK) -->
+        <!-- ISI MENU -->
         <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav ms-auto text-center">
+            <ul class="navbar-nav ms-auto text-center mt-3">
                 <li class="nav-item">
                     <a class="nav-link active" href="<?= $base ?>">Beranda</a>
                 </li>
@@ -63,13 +64,14 @@ $base = Config::base_url();
                 <li class="nav-item">
                     <a class="nav-link" href="#lokasi">Lokasi</a>
                 </li>
-                <li class="nav-item mt-2 mt-lg-0">
-                    <a class="btn btn-warning fw-semibold px-3" href="<?= $base ?>/login">
+                <li class="nav-item mt-2">
+                    <a class="btn btn-warning fw-semibold px-4" href="<?= $base ?>/login">
                         Login
                     </a>
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
 
