@@ -39,6 +39,7 @@ $base = Config::base_url();
                 <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#info">Informasi</a></li>
                 <li class="nav-item"><a class="nav-link" href="#fasilitas">Fasilitas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ekskul">Ekskul</a></li>
                 <li class="nav-item"><a class="nav-link" href="#lokasi">Lokasi</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= $base ?>/login">Login</a></li>
             </ul>
@@ -130,7 +131,7 @@ $base = Config::base_url();
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🕌</div>
                     <h6 class="fw-bold">Mushola</h6>
-                    <p>Tempat ibadah siswa</p>
+                    <p>Tempat ibadah</p>
                 </div>
             </div>
 
@@ -138,15 +139,15 @@ $base = Config::base_url();
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">⚽</div>
                     <h6 class="fw-bold">Lapangan Olahraga</h6>
-                    <p>Lapangan olahraga yang bersih dan luas</p>
+                    <p>Futsal dan Voli</p>
                 </div>
             </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🏢</div>
-                    <h6 class="fw-bold">Gedung Aula</h6>
-                    <p>Gedung aula yang luas</p>
+                    <h6 class="fw-bold">Aula Sekolah</h6>
+                    <p>Kegiatan sekolah</p>
                 </div>
             </div>
 
@@ -154,23 +155,44 @@ $base = Config::base_url();
     </div>
 </section>
 
-<!-- ================= STATISTIK ================= -->
-<section class="statistik">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="stat-box">30+</div>
-                Guru
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box">250+</div>
-                Siswa
-            </div>
-            <div class="col-md-4">
-                <div class="stat-box">20+</div>
-                Prestasi
+<!-- ================= EKSTRAKURIKULER ================= -->
+<section id="ekskul" class="container py-5">
+    <h2 class="section-title text-center">Ekstrakurikuler</h2>
+
+    <div class="row g-4 mt-4 text-center">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="fasilitas-card">
+                <div class="fasilitas-icon">🎒</div>
+                <h6 class="fw-bold">Pramuka</h6>
+                <p>Disiplin & kepemimpinan</p>
             </div>
         </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="fasilitas-card">
+                <div class="fasilitas-icon">🚩</div>
+                <h6 class="fw-bold">Paskibra</h6>
+                <p>Nasionalisme</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="fasilitas-card">
+                <div class="fasilitas-icon">⚽</div>
+                <h6 class="fw-bold">Futsal</h6>
+                <p>Olahraga prestasi</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="fasilitas-card">
+                <div class="fasilitas-icon">🥋</div>
+                <h6 class="fw-bold">Pencak Silat</h6>
+                <p>Bela diri</p>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -189,7 +211,7 @@ $base = Config::base_url();
         <div class="col-md-4 mb-4">
             <div class="info-card">
                 <h5>📋 Persyaratan</h5>
-                <p>KK, KTP Ortu, Ijazah SD, Akta Kelahiran, Pas Foto</p>
+                <p>KK, KTP Ortu, Ijazah SD, Akta, Pas Foto</p>
             </div>
         </div>
 
