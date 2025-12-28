@@ -30,16 +30,21 @@ $base = Config::base_url();
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <!-- TOGGLER -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <!-- TOGGLER DENGAN TULISAN MENU -->
+        <button class="navbar-toggler d-flex align-items-center gap-2"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav"
+                aria-controls="nav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="text-white fw-semibold">Menu</span>
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- MENU -->
+        <!-- ISI MENU (MUNCUL SAAT DIKLIK) -->
         <div class="collapse navbar-collapse" id="nav">
-
-            <!-- MENU UTAMA (TENGAH) -->
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav ms-auto text-center">
                 <li class="nav-item">
                     <a class="nav-link active" href="<?= $base ?>">Beranda</a>
                 </li>
@@ -58,20 +63,16 @@ $base = Config::base_url();
                 <li class="nav-item">
                     <a class="nav-link" href="#lokasi">Lokasi</a>
                 </li>
-            </ul>
-
-            <!-- LOGIN (KANAN) -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link btn btn-warning px-3 text-dark fw-semibold" href="<?= $base ?>/login">
+                <li class="nav-item mt-2 mt-lg-0">
+                    <a class="btn btn-warning fw-semibold px-3" href="<?= $base ?>/login">
                         Login
                     </a>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
+
 
 <!-- ================= HERO ================= -->
 <section class="hero">
