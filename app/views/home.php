@@ -27,45 +27,61 @@ $base = Config::base_url();
 
         <!-- LOGO -->
         <a class="navbar-brand d-flex align-items-center" href="<?= $base ?>">
-            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo">
+            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo" height="40" class="me-2">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <!-- TOMBOL MENU -->
-        <button class="menu-btn"
+        <!-- TOMBOL MENU (SELALU MUNCUL) -->
+        <button class="navbar-toggler d-flex align-items-center gap-2"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#sideMenu"
-                aria-expanded="false">
-            <span>Menu</span>
-            <span class="hamburger"></span>
+                data-bs-target="#nav"
+                aria-controls="nav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="text-white fw-semibold">Menu</span>
+            <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- ISI MENU -->
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto text-center mt-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= $base ?>">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#profil">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#info">Informasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#fasilitas">Fasilitas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ekskul">Ekskul</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#lokasi">Lokasi</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="btn btn-warning fw-semibold px-4" href="<?= $base ?>/login">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </nav>
 
-<!-- ================= SIDE MENU ================= -->
-<div class="collapse side-menu" id="sideMenu">
-    <ul class="menu-list">
-        <li><a href="<?= $base ?>">Beranda</a></li>
-        <li><a href="#profil">Profil</a></li>
-        <li><a href="#info">Informasi</a></li>
-        <li><a href="#fasilitas">Fasilitas</a></li>
-        <li><a href="#ekskul">Ekstrakurikuler</a></li>
-        <li><a href="#lokasi">Lokasi</a></li>
-        <li class="mt-3">
-            <a href="<?= $base ?>/login" class="btn btn-warning w-100 fw-semibold">
-                Login
-            </a>
-        </li>
-    </ul>
-</div>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
     <div>
         <h1>PPDB ONLINE 2026/2027</h1>
         <h3>SMP PGRI ARJASARI</h3>
-        <p class="lead">Membentuk Generasi Berkarakter dan Berprestasi</p>
+        <p class="lead">“Membentuk Generasi Berkarakter dan Berprestasi.”</p>
         <a href="<?= $base ?>/login" class="btn-daftar">Daftar Sekarang</a>
     </div>
 </section>
@@ -74,15 +90,15 @@ $base = Config::base_url();
 <section id="profil" class="container py-5">
     <h2 class="section-title text-center">Tentang Sekolah</h2>
     <p class="text-center">
-        SMP PGRI Arjasari berdiri sejak tahun 1976 dan berkomitmen mencetak
-        generasi yang unggul, berkarakter, dan berprestasi.
+        SMP PGRI Arjasari berdiri sejak tahun 1976 dan berkomitmen
+        mencetak generasi yang unggul, berkarakter, dan berprestasi.
     </p>
 </section>
 
 <!-- ================= VISI MISI ================= -->
 <section class="py-5 visi-section">
     <div class="container">
-        <h2 class="section-title text-center">Visi & Misi</h2>
+        <h2 class="section-title text-center">Visi & Misi Sekolah</h2>
 
         <div class="row">
             <div class="col-md-6 mb-4">
@@ -101,7 +117,7 @@ $base = Config::base_url();
                     <ul>
                         <li>Meningkatkan mutu pendidikan</li>
                         <li>Membentuk karakter disiplin</li>
-                        <li>Menguasai teknologi dan IPTEK</li>
+                        <li>Menguasai teknologi dan ilmu pengetahuan</li>
                     </ul>
                 </div>
             </div>
@@ -115,46 +131,16 @@ $base = Config::base_url();
         <h2 class="section-title text-center">Fasilitas Sekolah</h2>
 
         <div class="row g-4 mt-4">
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏫</div><h6>Ruang Kelas</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📚</div><h6>Perpustakaan</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">💻</div><h6>Lab Komputer</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🕌</div><h6>Mushola</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">⚽</div><h6>Lapangan</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏢</div><h6>Aula</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🩺</div><h6>UKS</h6></div></div>
-            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📶</div><h6>Wi-Fi</h6></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏫</div><h6 class="fw-bold">Ruang Kelas</h6><p>Nyaman dan kondusif</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📚</div><h6 class="fw-bold">Perpustakaan</h6><p>Koleksi buku lengkap</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">💻</div><h6 class="fw-bold">Lab Komputer</h6><p>Pembelajaran IT</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🕌</div><h6 class="fw-bold">Mushola</h6><p>Tempat ibadah</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">⚽</div><h6 class="fw-bold">Lapangan Olahraga</h6><p>Futsal & Voli</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏢</div><h6 class="fw-bold">Aula Sekolah</h6><p>Kegiatan sekolah</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🩺</div><h6 class="fw-bold">UKS</h6><p>Kesehatan siswa</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📶</div><h6 class="fw-bold">Wi-Fi Sekolah</h6><p>Akses internet</p></div></div>
         </div>
     </div>
-</section>
-
-<!-- ================= EKSKUL ================= -->
-<section id="ekskul" class="container py-5">
-    <h2 class="section-title text-center">Ekstrakurikuler</h2>
-    <div class="row g-4 text-center mt-4">
-        <div class="col-md-3 col-sm-6"><div class="fasilitas-card">🎒 Pramuka</div></div>
-        <div class="col-md-3 col-sm-6"><div class="fasilitas-card">🚩 Paskibra</div></div>
-        <div class="col-md-3 col-sm-6"><div class="fasilitas-card">⚽ Futsal</div></div>
-        <div class="col-md-3 col-sm-6"><div class="fasilitas-card">🥋 Pencak Silat</div></div>
-    </div>
-</section>
-
-<!-- ================= INFO ================= -->
-<section id="info" class="container py-5">
-    <h2 class="section-title text-center">Informasi PPDB</h2>
-
-    <div class="row">
-        <div class="col-md-4"><div class="info-card">🗓 Jan – Jun 2026</div></div>
-        <div class="col-md-4"><div class="info-card">📋 Persyaratan Lengkap</div></div>
-        <div class="col-md-4"><div class="info-card">📞 0821-2873-5795</div></div>
-    </div>
-</section>
-
-<!-- ================= MAP ================= -->
-<section id="lokasi" class="map container mb-5">
-    <iframe
-        src="https://www.google.com/maps?q=SMP%20PGRI%20Arjasari&output=embed"
-        loading="lazy">
-    </iframe>
 </section>
 
 <!-- ================= FOOTER ================= -->
