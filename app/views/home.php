@@ -24,25 +24,51 @@ $base = Config::base_url();
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="<?= $base ?>">
-            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo">
+        <!-- LOGO -->
+        <a class="navbar-brand d-flex align-items-center" href="<?= $base ?>">
+            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo" height="40" class="me-2">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
+        <!-- TOGGLER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- MENU -->
         <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="<?= $base ?>">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#info">Informasi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#fasilitas">Fasilitas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ekskul">Ekskul</a></li>
-                <li class="nav-item"><a class="nav-link" href="#lokasi">Lokasi</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= $base ?>/login">Login</a></li>
+
+            <!-- MENU UTAMA (TENGAH) -->
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= $base ?>">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#profil">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#info">Informasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#fasilitas">Fasilitas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ekskul">Ekskul</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#lokasi">Lokasi</a>
+                </li>
             </ul>
+
+            <!-- LOGIN (KANAN) -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-warning px-3 text-dark fw-semibold" href="<?= $base ?>/login">
+                        Login
+                    </a>
+                </li>
+            </ul>
+
         </div>
     </div>
 </nav>
@@ -102,153 +128,16 @@ $base = Config::base_url();
         <h2 class="section-title text-center">Fasilitas Sekolah</h2>
 
         <div class="row g-4 mt-4">
-
-            <!-- BARIS ATAS -->
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🏫</div>
-                    <h6 class="fw-bold">Ruang Kelas</h6>
-                    <p>Nyaman dan kondusif</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">📚</div>
-                    <h6 class="fw-bold">Perpustakaan</h6>
-                    <p>Koleksi buku lengkap</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">💻</div>
-                    <h6 class="fw-bold">Lab Komputer</h6>
-                    <p>Pembelajaran IT</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🕌</div>
-                    <h6 class="fw-bold">Mushola</h6>
-                    <p>Tempat ibadah</p>
-                </div>
-            </div>
-
-            <!-- BARIS BAWAH -->
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">⚽</div>
-                    <h6 class="fw-bold">Lapangan Olahraga</h6>
-                    <p>Futsal & Voli</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🏢</div>
-                    <h6 class="fw-bold">Aula Sekolah</h6>
-                    <p>Kegiatan sekolah</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">🩺</div>
-                    <h6 class="fw-bold">UKS</h6>
-                    <p>Kesehatan siswa</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="fasilitas-card">
-                    <div class="fasilitas-icon">📶</div>
-                    <h6 class="fw-bold">Wi-Fi Sekolah</h6>
-                    <p>Akses internet</p>
-                </div>
-            </div>
-
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏫</div><h6 class="fw-bold">Ruang Kelas</h6><p>Nyaman dan kondusif</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📚</div><h6 class="fw-bold">Perpustakaan</h6><p>Koleksi buku lengkap</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">💻</div><h6 class="fw-bold">Lab Komputer</h6><p>Pembelajaran IT</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🕌</div><h6 class="fw-bold">Mushola</h6><p>Tempat ibadah</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">⚽</div><h6 class="fw-bold">Lapangan Olahraga</h6><p>Futsal & Voli</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🏢</div><h6 class="fw-bold">Aula Sekolah</h6><p>Kegiatan sekolah</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">🩺</div><h6 class="fw-bold">UKS</h6><p>Kesehatan siswa</p></div></div>
+            <div class="col-md-3 col-sm-6"><div class="fasilitas-card"><div class="fasilitas-icon">📶</div><h6 class="fw-bold">Wi-Fi Sekolah</h6><p>Akses internet</p></div></div>
         </div>
     </div>
-</section>
-
-
-<!-- ================= EKSTRAKURIKULER ================= -->
-<section id="ekskul" class="container py-5">
-    <h2 class="section-title text-center">Ekstrakurikuler</h2>
-
-    <div class="row g-4 mt-4 text-center">
-
-        <div class="col-md-3 col-sm-6">
-            <div class="fasilitas-card">
-                <div class="fasilitas-icon">🎒</div>
-                <h6 class="fw-bold">Pramuka</h6>
-                <p>Disiplin & kepemimpinan</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="fasilitas-card">
-                <div class="fasilitas-icon">🚩</div>
-                <h6 class="fw-bold">Paskibra</h6>
-                <p>Nasionalisme</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="fasilitas-card">
-                <div class="fasilitas-icon">⚽</div>
-                <h6 class="fw-bold">Futsal</h6>
-                <p>Olahraga prestasi</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="fasilitas-card">
-                <div class="fasilitas-icon">🥋</div>
-                <h6 class="fw-bold">Pencak Silat</h6>
-                <p>Bela diri</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= INFO ================= -->
-<section id="info" class="container py-5">
-    <h2 class="section-title text-center">Informasi PPDB 2026</h2>
-
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="info-card">
-                <h5>🗓 Jadwal</h5>
-                <p>Gelombang 1: Jan – Mar<br>Gelombang 2: Apr – Jun</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="info-card">
-                <h5>📋 Persyaratan</h5>
-                <p>KK, KTP Ortu, Ijazah SD, Akta, Pas Foto</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="info-card">
-                <h5>📞 Kontak</h5>
-                <p>0821-2873-5795</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================= MAP ================= -->
-<section id="lokasi" class="map container mb-5">
-    <iframe
-        src="https://www.google.com/maps?q=SMP%20PGRI%20Arjasari&output=embed"
-        loading="lazy">
-    </iframe>
 </section>
 
 <!-- ================= FOOTER ================= -->
