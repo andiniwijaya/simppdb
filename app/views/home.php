@@ -22,59 +22,45 @@ $base = Config::base_url();
 <body>
 
 <!-- ================= NAVBAR ================= -->
-<!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-dark fixed-top">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
 
         <!-- LOGO -->
         <a class="navbar-brand d-flex align-items-center" href="<?= $base ?>">
-            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo" height="40" class="me-2">
+            <img src="<?= $base ?>/public/img/logo_smp.png" alt="Logo">
             <strong>SMP PGRI ARJASARI</strong>
         </a>
 
-        <!-- TOMBOL MENU (SELALU MUNCUL) -->
-        <button class="navbar-toggler d-flex align-items-center gap-2"
+        <!-- TOMBOL MENU  -->
+        <button class="menu-btn"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#nav"
-                aria-controls="nav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="text-white fw-semibold">Menu</span>
-            <span class="navbar-toggler-icon"></span>
+                data-bs-target="#sideMenu"
+                aria-expanded="false">
+            <span>Menu</span>
+            <span class="hamburger"></span>
         </button>
-
-        <!-- ISI MENU -->
-        <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav ms-auto text-center mt-3">
-                <li class="nav-item">
-                    <a class="nav-link active" href="<?= $base ?>">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#profil">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#info">Informasi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#fasilitas">Fasilitas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#ekskul">Ekskul</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#lokasi">Lokasi</a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a class="btn btn-warning fw-semibold px-4" href="<?= $base ?>/login">
-                        Login
-                    </a>
-                </li>
-            </ul>
-        </div>
 
     </div>
 </nav>
+
+<!-- ================= SIDE MENU (PINGGIR) ================= -->
+<div class="collapse side-menu" id="sideMenu">
+    <ul class="menu-list">
+        <li><a href="<?= $base ?>">Beranda</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#info">Informasi</a></li>
+        <li><a href="#fasilitas">Fasilitas</a></li>
+        <li><a href="#ekskul">Ekstrakurikuler</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li class="mt-3">
+            <a href="<?= $base ?>/login" class="btn btn-warning w-100 fw-semibold">
+                Login
+            </a>
+        </li>
+    </ul>
+</div>
+
 
 <!-- ================= HERO ================= -->
 <section class="hero">
