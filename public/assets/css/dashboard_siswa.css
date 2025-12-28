@@ -1,11 +1,10 @@
-/* ================= DASHBOARD ================= */
-.dashboard-page{
+body{
     margin:0;
     background:#e9eff7;
     font-family:Poppins, system-ui;
 }
 
-.dashboard-page .sidebar{
+.sidebar{
     width:240px;
     height:100vh;
     background:#1554c0;
@@ -16,12 +15,12 @@
     padding-top:15px;
 }
 
-.dashboard-page .sidebar img{
+.sidebar img{
     width:60px;
     border-radius:50%;
 }
 
-.dashboard-page .sidebar a{
+.sidebar a{
     color:white;
     display:block;
     padding:12px 20px;
@@ -31,29 +30,30 @@
     transition:.2s;
 }
 
-.dashboard-page .sidebar a:hover,
-.dashboard-page .sidebar a.active{
+.sidebar a:hover,
+.sidebar a.active{
     background:rgba(255,255,255,0.15);
     border-left:4px solid white;
 }
 
-.dashboard-page .content{
-    margin-left:240px;
-    padding:30px;
+.content{
+    margin-left:240px !important;
+    padding:30px !important;
 }
 
-.dashboard-page .card{
-    border:none;
-    border-radius:12px;
+.card{
+    border:none !important;
+    border-radius:12px !important;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
-.dashboard-page .progress{
+.progress{
     height:26px;
     border-radius:20px;
+    overflow:hidden;
 }
 
-.dashboard-page .progress-bar{
+.progress-bar{
     font-size:13px;
     font-weight:bold;
 }
