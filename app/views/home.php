@@ -103,6 +103,7 @@ $base = Config::base_url();
 
         <div class="row g-4 mt-4">
 
+            <!-- BARIS ATAS -->
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">🏫</div>
@@ -135,11 +136,12 @@ $base = Config::base_url();
                 </div>
             </div>
 
+            <!-- BARIS BAWAH -->
             <div class="col-md-3 col-sm-6">
                 <div class="fasilitas-card">
                     <div class="fasilitas-icon">⚽</div>
                     <h6 class="fw-bold">Lapangan Olahraga</h6>
-                    <p>Futsal dan Voli</p>
+                    <p>Futsal & Voli</p>
                 </div>
             </div>
 
@@ -151,9 +153,26 @@ $base = Config::base_url();
                 </div>
             </div>
 
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">🩺</div>
+                    <h6 class="fw-bold">UKS</h6>
+                    <p>Kesehatan siswa</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="fasilitas-card">
+                    <div class="fasilitas-icon">📶</div>
+                    <h6 class="fw-bold">Wi-Fi Sekolah</h6>
+                    <p>Akses internet</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
+
 
 <!-- ================= EKSTRAKURIKULER ================= -->
 <section id="ekskul" class="container py-5">
