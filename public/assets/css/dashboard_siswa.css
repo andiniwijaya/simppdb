@@ -45,8 +45,10 @@ body{
     margin-left:240px;
     width:calc(100vw - 240px);
     padding:30px;
+    padding-left:0;          
     box-sizing:border-box;
 }
+
 
 
 .card{
