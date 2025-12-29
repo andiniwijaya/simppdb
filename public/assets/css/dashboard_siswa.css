@@ -1,8 +1,3 @@
-html, body{
-    overflow-x:hidden;
-}
-
-
 body{
     margin:0;
     background:#e9eff7;
@@ -42,12 +37,12 @@ body{
 }
 
 .content{
-    margin-left:240px;
-    width:calc(100vw - 240px);
-    padding:30px;        /* jarak atas & dalam */
-    padding-left:0;     /* ❗ khusus kiri dihilangkan */
-    box-sizing:border-box;
+    margin-left:240px !important;
+    padding:30px !important;
+
+    overflow-x:auto;   
 }
+
 
 .card{
     border:none !important;
