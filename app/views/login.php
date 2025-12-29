@@ -71,20 +71,21 @@ $base = Config::base_url();
                 </div>
 
                 <!-- PASSWORD -->
-                <div class="mb-3 position-relative">
-                    <label class="form-label fw-semibold">Kata Sandi</label>
+<div class="mb-3 position-relative">
+    <label class="form-label fw-semibold">Kata Sandi</label>
 
-                    <input type="password" 
-                        name="password"
-                        class="form-control pe-5"
-                        id="passField"
-                        placeholder="kata sandi"
-                        minlength="8"
-                        maxlength="8"
-                        required>
+    <input type="password" 
+        name="password"
+        class="form-control pe-5"
+        id="passField"
+        placeholder="kata sandi"
+        minlength="8"
+        required>
+</div>
+
 
                     <small class="text-muted">
-                        *Password wajib 8 karakter
+                        *Password Minimal 8 karakter
                     </small>
 
                     <i class="bi bi-eye-slash"
