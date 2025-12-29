@@ -1,7 +1,8 @@
 <?php $active="berkas"; ?>
 <link rel="stylesheet" href="<?= Config::base_url();?>/public/assets/css/berkas.css">
 
-<div class="content container-fluid px-0">
+<div class="content">
+
 
 <h3 class="fw-bold mb-4 text-center">Unggah Berkas Pendaftaran</h3>
 
