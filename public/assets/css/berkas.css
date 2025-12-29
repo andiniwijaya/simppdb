@@ -20,7 +20,7 @@ button{
     letter-spacing:.5px;
 }
 .content{
-    margin-left:250px; /* SESUAIKAN lebar sidebar */
+    margin-left:250px;           /* lebar sidebar */
+    width: calc(100% - 250px);   /* KUNCI LEBAR */
     padding:20px;
 }
-
