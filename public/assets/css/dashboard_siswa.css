@@ -44,12 +44,10 @@ body{
 .content{
     margin-left:240px;
     width:calc(100vw - 240px);
-    padding:0;
+    padding:30px;        /* jarak atas & dalam */
+    padding-left:0;     /* ❗ khusus kiri dihilangkan */
     box-sizing:border-box;
 }
-
-
-
 
 .card{
     border:none !important;
