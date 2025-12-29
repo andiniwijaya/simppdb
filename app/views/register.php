@@ -42,47 +42,50 @@
         <input type="email" name="email" class="form-control"
           placeholder="Email aktif" required>
 
-        <!-- PASSWORD -->
-        <label class="mt-1">Kata Sandi</label>
-        <div class="position-relative">
-          <input type="password" name="password"
-            class="form-control pe-5"
-            id="regPass"
-            placeholder="Buat kata sandi akun"
-            required>
+          <!-- PASSWORD -->
+<label class="mt-1">Kata Sandi</label>
+<div class="position-relative">
+  <input type="password" name="password"
+    class="form-control pe-5"
+    id="regPass"
+    placeholder="Buat kata sandi akun"
+    minlength="8"
+    required>
 
-          <i class="bi bi-eye-slash"
-             id="toggleRegPass"
-             style="
-                position:absolute;
-                right:15px;
-                top:10px;
-                font-size:18px;
-                cursor:pointer;
-                color:#555;">
-          </i>
-        </div>
+  <i class="bi bi-eye-slash"
+     id="toggleRegPass"
+     style="
+        position:absolute;
+        right:15px;
+        top:10px;
+        font-size:18px;
+        cursor:pointer;
+        color:#555;">
+  </i>
+</div>
 
-        <!-- CONFIRM PASSWORD -->
-        <label class="mt-1">Konfirmasi Kata Sandi</label>
-        <div class="position-relative">
-          <input type="password" name="confirm_password"
-            class="form-control pe-5"
-            id="regPassConfirm"
-            placeholder="Ulangi kata sandi"
-            required>
+<!-- CONFIRM PASSWORD -->
+<label class="mt-1">Konfirmasi Kata Sandi</label>
+<div class="position-relative">
+  <input type="password" name="confirm_password"
+    class="form-control pe-5"
+    id="regPassConfirm"
+    placeholder="Ulangi kata sandi"
+    minlength="8"
+    required>
 
-          <i class="bi bi-eye-slash"
-             id="toggleRegPassConfirm"
-             style="
-                position:absolute;
-                right:15px;
-                top:10px;
-                font-size:18px;
-                cursor:pointer;
-                color:#555;">
-          </i>
-        </div>
+  <i class="bi bi-eye-slash"
+     id="toggleRegPassConfirm"
+     style="
+        position:absolute;
+        right:15px;
+        top:10px;
+        font-size:18px;
+        cursor:pointer;
+        color:#555;">
+  </i>
+</div>
+
 
         <!-- RECAPTCHA -->
         <div class="text-center mt-3 mb-2">
