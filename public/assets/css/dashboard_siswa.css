@@ -1,3 +1,8 @@
+html, body{
+    overflow-x:hidden;
+}
+
+
 body{
     margin:0;
     background:#e9eff7;
@@ -37,9 +42,12 @@ body{
 }
 
 .content{
-    margin-left:240px !important;
-    padding:30px !important;
+    margin-left:240px;
+    width:calc(100vw - 240px);
+    padding:30px;
+    box-sizing:border-box;
 }
+
 
 .card{
     border:none !important;

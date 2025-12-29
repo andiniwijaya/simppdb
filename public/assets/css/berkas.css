@@ -11,15 +11,6 @@ body{
     margin:0;
 }
 
-/* CONTENT AREA */
-.content{
-    position:relative;
-    margin-left:250px;                 /* lebar sidebar */
-    width:calc(100vw - 250px);         /* KUNCI KE VIEWPORT */
-    max-width:none !important;         /* MATIKAN CENTER WRAPPER */
-    padding:20px;
-    box-sizing:border-box;
-}
 
 /* CARD */
 .card{
