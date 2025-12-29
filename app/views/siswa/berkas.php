@@ -3,7 +3,6 @@
 
 <div class="content">
 
-
 <h3 class="fw-bold mb-4 text-center">Unggah Berkas Pendaftaran</h3>
 
 <div class="card p-4 shadow-sm mb-5">
