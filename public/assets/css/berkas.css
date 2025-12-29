@@ -1,44 +1,20 @@
-/* KUNCI LAYAR */
-html, body{
-    width:100%;
-    overflow-x:hidden;
-}
-
-/* BODY */
 body{
     background:#eef3ff;
     font-family:Poppins, sans-serif;
-    margin:0;
 }
 
-
-/* CARD */
 .card{
     border-radius:12px;
     border:none;
     box-shadow:0 4px 8px rgba(0,0,0,.05);
 }
 
-/* TABLE */
 .table{
-    width:100%;
-    table-layout:fixed;
     border-radius:8px;
     overflow:hidden;
     font-size:14px;
 }
 
-.table th,
-.table td{
-    word-wrap:break-word;
-}
-
-/* INPUT FILE */
-input[type="file"]{
-    max-width:100%;
-}
-
-/* BUTTON */
 button{
     font-weight:600;
     letter-spacing:.5px;
