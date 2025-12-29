@@ -19,3 +19,8 @@ button{
     font-weight:600;
     letter-spacing:.5px;
 }
+.content{
+    margin-left:250px; /* SESUAIKAN lebar sidebar */
+    padding:20px;
+}
+
