@@ -11,7 +11,6 @@ $base = Config::base_url();
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="<?= $base ?>/public/assets/css/login.css">
-
 </head>
 
 <body>
@@ -71,26 +70,22 @@ $base = Config::base_url();
                 </div>
 
                 <!-- PASSWORD -->
-<div class="mb-3 position-relative">
-    <label class="form-label fw-semibold">Kata Sandi</label>
+                <div class="mb-3 position-relative">
+                    <label class="form-label fw-semibold">
+                        Kata Sandi
+                    </label>
 
-    <input type="password" 
-        name="password"
-        class="form-control pe-5"
-        id="passField"
-        placeholder="kata sandi"
-        minlength="8"
-        required>
-</div>
-
-
-                    <small class="text-muted">
-                        *Password Minimal 8 karakter
-                    </small>
+                    <input type="password" 
+                           name="password"
+                           class="form-control pe-5"
+                           id="passField"
+                           placeholder="kata sandi"
+                           minlength="8"
+                           required>
 
                     <i class="bi bi-eye-slash"
-                        id="togglePass"
-                        style="
+                       id="togglePass"
+                       style="
                             position:absolute;
                             right:15px;
                             top:42px;
@@ -99,8 +94,11 @@ $base = Config::base_url();
                             color:#555;">
                     </i>
 
+                    <small class="text-muted">
+                        *Password Minimal 8 karakter
+                    </small>
                 </div>
-                
+
                 <button type="submit" class="btn btn-login w-100">
                     Masuk
                 </button>
