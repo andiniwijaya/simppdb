@@ -6,25 +6,6 @@ $base = Config::base_url();
 <div class="content">
 
 <h3 class="mb-4 fw-bold text-center">Formulir PPDB</h3>
-<div class="card mb-4">
-    <div class="card-body">
-        <div class="d-flex align-items-center gap-2 mb-2">
-            <i class="bi bi-graph-up-arrow"></i>
-            <strong>Progress Pengisian</strong>
-        </div>
-
-        <div class="progress mb-2" style="height:10px;">
-            <div class="progress-bar bg-primary"
-                 role="progressbar"
-                 style="width: <?= $progress ?? 0 ?>%">
-            </div>
-        </div>
-
-        <small class="text-muted">
-            Lengkapi semua bagian hingga 100%.
-        </small>
-    </div>
-</div>
 
 
 <ul class="nav nav-tabs mb-4" id="formTabs">
