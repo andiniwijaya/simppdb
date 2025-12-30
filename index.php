@@ -22,6 +22,12 @@ $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
 $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
 $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
+$router->get('/admin/ppdb', 'AdminPPDBController@index');
+$router->get('/admin/ppdb/detail/{id}', 'AdminPPDBController@detail');
+$router->get('/admin/ppdb/edit/{id}', 'AdminPPDBController@edit');
+$router->post('/admin/ppdb/update/{id}', 'AdminPPDBController@update');
+$router->get('/admin/ppdb/delete/{id}', 'AdminPPDBController@delete');
+
 
 $router->get('/siswa/formulir', 'FormulirController@index');
 $router->post('/siswa/formulir/simpan', 'FormulirController@simpan');
