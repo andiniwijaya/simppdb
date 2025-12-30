@@ -1,10 +1,12 @@
 /* ================= GLOBAL LAYOUT ================= */
 body{
+    margin:0;
     overflow-x:hidden;
     font-family:Poppins, system-ui;
+    background:#e9eff7;
 }
 
-/* ================= SIDEBAR (GLOBAL) ================= */
+/* ================= SIDEBAR (GLOBAL, FIXED) ================= */
 .sidebar{
     width:240px;
     height:100vh;
@@ -40,12 +42,18 @@ body{
     border-left:4px solid white;
 }
 
-/* ================= CONTENT (GLOBAL) ================= */
+/* ================= WRAPPER UTAMA ================= */
+/* INI KUNCI UTAMA → MENDORONG SEMUA HALAMAN */
+.container-fluid{
+    padding-left:240px !important;
+    padding-right:30px;
+    max-width:100% !important;
+}
+
+/* ================= CONTENT ================= */
 .content{
-    margin-left:240px;
     padding:30px;
     min-height:100vh;
-    width:calc(100% - 240px);
     background:#e9eff7;
 }
 
@@ -84,7 +92,21 @@ body{
     margin-left:0;
     margin-right:0;
 }
-/* FIX CONTAINER KETUTUP SIDEBAR */
-.container-fluid{
-    padding-left:240px !important;
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:992px){
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .container-fluid{
+        padding-left:0 !important;
+        padding-right:0;
+    }
+
+    .content{
+        padding:20px;
+    }
 }
