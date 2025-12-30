@@ -3,12 +3,34 @@
     margin:0;
     background:#fff;
     font-family:'Poppins',sans-serif;
+
+    /* PERBAIKAN */
+    display:flex;
+    min-height:100vh;
     width:100%;
-    overflow-x:hidden;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    width:240px;
+    background:#1554c0;
+    color:#fff;
+    flex-shrink:0;
+}
+
+/* ================= CONTENT AREA ================= */
+.formulir-page .content{
+    flex:1;                 /* ⬅️ INI KUNCI UTAMA */
+    padding:30px;
+    background:#fff;
+    min-height:100vh;
+
+    /* HAPUS SEMUA INI */
+    /* margin-left:240px; */
+    /* width:calc(100% - 240px); */
 }
 
 /* ================= OVERRIDE BOOTSTRAP CONTAINER ================= */
-/* INI PALING PENTING */
 .formulir-page .container,
 .formulir-page .container-fluid{
     max-width:100% !important;
@@ -18,21 +40,12 @@
     margin:0 !important;
 }
 
-/* ================= CONTENT AREA ================= */
-.formulir-page .content{
-    margin-left:240px;          /* lebar sidebar */
-    padding:30px;
-    background:#fff;
-    min-height:100vh;
-    width:calc(100% - 240px);
-}
-
 /* ================= TAB ================= */
 .formulir-page .nav-tabs{
     border:none;
     gap:12px;
     margin-bottom:30px;
-    justify-content:center;
+    justify-content:flex-start;
 }
 
 .formulir-page .nav-tabs .nav-link{
@@ -63,6 +76,7 @@
     padding:30px;
     box-shadow:0 10px 28px rgba(0,0,0,.08);
     margin-bottom:30px;
+    max-width:100%;
 }
 
 /* ================= ROW & GUTTER ================= */
@@ -103,24 +117,21 @@
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 992px){
-    .formulir-page .content{
-        margin-left:0;
+    .formulir-page{
+        flex-direction:column;
+    }
+
+    .sidebar{
         width:100%;
+        height:auto;
+    }
+
+    .formulir-page .content{
         padding:20px;
     }
 }
-/* SAMAKAN DENGAN CONTOH (KONTEN KIRI) */
-.formulir-page .nav-tabs{
-    justify-content:flex-start;
-    margin-left:0;
-}
 
-/* FORM MELEBAR */
-.formulir-page .card{
-    max-width:100%;
-}
-
-/* JARAK ATAS LEBIH RAPAT */
+/* JARAK ATAS */
 .formulir-page h3{
     margin-bottom:20px;
 }
