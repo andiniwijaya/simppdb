@@ -18,7 +18,7 @@
     <!-- FORM PEMBAYARAN -->
     <?php if ($status != "lunas"): ?>
     <div class="card p-4 mb-4">
-        <form action="/pembayaran/upload" method="post" enctype="multipart/form-data">
+        <form action="/siswa/pembayaran/upload" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label">Nominal Bayar</label>
