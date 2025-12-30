@@ -3,12 +3,16 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Payment extends Database
 {
+    /**
+     * Total infaq yang harus dibayar siswa
+     */
     const TOTAL_INFAQ = 500000;
 
     // ==================================================
     // DASHBOARD ADMIN
     // ==================================================
 
+    // Hitung total data pembayaran
     public function count()
     {
         $sql = "SELECT COUNT(*) AS total FROM pembayaran";
@@ -18,7 +22,8 @@ class Payment extends Database
         return (int) $row['total'];
     }
 
-    // ✅ FIXED: JOIN dengan pendaftar
+    // Ambil semua pembayaran (ADMINISTRASI ADMIN)
+    // ✅ SUDAH JOIN ke tabel pendaftar
     public function getAllPayments()
     {
         $sql = "
@@ -44,6 +49,7 @@ class Payment extends Database
     // PEMBAYARAN SISWA
     // ==================================================
 
+    // Total nominal yang sudah dibayar (status lunas)
     public function getTotalBayar($id_pendaftar)
     {
         $sql = "
@@ -61,6 +67,7 @@ class Payment extends Database
         return (int) $row['total'];
     }
 
+    // Status pembayaran terakhir siswa
     public function getStatus($id_pendaftar)
     {
         $sql = "
@@ -76,13 +83,23 @@ class Payment extends Database
         $stmt->execute();
 
         $row = $stmt->get_result()->fetch_assoc();
-        return $row ? $row["status_bayar"] : "belum";
+
+        if (!$row) {
+            return "belum";
+        }
+
+        return $row["status_bayar"];
     }
 
+    // Riwayat pembayaran siswa
     public function getRiwayat($id_pendaftar)
     {
         $sql = "
-            SELECT tanggal_bayar, jumlah, bukti_transfer, status_bayar
+            SELECT 
+                tanggal_bayar,
+                jumlah,
+                bukti_transfer,
+                status_bayar
             FROM pembayaran
             WHERE id_pendaftar = ?
             ORDER BY tanggal_bayar DESC
@@ -95,6 +112,11 @@ class Payment extends Database
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    // ==================================================
+    // DASHBOARD SISWA
+    // ==================================================
+
+    // Ambil pembayaran terakhir siswa
     public function lastPayment($id_pendaftar)
     {
         $sql = "
@@ -112,11 +134,17 @@ class Payment extends Database
         return $stmt->get_result()->fetch_assoc();
     }
 
+    // Alias total bayar (kompatibilitas)
     public function countPaid($id_pendaftar)
     {
         return $this->getTotalBayar($id_pendaftar);
     }
 
+    // ==================================================
+    // SIMPAN PEMBAYARAN
+    // ==================================================
+
+    // Simpan pembayaran (cicilan)
     public function insert($id_pendaftar, $jumlah, $bukti)
     {
         $sql = "
