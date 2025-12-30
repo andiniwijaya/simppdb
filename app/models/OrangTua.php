@@ -96,31 +96,35 @@ class OrangTua extends Database {
        (AYAH + IBU)
        ====================== */
     public function getOrtuByPendaftar($id_pendaftar)
-    {
-        $sql = "SELECT * 
-                FROM orang_tua 
-                WHERE id_pendaftar = ? 
-                  AND jenis IN ('Ayah','Ibu')";
+{
+    $sql = "SELECT * 
+            FROM orang_tua 
+            WHERE id_pendaftar = ? 
+              AND jenis IN ('Ayah','Ibu')";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_pendaftar);
-        $stmt->execute();
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
 
-        $data = [
-            "ayah" => null,
-            "ibu"  => null
-        ];
+    // 🔴 get_result DIPANGGIL SEKALI
+    $result = $stmt->get_result();
 
-        while ($row = $stmt->get_result()->fetch_assoc()) {
-            if ($row["jenis"] === "Ayah") {
-                $data["ayah"] = $row;
-            } elseif ($row["jenis"] === "Ibu") {
-                $data["ibu"] = $row;
-            }
+    $data = [
+        "ayah" => null,
+        "ibu"  => null
+    ];
+
+    while ($row = $result->fetch_assoc()) {
+        if ($row["jenis"] === "Ayah") {
+            $data["ayah"] = $row;
+        } elseif ($row["jenis"] === "Ibu") {
+            $data["ibu"] = $row;
         }
-
-        return $data;
     }
+
+    return $data;
+}
+
 
     /* ======================
        GET DATA WALI
