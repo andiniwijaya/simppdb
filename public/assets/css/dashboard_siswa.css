@@ -84,3 +84,7 @@ body{
     margin-left:0;
     margin-right:0;
 }
+/* FIX CONTAINER KETUTUP SIDEBAR */
+.container-fluid{
+    padding-left:240px !important;
+}
