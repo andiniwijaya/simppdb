@@ -1,8 +1,6 @@
 <h2>Data PPDB</h2>
-<a href="/admin/ppdb/cetak" 
-   target="_blank"
-   class="btn btn-success mb-3">
-   <i class="bi bi-file-earmark-excel"></i> Cetak Data (Excel)
+<a href="/admin/ppdb/cetak" class="btn btn-success mb-3">
+    <i class="bi bi-file-earmark-excel"></i> Export Excel
 </a>
 
 

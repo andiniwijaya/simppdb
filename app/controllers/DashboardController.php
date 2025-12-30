@@ -206,7 +206,7 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
-   public function cetakPPDB()
+ public function cetakPPDB()
 {
     if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
         header("Location: /login");
@@ -216,7 +216,14 @@ class DashboardController {
     $pendaftar = new Pendaftar();
     $list = $pendaftar->getLatest();
 
+    // HEADER EXCEL (INI KUNCI)
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=data_ppdb.xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
     require_once dirname(__DIR__) . '/views/admin/cetak_ppdb_excel.php';
+    exit;
 }
 
 
