@@ -1,16 +1,9 @@
-/* =====================
-   GLOBAL
-===================== */
 body{
     margin:0;
     background:#e9eff7;
     font-family:Poppins, system-ui;
-    overflow-x:hidden; /* cegah scroll horizontal */
 }
 
-/* =====================
-   SIDEBAR
-===================== */
 .sidebar{
     width:240px;
     height:100vh;
@@ -20,14 +13,11 @@ body{
     top:0;
     color:white;
     padding-top:15px;
-    z-index:1000;
 }
 
 .sidebar img{
     width:60px;
     border-radius:50%;
-    display:block;
-    margin:0 auto 10px;
 }
 
 .sidebar a{
@@ -37,7 +27,7 @@ body{
     text-decoration:none;
     font-size:14px;
     border-left:4px solid transparent;
-    transition:background .2s ease, border .2s ease;
+    transition:.2s;
 }
 
 .sidebar a:hover,
@@ -46,28 +36,20 @@ body{
     border-left:4px solid white;
 }
 
-/* =====================
-   CONTENT
-===================== */
 .content{
-    margin-left:240px;
-    padding:30px;
-    overflow-x:auto;
-    min-height:100vh;
+    margin-left:240px !important;
+    padding:30px !important;
+
+    overflow-x:auto;   
 }
 
-/* =====================
-   CARD
-===================== */
+
 .card{
-    border:none;
-    border-radius:12px;
+    border:none !important;
+    border-radius:12px !important;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
-/* =====================
-   PROGRESS BAR
-===================== */
 .progress{
     height:26px;
     border-radius:20px;
@@ -77,5 +59,4 @@ body{
 .progress-bar{
     font-size:13px;
     font-weight:bold;
-    line-height:26px;
 }
