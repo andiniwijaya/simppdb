@@ -1,13 +1,33 @@
 /* ================= FORMULIR ================= */
 .formulir-page{
     margin:0;
-    background:#eef3ff;
+    background:#fff;
     font-family:'Poppins',sans-serif;
 }
 
+/* CONTENT FULL */
 .formulir-page .content{
     margin-left:240px;
+    padding:0;
+    background:#fff;
+    min-height:100vh;
+}
+
+/* TAB CONTENT FULL PUTIH */
+.formulir-page .tab-content{
+    background:#fff;
     padding:30px;
+    min-height:100vh;
+}
+
+/* HILANGKAN GUTTER */
+.formulir-page .row{
+    margin-left:0;
+    margin-right:0;
+}
+.formulir-page .row > *{
+    padding-left:0;
+    padding-right:0;
 }
 
 /* progress card */
