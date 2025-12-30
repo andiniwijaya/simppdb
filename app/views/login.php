@@ -30,13 +30,13 @@ $base = Config::base_url();
 
             <!-- LOGO -->
             <div class="text-center mb-3">
-                <img src="<?= $base ?>/public/img/logo_smp2.png" 
+                <img src="<?= $base ?>/public/img/logo_smp.png" 
                      alt="Logo SMP"
                      style="height:75px;">
             </div>
 
             <!-- TITLE -->
-            <h4 class="text-center fw-bold mb-1">Portal Login</h4>
+            <h4 class="text-center fw-bold mb-1"> Login</h4>
             <p class="text-center mb-4">Masukkan akun kamu</p>
 
             <!-- NOTIF REGISTER -->
