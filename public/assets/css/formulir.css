@@ -1,51 +1,20 @@
-/* ================= FORMULIR ================= */
+/* ================= FORMULIR PAGE ================= */
 .formulir-page{
-    margin:0;
     background:#fff;
-    font-family:'Poppins',sans-serif;
-
-    /* PERBAIKAN */
-    display:flex;
     min-height:100vh;
-    width:100%;
+    font-family:Poppins, sans-serif;
 }
 
-/* ================= SIDEBAR ================= */
-.sidebar{
-    width:240px;
-    background:#1554c0;
-    color:#fff;
-    flex-shrink:0;
-}
-
-/* ================= CONTENT AREA ================= */
+/* CONTENT KHUSUS FORMULIR */
 .formulir-page .content{
-    flex:1;                 /* ⬅️ INI KUNCI UTAMA */
-    padding:30px;
     background:#fff;
-    min-height:100vh;
-
-    /* HAPUS SEMUA INI */
-    /* margin-left:240px; */
-    /* width:calc(100% - 240px); */
 }
 
-/* ================= OVERRIDE BOOTSTRAP CONTAINER ================= */
-.formulir-page .container,
-.formulir-page .container-fluid{
-    max-width:100% !important;
-    width:100% !important;
-    padding-left:0 !important;
-    padding-right:0 !important;
-    margin:0 !important;
-}
-
-/* ================= TAB ================= */
+/* ================= TABS ================= */
 .formulir-page .nav-tabs{
     border:none;
     gap:12px;
     margin-bottom:30px;
-    justify-content:flex-start;
 }
 
 .formulir-page .nav-tabs .nav-link{
@@ -59,42 +28,22 @@
 
 .formulir-page .nav-tabs .nav-link.active{
     background:#0d6efd;
-    color:white;
+    color:#fff;
     font-weight:600;
 }
 
-/* ================= TAB CONTENT ================= */
-.formulir-page .tab-content{
-    background:#fff;
-    width:100%;
-}
-
-/* ================= CARD FORM ================= */
+/* ================= CARD ================= */
 .formulir-page .card{
     border:none;
     border-radius:20px;
     padding:30px;
     box-shadow:0 10px 28px rgba(0,0,0,.08);
     margin-bottom:30px;
-    max-width:100%;
 }
 
-/* ================= ROW & GUTTER ================= */
-.formulir-page .row{
-    margin-left:-12px;
-    margin-right:-12px;
-}
-
-.formulir-page .row > div{
-    padding-left:12px;
-    padding-right:12px;
-    margin-bottom:18px;
-}
-
-/* ================= FORM CONTROL ================= */
+/* ================= FORM ================= */
 .formulir-page label{
     font-weight:500;
-    margin-bottom:6px;
 }
 
 .formulir-page .form-control,
@@ -104,7 +53,6 @@
 }
 
 .formulir-page textarea.form-control{
-    height:auto;
     min-height:90px;
 }
 
@@ -113,25 +61,4 @@
     border-radius:14px;
     padding:12px;
     font-weight:600;
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 992px){
-    .formulir-page{
-        flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
-        height:auto;
-    }
-
-    .formulir-page .content{
-        padding:20px;
-    }
-}
-
-/* JARAK ATAS */
-.formulir-page h3{
-    margin-bottom:20px;
 }
