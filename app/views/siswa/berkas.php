@@ -3,7 +3,7 @@
 
 <div class="content">
 
-<h3 class="fw-bold mb-4 text-center">Unggah Berkas Pendaftaran</h3>
+<h3 class="bi bi-upload me-2">Unggah Berkas Pendaftaran</h3>
 
 <!-- ALERT -->
 <?php if(isset($_SESSION["error"])): ?>

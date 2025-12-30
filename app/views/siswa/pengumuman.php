@@ -1,6 +1,6 @@
 <?php $active="pengumuman"; ?>
 
-<h3 class="fw-bold mb-4 text-center">Pengumuman PPDB</h3>
+<h3 class="bi bi-megaphone-fill me-2">Pengumuman PPDB</h3>
 
 <div class="card p-5 text-center">
 

@@ -5,7 +5,7 @@ $base = Config::base_url();
 <div class="formulir-page">
 <div class="content">
 
-<h3 class="mb-4 fw-bold text-center">Formulir PPDB</h3>
+<h3 class="bi bi-file-earmark-text me-2"> Formulir PPDB</h3>
 
 
 <ul class="nav nav-tabs mb-4" id="formTabs">
