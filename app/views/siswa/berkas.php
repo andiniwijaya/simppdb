@@ -3,7 +3,9 @@
 
 <div class="content">
 
-<h3 class="bi bi-upload me-2">Unggah Berkas Pendaftaran</h3>
+<h3 class="fw-bold mb-3">
+    <i class="bi bi-file-earmark-text me-2"></i> Unggah Berkas Pendaftaran
+</h3>
 
 <!-- ALERT -->
 <?php if(isset($_SESSION["error"])): ?>

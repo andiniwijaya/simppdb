@@ -13,8 +13,8 @@ $siswa             = $siswa ?? [
 ];
 ?>
 
-<h3 class="mb-3">
-  <i class="bi bi-speedometer2 me-2"></i>Dashboard
+<h3 class="fw-bold mb-3">
+  <i class="bi bi-speedometer2 me-2"></i> Dashboard
 </h3>
 
 <!-- IDENTITAS PENDAFTAR -->
