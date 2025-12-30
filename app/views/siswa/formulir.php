@@ -2,8 +2,9 @@
 $active = "formulir"; 
 $base = Config::base_url();
 ?>
-<div class="formulir-page">
+
 <div class="content">
+
 
 <h3 class="mb-4 fw-bold text-center">Formulir PPDB</h3>
 
