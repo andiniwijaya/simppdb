@@ -28,7 +28,7 @@ $router->post('/siswa/formulir/simpan', 'FormulirController@simpan');
 $router->get('/siswa/formulir/cetak', 'FormulirController@cetak');
 
 
-$router->get("/siswa/berkas_pendaftar", "BerkasController@index");
+$router->get("/siswa/berkas", "BerkasController@index");
 $router->post("/siswa/berkas/upload", "BerkasController@upload");
 
 $router->get('/siswa/pembayaran', 'PembayaranController@index');
