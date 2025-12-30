@@ -47,7 +47,7 @@ body{
 .container-fluid{
     padding-left:240px !important;
     padding-right:30px;
-    max-width:100% !important;
+    max-width:90% !important;
 }
 
 /* ================= CONTENT ================= */
