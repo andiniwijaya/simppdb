@@ -1,5 +1,7 @@
 <h2>Data PPDB</h2>
 
+<div class="pengaturan-wrapper">
+
 <table class="pengaturan-table">
     <tr>
         <th>Nama Lengkap</th>
@@ -17,19 +19,26 @@
             <td><?= htmlspecialchars($row["nisn"]) ?></td>
             <td><?= htmlspecialchars($row["asal_sekolah"]) ?></td>
             <td><?= htmlspecialchars($row["status_data"]) ?></td>
-            <td><?= $row["tanggal_daftar"] ?></td>
+            <td><?= date("d-m-Y", strtotime($row["tanggal_daftar"])) ?></td>
             <td>
 
-                <!-- DETAIL / READ -->
+                <!-- DETAIL -->
                 <a href="/admin/ppdb/detail/<?= $row['id_pendaftar'] ?>"
                    class="btn btn-sm btn-info">
                     Detail
                 </a>
 
-                <!-- UPDATE -->
+                <!-- EDIT -->
                 <a href="/admin/ppdb/edit/<?= $row['id_pendaftar'] ?>"
                    class="btn btn-sm btn-warning">
                     Edit
+                </a>
+
+                <!-- CETAK -->
+                <a href="/admin/ppdb/cetak/<?= $row['id_pendaftar'] ?>"
+                   target="_blank"
+                   class="btn btn-sm btn-success">
+                    Cetak
                 </a>
 
                 <!-- DELETE -->
@@ -50,3 +59,5 @@
         </tr>
     <?php endif; ?>
 </table>
+
+</div>
