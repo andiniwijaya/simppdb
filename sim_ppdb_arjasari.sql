@@ -118,7 +118,8 @@ CREATE TABLE berkas_pendaftar (
 
     jenis_berkas ENUM(
         'kartu_keluarga',
-        'ktp_orang_tua',
+        'ktp_ayah',
+        'ktp_ibu',
         'kip',
         'ijazah_sd',
         'surat_keterangan_lulus',

@@ -5,6 +5,7 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 
 class PembayaranController {
 
+    // ================= HALAMAN PEMBAYARAN =================
     public function index(){
 
         if(!isset($_SESSION["user_id"])){
@@ -36,6 +37,7 @@ class PembayaranController {
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
+    // ================= UPLOAD PEMBAYARAN =================
     public function upload(){
 
         if(!isset($_SESSION["user_id"])){
@@ -43,29 +45,52 @@ class PembayaranController {
             exit;
         }
 
-        $jumlah = (int) $_POST["jumlah"];
+        if(
+            !isset($_POST["jumlah"]) ||
+            !isset($_FILES["bukti"]) ||
+            empty($_FILES["bukti"]["name"])
+        ){
+            die("Data pembayaran tidak lengkap");
+        }
 
+        $jumlah = (int) $_POST["jumlah"];
         if($jumlah <= 0){
             die("Nominal tidak valid");
         }
-
-        $file = time()."_".$_FILES["bukti"]["name"];
-        move_uploaded_file(
-            $_FILES["bukti"]["tmp_name"],
-            __DIR__."/../../public/uploads/".$file
-        );
 
         $pendaftar = new Pendaftar();
         $payment   = new Payment();
 
         $data = $pendaftar->getFormDataByUserId($_SESSION["user_id"]);
+        $id_pendaftar = $data["id_pendaftar"];
 
+        // ================= FOLDER KHUSUS PEMBAYARAN =================
+        $uploadDir = __DIR__ . "/../../public/uploads/pembayaran/";
+
+        if(!is_dir($uploadDir)){
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // ================= NAMA FILE AMAN =================
+        $ext  = pathinfo($_FILES["bukti"]["name"], PATHINFO_EXTENSION);
+        $nama = "bayar_" . $id_pendaftar . "_" . time() . "." . $ext;
+
+        $pathServer = $uploadDir . $nama;
+        $pathDB     = "/public/uploads/pembayaran/" . $nama;
+
+        // ================= UPLOAD =================
+        if(!move_uploaded_file($_FILES["bukti"]["tmp_name"], $pathServer)){
+            die("Gagal mengunggah bukti pembayaran");
+        }
+
+        // ================= SIMPAN DB =================
         $payment->insert(
-            $data["id_pendaftar"],
+            $id_pendaftar,
             $jumlah,
-            "/public/uploads/".$file
+            $pathDB
         );
 
+        $_SESSION["success"] = "Pembayaran berhasil dikirim.";
         header("Location: /siswa/pembayaran");
         exit;
     }

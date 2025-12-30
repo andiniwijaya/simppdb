@@ -46,7 +46,7 @@ class DashboardController {
             $id_pendaftar = (int) $siswa["id_pendaftar"];
 
             // ===== STATUS UPLOAD =====
-            $status_upload = "Belum Upload";
+            $status_upload = "belum";
 
             if ($id_pendaftar > 0) {
                 $status_upload = $berkas->getStatusLengkap($id_pendaftar);
@@ -65,9 +65,17 @@ class DashboardController {
             // ===== PROGRESS =====
             $progress = 0;
 
-            if (!empty($siswa["nama_lengkap"])) $progress += 40;
-            if ($status_upload === "lengkap")   $progress += 30;
-            if ($paymentData["status_bayar"] === "lunas") $progress += 30;
+            if (!empty($siswa["nama_lengkap"])) {
+                $progress += 40;
+            }
+
+            if ($status_upload === "lengkap") {
+                $progress += 30;
+            }
+
+            if ($paymentData["status_bayar"] === "lunas") {
+                $progress += 30;
+            }
 
             // PENGUMUMAN
             $pengumuman = new Pengumuman();

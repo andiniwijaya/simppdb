@@ -1,10 +1,41 @@
 <?php
-$active="dashboard";
+$active = "dashboard";
+
+// pengaman variabel
+$progress          = $progress ?? 0;
+$status_upload     = $status_upload ?? "belum";
+$status_pengumuman = $status_pengumuman ?? "menunggu";
+$payment           = $payment ?? ["status_bayar" => "belum"];
+$siswa             = $siswa ?? [
+    "id_pendaftar" => "-",
+    "nama_lengkap" => "-",
+    "nisn"         => "-"
+];
 ?>
 
-<h3 class="mb-3">
-  <i class="bi bi-speedometer2 me-2"></i>Dashboard
+<h3 class="fw-bold mb-3">
+  <i class="bi bi-speedometer2 me-2"></i> Dashboard
 </h3>
+
+<!-- IDENTITAS PENDAFTAR -->
+<div class="card p-4 mb-4">
+  <h5 class="mb-3"><i class="bi bi-person-badge me-2"></i>Identitas Pendaftar</h5>
+
+  <table class="table table-sm mb-0">
+    <tr>
+      <th width="30%">ID Pendaftar</th>
+      <td><?= $siswa["id_pendaftar"] ?: "-" ?></td>
+    </tr>
+    <tr>
+      <th>Nama Lengkap</th>
+      <td><?= $siswa["nama_lengkap"] ?: "-" ?></td>
+    </tr>
+    <tr>
+      <th>NISN</th>
+      <td><?= $siswa["nisn"] ?? "-" ?></td>
+    </tr>
+  </table>
+</div>
 
 <!-- PROGRESS -->
 <div class="card p-4 mb-4">
@@ -17,8 +48,8 @@ $active="dashboard";
   </div>
 
   <small class="text-muted">
-    <?= $progress == 100 
-      ? "✔ Semua proses selesai" 
+    <?= $progress == 100
+      ? "✔ Semua proses pendaftaran telah selesai"
       : "Lengkapi formulir, upload berkas, dan lakukan pembayaran untuk menyelesaikan pendaftaran." ?>
   </small>
 </div>
@@ -49,34 +80,29 @@ $active="dashboard";
            <i class="bi bi-printer"></i> Cetak Formulir
         </a>
       <?php endif; ?>
-
     </div>
   </div>
 
   <!-- UNGGAH BERKAS -->
   <div class="col-md-4">
     <div class="card p-3 text-center">
-
       <h6>Unggah Berkas</h6>
 
       <?php if($status_upload === "lengkap"): ?>
-          <i class="bi bi-check-circle-fill text-success fs-1 mb-2"></i>
-          <small>Lengkap</small>
-
+        <i class="bi bi-check-circle-fill text-success fs-1 mb-2"></i>
+        <small>Berkas Lengkap</small>
       <?php elseif($status_upload === "menunggu"): ?>
-          <i class="bi bi-clock-fill text-warning fs-1 mb-2"></i>
-          <small>Menunggu Verifikasi</small>
-
+        <i class="bi bi-clock-fill text-warning fs-1 mb-2"></i>
+        <small>Menunggu / Belum Lengkap</small>
       <?php else: ?>
-          <i class="bi bi-x-circle-fill text-danger fs-1 mb-2"></i>
-          <small>Belum Upload</small>
+        <i class="bi bi-x-circle-fill text-danger fs-1 mb-2"></i>
+        <small>Belum Upload</small>
       <?php endif; ?>
 
       <a href="/siswa/berkas_pendaftar"
          class="btn btn-outline-primary btn-sm mt-3">
-        Upload Berkas
+        Kelola Berkas
       </a>
-
     </div>
   </div>
 
@@ -98,7 +124,7 @@ $active="dashboard";
 
       <a href="/siswa/pembayaran"
          class="btn btn-outline-primary btn-sm mt-3">
-        Bayar
+        Pembayaran
       </a>
     </div>
   </div>
@@ -106,26 +132,22 @@ $active="dashboard";
   <!-- PENGUMUMAN -->
   <div class="col-md-4">
     <div class="card p-3 text-center">
-
       <h6>Pengumuman</h6>
 
       <?php if($status_pengumuman === "diterima"): ?>
-          <i class="bi bi-patch-check-fill text-success fs-1 mb-2"></i>
-          <div class="fw-semibold text-success">DITERIMA</div>
-
+        <i class="bi bi-patch-check-fill text-success fs-1 mb-2"></i>
+        <div class="fw-semibold text-success">DITERIMA</div>
       <?php elseif($status_pengumuman === "tidak_diterima"): ?>
-          <i class="bi bi-x-octagon-fill text-danger fs-1 mb-2"></i>
-          <div class="fw-semibold text-danger">TIDAK DITERIMA</div>
-
+        <i class="bi bi-x-octagon-fill text-danger fs-1 mb-2"></i>
+        <div class="fw-semibold text-danger">TIDAK DITERIMA</div>
       <?php else: ?>
-          <i class="bi bi-hourglass-split text-warning fs-1 mb-2"></i>
-          <div class="fw-semibold">MENUNGGU PENGUMUMAN</div>
+        <i class="bi bi-hourglass-split text-warning fs-1 mb-2"></i>
+        <div class="fw-semibold">MENUNGGU PENGUMUMAN</div>
       <?php endif; ?>
 
       <small class="text-muted d-block mt-2">
-          Pengumuman akan ditampilkan setelah seleksi selesai
+        Pengumuman akan ditampilkan setelah seleksi selesai
       </small>
-
     </div>
   </div>
 

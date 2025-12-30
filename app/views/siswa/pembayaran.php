@@ -2,7 +2,9 @@
 
 <div class="wrapper">
 
-    <h3 class="fw-bold mb-4">Pembayaran Infaq Yayasan</h3>
+    <h3 class="fw-bold mb-3">
+        <i class="bi bi-cash-coin me-2"></i> Pembayaran Infaq Yayasan
+    </h3>
 
     <!-- INFO PEMBAYARAN -->
     <div class="card p-4 mb-4">
@@ -18,7 +20,7 @@
     <!-- FORM PEMBAYARAN -->
     <?php if ($status != "lunas"): ?>
     <div class="card p-4 mb-4">
-        <form action="/pembayaran/upload" method="post" enctype="multipart/form-data">
+        <form action="/siswa/pembayaran/upload" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label">Nominal Bayar</label>

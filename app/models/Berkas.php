@@ -14,6 +14,16 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    // ================= CEK DUPLIKASI JENIS BERKAS =================
+    public function getByJenis($id_pendaftar, $jenis){
+        $sql = "SELECT id_berkas FROM berkas_pendaftar
+                WHERE id_pendaftar = ? AND jenis_berkas = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("is", $id_pendaftar, $jenis);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
     // ================= INSERT BERKAS =================
     public function insert($id_pendaftar, $jenis, $lokasi){
 
@@ -29,10 +39,14 @@ class Berkas extends Database {
     // ================= CEK STATUS LENGKAP BERKAS =================
     public function getStatusLengkap($id_pendaftar) {
 
-        // ❗ KIP TIDAK WAJIB
+        /**
+         * ❗ KIP TIDAK WAJIB
+         * ❗ KTP HARUS AYAH + IBU
+         */
         $wajib = [
             'kartu_keluarga',
-            'ktp_orang_tua',
+            'ktp_ayah',
+            'ktp_ibu',
             'ijazah_sd',
             'surat_keterangan_lulus',
             'akta_kelahiran',
@@ -55,24 +69,59 @@ class Berkas extends Database {
             return "belum";
         }
 
-        // mapping: jenis_berkas => status
+        // mapping: jenis_berkas => status_berkas
         $map = [];
         foreach ($rows as $r) {
             $map[$r['jenis_berkas']] = $r['status_berkas'];
         }
 
-        // cek semua berkas wajib
+        // ❌ CEK SEMUA BERKAS WAJIB
         foreach ($wajib as $jenis) {
-            // belum ada atau invalid
-            if (
-                !isset($map[$jenis]) ||
-                $map[$jenis] === 'invalid'
-            ) {
+
+            // belum diupload
+            if (!isset($map[$jenis])) {
+                return "menunggu";
+            }
+
+            // sudah ada tapi invalid
+            if ($map[$jenis] === 'invalid') {
                 return "menunggu";
             }
         }
 
-        // ✅ SEMUA WAJIB ADA & VALID
+        // ✅ SEMUA WAJIB ADA & VALID / MENUNGGU VALIDASI
         return "lengkap";
+    }
+
+    // ================= HITUNG PROGRESS (%) =================
+    public function getProgress($id_pendaftar){
+
+        $wajib = [
+            'kartu_keluarga',
+            'ktp_ayah',
+            'ktp_ibu',
+            'ijazah_sd',
+            'surat_keterangan_lulus',
+            'akta_kelahiran',
+            'pas_foto'
+        ];
+
+        $sql = "
+            SELECT jenis_berkas
+            FROM berkas_pendaftar
+            WHERE id_pendaftar = ?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+        $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        $uploaded = array_column($rows, 'jenis_berkas');
+
+        $done = count(array_intersect($wajib, $uploaded));
+        $total = count($wajib);
+
+        return round(($done / $total) * 100);
     }
 }
