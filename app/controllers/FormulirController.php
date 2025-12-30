@@ -59,4 +59,30 @@ class FormulirController
             exit;
         }
     }
+
+    /* ============================
+       TAMBAHAN CETAK FORMULIR
+       ============================ */
+    public function cetak()
+    {
+        if(!isset($_SESSION["user_id"])) {
+            header("Location: /login");
+            exit;
+        }
+
+        $user_id = $_SESSION["user_id"];
+
+        $pendaftar = new Pendaftar;
+        $ortu      = new OrangTua;
+
+        $id_pendaftar = $pendaftar->getId($user_id);
+
+        $data = [
+            "siswa" => $pendaftar->getFormDataByUserId($user_id),
+            "ortu"  => $ortu->getOrtuByPendaftar($id_pendaftar),
+            "wali"  => $ortu->getWaliByPendaftar($id_pendaftar)
+        ];
+
+        require __DIR__ . '/../views/siswa/cetak_formulir.php';
+    }
 }

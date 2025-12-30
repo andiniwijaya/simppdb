@@ -1,0 +1,51 @@
+body {
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    color: #000;
+}
+
+h3, h4 {
+    text-align: center;
+    margin: 5px 0;
+}
+
+hr {
+    margin: 15px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.label {
+    width: 30%;
+    font-weight: bold;
+}
+
+.border td {
+    border: 1px solid #000;
+}
+
+.btn-cetak {
+    margin-bottom: 15px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.ttd {
+    margin-top: 40px;
+}
+
+@media print {
+    .btn-cetak {
+        display: none;
+    }
+}

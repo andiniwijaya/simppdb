@@ -90,5 +90,54 @@ class OrangTua extends Database {
     public function saveAyah($id,$d){ return $this->save($id,"Ayah",$d); }
     public function saveIbu($id,$d){  return $this->save($id,"Ibu" ,$d); }
     public function saveWali($id,$d){ return $this->save($id,"Wali",$d); }
+    
+        /* ======================
+       GET DATA ORANG TUA
+       (AYAH + IBU)
+       ====================== */
+    public function getOrtuByPendaftar($id_pendaftar)
+    {
+        $sql = "SELECT * 
+                FROM orang_tua 
+                WHERE id_pendaftar = ? 
+                  AND jenis IN ('Ayah','Ibu')";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        $data = [
+            "ayah" => null,
+            "ibu"  => null
+        ];
+
+        while ($row = $stmt->get_result()->fetch_assoc()) {
+            if ($row["jenis"] === "Ayah") {
+                $data["ayah"] = $row;
+            } elseif ($row["jenis"] === "Ibu") {
+                $data["ibu"] = $row;
+            }
+        }
+
+        return $data;
+    }
+
+    /* ======================
+       GET DATA WALI
+       ====================== */
+    public function getWaliByPendaftar($id_pendaftar)
+    {
+        $sql = "SELECT * 
+                FROM orang_tua 
+                WHERE id_pendaftar = ? 
+                  AND jenis = 'Wali'
+                LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
+    }
 
 }

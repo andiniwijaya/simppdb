@@ -41,6 +41,15 @@ $active="dashboard";
       <a href="/siswa/formulir" class="btn btn-outline-primary btn-sm mt-3">
         Lihat Formulir
       </a>
+
+      <?php if(!empty($siswa["nama_lengkap"])): ?>
+        <a href="/siswa/formulir/cetak"
+           target="_blank"
+           class="btn btn-success btn-sm mt-2">
+           <i class="bi bi-printer"></i> Cetak Formulir
+        </a>
+      <?php endif; ?>
+
     </div>
   </div>
 
