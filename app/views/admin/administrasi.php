@@ -3,59 +3,88 @@
 <div class="pengaturan-wrapper">
 
 <table class="pengaturan-table">
+    <thead>
+        <tr>
+            <th>Nama Siswa</th>
+            <th>Jumlah</th>
+            <th>Tanggal Bayar</th>
+            <th>Jenis Pembayaran</th>
+            <th>Bukti Pembayaran</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
 
-<tr>
-    <th>Nama Siswa</th>
-    <th>Jumlah</th>
-    <th>Tanggal</th>
-    <th>Jenis Pembyaran</th>
-    <th>Bukti Pembayaran</th>
-    <th>Status</th>
-    <th>Action</th>
-</tr>
+    <tbody>
+    <?php if(!empty($list)): ?>
+        <?php foreach($list as $row): ?>
+        <tr>
+            <!-- NAMA -->
+            <td><?= htmlspecialchars($row["nama_lengkap"] ?? "-") ?></td>
 
-<?php foreach($list as $row): ?>
+            <!-- JUMLAH -->
+            <td>
+                Rp <?= number_format($row["jumlah"], 0, ",", ".") ?>
+            </td>
 
-<tr>
-    <td><?= $row["nama_lengkap"] ?></td>
-    <td>Rp <?= number_format($row["jumlah"]) ?></td>
-    <td><?= $row["tanggal"] ?></td>
+            <!-- TANGGAL -->
+            <td>
+                <?= date("d-m-Y", strtotime($row["tanggal_bayar"])) ?>
+            </td>
 
-    <td>
-        <a href="<?= $base ?>/public/bukti/<?= $row["bukti"] ?>" target="_blank">Lihat</a>
-    </td>
+            <!-- JENIS PEMBAYARAN -->
+            <td>Infaq PPDB</td>
 
-    <td>
-        <?php if($row["status_bayar"] == "lunas"): ?>
-            <span style="color:green;font-weight:bold;">Lunas</span>
-        <?php elseif($row["status_bayar"] == "ditolak"): ?>
-            <span style="color:red;font-weight:bold;">Ditolak</span>
-        <?php else: ?>
-            <span style="color:orange;font-weight:bold;">Menunggu</span>
-        <?php endif; ?>
-    </td>
+            <!-- BUKTI -->
+            <td>
+                <?php if(!empty($row["bukti_transfer"])): ?>
+                    <a href="<?= $base ?>/uploads/<?= $row["bukti_transfer"] ?>"
+                       target="_blank">
+                       Lihat
+                    </a>
+                <?php else: ?>
+                    -
+                <?php endif; ?>
+            </td>
 
-    <td>
-        <?php if($row["status_bayar"] != "lunas"): ?>
+            <!-- STATUS -->
+            <td>
+                <?php if($row["status_bayar"] === "lunas"): ?>
+                    <span style="color:green;font-weight:bold;">Lunas</span>
+                <?php elseif($row["status_bayar"] === "ditolak"): ?>
+                    <span style="color:red;font-weight:bold;">Ditolak</span>
+                <?php else: ?>
+                    <span style="color:orange;font-weight:bold;">Menunggu</span>
+                <?php endif; ?>
+            </td>
 
-            <a href="<?= $base ?>/administrasi/valid/<?= $row["id_payment"] ?>" 
-               style="color:green;font-weight:bold;">Valid</a>
-
-            |
-
-            <a href="<?= $base ?>/administrasi/tolak/<?= $row["id_payment"] ?>" 
-               style="color:red;font-weight:bold;">Tolak</a>
-
-        <?php else: ?>
-
-            ✔
-
-        <?php endif; ?>
-    </td>
-
-</tr>
-
-<?php endforeach; ?>
-
+            <!-- AKSI -->
+            <td>
+                <?php if($row["status_bayar"] !== "lunas"): ?>
+                    <a href="<?= $base ?>/admin/pembayaran/valid/<?= $row["id_pembayaran"] ?>"
+                       style="color:green;font-weight:bold;">
+                       Valid
+                    </a>
+                    |
+                    <a href="<?= $base ?>/admin/pembayaran/tolak/<?= $row["id_pembayaran"] ?>"
+                       style="color:red;font-weight:bold;"
+                       onclick="return confirm('Tolak pembayaran ini?')">
+                       Tolak
+                    </a>
+                <?php else: ?>
+                    ✔
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="7" style="text-align:center;">
+                Belum ada data pembayaran
+            </td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
 </table>
+
 </div>
