@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <title>Cetak Data PPDB</title>
 
-<!-- CSS DIPISAH -->
 <link rel="stylesheet" href="<?= $base ?>/public/assets/css/cetak_ppdb_excel.css">
 </head>
 
@@ -38,7 +37,6 @@
 <?php endforeach; ?>
 </tbody>
 </table>
-
 
 <script src="<?= $base ?>/public/assets/js/cetak_ppdb_excel.js"></script>
 </body>
