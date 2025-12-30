@@ -27,6 +27,8 @@ $router->get('/admin/ppdb/detail/{id}', 'AdminPPDBController@detail');
 $router->get('/admin/ppdb/edit/{id}', 'AdminPPDBController@edit');
 $router->post('/admin/ppdb/update/{id}', 'AdminPPDBController@update');
 $router->get('/admin/ppdb/delete/{id}', 'AdminPPDBController@delete');
+$router->get('/admin/ppdb/cetak/(:num)', 'DashboardController@cetakPPDB');
+
 
 
 $router->get('/siswa/formulir', 'FormulirController@index');

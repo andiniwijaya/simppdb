@@ -1,4 +1,12 @@
 <h2>Data PPDB</h2>
+<div style="margin-bottom:15px; text-align:right;">
+    <a href="/admin/ppdb/cetak"
+       target="_blank"
+       class="btn btn-success">
+        <i class="bi bi-printer"></i> Cetak Data PPDB
+    </a>
+</div>
+
 
 <div class="pengaturan-wrapper">
 
@@ -33,13 +41,7 @@
                    class="btn btn-sm btn-warning">
                     Edit
                 </a>
-
-                <!-- CETAK -->
-                <a href="/admin/ppdb/cetak/<?= $row['id_pendaftar'] ?>"
-                   target="_blank"
-                   class="btn btn-sm btn-success">
-                    Cetak
-                </a>
+               
 
                 <!-- DELETE -->
                 <a href="/admin/ppdb/delete/<?= $row['id_pendaftar'] ?>"
