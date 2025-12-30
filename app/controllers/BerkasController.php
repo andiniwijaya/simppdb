@@ -32,7 +32,6 @@ class BerkasController {
         $statusBerkas   = $m->getStatusLengkap($id_pendaftar);
         $progressBerkas = $m->getProgress($id_pendaftar);
 
-        // KIRIM KE VIEW
         ob_start();
         require __DIR__ . "/../views/siswa/berkas.php";
         $content = ob_get_clean();
@@ -57,8 +56,7 @@ class BerkasController {
         $p = new Pendaftar();
         $m = new Berkas();
 
-        $id_pengguna = $_SESSION["user_id"];
-        $pendaftar   = $p->getFormDataByUserId($id_pengguna);
+        $pendaftar = $p->getFormDataByUserId($_SESSION["user_id"]);
 
         if(!$pendaftar){
             die("Data pendaftar tidak ditemukan");
@@ -66,28 +64,27 @@ class BerkasController {
 
         $id_pendaftar = $pendaftar["id_pendaftar"];
 
-        // ❌ CEK DUPLIKASI JENIS BERKAS
+        // ❌ CEK DUPLIKASI
         if($m->getByJenis($id_pendaftar, $jenis)){
             $_SESSION["error"] = "Berkas ini sudah diunggah.";
-            header("Location: /siswa/berkas");
+            header("Location: /siswa/berkas_pendaftar");
             exit;
         }
 
-        // ================= SETUP FOLDER =================
+        // ================= FOLDER =================
         $uploadDir = __DIR__ . "/../../public/uploads/berkas/";
 
         if(!is_dir($uploadDir)){
             mkdir($uploadDir, 0777, true);
         }
 
-        // ================= NAMA FILE AMAN =================
+        // ================= NAMA FILE =================
         $ext  = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
         $nama = $jenis . "_" . $id_pendaftar . "_" . time() . "." . $ext;
 
         $pathServer = $uploadDir . $nama;
         $pathDB     = "/public/uploads/berkas/" . $nama;
 
-        // ================= UPLOAD =================
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $pathServer)){
 
             $m->insert(
@@ -97,12 +94,12 @@ class BerkasController {
             );
 
             $_SESSION["success"] = "Berkas berhasil diunggah.";
-            header("Location: /siswa/berkas");
+            header("Location: /siswa/berkas_pendaftar");
             exit;
         }
 
         $_SESSION["error"] = "Gagal mengunggah berkas.";
-        header("Location: /siswa/berkas");
+        header("Location: /siswa/berkas_pendaftar");
         exit;
     }
 }
