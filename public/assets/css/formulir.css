@@ -109,3 +109,18 @@
         padding:20px;
     }
 }
+/* SAMAKAN DENGAN CONTOH (KONTEN KIRI) */
+.formulir-page .nav-tabs{
+    justify-content:flex-start;
+    margin-left:0;
+}
+
+/* FORM MELEBAR */
+.formulir-page .card{
+    max-width:100%;
+}
+
+/* JARAK ATAS LEBIH RAPAT */
+.formulir-page h3{
+    margin-bottom:20px;
+}
