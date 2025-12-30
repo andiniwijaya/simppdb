@@ -206,30 +206,25 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
-        // =========================
-    // CETAK DATA PPDB (ADMIN)
-    // =========================
-    public function cetakPPDB($id_pendaftar)
-    {
-        // CEK LOGIN & ROLE
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
-            exit;
-        }
-
-        $pendaftar = new Pendaftar();
-
-        // Ambil data pendaftar berdasarkan ID
-        $data = $pendaftar->getFormDataByUserId($id_pendaftar);
-
-        if (!$data) {
-            echo "Data pendaftar tidak ditemukan";
-            exit;
-        }
-
-        // Kirim ke view cetak
-        require __DIR__ . '/../views/admin/cetak_ppdb.php';
+       // =========================
+// CETAK DATA PPDB (ADMIN)
+// =========================
+public function cetakPPDB()
+{
+    // CEK LOGIN & ROLE
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
     }
+
+    $pendaftar = new Pendaftar();
+
+    // AMBIL SEMUA DATA PPDB
+    $list = $pendaftar->getLatest();
+
+    // TAMPILKAN VIEW CETAK (TANPA LAYOUT)
+    require __DIR__ . '/../views/admin/cetak_ppdb.php';
+}
 
 
 }
