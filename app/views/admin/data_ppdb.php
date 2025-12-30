@@ -1,11 +1,9 @@
 <h2>Data PPDB</h2>
-<div style="margin-bottom:15px; text-align:right;">
-    <a href="/admin/ppdb/cetak"
-       target="_blank"
-       class="btn btn-success">
-        <i class="bi bi-printer"></i> Cetak Data PPDB
-    </a>
-</div>
+<a href="/admin/ppdb/cetak" 
+   target="_blank"
+   class="btn btn-success mb-3">
+   <i class="bi bi-file-earmark-excel"></i> Cetak Data (Excel)
+</a>
 
 
 <div class="pengaturan-wrapper">

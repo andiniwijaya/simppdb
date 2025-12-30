@@ -1,0 +1,40 @@
+body{
+    font-family: Calibri, Arial, sans-serif;
+    font-size:12px;
+    margin:20px;
+    color:#000;
+}
+
+h3{
+    text-align:center;
+    margin-bottom:12px;
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    border:1px solid #000;
+    padding:6px 8px;
+    vertical-align:middle;
+}
+
+th{
+    background:#d9e1f2; /* khas Excel */
+    text-align:center;
+    font-weight:bold;
+}
+
+tr:nth-child(even){
+    background:#f7f7f7;
+}
+
+/* MODE PRINT */
+@media print{
+    body{
+        margin:0;
+    }
+}
