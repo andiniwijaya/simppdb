@@ -1,10 +1,13 @@
-body{
+/* ================= DASHBOARD PAGE ================= */
+.dashboard-page{
     margin:0;
     background:#e9eff7;
     font-family:Poppins, system-ui;
+    overflow-x:hidden;
 }
 
-.sidebar{
+/* ================= SIDEBAR ================= */
+.dashboard-page .sidebar{
     width:240px;
     height:100vh;
     background:#1554c0;
@@ -13,14 +16,17 @@ body{
     top:0;
     color:white;
     padding-top:15px;
+    z-index:1000;
 }
 
-.sidebar img{
+.dashboard-page .sidebar img{
     width:60px;
     border-radius:50%;
+    display:block;
+    margin:0 auto 10px;
 }
 
-.sidebar a{
+.dashboard-page .sidebar a{
     color:white;
     display:block;
     padding:12px 20px;
@@ -30,33 +36,63 @@ body{
     transition:.2s;
 }
 
-.sidebar a:hover,
-.sidebar a.active{
+.dashboard-page .sidebar a:hover,
+.dashboard-page .sidebar a.active{
     background:rgba(255,255,255,0.15);
     border-left:4px solid white;
 }
 
-.content{
-    margin-left:240px !important;
-    padding:30px !important;
-
-    overflow-x:auto;   
+/* ================= CONTENT ================= */
+.dashboard-page .content{
+    margin-left:240px;
+    padding:30px;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
 
-.card{
-    border:none !important;
-    border-radius:12px !important;
+/* ================= CARD ================= */
+.dashboard-page .card{
+    border:none;
+    border-radius:12px;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
-.progress{
+/* ================= PROGRESS ================= */
+.dashboard-page .progress{
     height:26px;
     border-radius:20px;
     overflow:hidden;
 }
 
-.progress-bar{
+.dashboard-page .progress-bar{
     font-size:13px;
     font-weight:bold;
+    line-height:26px;
+}
+
+/* ================= FIX BOOTSTRAP ROW ================= */
+.dashboard-page .row{
+    margin-left:0;
+    margin-right:0;
+}
+.main-content .container,
+.content .container{
+    max-width:100% !important;
+}
+/* ================= GLOBAL FIX (SEMUA HALAMAN) ================= */
+.sidebar{
+    width:240px;
+}
+
+.content{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    min-height:100vh;
+}
+
+/* JIKA ADA CONTAINER BOOTSTRAP */
+.content .container,
+.content .container-fluid{
+    max-width:100% !important;
 }

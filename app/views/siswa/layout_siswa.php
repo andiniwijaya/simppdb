@@ -27,7 +27,7 @@ rel="stylesheet">
 
 </head>
 
-<body>
+<body class="dashboard-page">
 
 <!-- SIDEBAR -->
 <?php include __DIR__ . "/sidebar.php"; ?>
@@ -46,6 +46,6 @@ rel="stylesheet">
 <?php if(str_contains($_SERVER["REQUEST_URI"], "/formulir")): ?>
 <script src="<?= $base ?>/public/assets/js/formulir.js"></script>
 <?php endif; ?>
-
+</body>
 </body>
 </html>
