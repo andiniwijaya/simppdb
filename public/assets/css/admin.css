@@ -1,37 +1,41 @@
 /* ======================================================
    GLOBAL
-====================================================== */
-*{
-    box-sizing:border-box;
+   ====================================================== */
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background: #f5f7fa;
+    color: #333;
 }
 
-body{
-    margin:0;
-    font-family:Poppins, sans-serif;
-    background:#f5f7fa;
-    color:#333;
-    overflow-x:hidden;
+* {
+    box-sizing: border-box;
 }
+
 
 /* ======================================================
-   SIDEBAR (FIXED)
-====================================================== */
+   SIDEBAR
+   ====================================================== */
+/* ======================================================
+   SIDEBAR - SAMA PERSIS DENGAN SISWA
+   ====================================================== */
+
 .sidebar{
     width:260px;
+    background:#0f2a48;  /* warna sama siswa */
     height:100vh;
-    background:#0f2a48;
+    padding-top:20px;
     position:fixed;
-    top:0;
     left:0;
-    z-index:1000;
-    color:white;
+    top:0;
     overflow-y:auto;
-    border-right:3px solid #00365b;
+    color:white;
+    border-right:3px solid #00365b; /* garis halus */
 }
 
-/* BRAND */
 .brand{
-    padding:20px;
+    padding:15px 20px;
     text-align:center;
     border-bottom:1px solid rgba(255,255,255,0.1);
 }
@@ -45,9 +49,10 @@ body{
 }
 
 .brand h5{
-    margin:4px 0 0;
+    margin:4px 0 0 0;
     font-size:15px;
     font-weight:600;
+    letter-spacing:0.4px;
 }
 
 .brand small{
@@ -55,42 +60,53 @@ body{
     opacity:.8;
 }
 
-/* SIDEBAR LINK */
+/* LINK */
 .sidebar-link{
     display:block;
-    padding:14px 24px;
+    padding:12px 24px;
     text-decoration:none;
     color:white;
     font-size:15px;
     font-weight:500;
-    border-left:4px solid transparent;
     transition:.2s;
+    border-left:4px solid transparent;
 }
 
-.sidebar-link:hover,
-.sidebar-link.active{
+/* HOVER */
+.sidebar-link:hover{
     background:rgba(255,255,255,.15);
     border-left:4px solid white;
     padding-left:28px;
 }
 
+/* ACTIVE */
+.sidebar-link.active{
+    background:rgba(255,255,255,.22);
+    border-left:4px solid white;
+    padding-left:28px;
+    font-weight:600;
+}
+
 .sidebar-link i{
-    width:24px;
     font-size:18px;
+    width:24px;
+    opacity:.9;
 }
 
 /* LOGOUT */
 .logout-box{
+    padding-top:12px;
     margin-top:20px;
     border-top:1px solid rgba(255,255,255,0.1);
 }
 
 .logout-link{
     display:block;
-    padding:14px 24px;
+    padding:12px 24px;
     color:#ff6b6b !important;
     font-weight:700;
-    letter-spacing:.4px;
+    letter-spacing:0.4px;
+    transition:.2s;
 }
 
 .logout-link:hover{
@@ -107,102 +123,108 @@ body{
     border-radius:50px;
 }
 
-/* ======================================================
-   CONTENT (INI KUNCI TIDAK KETUTUP)
-====================================================== */
-.content{
-    margin-left:260px;                /* HARUS SAMA DENGAN SIDEBAR */
-    padding:35px;
-    min-height:100vh;
-    background:#f5f7fa;
-    position:relative;
-    overflow-x:auto;
-}
 
 /* ======================================================
-   DASHBOARD - STAT BOX
-====================================================== */
-.stat-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
+   CONTENT WRAPPER
+   ====================================================== */
+
+.content {
+    padding: 35px;
+    margin-left: 260px;
+    z-index: 10;
+    position: relative;
 }
 
-.stat-card{
-    flex:1;
-    min-width:240px;
-    padding:22px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-radius:16px;
-    color:white;
-    font-weight:600;
-    box-shadow:0 3px 8px rgba(0,0,0,.1);
-    transition:.2s;
-}
-
-.stat-card:hover{
-    transform:translateY(-6px);
-}
-
-.stat-card.purple{ background:#9276d1; }
-.stat-card.blue{ background:#4c98ff; }
-.stat-card.green{ background:#48d1ac; }
-.stat-card.red{ background:#f26464; }
-
-.stat-info h3{
-    margin:0;
-    font-size:38px;
-}
-
-.stat-info p{
-    margin:0;
-    opacity:.9;
-}
-
-.stat-icon{
-    font-size:40px;
-}
 
 /* ======================================================
-   TABLE (ANTI KETUTUP + ANTI POTONG)
-====================================================== */
-.table-box{
-    background:white;
-    padding:20px;
-    border-radius:14px;
-    margin-top:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-    overflow-x:auto;                 /* WAJIB */
+   DASHBOARD - STATISTIC BOX
+   ====================================================== */
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.table-admin{
-    width:100%;
-    min-width:900px;                 /* INI YANG NYELAMATIN */
-    border-collapse:collapse;
-    font-size:15px;
+.stat-card {
+    flex: 1;
+    min-width: 220px;
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 16px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    cursor: default;
 }
 
-.table-admin thead{
-    background:#eef3f9;
+.stat-card:hover {
+    transform: translateY(-6px);
 }
 
-.table-admin th,
-.table-admin td{
-    padding:14px;
-    text-align:left;
-    border-bottom:1px solid #ddd;
-    white-space:nowrap;              /* NAMA TIDAK NIMPA NISN */
+.stat-card.purple { background: #9276d1; }
+.stat-card.blue   { background: #4c98ff; }
+.stat-card.green  { background: #48d1ac; }
+.stat-card.red    { background: #f26464; }
+
+.stat-info h3 {
+    margin: 0;
+    font-size: 38px;
 }
 
-.table-admin tr:hover{
-    background:#f8fbff;
+.stat-info p {
+    margin: 0;
+    opacity: 0.9;
 }
+
+.stat-icon {
+    font-size: 40px;
+}
+.table-box {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.table-admin {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.table-admin thead tr {
+    background: #eef3f9;
+}
+
+.table-admin th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.table-admin td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-admin tr:hover {
+    background: #f8fbff;
+    transition: 0.2s;
+}
+
+
 
 /* ======================================================
-   KELEMBAGAAN
-====================================================== */
+   KELEMBAGAAN STYLE
+   ====================================================== */
+
 .kelembagaan-wrapper{
     background:white;
     padding:25px;
@@ -215,6 +237,7 @@ body{
     display:flex;
     gap:15px;
     margin-bottom:25px;
+    padding-left:0;
     border-bottom:2px solid #eee;
     padding-bottom:10px;
 }
@@ -226,31 +249,134 @@ body{
     border-radius:6px;
     cursor:pointer;
     font-weight:600;
+    transition:.2s;
     color:#082a5c;
+    font-size:15px;
 }
 
-.kelembagaan-nav li.active,
-.kelembagaan-nav li:hover{
+.kelembagaan-nav li:hover,
+.kelembagaan-nav li.active{
     background:#082a5c;
     color:white;
 }
 
+.kelembagaan-content{
+    padding:5px;
+}
+
+.kelembagaan-page{
+    display:none;
+}
+
+.kelembagaan-page.show{
+    display:block;
+}
+
+
+/* TABLE DESIGN */
+
+.form-table,
+.pengaturan-table {
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+.form-table th,
+.pengaturan-table th{
+    width:220px;
+    padding:12px 15px;
+    background:#f7faff;
+    color:#082a5c;
+    font-weight:700;
+    border-bottom:1px solid #e6edf5;
+    font-size:15px;
+}
+
+.form-table td,
+.pengaturan-table td{
+    padding:12px 15px;
+    background:white;
+    border-bottom:1px solid #eef2f7;
+    font-size:15px;
+}
+
+.form-table tr:hover td,
+.pengaturan-table tr:hover td{
+    background:#fafbff;
+}
+
+
 /* ======================================================
-   RESPONSIVE
-====================================================== */
-@media (max-width:992px){
-    .sidebar{
-        position:relative;
+   RESPONSIVE TABLE
+   ====================================================== */
+
+@media (max-width:900px){
+
+    .form-table th,
+    .form-table td,
+    .pengaturan-table th,
+    .pengaturan-table td{
+        display:block;
         width:100%;
-        height:auto;
     }
 
-    .content{
-        margin-left:0;
-        padding:20px;
+    .form-table tr,
+    .pengaturan-table tr{
+        margin-bottom:10px;
+        display:block;
+        border-bottom:2px solid #eee;
     }
+}
 
-    .table-admin{
-        min-width:700px;
-    }
+
+/* ======================================================
+   PENGATURAN STYLE 
+   ====================================================== */
+
+.pengaturan-wrapper{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    margin-top:20px;
+}
+
+.pengaturan-nav{
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+    padding-left:0;
+    border-bottom:2px solid #eee;
+    padding-bottom:10px;
+}
+
+.pengaturan-nav li{
+    list-style:none;
+    padding:10px 20px;
+    background:#eaf3ff;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.2s;
+    color:#082a5c;
+    font-size:15px;
+}
+
+.pengaturan-nav li:hover,
+.pengaturan-nav li.active{
+    background:#082a5c;
+    color:white;
+}
+
+.pengaturan-content{
+    padding:5px;
+}
+
+.pengaturan-page{
+    display:none;
+}
+
+.pengaturan-page.show{
+    display:block;
 }
