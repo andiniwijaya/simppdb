@@ -1,13 +1,11 @@
-/* ================= DASHBOARD PAGE ================= */
-.dashboard-page{
-    margin:0;
-    background:#e9eff7;
-    font-family:Poppins, system-ui;
+/* ================= GLOBAL LAYOUT ================= */
+body{
     overflow-x:hidden;
+    font-family:Poppins, system-ui;
 }
 
-/* ================= SIDEBAR ================= */
-.dashboard-page .sidebar{
+/* ================= SIDEBAR (GLOBAL) ================= */
+.sidebar{
     width:240px;
     height:100vh;
     background:#1554c0;
@@ -19,14 +17,14 @@
     z-index:1000;
 }
 
-.dashboard-page .sidebar img{
+.sidebar img{
     width:60px;
     border-radius:50%;
     display:block;
     margin:0 auto 10px;
 }
 
-.dashboard-page .sidebar a{
+.sidebar a{
     color:white;
     display:block;
     padding:12px 20px;
@@ -36,63 +34,53 @@
     transition:.2s;
 }
 
-.dashboard-page .sidebar a:hover,
-.dashboard-page .sidebar a.active{
+.sidebar a:hover,
+.sidebar a.active{
     background:rgba(255,255,255,0.15);
     border-left:4px solid white;
 }
 
-/* ================= CONTENT ================= */
-.dashboard-page .content{
+/* ================= CONTENT (GLOBAL) ================= */
+.content{
     margin-left:240px;
     padding:30px;
     min-height:100vh;
-    overflow-x:hidden;
+    width:calc(100% - 240px);
+    background:#e9eff7;
 }
 
+/* ================= DASHBOARD PAGE ================= */
+.dashboard-page{
+    background:#e9eff7;
+}
 
 /* ================= CARD ================= */
-.dashboard-page .card{
+.card{
     border:none;
     border-radius:12px;
     box-shadow:0 2px 12px rgba(0,0,0,.08);
 }
 
 /* ================= PROGRESS ================= */
-.dashboard-page .progress{
+.progress{
     height:26px;
     border-radius:20px;
     overflow:hidden;
 }
 
-.dashboard-page .progress-bar{
+.progress-bar{
     font-size:13px;
     font-weight:bold;
     line-height:26px;
 }
 
-/* ================= FIX BOOTSTRAP ROW ================= */
-.dashboard-page .row{
+/* ================= BOOTSTRAP FIX ================= */
+.container,
+.container-fluid{
+    max-width:100% !important;
+}
+
+.row{
     margin-left:0;
     margin-right:0;
-}
-.main-content .container,
-.content .container{
-    max-width:100% !important;
-}
-/* ================= GLOBAL FIX (SEMUA HALAMAN) ================= */
-.sidebar{
-    width:240px;
-}
-
-.content{
-    margin-left:240px;
-    width:calc(100% - 240px);
-    min-height:100vh;
-}
-
-/* JIKA ADA CONTAINER BOOTSTRAP */
-.content .container,
-.content .container-fluid{
-    max-width:100% !important;
 }
