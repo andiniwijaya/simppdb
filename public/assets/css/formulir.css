@@ -3,56 +3,45 @@
     margin:0;
     background:#fff;
     font-family:'Poppins',sans-serif;
+    width:100%;
+    overflow-x:hidden;
 }
 
-/* CONTENT FULL */
+/* ================= OVERRIDE BOOTSTRAP CONTAINER ================= */
+/* INI PALING PENTING */
+.formulir-page .container,
+.formulir-page .container-fluid{
+    max-width:100% !important;
+    width:100% !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    margin:0 !important;
+}
+
+/* ================= CONTENT AREA ================= */
 .formulir-page .content{
-    margin-left:240px;
-    padding:0;
-    background:#fff;
-    min-height:100vh;
-}
-
-/* TAB CONTENT FULL PUTIH */
-.formulir-page .tab-content{
-    background:#fff;
+    margin-left:240px;          /* lebar sidebar */
     padding:30px;
+    background:#fff;
     min-height:100vh;
+    width:calc(100% - 240px);
 }
 
-/* HILANGKAN GUTTER */
-.formulir-page .row{
-    margin-left:0;
-    margin-right:0;
-}
-.formulir-page .row > *{
-    padding-left:0;
-    padding-right:0;
-}
-
-/* progress card */
-.formulir-page .progress-card{
-    background:white;
-    border-radius:16px;
-    padding:20px 25px;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    margin-bottom:25px;
-}
-
-/* tab */
+/* ================= TAB ================= */
 .formulir-page .nav-tabs{
     border:none;
-    gap:10px;
-    margin-bottom:20px;
+    gap:12px;
+    margin-bottom:30px;
+    justify-content:center;
 }
 
 .formulir-page .nav-tabs .nav-link{
     border:none;
-    background:#e8f0ff;
+    background:#eef3ff;
     color:#0d6efd;
     font-weight:500;
-    padding:10px 22px;
-    border-radius:10px;
+    padding:12px 28px;
+    border-radius:14px;
 }
 
 .formulir-page .nav-tabs .nav-link.active{
@@ -61,31 +50,62 @@
     font-weight:600;
 }
 
-/* form card */
-.formulir-page .form-card,
-.formulir-page .form-wrapper{
-    background:white;
-    border-radius:18px;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+/* ================= TAB CONTENT ================= */
+.formulir-page .tab-content{
+    background:#fff;
+    width:100%;
 }
 
-/* form */
-.formulir-page .form-label{
+/* ================= CARD FORM ================= */
+.formulir-page .card{
+    border:none;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+/* ================= ROW & GUTTER ================= */
+.formulir-page .row{
+    margin-left:-12px;
+    margin-right:-12px;
+}
+
+.formulir-page .row > div{
+    padding-left:12px;
+    padding-right:12px;
+    margin-bottom:18px;
+}
+
+/* ================= FORM CONTROL ================= */
+.formulir-page label{
     font-weight:500;
     margin-bottom:6px;
 }
 
 .formulir-page .form-control,
 .formulir-page .form-select{
-    height:45px;
-    border-radius:8px;
+    height:46px;
+    border-radius:10px;
 }
 
 .formulir-page textarea.form-control{
     height:auto;
+    min-height:90px;
 }
 
-.formulir-page .row > div{
-    margin-bottom:16px;
+/* ================= BUTTON ================= */
+.formulir-page .btn-primary{
+    border-radius:14px;
+    padding:12px;
+    font-weight:600;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px){
+    .formulir-page .content{
+        margin-left:0;
+        width:100%;
+        padding:20px;
+    }
 }
