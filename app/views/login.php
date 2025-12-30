@@ -30,7 +30,7 @@ $base = Config::base_url();
 
             <!-- LOGO -->
             <div class="text-center mb-3">
-                <img src="<?= $base ?>/public/img/logo_smp.png" 
+                <img src="<?= $base ?>/public/img/logo_smp2.png" 
                      alt="Logo SMP"
                      style="height:75px;">
             </div>
