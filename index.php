@@ -23,10 +23,11 @@ $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
 $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/admin/ppdb', 'AdminPPDBController@index');
-$router->get('/admin/ppdb/detail/{id}', 'DashboardController@detailPPDB');
-$router->get('/admin/ppdb/edit/{id}', 'DashboardController@editPPDB');
-$router->post('/admin/ppdb/update/{id}', 'DashboardController@updatePPDB');
-$router->get('/admin/ppdb/delete/{id}', 'DashboardController@deletePPDB');
+$router->get('/admin/ppdb/detail/(:num)', 'DashboardController@detailPPDB');
+$router->get('/admin/ppdb/edit/(:num)', 'DashboardController@editPPDB');
+$router->post('/admin/ppdb/update/(:num)', 'DashboardController@updatePPDB');
+$router->get('/admin/ppdb/delete/(:num)', 'DashboardController@deletePPDB');
+
 
 $router->get('/admin/ppdb/cetak', 'DashboardController@cetakPPDB');
 
