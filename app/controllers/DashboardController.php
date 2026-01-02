@@ -226,5 +226,86 @@ class DashboardController {
     exit;
 }
 
+        // ===============================
+    // DETAIL DATA PPDB (ADMIN)
+    // ===============================
+    public function detailPPDB($id)
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $pendaftar = new Pendaftar();
+        $data = $pendaftar->getById($id);
+
+        if (!$data) {
+            echo "Data tidak ditemukan";
+            exit;
+        }
+
+        extract(["data" => $data]);
+
+        require __DIR__ . '/../views/admin/detail_ppdb.php';
+    }
+
+    // ===============================
+    // FORM EDIT DATA PPDB (ADMIN)
+    // ===============================
+    public function editPPDB($id)
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $pendaftar = new Pendaftar();
+        $data = $pendaftar->getById($id);
+
+        if (!$data) {
+            echo "Data tidak ditemukan";
+            exit;
+        }
+
+        extract(["data" => $data]);
+
+        require __DIR__ . '/../views/admin/edit_ppdb.php';
+    }
+
+    // ===============================
+    // UPDATE DATA PPDB (ADMIN)
+    // ===============================
+    public function updatePPDB($id)
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $pendaftar = new Pendaftar();
+        $pendaftar->updateByAdmin($id, $_POST);
+
+        header("Location: /dashboard/data_ppdb");
+        exit;
+    }
+
+    // ===============================
+    // DELETE DATA PPDB (ADMIN)
+    // ===============================
+    public function deletePPDB($id)
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $pendaftar = new Pendaftar();
+        $pendaftar->delete($id);
+
+        header("Location: /dashboard/data_ppdb");
+        exit;
+    }
+
+
 
 }

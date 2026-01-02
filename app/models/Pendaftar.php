@@ -166,5 +166,45 @@ class Pendaftar extends Database {
 
     return $stmt->get_result()->num_rows > 0;
 }
+public function getById($id)
+{
+    $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_assoc();
+}
+
+public function updateByAdmin($id, $data)
+{
+    $sql = "UPDATE pendaftar SET
+            nama_lengkap = ?,
+            nisn = ?,
+            asal_sekolah = ?,
+            status_data = ?
+            WHERE id_pendaftar = ?";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param(
+        "ssssi",
+        $data["nama_lengkap"],
+        $data["nisn"],
+        $data["asal_sekolah"],
+        $data["status_data"],
+        $id
+    );
+
+    return $stmt->execute();
+}
+
+public function delete($id)
+{
+    $sql = "DELETE FROM pendaftar WHERE id_pendaftar = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+}
+
 
 }
