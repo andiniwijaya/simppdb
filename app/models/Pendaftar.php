@@ -3,52 +3,61 @@
 require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar extends Database {
-    // GET ID PENDAFTAR BY USER
+
+    // UTIL VALIDASI ENUM
+    private function sanitizeEnum(&$d) {
+        // status_anak
+        $enum_status_anak = ['kandung','tiri','angkat'];
+        if (!isset($d['status_anak']) || !in_array($d['status_anak'], $enum_status_anak)) {
+            $d['status_anak'] = 'kandung';
+        }
+
+        // yatim_status
+        $enum_yatim = ['bukan','yatim','piatu','yatim_piatu'];
+        if (!isset($d['yatim_status']) || !in_array($d['yatim_status'], $enum_yatim)) {
+            $d['yatim_status'] = 'bukan';
+        }
+
+        // jenis_kelamin
+        $enum_jk = ['Laki-laki','Perempuan'];
+        if (!isset($d['jenis_kelamin']) || !in_array($d['jenis_kelamin'], $enum_jk)) {
+            $d['jenis_kelamin'] = 'Laki-laki';
+        }
+
+        // status_tinggal
+        $enum_tinggal = ['bersama_ortu','wali','kost','asrama','lainnya'];
+        if (!isset($d['status_tinggal']) || !in_array($d['status_tinggal'], $enum_tinggal)) {
+            $d['status_tinggal'] = 'bersama_ortu';
+        }
+    }
+
+    // GET ID PENDAFTAR
     public function getId($id_pengguna) {
-        $sql = "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare(
+            "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna=? LIMIT 1"
+        );
         $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
 
         $r = $stmt->get_result()->fetch_assoc();
-        return $r ? (int)$r["id_pendaftar"] : 0;
+        return $r ? (int)$r['id_pendaftar'] : 0;
     }
 
-    // GET DATA FORM SISWA
     public function getFormDataByUserId($id_pengguna) {
-        $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM pendaftar WHERE id_pengguna=? LIMIT 1"
+        );
         $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // COUNT ALL PENDAFTAR
-    public function countAll() {
-        $sql = "SELECT COUNT(*) AS total FROM pendaftar";
-        $result = $this->conn->query($sql);
-        $row = $result->fetch_assoc();
-        return (int)$row['total'];
-    }
-
-    // GET DATA TERBARU
-    public function getLatest() {
-        $sql = "SELECT * FROM pendaftar ORDER BY id_pendaftar DESC";
-        $result = $this->conn->query($sql);
-
-        $data = [];
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-
-        return $data;
-    }
-
-    // SIMPAN DATA SISWA (AUTO INSERT / UPDATE)
+    // SIMPAN DATA SISWA
     public function saveSiswa($id_pengguna, $d) {
-        $existId = $this->getId($id_pengguna);
+        $this->sanitizeEnum($d);
 
+        $existId = $this->getId($id_pengguna);
         if ($existId > 0) {
             return $this->update($existId, $d);
         }
@@ -56,8 +65,10 @@ class Pendaftar extends Database {
         return $this->insert($id_pengguna, $d);
     }
 
-    // INSERT DATA SISWA
+    // INSERT
     private function insert($id_pengguna, $d) {
+        $this->sanitizeEnum($d);
+
         $sql = "INSERT INTO pendaftar (
             id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
             tanggal_lahir, agama, alamat, status_tinggal, asal_sekolah,
@@ -66,7 +77,6 @@ class Pendaftar extends Database {
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bind_param(
             "issssssssssiiisssiisss",
             $id_pengguna,
@@ -96,8 +106,10 @@ class Pendaftar extends Database {
         return $stmt->execute();
     }
 
-    // UPDATE DATA SISWA
+    // UPDATE
     private function update($id, $d) {
+        $this->sanitizeEnum($d);
+
         $sql = "UPDATE pendaftar SET
             nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
             tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
@@ -106,7 +118,6 @@ class Pendaftar extends Database {
             WHERE id_pendaftar=?";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bind_param(
             "ssssssssssiiisssiisssi",
             $d['nik'],
@@ -133,91 +144,6 @@ class Pendaftar extends Database {
             $id
         );
 
-        return $stmt->execute();
-    }
-
-    // UPDATE STATUS DATA (BELUM_LENGKAP / LENGKAP)
-    public function updateStatusData($id_pendaftar) {
-        // cek data orang tua & wali
-        $sql = "SELECT jenis FROM orang_tua WHERE id_pendaftar = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id_pendaftar);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        $hasAyah = false;
-        $hasIbu  = false;
-        $hasWali = false;
-
-        while ($row = $result->fetch_assoc()) {
-            if ($row['jenis'] === 'Ayah') $hasAyah = true;
-            if ($row['jenis'] === 'Ibu')  $hasIbu  = true;
-            if ($row['jenis'] === 'Wali') $hasWali = true;
-        }
-
-        // tentukan status
-        if (($hasAyah && $hasIbu) || $hasWali) {
-            $status = 'lengkap';
-        } else {
-            $status = 'belum_lengkap';
-        }
-
-        // update ke tabel pendaftar
-        $upd = $this->conn->prepare(
-            "UPDATE pendaftar SET status_data = ? WHERE id_pendaftar = ?"
-        );
-        $upd->bind_param("si", $status, $id_pendaftar);
-        $upd->execute();
-    }
-
-    // CEK NISN EXIST
-    public function nisnExists($nisn) {
-        $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $nisn);
-        $stmt->execute();
-
-        return $stmt->get_result()->num_rows > 0;
-    }
-
-    // GET BY ID (ADMIN)
-    public function getById($id) {
-        $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_assoc();
-    }
-
-    // UPDATE BY ADMIN
-    public function updateByAdmin($id, $data) {
-        $sql = "UPDATE pendaftar SET
-                nama_lengkap = ?,
-                nisn = ?,
-                asal_sekolah = ?,
-                status_data = ?
-                WHERE id_pendaftar = ?";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param(
-            "ssssi",
-            $data["nama_lengkap"],
-            $data["nisn"],
-            $data["asal_sekolah"],
-            $data["status_data"],
-            $id
-        );
-
-        return $stmt->execute();
-    }
-
-    // DELETE DATA
-    public function delete($id) {
-        $sql = "DELETE FROM pendaftar WHERE id_pendaftar = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
 }
