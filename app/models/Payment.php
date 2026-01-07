@@ -159,4 +159,29 @@ class Payment extends Database
 
         return $stmt->execute();
     }
+    // ===============================
+// UPDATE STATUS PEMBAYARAN
+// ===============================
+public function updateStatus($id_pembayaran, $status)
+{
+    $sql = "UPDATE pembayaran SET status_bayar = ? WHERE id_pembayaran = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("si", $status, $id_pembayaran);
+    return $stmt->execute();
+}
+
+// ===============================
+// AMBIL ID PENDAFTAR DARI PEMBAYARAN
+// ===============================
+public function getPendaftarId($id_pembayaran)
+{
+    $sql = "SELECT id_pendaftar FROM pembayaran WHERE id_pembayaran = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pembayaran);
+    $stmt->execute();
+
+    $row = $stmt->get_result()->fetch_assoc();
+    return $row['id_pendaftar'] ?? null;
+}
+
 }
