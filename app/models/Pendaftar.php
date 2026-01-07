@@ -193,6 +193,28 @@ public function getLatest($limit = 5)
 
     return $data;
 }
+public function updateByAdmin($id, $data)
+{
+    $sql = "UPDATE pendaftar SET
+            nama_lengkap = ?,
+            nisn = ?,
+            asal_sekolah = ?,
+            status_data = ?
+            WHERE id_pendaftar = ?";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param(
+        "ssssi",
+        $data['nama_lengkap'],
+        $data['nisn'],
+        $data['asal_sekolah'],
+        $data['status_data'],
+        $id
+    );
+
+    return $stmt->execute();
+}
+
 
 
 
