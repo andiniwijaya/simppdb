@@ -207,7 +207,7 @@ public function delete($id)
 }
 
 // ======================
-// GET DATA PPDB LENGKAP
+// GET DATA PPDB (SISWA + ORTU)
 // ======================
 public function getAllLengkap()
 {
@@ -223,15 +223,10 @@ public function getAllLengkap()
             o.nama_ayah,
             o.hp_ayah,
             o.nama_ibu,
-            o.hp_ibu,
-
-            w.nama_wali,
-            w.hp_wali
+            o.hp_ibu
 
         FROM pendaftar p
         LEFT JOIN orang_tua o ON p.id_pendaftar = o.id_pendaftar
-        LEFT JOIN wali w ON p.id_pendaftar = w.id_pendaftar
-
         ORDER BY p.id_pendaftar DESC
     ";
 
