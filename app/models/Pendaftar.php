@@ -206,5 +206,45 @@ public function delete($id)
     return $stmt->execute();
 }
 
+// ======================
+// GET DATA PPDB LENGKAP
+// ======================
+public function getAllLengkap()
+{
+    $sql = "
+        SELECT 
+            p.id_pendaftar,
+            p.nama_lengkap,
+            p.nisn,
+            p.asal_sekolah,
+            p.status_data,
+            p.tanggal_daftar,
+
+            o.nama_ayah,
+            o.hp_ayah,
+            o.nama_ibu,
+            o.hp_ibu,
+
+            w.nama_wali,
+            w.hp_wali
+
+        FROM pendaftar p
+        LEFT JOIN orang_tua o ON p.id_pendaftar = o.id_pendaftar
+        LEFT JOIN wali w ON p.id_pendaftar = w.id_pendaftar
+
+        ORDER BY p.id_pendaftar DESC
+    ";
+
+    $result = $this->conn->query($sql);
+
+    $data = [];
+    while($row = $result->fetch_assoc()){
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
 
 }

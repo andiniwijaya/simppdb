@@ -206,25 +206,7 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
- public function cetakPPDB()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
-    }
-
-    $pendaftar = new Pendaftar();
-    $list = $pendaftar->getLatest();
-
-    // HEADER EXCEL (INI KUNCI)
-    header("Content-Type: application/vnd.ms-excel");
-    header("Content-Disposition: attachment; filename=data_ppdb.xls");
-    header("Pragma: no-cache");
-    header("Expires: 0");
-
-    require_once dirname(__DIR__) . '/views/admin/cetak_ppdb_excel.php';
-    exit;
-}
+ 
 
         // ===============================
     // DETAIL DATA PPDB (ADMIN)
@@ -305,6 +287,27 @@ class DashboardController {
         header("Location: /dashboard/data_ppdb");
         exit;
     }
+
+    // ===============================
+// EXPORT EXCEL DATA PPDB LENGKAP
+// ===============================
+public function exportPPDBLengkap()
+{
+    if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        header("Location: /login");
+        exit;
+    }
+
+    $pendaftar = new Pendaftar();
+    $list = $pendaftar->getAllLengkap();
+
+    extract(["list" => $list]);
+
+    // view khusus excel (tanpa layout)
+    require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+    exit;
+}
+
 
 
 
