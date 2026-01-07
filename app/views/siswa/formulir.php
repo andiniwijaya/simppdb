@@ -138,14 +138,12 @@ if (!empty($ortu)) {
     <div class="col-md-4">
         <label>Status Anak</label>
         <select name="status_anak" class="form-control" required>
-            <option value=""></option>
-            <?php
-            $sa = ['kandung','tiri','angkat'];
-            foreach ($sa as $v) {
-                $sel = ($siswa['status_anak'] ?? '')==$v?'selected':'';
-                echo "<option value=\"$v\" $sel>$v</option>";
-            }
-            ?>
+            <option value="" disabled <?= empty($siswa['status_anak'])?'selected':'' ?>>
+                -- Pilih Status Anak --
+            </option>
+            <option value="kandung" <?= ($siswa['status_anak'] ?? '')=='kandung'?'selected':'' ?>>kandung</option>
+            <option value="tiri" <?= ($siswa['status_anak'] ?? '')=='tiri'?'selected':'' ?>>tiri</option>
+            <option value="angkat" <?= ($siswa['status_anak'] ?? '')=='angkat'?'selected':'' ?>>angkat</option>
         </select>
     </div>
 
