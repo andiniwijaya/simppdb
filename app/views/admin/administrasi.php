@@ -58,13 +58,13 @@
             <td style="text-align:center;">
                 <?php if($row["status_bayar"] === "menunggu"): ?>
 
-                    <a href="<?= $base ?>/dashboard/verifikasi-bayar/lunas/<?= $row["id_pembayaran"] ?>"
+                    <a href="<?= $base ?>/dashboard/verifikasiBayar/lunas/<?= $row["id_pembayaran"] ?>"
                        style="color:green;font-weight:bold;"
                        onclick="return confirm('Yakin pembayaran ini dinyatakan LUNAS?')">
                        ✔ Valid
                     </a>
                     &nbsp;|&nbsp;
-                    <a href="<?= $base ?>/dashboard/verifikasi-bayar/tolak/<?= $row["id_pembayaran"] ?>"
+                    <a href="<?= $base ?>/dashboard/verifikasiBayar/tolak/<?= $row["id_pembayaran"] ?>"
                        style="color:red;font-weight:bold;"
                        onclick="return confirm('Yakin pembayaran ini DITOLAK?')">
                        ✖ Tolak
