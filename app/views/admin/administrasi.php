@@ -45,17 +45,20 @@
 
 <td style="text-align:center;">
 <?php if($row["status_bayar"] === "menunggu"): ?>
-    <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row["id_pembayaran"] ?>"
-       onclick="return confirm('Yakin pembayaran ini LUNAS?')"
-       style="color:green;font-weight:bold;">
-       ✔ Valid
-    </a>
-    |
-    <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row["id_pembayaran"] ?>"
-       onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
-       style="color:red;font-weight:bold;">
-       ✖ Tolak
-    </a>
+   <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row['id_pembayaran'] ?>"
+   onclick="return confirm('Yakin pembayaran ini LUNAS?')"
+   style="color:green;font-weight:bold;">
+   ✔ Valid
+</a>
+
+|
+
+<a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row['id_pembayaran'] ?>"
+   onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
+   style="color:red;font-weight:bold;">
+   ✖ Tolak
+</a>
+
 <?php else: ?>
 
 <?php endif; ?>
