@@ -171,6 +171,29 @@ public function countAll()
 
     return 0;
 }
+// ===============================
+// AMBIL DATA PENDAFTAR TERBARU
+// ===============================
+public function getLatest($limit = 5)
+{
+    $limit = (int) $limit;
+
+    $sql = "SELECT * FROM pendaftar 
+            ORDER BY tanggal_daftar DESC 
+            LIMIT $limit";
+
+    $result = $this->conn->query($sql);
+
+    $data = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
+
 
 
 }
