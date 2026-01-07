@@ -323,7 +323,7 @@ public function cetakPPDB()
     extract(["list" => $list]);
 
     // view khusus excel (tanpa layout)
-    require __DIR__ . '/../views/admin/export_ppdb_lengkap.php';
+    require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
     exit;
 }
 
