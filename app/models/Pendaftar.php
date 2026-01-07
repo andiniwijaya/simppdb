@@ -118,45 +118,32 @@ class Pendaftar extends Database {
     // ======================
     // UPDATE
     // ======================
-    private function update($id, $d)
-    {
-        $sql = "UPDATE pendaftar SET
-        nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
-        tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
-        anak_ke=?, jumlah_saudara=?, status_anak=?, yatim_status=?, bahasa_rumah=?,
-        tinggi_badan=?, berat_badan=?, penyakit=?, tahun_lulus=?, nomor_hp=?, email=?
-        WHERE id_pendaftar=?";
+ $stmt->bind_param(
+    "ssssssssssiisssiisissi",
+    $d['nik'],
+    $d['nisn'],
+    $d['nama_lengkap'],
+    $d['jenis_kelamin'],
+    $d['tempat_lahir'],
+    $d['tanggal_lahir'],
+    $d['agama'],
+    $d['alamat'],
+    $d['status_tinggal'],
+    $d['asal_sekolah'],
+    $d['anak_ke'],
+    $d['jumlah_saudara'],
+    $d['status_anak'],
+    $d['yatim_status'],
+    $d['bahasa_rumah'],
+    $d['tinggi_badan'],
+    $d['berat_badan'],
+    $d['penyakit'],
+    $d['tahun_lulus'],
+    $d['nomor_hp'],
+    $d['email'],
+    $id
+);
 
-        $stmt = $this->conn->prepare($sql);
-
-        $stmt->bind_param(
-            "ssssssssssiiisssiissi",
-            $d['nik'],
-            $d['nisn'],
-            $d['nama_lengkap'],
-            $d['jenis_kelamin'],
-            $d['tempat_lahir'],
-            $d['tanggal_lahir'],
-            $d['agama'],
-            $d['alamat'],
-            $d['status_tinggal'],
-            $d['asal_sekolah'],
-            $d['anak_ke'],
-            $d['jumlah_saudara'],
-            $d['status_anak'],
-            $d['yatim_status'],
-            $d['bahasa_rumah'],
-            $d['tinggi_badan'],
-            $d['berat_badan'],
-            $d['penyakit'],
-            $d['tahun_lulus'],
-            $d['nomor_hp'],
-            $d['email'],
-            $id
-        );
-
-        $stmt->execute();
-    }
     public function nisnExists($nisn)
 {
     $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
