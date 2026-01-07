@@ -194,7 +194,7 @@ class DashboardController {
     // ===============================
 // VERIFIKASI PEMBAYARAN (ADMIN)
 // ===============================
-public function verifikasiBayar($aksi, $id)
+public function verifikasibayar($aksi, $id)
 {
     if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
         header("Location: /login");
