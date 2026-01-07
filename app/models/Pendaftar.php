@@ -4,12 +4,10 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar extends Database {
 
-    // ======================
-    // GET ID PENDAFTAR
-    // ======================
+    // GET ID PENDAFTAR BY USER
     public function getId($id_pengguna)
     {
-        $sql = "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna=? LIMIT 1";
+        $sql = "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pengguna);
         $stmt->execute();
@@ -18,11 +16,8 @@ class Pendaftar extends Database {
         return $r ? (int)$r["id_pendaftar"] : 0;
     }
 
-    // ======================
-    // GET DATA SISWA
-    // ======================
-    public function getFormDataByUserId($id_pengguna)
-    {
+    // GET DATA FORM SISWA
+    public function getFormDataByUserId($id_pengguna) {
         $sql = "SELECT * FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pengguna);
@@ -31,22 +26,16 @@ class Pendaftar extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // ======================
     // COUNT ALL PENDAFTAR
-    // ======================
-    public function countAll()
-    {
+    public function countAll() {
         $sql = "SELECT COUNT(*) AS total FROM pendaftar";
         $result = $this->conn->query($sql);
         $row = $result->fetch_assoc();
         return (int)$row['total'];
     }
 
-    // ======================
     // GET DATA TERBARU
-    // ======================
-    public function getLatest()
-    {
+    public function getLatest() {
         $sql = "SELECT * FROM pendaftar ORDER BY id_pendaftar DESC";
         $result = $this->conn->query($sql);
 
@@ -58,11 +47,8 @@ class Pendaftar extends Database {
         return $data;
     }
 
-    // ======================
-    // SIMPAN DATA SISWA
-    // ======================
-    public function saveSiswa($id_pengguna, $d)
-    {
+    // SIMPAN DATA SISWA (AUTO INSERT / UPDATE)
+    public function saveSiswa($id_pengguna, $d) {
         $existId = $this->getId($id_pengguna);
 
         if ($existId > 0) {
@@ -72,22 +58,19 @@ class Pendaftar extends Database {
         return $this->insert($id_pengguna, $d);
     }
 
-    // ======================
-    // INSERT
-    // ======================
-    private function insert($id_pengguna, $d)
-    {
-        $sql = "INSERT INTO pendaftar
-        (id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
-        tanggal_lahir, agama, alamat, status_tinggal, asal_sekolah,
-        anak_ke, jumlah_saudara, status_anak, yatim_status, bahasa_rumah,
-        tinggi_badan, berat_badan, penyakit, tahun_lulus, nomor_hp, email)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    // INSERT DATA
+    private function insert($id_pengguna, $d) {
+        $sql = "INSERT INTO pendaftar (
+            id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
+            tanggal_lahir, agama, alamat, status_tinggal, asal_sekolah,
+            anak_ke, jumlah_saudara, status_anak, yatim_status, bahasa_rumah,
+            tinggi_badan, berat_badan, penyakit, tahun_lulus, nomor_hp, email
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sql);
 
         $stmt->bind_param(
-            "issssssssssisssiiisiss",
+            "issssssssssiiisssiisss",
             $id_pengguna,
             $d['nik'],
             $d['nisn'],
@@ -112,25 +95,22 @@ class Pendaftar extends Database {
             $d['email']
         );
 
-        $stmt->execute();
+        return $stmt->execute();
     }
 
-    // ======================
-    // UPDATE
-    // ======================
-    private function update($id, $d)
-    {
+    // UPDATE DATA
+    private function update($id, $d) {
         $sql = "UPDATE pendaftar SET
-        nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
-        tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
-        anak_ke=?, jumlah_saudara=?, status_anak=?, yatim_status=?, bahasa_rumah=?,
-        tinggi_badan=?, berat_badan=?, penyakit=?, tahun_lulus=?, nomor_hp=?, email=?
-        WHERE id_pendaftar=?";
+            nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
+            tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
+            anak_ke=?, jumlah_saudara=?, status_anak=?, yatim_status=?, bahasa_rumah=?,
+            tinggi_badan=?, berat_badan=?, penyakit=?, tahun_lulus=?, nomor_hp=?, email=?
+            WHERE id_pendaftar=?";
 
         $stmt = $this->conn->prepare($sql);
 
         $stmt->bind_param(
-            "ssssssssssiiisssiissi",
+            "ssssssssssiiisssiisssi",
             $d['nik'],
             $d['nisn'],
             $d['nama_lengkap'],
@@ -155,56 +135,56 @@ class Pendaftar extends Database {
             $id
         );
 
-        $stmt->execute();
+        return $stmt->execute();
     }
-    public function nisnExists($nisn)
-{
-    $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("s", $nisn);
-    $stmt->execute();
 
-    return $stmt->get_result()->num_rows > 0;
-}
-public function getById($id)
-{
-    $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    // CEK NISN EXIST
+    public function nisnExists($nisn) {
+        $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $nisn);
+        $stmt->execute();
 
-    return $stmt->get_result()->fetch_assoc();
-}
+        return $stmt->get_result()->num_rows > 0;
+    }
 
-public function updateByAdmin($id, $data)
-{
-    $sql = "UPDATE pendaftar SET
-            nama_lengkap = ?,
-            nisn = ?,
-            asal_sekolah = ?,
-            status_data = ?
-            WHERE id_pendaftar = ?";
+    // GET BY ID (ADMIN)
+    public function getById($id) {
+        $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
 
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param(
-        "ssssi",
-        $data["nama_lengkap"],
-        $data["nisn"],
-        $data["asal_sekolah"],
-        $data["status_data"],
-        $id
-    );
+        return $stmt->get_result()->fetch_assoc();
+    }
 
-    return $stmt->execute();
-}
+    // UPDATE BY ADMIN
+    public function updateByAdmin($id, $data) {
+        $sql = "UPDATE pendaftar SET
+                nama_lengkap = ?,
+                nisn = ?,
+                asal_sekolah = ?,
+                status_data = ?
+                WHERE id_pendaftar = ?";
 
-public function delete($id)
-{
-    $sql = "DELETE FROM pendaftar WHERE id_pendaftar = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    return $stmt->execute();
-}
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param(
+            "ssssi",
+            $data["nama_lengkap"],
+            $data["nisn"],
+            $data["asal_sekolah"],
+            $data["status_data"],
+            $id
+        );
 
+        return $stmt->execute();
+    }
 
+    // DELETE DATA
+    public function delete($id) {
+        $sql = "DELETE FROM pendaftar WHERE id_pendaftar = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
 }
