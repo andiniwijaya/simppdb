@@ -253,4 +253,15 @@ class Pendaftar extends Database {
 
         return $data;
     }
+    // ===============================
+// UPDATE STATUS DATA SISWA
+// ===============================
+public function updateStatusData($id_pendaftar, $status)
+{
+    $sql = "UPDATE pendaftar SET status_data = ? WHERE id_pendaftar = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("si", $status, $id_pendaftar);
+    return $stmt->execute();
+}
+
 }

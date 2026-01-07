@@ -191,6 +191,43 @@ class DashboardController {
 
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
+    // ===============================
+// VERIFIKASI PEMBAYARAN (ADMIN)
+// ===============================
+public function verifikasiBayar($aksi, $id)
+{
+    if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        header("Location: /login");
+        exit;
+    }
+
+    $payment   = new Payment();
+    $pendaftar = new Pendaftar();
+
+    if ($aksi === "lunas") {
+
+        // 1. Update status pembayaran
+        $payment->updateStatus($id, "lunas");
+
+        // 2. Ambil id_pendaftar dari pembayaran
+        $id_pendaftar = $payment->getPendaftarId($id);
+
+        // 3. Update status siswa
+        if ($id_pendaftar) {
+            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+        }
+
+    } elseif ($aksi === "tolak") {
+
+        $payment->updateStatus($id, "ditolak");
+    }
+
+    // 4. Kembali ke halaman administrasi
+    header("Location: /dashboard/administrasi");
+    exit;
+}
+
+    
 
     // PENGATURAN ADMIN
 
