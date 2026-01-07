@@ -156,5 +156,21 @@ public function updateStatusData($id_pendaftar, $status)
     $stmt->bind_param("si", $status, $id_pendaftar);
     return $stmt->execute();
 }
+// ===============================
+// HITUNG TOTAL PENDAFTAR
+// ===============================
+public function countAll()
+{
+    $sql = "SELECT COUNT(*) AS total FROM pendaftar";
+    $result = $this->conn->query($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        return (int) $row['total'];
+    }
+
+    return 0;
+}
+
 
 }
