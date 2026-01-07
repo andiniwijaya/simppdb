@@ -31,6 +31,11 @@ $uri  = $_SERVER['REQUEST_URI'];
         <i class="bi bi-folder-check me-2"></i> Administrasi
     </a>
 
+    <a href="<?= $base ?>/dashboard/upload-berkas"
+         class="sidebar-link <?= (strpos($uri, '/dashboard/upload-berkas') !== false ? 'active' : '') ?>">
+        <i class="bi bi-cloud-upload me-2"></i> Upload Berkas
+    </a>
+
     <a href="<?= $base ?>/dashboard/pengaturan" 
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengaturan') !== false ? 'active' : '') ?>">
         <i class="bi bi-gear-wide-connected me-2"></i> Pengaturan

@@ -98,8 +98,16 @@ class Pendaftar extends Database {
         return $stmt->execute();
     }
 
+<<<<<<< HEAD
     // UPDATE DATA
     private function update($id, $d) {
+=======
+    // ======================
+    // UPDATE (FIXED)
+    // ======================
+    private function update($id, $d)
+    {
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
         $sql = "UPDATE pendaftar SET
             nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
             tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
@@ -110,7 +118,11 @@ class Pendaftar extends Database {
         $stmt = $this->conn->prepare($sql);
 
         $stmt->bind_param(
+<<<<<<< HEAD
             "ssssssssssiiisssiisssi",
+=======
+            "ssssssssssiisssiisissi",
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
             $d['nik'],
             $d['nisn'],
             $d['nama_lengkap'],
@@ -137,6 +149,7 @@ class Pendaftar extends Database {
 
         return $stmt->execute();
     }
+<<<<<<< HEAD
 
     // CEK NISN EXIST
     public function nisnExists($nisn) {
@@ -150,6 +163,24 @@ class Pendaftar extends Database {
 
     // GET BY ID (ADMIN)
     public function getById($id) {
+=======
+
+    // ======================
+    // CEK NISN
+    // ======================
+    public function nisnExists($nisn)
+    {
+        $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $nisn);
+        $stmt->execute();
+
+        return $stmt->get_result()->num_rows > 0;
+    }
+
+    public function getById($id)
+    {
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
         $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -158,8 +189,13 @@ class Pendaftar extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
+<<<<<<< HEAD
     // UPDATE BY ADMIN
     public function updateByAdmin($id, $data) {
+=======
+    public function updateByAdmin($id, $data)
+    {
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
         $sql = "UPDATE pendaftar SET
                 nama_lengkap = ?,
                 nisn = ?,
@@ -180,11 +216,62 @@ class Pendaftar extends Database {
         return $stmt->execute();
     }
 
+<<<<<<< HEAD
     // DELETE DATA
     public function delete($id) {
+=======
+    public function delete($id)
+    {
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
         $sql = "DELETE FROM pendaftar WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+<<<<<<< HEAD
+=======
+
+    // ======================
+    // GET DATA PPDB LENGKAP
+    // ======================
+    public function getAllLengkap()
+    {
+        $sql = "
+            SELECT 
+                p.id_pendaftar,
+                p.nama_lengkap,
+                p.nisn,
+                p.asal_sekolah,
+                p.status_data,
+                p.tanggal_daftar,
+
+                ayah.nama_orang_tua AS nama_ayah,
+                ayah.nomor_hp       AS hp_ayah,
+
+                ibu.nama_orang_tua  AS nama_ibu,
+                ibu.nomor_hp        AS hp_ibu,
+
+                wali.nama_orang_tua AS nama_wali,
+                wali.nomor_hp       AS hp_wali
+
+            FROM pendaftar p
+            LEFT JOIN orang_tua ayah 
+                ON p.id_pendaftar = ayah.id_pendaftar AND ayah.jenis='Ayah'
+            LEFT JOIN orang_tua ibu  
+                ON p.id_pendaftar = ibu.id_pendaftar AND ibu.jenis='Ibu'
+            LEFT JOIN orang_tua wali 
+                ON p.id_pendaftar = wali.id_pendaftar AND wali.jenis='Wali'
+            ORDER BY p.id_pendaftar DESC
+        ";
+
+        $result = $this->conn->query($sql);
+
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+>>>>>>> cb6ab0dc4ec5373dd206f735c94d56a3c6e87b33
 }
