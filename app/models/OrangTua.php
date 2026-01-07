@@ -2,138 +2,134 @@
 require_once __DIR__ . "/../../core/Database.php";
 
 class OrangTua extends Database {
-
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
     }
 
-    private function exist($id,$jenis)
-    {
-        $q = "SELECT id_orang_tua 
-              FROM orang_tua 
-              WHERE id_pendaftar=? AND jenis=? 
-              LIMIT 1";
+    // CEK DATA EXIST
+    private function exist($id_pendaftar, $jenis) {
+        $sql = "SELECT id_orang_tua
+                FROM orang_tua
+                WHERE id_pendaftar = ? AND jenis = ?
+                LIMIT 1";
 
-        $stm = $this->conn->prepare($q);
-        $stm->bind_param("is",$id,$jenis);
-        $stm->execute();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("is", $id_pendaftar, $jenis);
+        $stmt->execute();
 
-        return $stm->get_result()->num_rows > 0;
+        return $stmt->get_result()->num_rows > 0;
     }
 
+    // INSERT DATA
+    private function insert($id_pendaftar, $jenis, $d) {
+        $map = strtolower($jenis);
 
-    private function insert($id, $jenis, $d)
-    {
-        $sql = "INSERT INTO orang_tua 
-        (id_pendaftar, jenis, nama_orang_tua, pendidikan_terakhir, pekerjaan,
-         penghasilan, nomor_hp, tempat_lahir, tanggal_lahir, alamat_rumah)
-        VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO orang_tua
+            (id_pendaftar, jenis, nama_orang_tua, pendidikan_terakhir, pekerjaan,
+             penghasilan, nomor_hp, tempat_lahir, tanggal_lahir, alamat_rumah)
+            VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-        $st = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
-        $st->bind_param(
+        $stmt->bind_param(
             "isssssssss",
-            $id,
+            $id_pendaftar,
             $jenis,
-            $d["nama_".strtolower($jenis)],
-            $d["pendidikan_".strtolower($jenis)],
-            $d["pekerjaan_".strtolower($jenis)],
-            $d["penghasilan_".strtolower($jenis)],
-            $d["hp_".strtolower($jenis)],
-            $d["tempat_lahir_".strtolower($jenis)],
-            $d["tanggal_lahir_".strtolower($jenis)],
-            $d["alamat_rumah_".strtolower($jenis)]
+            $d["nama_$map"] ?? null,
+            $d["pendidikan_$map"] ?? null,
+            $d["pekerjaan_$map"] ?? null,
+            $d["penghasilan_$map"] ?? null,
+            $d["hp_$map"] ?? null,
+            $d["tempat_lahir_$map"] ?? null,
+            $d["tanggal_lahir_$map"] ?? null,
+            $d["alamat_rumah_$map"] ?? null
         );
 
-        return $st->execute();
+        return $stmt->execute();
     }
 
+    // UPDATE DATA
+    private function update($id_pendaftar, $jenis, $d) {
+        $map = strtolower($jenis);
 
-    private function update($id,$jenis,$d)
-    {
         $sql = "UPDATE orang_tua SET
-        nama_orang_tua=?, pendidikan_terakhir=?, pekerjaan=?, penghasilan=?,
-        nomor_hp=?, tempat_lahir=?, tanggal_lahir=?, alamat_rumah=?
-        WHERE id_pendaftar=? AND jenis=?";
+                nama_orang_tua = ?,
+                pendidikan_terakhir = ?,
+                pekerjaan = ?,
+                penghasilan = ?,
+                nomor_hp = ?,
+                tempat_lahir = ?,
+                tanggal_lahir = ?,
+                alamat_rumah = ?
+                WHERE id_pendaftar = ? AND jenis = ?";
 
-        $st = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
-        $st->bind_param(
+        $stmt->bind_param(
             "ssssssssis",
-            $d["nama_".strtolower($jenis)],
-            $d["pendidikan_".strtolower($jenis)],
-            $d["pekerjaan_".strtolower($jenis)],
-            $d["penghasilan_".strtolower($jenis)],
-            $d["hp_".strtolower($jenis)],
-            $d["tempat_lahir_".strtolower($jenis)],
-            $d["tanggal_lahir_".strtolower($jenis)],
-            $d["alamat_rumah_".strtolower($jenis)],
-            $id,
+            $d["nama_$map"] ?? null,
+            $d["pendidikan_$map"] ?? null,
+            $d["pekerjaan_$map"] ?? null,
+            $d["penghasilan_$map"] ?? null,
+            $d["hp_$map"] ?? null,
+            $d["tempat_lahir_$map"] ?? null,
+            $d["tanggal_lahir_$map"] ?? null,
+            $d["alamat_rumah_$map"] ?? null,
+            $id_pendaftar,
             $jenis
         );
 
-        return $st->execute();
+        return $stmt->execute();
     }
 
-
-    private function save($id,$jenis,$d)
-    {
-        if($this->exist($id,$jenis))
-        {
-            return $this->update($id,$jenis,$d);
+    // SAVE (AUTO INSERT / UPDATE)
+    private function save($id_pendaftar, $jenis, $d) {
+        if ($this->exist($id_pendaftar, $jenis)) {
+            return $this->update($id_pendaftar, $jenis, $d);
         }
 
-        return $this->insert($id,$jenis,$d);
+        return $this->insert($id_pendaftar, $jenis, $d);
     }
 
+    // PUBLIC SAVE
+    public function saveAyah($id, $d) {
+        return $this->save($id, "Ayah", $d);
+    }
 
-    public function saveAyah($id,$d){ return $this->save($id,"Ayah",$d); }
-    public function saveIbu($id,$d){  return $this->save($id,"Ibu" ,$d); }
-    public function saveWali($id,$d){ return $this->save($id,"Wali",$d); }
-    
-        /* ======================
-       GET DATA ORANG TUA
-       (AYAH + IBU)
-       ====================== */
-    public function getOrtuByPendaftar($id_pendaftar)
-{
-    $sql = "SELECT * 
-            FROM orang_tua 
-            WHERE id_pendaftar = ? 
-              AND jenis IN ('Ayah','Ibu')";
+    public function saveIbu($id, $d) {
+        return $this->save($id, "Ibu", $d);
+    }
 
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id_pendaftar);
-    $stmt->execute();
+    public function saveWali($id, $d) {
+        return $this->save($id, "Wali", $d);
+    }
 
-    // 🔴 get_result DIPANGGIL SEKALI
-    $result = $stmt->get_result();
+    // GET DATA AYAH + IBU
+    public function getOrtuByPendaftar($id_pendaftar) {
+        $sql = "SELECT *
+                FROM orang_tua
+                WHERE id_pendaftar = ?
+                  AND jenis IN ('Ayah','Ibu')";
 
-    $data = [
-        "ayah" => null,
-        "ibu"  => null
-    ];
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
 
-    while ($row = $result->fetch_assoc()) {
-        if ($row["jenis"] === "Ayah") {
-            $data["ayah"] = $row;
-        } elseif ($row["jenis"] === "Ibu") {
-            $data["ibu"] = $row;
+        $result = $stmt->get_result();
+
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
+
+        return $data; // <-- ARRAY LIST (konsisten dengan controller & view)
     }
 
-    return $data;
-}
-
-
-    /* ======================
-       GET DATA WALI
-       ====================== */
-    public function getWaliByPendaftar($id_pendaftar)
-    {
-        $sql = "SELECT * 
-                FROM orang_tua 
-                WHERE id_pendaftar = ? 
+    // GET DATA WALI
+    public function getWaliByPendaftar($id_pendaftar) {
+        $sql = "SELECT *
+                FROM orang_tua
+                WHERE id_pendaftar = ?
                   AND jenis = 'Wali'
                 LIMIT 1";
 
@@ -143,5 +139,4 @@ class OrangTua extends Database {
 
         return $stmt->get_result()->fetch_assoc();
     }
-
 }

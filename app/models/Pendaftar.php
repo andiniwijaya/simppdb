@@ -3,10 +3,8 @@
 require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar extends Database {
-
     // GET ID PENDAFTAR BY USER
-    public function getId($id_pengguna)
-    {
+    public function getId($id_pengguna) {
         $sql = "SELECT id_pendaftar FROM pendaftar WHERE id_pengguna = ? LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pengguna);
@@ -58,7 +56,7 @@ class Pendaftar extends Database {
         return $this->insert($id_pengguna, $d);
     }
 
-    // INSERT DATA
+    // INSERT DATA SISWA
     private function insert($id_pengguna, $d) {
         $sql = "INSERT INTO pendaftar (
             id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin, tempat_lahir,
@@ -98,7 +96,7 @@ class Pendaftar extends Database {
         return $stmt->execute();
     }
 
-    // UPDATE DATA
+    // UPDATE DATA SISWA
     private function update($id, $d) {
         $sql = "UPDATE pendaftar SET
             nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
@@ -136,6 +134,41 @@ class Pendaftar extends Database {
         );
 
         return $stmt->execute();
+    }
+
+    // UPDATE STATUS DATA (BELUM_LENGKAP / LENGKAP)
+    public function updateStatusData($id_pendaftar) {
+        // cek data orang tua & wali
+        $sql = "SELECT jenis FROM orang_tua WHERE id_pendaftar = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $hasAyah = false;
+        $hasIbu  = false;
+        $hasWali = false;
+
+        while ($row = $result->fetch_assoc()) {
+            if ($row['jenis'] === 'Ayah') $hasAyah = true;
+            if ($row['jenis'] === 'Ibu')  $hasIbu  = true;
+            if ($row['jenis'] === 'Wali') $hasWali = true;
+        }
+
+        // tentukan status
+        if (($hasAyah && $hasIbu) || $hasWali) {
+            $status = 'lengkap';
+        } else {
+            $status = 'belum_lengkap';
+        }
+
+        // update ke tabel pendaftar
+        $upd = $this->conn->prepare(
+            "UPDATE pendaftar SET status_data = ? WHERE id_pendaftar = ?"
+        );
+        $upd->bind_param("si", $status, $id_pendaftar);
+        $upd->execute();
     }
 
     // CEK NISN EXIST

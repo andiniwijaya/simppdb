@@ -12,18 +12,23 @@ class FormulirController {
         }
 
         $user_id   = $_SESSION["user_id"];
-        $pendaftar = new Pendaftar;
-        $ortu      = new OrangTua;
+        $pendaftar = new Pendaftar();
+        $ortu      = new OrangTua();
 
-        // ambil data untuk mode EDIT
+        // ambil data siswa (pendaftar)
         $siswa = $pendaftar->getFormDataByUserId($user_id);
 
         $id_pendaftar = $siswa ? $siswa['id_pendaftar'] : 0;
 
+        // ambil data orang tua & wali jika siswa sudah ada
+        $ortuData = $id_pendaftar ? $ortu->getOrtuByPendaftar($id_pendaftar) : [];
+        $waliData = $id_pendaftar ? $ortu->getWaliByPendaftar($id_pendaftar) : null;
+
+        // kirim ke view
         $data = [
             "siswa" => $siswa,
-            "ortu"  => $id_pendaftar ? $ortu->getOrtuByPendaftar($id_pendaftar) : null,
-            "wali"  => $id_pendaftar ? $ortu->getWaliByPendaftar($id_pendaftar) : null
+            "ortu"  => $ortuData,
+            "wali"  => $waliData
         ];
 
         extract($data);
@@ -48,8 +53,8 @@ class FormulirController {
         }
 
         $user_id   = $_SESSION["user_id"];
-        $pendaftar = new Pendaftar;
-        $ortu      = new OrangTua;
+        $pendaftar = new Pendaftar();
+        $ortu      = new OrangTua();
 
         // SIMPAN DATA SISWA
         if ($_POST["save"] === "siswa") {
@@ -60,19 +65,22 @@ class FormulirController {
             exit;
         }
 
-        // SIMPAN DATA ORANG TUA
+        // ambil id_pendaftar (wajib untuk ortu / wali)
+        $id_pendaftar = $pendaftar->getId($user_id);
+
+        if ($id_pendaftar == 0) {
+            header("Location: /siswa/formulir?tab=siswa&error=lengkapi_data_siswa");
+            exit;
+        }
+
+        // SIMPAN DATA ORANG TUA (AYAH & IBU)
         if ($_POST["save"] === "ortu") {
-
-            $id_pendaftar = $pendaftar->getId($user_id);
-
-            // proteksi: siswa harus ada dulu
-            if ($id_pendaftar == 0) {
-                header("Location: /siswa/formulir?tab=siswa&error=lengkapi_siswa");
-                exit;
-            }
 
             $ortu->saveAyah($id_pendaftar, $_POST);
             $ortu->saveIbu($id_pendaftar, $_POST);
+
+            // update status_data (lengkap / belum_lengkap)
+            $pendaftar->updateStatusData($id_pendaftar);
 
             header("Location: /siswa/formulir?tab=ortu&saved=1");
             exit;
@@ -81,14 +89,10 @@ class FormulirController {
         // SIMPAN DATA WALI
         if ($_POST["save"] === "wali") {
 
-            $id_pendaftar = $pendaftar->getId($user_id);
-
-            if ($id_pendaftar == 0) {
-                header("Location: /siswa/formulir?tab=siswa&error=lengkapi_siswa");
-                exit;
-            }
-
             $ortu->saveWali($id_pendaftar, $_POST);
+
+            // update status_data (lengkap / belum_lengkap)
+            $pendaftar->updateStatusData($id_pendaftar);
 
             header("Location: /siswa/formulir?tab=wali&saved=1");
             exit;
@@ -107,8 +111,8 @@ class FormulirController {
         }
 
         $user_id   = $_SESSION["user_id"];
-        $pendaftar = new Pendaftar;
-        $ortu      = new OrangTua;
+        $pendaftar = new Pendaftar();
+        $ortu      = new OrangTua();
 
         $id_pendaftar = $pendaftar->getId($user_id);
 
