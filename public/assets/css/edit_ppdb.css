@@ -1,0 +1,77 @@
+/* ===============================
+   FORM ADMIN PPDB (EDIT / DETAIL)
+   =============================== */
+
+.ppdb-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #082a5c;
+}
+
+.ppdb-form-wrapper {
+    background: #ffffff;
+    padding: 25px;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.ppdb-form-group {
+    margin-bottom: 15px;
+}
+
+.ppdb-form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.ppdb-form-group input,
+.ppdb-form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.ppdb-form-group input:focus,
+.ppdb-form-group select:focus {
+    outline: none;
+    border-color: #0d6efd;
+}
+
+.ppdb-btn {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.ppdb-btn-primary {
+    background: #0d6efd;
+    color: white;
+}
+
+.ppdb-btn-primary:hover {
+    background: #0b5ed7;
+}
+
+.ppdb-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.ppdb-btn-secondary:hover {
+    background: #5c636a;
+}
+
+.ppdb-btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}

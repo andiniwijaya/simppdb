@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/public/css/admin_ppdb_form.css">
 <h2>Edit Data PPDB</h2>
 
 <div class="pengaturan-wrapper">
