@@ -43,24 +43,23 @@
 
             <td class="ppdb-action">
 
-                <!-- DETAIL -->
-                <a href="/admin/ppdb/detail/<?= $row['id_pendaftar'] ?>"
-                   class="btn btn-sm btn-info btn-detail-ppdb">
-                    Detail
-                </a>
+               <a href="/admin/ppdb/detail?id=<?= $row['id_pendaftar'] ?>"
+                    class="btn btn-sm btn-info">
+                        Detail
+                    </a>
 
-                <!-- EDIT -->
-                <a href="/admin/ppdb/edit/<?= $row['id_pendaftar'] ?>"
-                   class="btn btn-sm btn-warning btn-edit-ppdb">
+
+               <a href="/admin/ppdb/edit?id=<?= $row['id_pendaftar'] ?>"
+                class="btn btn-sm btn-warning">
                     Edit
                 </a>
 
-                <!-- DELETE -->
-                <a href="/admin/ppdb/delete/<?= $row['id_pendaftar'] ?>"
-                   class="btn btn-sm btn-danger btn-delete-ppdb"
-                   onclick="return confirm('Yakin ingin menghapus data ini?')">
+               <a href="/admin/ppdb/delete?id=<?= $row['id_pendaftar'] ?>"
+                class="btn btn-sm btn-danger"
+                onclick="return confirm('Yakin ingin menghapus data ini?')">
                     Hapus
                 </a>
+
 
             </td>
         </tr>

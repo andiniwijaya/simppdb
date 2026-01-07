@@ -25,10 +25,10 @@ $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');
 
 $router->get('/admin/ppdb', 'AdminPPDBController@index');
-$router->get('/admin/ppdb/detail/(:num)', 'DashboardController@detailPPDB');
-$router->get('/admin/ppdb/edit/(:num)', 'DashboardController@editPPDB');
-$router->post('/admin/ppdb/update/(:num)', 'DashboardController@updatePPDB');
-$router->get('/admin/ppdb/delete/(:num)', 'DashboardController@deletePPDB');
+$router->get('/admin/ppdb/edit', 'DashboardController@editPPDB');
+$router->post('/admin/ppdb/update', 'DashboardController@updatePPDB');
+$router->get('/admin/ppdb/delete', 'DashboardController@deletePPDB');
+
 
 
 $router->get('/admin/ppdb/cetak', 'DashboardController@cetakPPDB');
