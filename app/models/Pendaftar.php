@@ -207,7 +207,7 @@ public function delete($id)
 }
 
 // ======================
-// GET DATA PPDB (SISWA + ORTU)
+// GET DATA PPDB LENGKAP
 // ======================
 public function getAllLengkap()
 {
@@ -220,20 +220,36 @@ public function getAllLengkap()
             p.status_data,
             p.tanggal_daftar,
 
-            o.nama_ayah,
-            o.hp_ayah,
-            o.nama_ibu,
-            o.hp_ibu
+            ayah.nama_orang_tua   AS nama_ayah,
+            ayah.nomor_hp         AS hp_ayah,
+
+            ibu.nama_orang_tua    AS nama_ibu,
+            ibu.nomor_hp          AS hp_ibu,
+
+            wali.nama_orang_tua   AS nama_wali,
+            wali.nomor_hp         AS hp_wali
 
         FROM pendaftar p
-        LEFT JOIN orang_tua o ON p.id_pendaftar = o.id_pendaftar
+
+        LEFT JOIN orang_tua ayah 
+            ON p.id_pendaftar = ayah.id_pendaftar 
+            AND ayah.jenis = 'Ayah'
+
+        LEFT JOIN orang_tua ibu 
+            ON p.id_pendaftar = ibu.id_pendaftar 
+            AND ibu.jenis = 'Ibu'
+
+        LEFT JOIN orang_tua wali 
+            ON p.id_pendaftar = wali.id_pendaftar 
+            AND wali.jenis = 'Wali'
+
         ORDER BY p.id_pendaftar DESC
     ";
 
     $result = $this->conn->query($sql);
 
     $data = [];
-    while($row = $result->fetch_assoc()){
+    while ($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
 
