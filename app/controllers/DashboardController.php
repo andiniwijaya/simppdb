@@ -307,6 +307,26 @@ public function exportPPDBLengkap()
     require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
     exit;
 }
+// ===============================
+// CETAK / EXPORT DATA PPDB LENGKAP
+// ===============================
+public function cetakPPDB()
+{
+    if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+        header("Location: /login");
+        exit;
+    }
+
+    $pendaftar = new Pendaftar();
+    $list = $pendaftar->getAllLengkap();
+
+    extract(["list" => $list]);
+
+    // view khusus excel (tanpa layout)
+    require __DIR__ . '/../views/admin/export_ppdb_lengkap.php';
+    exit;
+}
+
 
 
 
