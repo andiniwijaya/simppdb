@@ -77,31 +77,32 @@ class Pendaftar extends Database {
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param(
-            "issssssssssiiisssiisss",
-            $id_pengguna,
-            $d['nik'],
-            $d['nisn'],
-            $d['nama_lengkap'],
-            $d['jenis_kelamin'],
-            $d['tempat_lahir'],
-            $d['tanggal_lahir'],
-            $d['agama'],
-            $d['alamat'],
-            $d['status_tinggal'],
-            $d['asal_sekolah'],
-            $d['anak_ke'],
-            $d['jumlah_saudara'],
-            $d['status_anak'],
-            $d['yatim_status'],
-            $d['bahasa_rumah'],
-            $d['tinggi_badan'],
-            $d['berat_badan'],
-            $d['penyakit'],
-            $d['tahun_lulus'],
-            $d['nomor_hp'],
-            $d['email']
-        );
+            $stmt->bind_param(
+        "ssssssssssiiissiiisssi",
+        $id_pengguna,
+        $d['nik'],
+        $d['nisn'],
+        $d['nama_lengkap'],
+        $d['jenis_kelamin'],
+        $d['tempat_lahir'],
+        $d['tanggal_lahir'],
+        $d['agama'],
+        $d['alamat'],
+        $d['status_tinggal'],
+        $d['asal_sekolah'],
+        $d['anak_ke'],           // i
+        $d['jumlah_saudara'],    // i
+        $d['status_anak'],       // s
+        $d['yatim_status'],      // s
+        $d['bahasa_rumah'],      // s
+        $d['tinggi_badan'],      // i
+        $d['berat_badan'],       // i
+        $d['penyakit'],          // s
+        $d['tahun_lulus'],       // i
+        $d['nomor_hp'],
+        $d['email']
+    );
+
 
         return $stmt->execute();
     }
