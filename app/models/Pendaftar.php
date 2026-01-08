@@ -78,47 +78,76 @@ class Pendaftar extends Database {
     /* ===============================
      * INSERT DATA
      * =============================== */
-    private function insert($id_pengguna, $d)
-    {
-        $this->sanitizeEnum($d);
+        private function insert($id_pengguna, $d)
+{
+    $this->sanitizeEnum($d);
 
-        $sql = "INSERT INTO pendaftar (
-            id_pengguna, nik, nisn, nama_lengkap, jenis_kelamin,
-            tempat_lahir, tanggal_lahir, agama, alamat, status_tinggal,
-            asal_sekolah, anak_ke, jumlah_saudara, status_anak, yatim_status,
-            bahasa_rumah, tinggi_badan, berat_badan, penyakit, tahun_lulus,
-            nomor_hp, email
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    // ===============================
+    // CAST KE VARIABEL (WAJIB!)
+    // ===============================
+    $id_pengguna     = (int)$id_pengguna;
+    $anak_ke         = (int)$d['anak_ke'];
+    $jumlah_saudara  = (int)$d['jumlah_saudara'];
+    $tinggi_badan    = (int)$d['tinggi_badan'];
+    $berat_badan     = (int)$d['berat_badan'];
+    $tahun_lulus     = (int)$d['tahun_lulus'];
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param(
-            "issssssssssiiissiiisss",
-            $id_pengguna,
-            $d['nik'],
-            $d['nisn'],
-            $d['nama_lengkap'],
-            $d['jenis_kelamin'],
-            $d['tempat_lahir'],
-            $d['tanggal_lahir'],
-            $d['agama'],
-            $d['alamat'],
-            $d['status_tinggal'],
-            $d['asal_sekolah'],
-            (int)$d['anak_ke'],
-            (int)$d['jumlah_saudara'],
-            $d['status_anak'],
-            $d['yatim_status'],
-            $d['bahasa_rumah'],
-            (int)$d['tinggi_badan'],
-            (int)$d['berat_badan'],
-            $d['penyakit'],
-            (int)$d['tahun_lulus'],
-            $d['nomor_hp'],
-            $d['email']
-        );
+    $sql = "INSERT INTO pendaftar (
+        id_pengguna,
+        nik,
+        nisn,
+        nama_lengkap,
+        jenis_kelamin,
+        tempat_lahir,
+        tanggal_lahir,
+        agama,
+        alamat,
+        status_tinggal,
+        asal_sekolah,
+        anak_ke,
+        jumlah_saudara,
+        status_anak,
+        yatim_status,
+        bahasa_rumah,
+        tinggi_badan,
+        berat_badan,
+        penyakit,
+        tahun_lulus,
+        nomor_hp,
+        email
+    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return $stmt->execute();
-    }
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param(
+        "issssssssssiiissiiisss",
+        $id_pengguna,
+        $d['nik'],
+        $d['nisn'],
+        $d['nama_lengkap'],
+        $d['jenis_kelamin'],
+        $d['tempat_lahir'],
+        $d['tanggal_lahir'],
+        $d['agama'],
+        $d['alamat'],
+        $d['status_tinggal'],
+        $d['asal_sekolah'],
+        $anak_ke,
+        $jumlah_saudara,
+        $d['status_anak'],
+        $d['yatim_status'],
+        $d['bahasa_rumah'],
+        $tinggi_badan,
+        $berat_badan,
+        $d['penyakit'],
+        $tahun_lulus,
+        $d['nomor_hp'],
+        $d['email']
+    );
+
+    return $stmt->execute();
+}
+
+
         //update data
         private function update($id, $d)
 {
