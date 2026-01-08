@@ -24,6 +24,11 @@ $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');
 
+$router->get('/dashboard/verifikasi_berkas', 'DashboardController@verifikasiBerkas');
+$router->get('/admin/berkas/valid', 'DashboardController@validBerkas');
+$router->get('/admin/berkas/invalid', 'DashboardController@invalidBerkas');
+
+
 $router->get('/admin/ppdb', 'AdminPPDBController@index');
 $router->get('/admin/ppdb/edit', 'DashboardController@editPPDB');
 $router->post('/admin/ppdb/update', 'DashboardController@updatePPDB');

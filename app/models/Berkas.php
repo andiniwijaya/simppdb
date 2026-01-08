@@ -4,7 +4,7 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Berkas extends Database {
 
-    // ================= AMBIL SEMUA BERKAS SISWA =================
+    //  AMBIL SEMUA BERKAS SISWA 
     public function getAll($id_pendaftar){
         $sql = "SELECT * FROM berkas_pendaftar
                 WHERE id_pendaftar = ?";
@@ -14,7 +14,7 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    // ================= CEK DUPLIKASI JENIS BERKAS =================
+    //  CEK DUPLIKASI JENIS BERKAS 
     public function getByJenis($id_pendaftar, $jenis){
         $sql = "SELECT id_berkas FROM berkas_pendaftar
                 WHERE id_pendaftar = ? AND jenis_berkas = ?";
@@ -24,7 +24,7 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // ================= INSERT BERKAS =================
+    //  INSERT BERKAS 
     public function insert($id_pendaftar, $jenis, $lokasi){
 
         $sql = "INSERT INTO berkas_pendaftar
@@ -36,12 +36,12 @@ class Berkas extends Database {
         return $stmt->execute();
     }
 
-    // ================= CEK STATUS LENGKAP BERKAS =================
+    //  CEK STATUS LENGKAP BERKAS
     public function getStatusLengkap($id_pendaftar) {
 
         /**
-         * ❗ KIP TIDAK WAJIB
-         * ❗ KTP HARUS AYAH + IBU
+         *  KIP TIDAK WAJIB
+         *  KTP HARUS AYAH + IBU
          */
         $wajib = [
             'kartu_keluarga',
@@ -124,4 +124,21 @@ class Berkas extends Database {
 
         return round(($done / $total) * 100);
     }
+
+    // AMBIL SEMUA BERKAS UNTUK ADMIN
+public function getAllForAdmin()
+{
+    $sql = "
+        SELECT 
+            b.*, 
+            p.nama_lengkap
+        FROM berkas_pendaftar b
+        JOIN pendaftar p 
+            ON b.id_pendaftar = p.id_pendaftar
+        ORDER BY b.uploaded_at DESC
+    ";
+
+    return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+}
+
 }

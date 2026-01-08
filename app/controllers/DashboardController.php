@@ -197,6 +197,7 @@ class DashboardController {
         header("Location: /login");
         exit;
     }
+    
 
     // ⬇️ AMBIL DARI QUERY STRING
     $aksi = $_GET['aksi'] ?? null;
@@ -230,9 +231,75 @@ class DashboardController {
     header("Location: /dashboard/administrasi");
     exit;
 }
+        // ===============================
+// VERIFIKASI BERKAS SISWA (ADMIN)
+// ===============================
+public function verifikasiBerkas()
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    $berkas = new Berkas();
+
+    // ambil SEMUA berkas siswa (semua pendaftar)
+    $list = $berkas->getAllForAdmin();
+
+    extract(["list" => $list]);
+
+    $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+}
+
+    // ===============================
+// VALIDASI BERKAS
+// ===============================
+public function validBerkas()
+{
+    if ($_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        header("Location: /dashboard/verifikasi_berkas");
+        exit;
+    }
+
+    $sql = "UPDATE berkas_pendaftar SET status_berkas='valid' WHERE id_berkas=?";
+    $stmt = (new Database())->conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    header("Location: /dashboard/verifikasi_berkas");
+    exit;
+}
+
+public function invalidBerkas()
+{
+    if ($_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        header("Location: /dashboard/verifikasi_berkas");
+        exit;
+    }
+
+    $sql = "UPDATE berkas_pendaftar SET status_berkas='invalid' WHERE id_berkas=?";
+    $stmt = (new Database())->conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    header("Location: /dashboard/verifikasi_berkas");
+    exit;
+}
 
 
-    
 
     // PENGATURAN ADMIN
 
