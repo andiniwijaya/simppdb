@@ -92,6 +92,42 @@ class Berkas extends Database {
         // ✅ SEMUA WAJIB ADA & VALID / MENUNGGU VALIDASI
         return "lengkap";
     }
+    public function isSemuaBerkasValid($id_pendaftar)
+{
+    $wajib = [
+        'kartu_keluarga',
+        'ktp_ayah',
+        'ktp_ibu',
+        'ijazah_sd',
+        'surat_keterangan_lulus',
+        'akta_kelahiran',
+        'pas_foto'
+    ];
+
+    $sql = "
+        SELECT jenis_berkas, status_berkas
+        FROM berkas_pendaftar
+        WHERE id_pendaftar = ?
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    $map = [];
+    foreach ($rows as $r) {
+        $map[$r['jenis_berkas']] = $r['status_berkas'];
+    }
+
+    foreach ($wajib as $jenis) {
+        if (!isset($map[$jenis])) return false;
+        if ($map[$jenis] !== 'valid') return false;
+    }
+
+    return true;
+}
+
 
     // ================= HITUNG PROGRESS (%) =================
     public function getProgress($id_pendaftar){

@@ -252,10 +252,10 @@ public function verifikasiBerkas()
     require __DIR__ . '/../views/admin/layout_admin.php';
 }
 
-    // ===============================
+
 // VALIDASI BERKAS
-// ===============================
-public function validBerkas()
+
+    public function validBerkas()
 {
     if ($_SESSION["role"] !== "admin") {
         header("Location: /login");
@@ -268,32 +268,27 @@ public function validBerkas()
         exit;
     }
 
+    $db = new Database();
+    $berkas = new Berkas();
+    $pendaftar = new Pendaftar();
+
+    // 1️⃣ update status berkas
     $sql = "UPDATE berkas_pendaftar SET status_berkas='valid' WHERE id_berkas=?";
-    $stmt = (new Database())->conn->prepare($sql);
+    $stmt = $db->conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
 
-    header("Location: /dashboard/verifikasi_berkas");
-    exit;
-}
+    // 2️⃣ ambil id_pendaftar dari berkas
+    $q = $db->conn->query(
+        "SELECT id_pendaftar FROM berkas_pendaftar WHERE id_berkas=$id"
+    );
+    $row = $q->fetch_assoc();
+    $id_pendaftar = $row['id_pendaftar'];
 
-public function invalidBerkas()
-{
-    if ($_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
+    // 3️⃣ cek apakah semua berkas sudah VALID
+    if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
+        $pendaftar->updateStatusData($id_pendaftar, "lengkap");
     }
-
-    $id = $_GET['id'] ?? null;
-    if (!$id) {
-        header("Location: /dashboard/verifikasi_berkas");
-        exit;
-    }
-
-    $sql = "UPDATE berkas_pendaftar SET status_berkas='invalid' WHERE id_berkas=?";
-    $stmt = (new Database())->conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
 
     header("Location: /dashboard/verifikasi_berkas");
     exit;
@@ -412,44 +407,43 @@ public function invalidBerkas()
         exit;
     }
 
-    // ===============================
-// EXPORT EXCEL DATA PPDB LENGKAP
-// ===============================
-public function exportPPDBLengkap()
-{
-    if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
-        header("Location: /login");
-        exit;
-    }
+        // EXPORT EXCEL DATA PPDB LENGKAP
 
-    $pendaftar = new Pendaftar();
-    $list = $pendaftar->getAllLengkap();
+        public function exportPPDBLengkap()
+        {
+            if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+                header("Location: /login");
+                exit;
+            }
 
-    extract(["list" => $list]);
+            $pendaftar = new Pendaftar();
+            $list = $pendaftar->getAllLengkap();
 
-    // view khusus excel (tanpa layout)
-    require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
-    exit;
-}
-// ===============================
-// CETAK / EXPORT DATA PPDB LENGKAP
-// ===============================
-public function cetakPPDB()
-{
-    if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
-        header("Location: /login");
-        exit;
-    }
+            extract(["list" => $list]);
 
-    $pendaftar = new Pendaftar();
-    $list = $pendaftar->getAllLengkap();
+            // view khusus excel (tanpa layout)
+            require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+            exit;
+        }
+        // ===============================
+        // CETAK / EXPORT DATA PPDB LENGKAP
+        // ===============================
+        public function cetakPPDB()
+        {
+            if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+                header("Location: /login");
+                exit;
+            }
 
-    extract(["list" => $list]);
+            $pendaftar = new Pendaftar();
+            $list = $pendaftar->getAllLengkap();
 
-    // view khusus excel (tanpa layout)
-    require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
-    exit;
-}
+            extract(["list" => $list]);
+
+            // view khusus excel (tanpa layout)
+            require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+            exit;
+        }
 
 
 
