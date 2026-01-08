@@ -32,9 +32,6 @@ if (!empty($ortu)) {
         </h3>
 
         <?php if ($hasSiswa): ?>
-            <small class="text-muted">
-                Mode edit aktif — Anda dapat memperbarui data formulir
-            </small>
         <?php else: ?>
             <small class="text-muted">
                 Silakan isi formulir PPDB terlebih dahulu
