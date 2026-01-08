@@ -24,6 +24,33 @@ if (!empty($ortu)) {
 <div class="formulir-page">
 <div class="content">
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <div>
+        <h3 class="fw-bold mb-0">
+            <i class="bi bi-file-earmark-text me-2"></i> Formulir PPDB
+        </h3>
+
+        <?php if ($hasSiswa): ?>
+            <small class="text-muted">
+                Mode edit aktif — Anda dapat memperbarui data formulir
+            </small>
+        <?php else: ?>
+            <small class="text-muted">
+                Silakan isi formulir PPDB terlebih dahulu
+            </small>
+        <?php endif; ?>
+    </div>
+
+    <a href="/siswa/formulir?edit=1"
+       class="btn <?= $hasSiswa ? 'btn-outline-primary' : 'btn-primary' ?> btn-sm">
+        <i class="bi bi-pencil-square me-1"></i>
+        <?= $hasSiswa ? 'Edit Data' : 'Isi Formulir' ?>
+    </a>
+
+</div>
+
+
 <h3 class="fw-bold mb-3">
     <i class="bi bi-file-earmark-text me-2"></i> Formulir PPDB
 </h3>
