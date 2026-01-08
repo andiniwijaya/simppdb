@@ -4,39 +4,44 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Pendaftar extends Database {
 
-    /* ===============================
-     * ENUM SANITIZER (WAJIB AMAN)
-     * =============================== */
-    private function sanitizeEnum(&$d)
-    {
-        // status_anak
-        $enum_status_anak = ['kandung','tiri','angkat'];
-        if (empty($d['status_anak']) || !in_array(trim($d['status_anak']), $enum_status_anak)) {
-            $d['status_anak'] = 'kandung';
-        }
+             private function sanitizeEnum(&$d)
+{
+    // ===== status_anak =====
+    $map_status_anak = [
+        'kandung' => 'kandung',
+        'Kandung' => 'kandung',
+        'tiri'    => 'tiri',
+        'Tiri'    => 'tiri',
+        'angkat'  => 'angkat',
+        'Angkat'  => 'angkat'
+    ];
 
-        // yatim_status
-        $enum_yatim = ['bukan','yatim','piatu','yatim_piatu'];
-        if (empty($d['yatim_status']) || !in_array(trim($d['yatim_status']), $enum_yatim)) {
-            $d['yatim_status'] = 'bukan';
-        }
-
-        // jenis_kelamin
-        $enum_jk = ['Laki-laki','Perempuan'];
-        if (empty($d['jenis_kelamin']) || !in_array(trim($d['jenis_kelamin']), $enum_jk)) {
-            $d['jenis_kelamin'] = 'Laki-laki';
-        }
-
-        // status_tinggal
-        $enum_tinggal = ['bersama_ortu','wali','kost','asrama','lainnya'];
-        if (empty($d['status_tinggal']) || !in_array(trim($d['status_tinggal']), $enum_tinggal)) {
-            $d['status_tinggal'] = 'bersama_ortu';
-        }
+    if (!isset($d['status_anak']) || !isset($map_status_anak[$d['status_anak']])) {
+        $d['status_anak'] = 'kandung'; // DEFAULT AMAN
+    } else {
+        $d['status_anak'] = $map_status_anak[$d['status_anak']];
     }
 
-    /* ===============================
-     * GET ID PENDAFTAR
-     * =============================== */
+    // ===== yatim_status =====
+    $enum_yatim = ['bukan','yatim','piatu','yatim_piatu'];
+    if (!isset($d['yatim_status']) || !in_array($d['yatim_status'], $enum_yatim)) {
+        $d['yatim_status'] = 'bukan';
+    }
+
+    // ===== jenis_kelamin =====
+    $enum_jk = ['Laki-laki','Perempuan'];
+    if (!isset($d['jenis_kelamin']) || !in_array($d['jenis_kelamin'], $enum_jk)) {
+        $d['jenis_kelamin'] = 'Laki-laki';
+    }
+
+    // ===== status_tinggal =====
+    $enum_tinggal = ['bersama_ortu','wali','kost','asrama','lainnya'];
+    if (!isset($d['status_tinggal']) || !in_array($d['status_tinggal'], $enum_tinggal)) {
+        $d['status_tinggal'] = 'bersama_ortu';
+    }
+}
+
+        //get id pendaftar
     public function getId($id_pengguna)
     {
         $stmt = $this->conn->prepare(
