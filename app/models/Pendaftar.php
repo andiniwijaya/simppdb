@@ -215,6 +215,18 @@ public function updateByAdmin($id, $data)
     return $stmt->execute();
 }
 
+public function nisnExists($nisn)
+{
+    $sql = "SELECT id_pendaftar FROM pendaftar WHERE nisn = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("s", $nisn);
+    $stmt->execute();
+    $stmt->store_result();
+
+    return $stmt->num_rows > 0;
+}
+
+
 
 
 
