@@ -27,6 +27,10 @@ if (!empty($ortu)) {
 <div class="d-flex justify-content-between align-items-center mb-3">
 
     <div>
+        <h3 class="fw-bold mb-0">
+            <i class="bi bi-file-earmark-text me-2"></i> Formulir PPDB
+        </h3>
+
         <?php if ($hasSiswa): ?>
         <?php else: ?>
             <small class="text-muted">
@@ -42,11 +46,6 @@ if (!empty($ortu)) {
     </a>
 
 </div>
-
-
-<h3 class="fw-bold mb-3">
-    <i class="bi bi-file-earmark-text me-2"></i> Formulir PPDB
-</h3>
 
 <ul class="nav nav-tabs mb-4">
 
