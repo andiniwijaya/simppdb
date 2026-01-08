@@ -153,28 +153,45 @@ class Pendaftar extends Database {
 }
 
 
-        //update data
-        private function update($id, $d)
+    private function update($id, $d)
 {
     $this->sanitizeEnum($d);
-    // CAST KE VARIABEL 
-    $anak_ke         = (int)$d['anak_ke'];
-    $jumlah_saudara  = (int)$d['jumlah_saudara'];
-    $tinggi_badan    = (int)$d['tinggi_badan'];
-    $berat_badan     = (int)$d['berat_badan'];
-    $tahun_lulus     = (int)$d['tahun_lulus'];
-    $id_pendaftar    = (int)$id;
+
+    // PASTIKAN year integer
+    $d['tahun_lulus'] = (int) $d['tahun_lulus'];
+    $d['anak_ke'] = (int) $d['anak_ke'];
+    $d['jumlah_saudara'] = (int) $d['jumlah_saudara'];
+    $d['tinggi_badan'] = (int) $d['tinggi_badan'];
+    $d['berat_badan'] = (int) $d['berat_badan'];
 
     $sql = "UPDATE pendaftar SET
-        nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
-        tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
-        anak_ke=?, jumlah_saudara=?, status_anak=?, yatim_status=?, bahasa_rumah=?,
-        tinggi_badan=?, berat_badan=?, penyakit=?, tahun_lulus=?, nomor_hp=?, email=?
+        nik=?,
+        nisn=?,
+        nama_lengkap=?,
+        jenis_kelamin=?,
+        tempat_lahir=?,
+        tanggal_lahir=?,
+        agama=?,
+        alamat=?,
+        status_tinggal=?,
+        asal_sekolah=?,
+        anak_ke=?,
+        jumlah_saudara=?,
+        status_anak=?,
+        yatim_status=?,
+        bahasa_rumah=?,
+        tinggi_badan=?,
+        berat_badan=?,
+        penyakit=?,
+        tahun_lulus=?,
+        nomor_hp=?,
+        email=?
         WHERE id_pendaftar=?";
 
     $stmt = $this->conn->prepare($sql);
+
     $stmt->bind_param(
-        "ssssssssssiiissiiisssi",
+        "ssssssssssii sssii ssi i",
         $d['nik'],
         $d['nisn'],
         $d['nama_lengkap'],
@@ -185,18 +202,18 @@ class Pendaftar extends Database {
         $d['alamat'],
         $d['status_tinggal'],
         $d['asal_sekolah'],
-        $anak_ke,
-        $jumlah_saudara,
+        $d['anak_ke'],
+        $d['jumlah_saudara'],
         $d['status_anak'],
         $d['yatim_status'],
         $d['bahasa_rumah'],
-        $tinggi_badan,
-        $berat_badan,
+        $d['tinggi_badan'],
+        $d['berat_badan'],
         $d['penyakit'],
-        $tahun_lulus,
+        $d['tahun_lulus'],
         $d['nomor_hp'],
         $d['email'],
-        $id_pendaftar
+        $id
     );
 
     return $stmt->execute();
