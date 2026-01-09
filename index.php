@@ -29,9 +29,10 @@ $router->get('/dashboard/validBerkas', 'DashboardController@validBerkas');  // G
 $router->get('/dashboard/invalidBerkas', 'DashboardController@invalidBerkas');  // Ganti dari /admin/berkas/invalid
 
 $router->get('/admin/ppdb', 'AdminPPDBController@index');
-$router->get('/admin/ppdb/edit', 'DashboardController@editPPDB');
-$router->post('/admin/ppdb/update', 'DashboardController@updatePPDB');
-$router->get('/admin/ppdb/delete', 'DashboardController@deletePPDB');
+$router->get('/admin/ppdb/detail', 'AdminPPDBController@detail');
+$router->get('/admin/ppdb/edit', 'AdminPPDBController@edit');
+$router->post('/admin/ppdb/update', 'AdminPPDBController@update');
+$router->get('/admin/ppdb/delete', 'AdminPPDBController@delete');
 
 $router->get('/admin/ppdb/cetak', 'DashboardController@cetakPPDB');
 
