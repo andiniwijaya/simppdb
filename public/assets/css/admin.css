@@ -380,3 +380,66 @@ body {
 .pengaturan-page.show{
     display:block;
 }
+/* ===============================
+   TABEL PENGUMUMAN ADMIN
+   =============================== */
+
+.pengumuman-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pengumuman-table th,
+.pengumuman-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eaeaea;
+    vertical-align: middle;
+}
+
+/* Header */
+.pengumuman-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Kolom Nama */
+.pengumuman-table th.nama,
+.pengumuman-table td.nama {
+    text-align: left;
+    width: 70%;
+}
+
+/* Kolom Status */
+.pengumuman-table th.status,
+.pengumuman-table td.status {
+    text-align: center;
+    width: 30%;
+}
+
+/* Badge status */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-menunggu {
+    background: #fff7ed;
+    color: #f97316;
+}
+
+.status-diterima {
+    background: #ecfdf5;
+    color: #16a34a;
+}
+
+.status-ditolak {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
