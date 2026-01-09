@@ -172,6 +172,20 @@ class DashboardController {
 
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
+    // ===============================
+// BIOGRAFI SEKOLAH (ADMIN)
+// ===============================
+public function biografi()
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    $content = __DIR__ . '/../views/admin/biografi.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+}
+
 
     //Administrasi Admin
     public function administrasi() {
@@ -250,12 +264,13 @@ class DashboardController {
         $berkas = new Berkas();
 
         // ambil SEMUA berkas siswa (semua pendaftar)
-        $list = $berkas->getAllForAdmin();
+      $list = $berkas->getAllForAdmin();
 
-        extract(["list" => $list]);
+    extract(["list" => $list]);
 
-        $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
-        require __DIR__ . '/../views/admin/layout_admin.php';
+    $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+
     }
     // VALIDASI BERKAS (ADMIN)
     public function validBerkas()

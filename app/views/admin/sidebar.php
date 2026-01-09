@@ -44,6 +44,12 @@ $uri  = $_SERVER['REQUEST_URI'];
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengaturan') !== false ? 'active' : '') ?>">
         <i class="bi bi-gear-wide-connected me-2"></i> Pengaturan
     </a>
+
+    <a href="<?= $base ?>/dashboard/biografi"
+   class="sidebar-link <?= (strpos($uri, '/dashboard/biografi') !== false ? 'active' : '') ?>">
+    <i class="bi bi-person-lines-fill me-2"></i> Biografi
+</a>
+
     
 
     <div class="logout-box mt-4">

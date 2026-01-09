@@ -26,6 +26,8 @@ $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar'
 $router->get('/dashboard/verifikasiBerkas', 'DashboardController@verifikasiBerkas');
 $router->get('/dashboard/validBerkas', 'DashboardController@validBerkas');
 $router->get('/dashboard/invalidBerkas', 'DashboardController@invalidBerkas');
+$router->get('/dashboard/biografi', 'DashboardController@biografi');
+
 
 
 $router->get('/admin/ppdb', 'DashboardController@index');
