@@ -1,4 +1,17 @@
-<link rel="stylesheet" href="/public/css/edit_ppdb.css">
+<?php
+$base = Config::base_url();
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail PPDB</title>
+
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/admin.css">
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/edit_ppdb.css">
+</head>
+<body></body>
 <h2>Edit Data PPDB</h2>
 
 <div class="pengaturan-wrapper">
