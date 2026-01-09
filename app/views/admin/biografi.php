@@ -48,7 +48,7 @@ const dataBio = {
         nama: "Andini Wijayanti",
         reminder: "Project Manager",
         desc: "Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam pengembangan sistem informasi. Saya bertanggung jawab mengatur alur kerja tim, menyusun perencanaan proyek, mengoordinasikan tugas, serta memastikan setiap tahapan pengembangan berjalan sesuai target dan kebutuhan pengguna.",
-        foto: "<?= $base ?>/public/img/bio/andini2.png",
+        foto: "<?= $base ?>/public/img/bio/andini.png",
         ig: "https://www.instagram.com/ann.wijay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
         github: "",
         linkedin: ""
