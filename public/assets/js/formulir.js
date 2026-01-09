@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    // ambil tombol tab
+    // =============================
+    // AMBIL TOMBOL TAB
+    // =============================
     const tabSiswa = document.querySelector('[data-bs-target="#tabSiswa"]');
     const tabOrtu  = document.querySelector('[data-bs-target="#tabOrtu"]');
     const tabWali  = document.querySelector('[data-bs-target="#tabWali"]');
-
-    //  FUNGSI PINDAH TAB UMUM
 
     function switchTab(tabButton){
         if(tabButton){
@@ -17,58 +17,50 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    //  FUNGSI PINDAH TAB TERTENTU
+    window.switchToSiswa = () => switchTab(tabSiswa);
+    window.switchToOrtu  = () => switchTab(tabOrtu);
+    window.switchToWali  = () => switchTab(tabWali);
 
-    window.switchToSiswa = function(){
-        switchTab(tabSiswa);
-    }
-
-    window.switchToOrtu = function(){
-        switchTab(tabOrtu);
-    }
-
-    window.switchToWali = function(){
-        switchTab(tabWali);
-    }
-
-
-    //  VALIDASI BASIC FORM CLIENT
-
+    // =============================
+    // VALIDASI FORM
+    // =============================
     const form = document.getElementById("formPendaftar");
 
     if(form){
         form.addEventListener("submit", function(e){
 
-            // cari semua input required
             const required = form.querySelectorAll("[required]");
-
             let empty = false;
 
-            required.forEach(x => {
-                if(x.value.trim() === ""){
+            required.forEach(el => {
+                if(el.value.trim() === ""){
                     empty = true;
-                    x.classList.add("is-invalid");
+                    el.classList.add("is-invalid");
                 } else {
-                    x.classList.remove("is-invalid");
+                    el.classList.remove("is-invalid");
                 }
             });
 
+            // ❌ JIKA MASIH ADA KOSONG
             if(empty){
                 alert("Masih ada kolom wajib yang kosong.");
                 e.preventDefault();
+                return;
             }
+
+            // ✅ JIKA SEMUA VALID
+            alert("✅ Data berhasil disimpan!");
+            // form akan tetap dikirim ke server
         });
     }
 
-
-    //  HAPUS INVALID STATE SAAT DIISI
-
+    // =============================
+    // HAPUS INVALID SAAT DIKETIK
+    // =============================
     document.querySelectorAll("input, select, textarea").forEach(el => {
-
         el.addEventListener("input", () => {
             el.classList.remove("is-invalid");
         });
-
     });
 
 });
