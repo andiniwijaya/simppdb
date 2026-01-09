@@ -76,7 +76,7 @@ class PembayaranController {
         $nama = "bayar_" . $id_pendaftar . "_" . time() . "." . $ext;
 
         $pathServer = $uploadDir . $nama;
-        $pathDB     = "/public/uploads/pembayaran/" . $nama;
+        $pathDB = $nama;
 
         // ================= UPLOAD =================
         if(!move_uploaded_file($_FILES["bukti"]["tmp_name"], $pathServer)){
