@@ -331,7 +331,7 @@ class DashboardController {
     public function detail()
     {
         if (!isset($_GET['id'])) {
-            header("Location: /admin/ppdb");
+            header("Location: /admin/data_ppdb");
             exit;
         }
 
