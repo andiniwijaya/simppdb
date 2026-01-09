@@ -95,8 +95,7 @@ class Pendaftar extends Database {
     $jumlah_saudara  = (int)$d['jumlah_saudara'];
     $tinggi_badan    = (int)$d['tinggi_badan'];
     $berat_badan     = (int)$d['berat_badan'];
-    $tahun_lulus     = (int)$d['tahun_lulus'];
-
+    $tahun_lulus    = (string)$d['tahun_lulus'];
     $sql = "INSERT INTO pendaftar (
         id_pengguna,
         nik,
