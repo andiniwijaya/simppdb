@@ -16,16 +16,11 @@ body{
 /* ============================
    LEFT PANEL DESKTOP
    ============================ */
-.left-panel {
+.left-panel{
+    flex:1;
     background:
-        linear-gradient(
-            135deg,
-            rgba(34, 62, 148, 0.55),
-            rgba(90, 110, 220, 0.55)
-        ),
+        linear-gradient(135deg, rgba(91,92,226,.35), rgba(111,123,247,.45)),
         url('../../img/login_bg.png');
-
-
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -36,7 +31,6 @@ body{
     justify-content:center;
     align-items:flex-start;
 }
-
 
 /* ============================
    RIGHT PANEL DESKTOP
