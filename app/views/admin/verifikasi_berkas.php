@@ -22,11 +22,11 @@
 <td><?= ucwords(str_replace('_',' ', $row['jenis_berkas'])) ?></td>
 
 <td>
-    <a href="/public/uploads/berkas/<?= $row['lokasi_berkas'] ?>" 
-       target="_blank" 
-       class="link-view">
-       Lihat Berkas
-    </a>
+<a href="<?= $row['lokasi_berkas'] ?>" target="_blank">
+    Lihat Berkas
+</a>
+
+
 </td>
 
 <td>
