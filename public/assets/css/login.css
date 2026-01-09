@@ -17,21 +17,34 @@ body{
 /* ================= LEFT PANEL ================= */
 .left-panel{
     flex:1;
-    position: relative;
-    overflow: hidden;
+    min-height:100vh;
 
-    background: url('../../img/login_bg3.png') center center / cover no-repeat;
+    background-image: url('../../img/login_bg3.png');
+    background-size: contain;        /* FOTO UTUH */
+    background-position: center top; /* mulai dari atas */
+    background-repeat: no-repeat;
+    background-color: #1a1a1a;       /* isi kosong biar rapi */
 
     color:#fff;
-    padding:50px;
+    padding:40px;
+    padding-top:40px;
 
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
     align-items:flex-start;
 }
+.left-panel h2{
+    margin-top:0;
+    font-size:42px;
+}
 
-/* overlay tipis biar teks kebaca */
+.left-panel p{
+    margin-top:10px;
+    font-size:18px;
+    max-width:480px;
+}
+
 .left-panel::after{
     content:"";
     position:absolute;
@@ -107,5 +120,16 @@ body{
 
     body{
         font-size:14px;
+ 
+   }
+   @media(max-width:768px){
+    .left-panel{
+        height:260px;
+        padding:20px;
+        text-align:center;
+        align-items:center;
+        background-size: cover; /* mobile boleh cover */
     }
+}
+
 }
