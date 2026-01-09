@@ -83,7 +83,7 @@ class Pendaftar extends Database {
     /* ===============================
      * INSERT DATA
      * =============================== */
-        private function insert($id_pengguna, $d)
+    private function insert($id_pengguna, $d)
 {
     $this->sanitizeEnum($d);
 
@@ -122,39 +122,42 @@ class Pendaftar extends Database {
     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param(
-    "isssssssssssiiisssiiisss",
-    $id_pengguna,
-    $d['nik'],
-    $d['nisn'],
-    $d['nama_lengkap'],
-    $d['jenis_kelamin'],
-    $d['tempat_lahir'],
-    $d['tanggal_lahir'],
-    $d['agama'],
-    $d['alamat'],
-    $d['status_tinggal'],
-    $d['asal_sekolah'],
-    $anak_ke,
-    $jumlah_saudara,
-    $d['status_anak'],
-    $d['yatim_status'],
-    $d['bahasa_rumah'],
-    $tinggi_badan,
-    $berat_badan,
-    $d['penyakit'],
-    $tahun_lulus,
-    $d['nomor_hp'],
-    $d['email']
-);
+    // var_dump($sql); // Hapus atau komentari ini jika tidak diperlukan
+    // die("STOP DI SINI"); // Hapus atau komentari ini jika tidak diperlukan
 
+    $stmt->bind_param(
+        "issssssssssiisssiiissss",  // Perbaikan: Ubah dari "isssssssssssiiisssiiisss" menjadi ini
+        $id_pengguna,
+        $d['nik'],
+        $d['nisn'],
+        $d['nama_lengkap'],
+        $d['jenis_kelamin'],
+        $d['tempat_lahir'],
+        $d['tanggal_lahir'],
+        $d['agama'],
+        $d['alamat'],
+        $d['status_tinggal'],
+        $d['asal_sekolah'],
+        $anak_ke,
+        $jumlah_saudara,
+        $d['status_anak'],
+        $d['yatim_status'],
+        $d['bahasa_rumah'],
+        $tinggi_badan,
+        $berat_badan,
+        $d['penyakit'],
+        $tahun_lulus,
+        $d['nomor_hp'],
+        $d['email']
+    );
 
     return $stmt->execute();
 }
 
 
+
         //update data
-        private function update($id, $d)
+       private function update($id, $d)
 {
     $this->sanitizeEnum($d);
 
@@ -193,35 +196,33 @@ class Pendaftar extends Database {
     $stmt = $this->conn->prepare($sql);
     
     $stmt->bind_param(
-    "ssssssssssiiisssiiisssi",
-    $d['nik'],
-    $d['nisn'],
-    $d['nama_lengkap'],
-    $d['jenis_kelamin'],
-    $d['tempat_lahir'],
-    $d['tanggal_lahir'],
-    $d['agama'],
-    $d['alamat'],
-    $d['status_tinggal'],
-    $d['asal_sekolah'],
-    $anak_ke,
-    $jumlah_saudara,
-    $d['status_anak'],   // s
-    $d['yatim_status'],  // s
-    $d['bahasa_rumah'],  // s
-    $tinggi_badan,
-    $berat_badan,
-    $d['penyakit'],
-    $tahun_lulus,
-    $d['nomor_hp'],
-    $d['email'],
-    $id_pendaftar
-);
+        "ssssssssssiisssiiisssi",  // Perbaikan: Ubah dari "ssssssssssiiisssiiisssi" menjadi ini
+        $d['nik'],
+        $d['nisn'],
+        $d['nama_lengkap'],
+        $d['jenis_kelamin'],
+        $d['tempat_lahir'],
+        $d['tanggal_lahir'],
+        $d['agama'],
+        $d['alamat'],
+        $d['status_tinggal'],
+        $d['asal_sekolah'],
+        $anak_ke,
+        $jumlah_saudara,
+        $d['status_anak'],   // s
+        $d['yatim_status'],  // s
+        $d['bahasa_rumah'],  // s
+        $tinggi_badan,
+        $berat_badan,
+        $d['penyakit'],
+        $tahun_lulus,
+        $d['nomor_hp'],
+        $d['email'],
+        $id_pendaftar
+    );
 
     return $stmt->execute();
 }
-
-
      //STATUS DATA SISWA
     public function updateStatusData($id_pendaftar, $status)
     {
