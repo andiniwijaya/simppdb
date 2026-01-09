@@ -1,53 +1,90 @@
 <h2 class="mb-4">Biografi</h2>
 
-<div class="pengaturan-wrapper">
+<div class="row g-4">
 
-    <h5>1. Andini Wijayanti</h5>
-    <p>
-        Andini Wijayanti merupakan individu yang dikenal memiliki sikap
-        bertanggung jawab, teliti, dan mampu bekerja sama dengan baik.
-        Memiliki minat dalam pengelolaan administrasi serta sistem informasi,
-        khususnya dalam mendukung kegiatan pendidikan.
-    </p>
+    <!-- Andini -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center">
+            <img src="<?= $base ?>/public/uploads/biografi/andini.jpg"
+                 class="card-img-top"
+                 style="height:260px;object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Andini Wijayanti</h5>
+                <p class="card-text">
+                    Pribadi yang bertanggung jawab dan teliti,
+                    memiliki minat pada administrasi dan sistem informasi
+                    pendidikan.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <hr>
+    <!-- Mutiara -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center">
+            <img src="<?= $base ?>/public/uploads/biografi/mutiara.jpg"
+                 class="card-img-top"
+                 style="height:260px;object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Mutiara Botani</h5>
+                <p class="card-text">
+                    Individu disiplin dan tekun,
+                    memiliki ketertarikan dalam teknologi
+                    dan administrasi pendidikan.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <h5>2. Mutiara Botani</h5>
-    <p>
-        Mutiara Botani adalah pribadi yang tekun dan disiplin dalam
-        menyelesaikan tugas. Memiliki ketertarikan pada bidang teknologi
-        dan administrasi pendidikan, serta aktif dalam proses pembelajaran
-        dan pengembangan sistem.
-    </p>
+    <!-- Silvia -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center">
+            <img src="<?= $base ?>/public/uploads/biografi/silvia.jpg"
+                 class="card-img-top"
+                 style="height:260px;object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Silvia Agustina</h5>
+                <p class="card-text">
+                    Kreatif dan komunikatif,
+                    berperan dalam perancangan dan pengembangan
+                    sistem PPDB Online.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <hr>
+    <!-- Sundari -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center">
+            <img src="<?= $base ?>/public/uploads/biografi/sundari.jpg"
+                 class="card-img-top"
+                 style="height:260px;object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Sundari Rosdiana</h5>
+                <p class="card-text">
+                    Konsisten dan sistematis,
+                    memiliki kemampuan dalam pengelolaan data
+                    dan dokumentasi.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <h5>3. Silvia Agustina</h5>
-    <p>
-        Silvia Agustina dikenal sebagai sosok yang kreatif dan komunikatif.
-        Memiliki kemampuan analisis yang baik serta berperan aktif dalam
-        perancangan dan pengembangan sistem berbasis web, khususnya
-        pada sistem PPDB Online.
-    </p>
-
-    <hr>
-
-    <h5>4. Sundari Rosdiana</h5>
-    <p>
-        Sundari Rosdiana merupakan pribadi yang konsisten dan memiliki
-        komitmen tinggi dalam bekerja. Mampu menjalankan tugas dengan
-        rapi dan sistematis, terutama dalam pengelolaan data dan
-        dokumentasi.
-    </p>
-
-    <hr>
-
-    <h5>5. Winda Aryanti</h5>
-    <p>
-        Winda Aryanti adalah individu yang cekatan dan bertanggung jawab.
-        Memiliki minat dalam bidang administrasi dan teknologi informasi,
-        serta berkontribusi dalam mendukung kelancaran sistem dan
-        proses kerja tim.
-    </p>
+    <!-- Winda -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center">
+            <img src="<?= $base ?>/public/uploads/biografi/winda.jpg"
+                 class="card-img-top"
+                 style="height:260px;object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Winda Aryanti</h5>
+                <p class="card-text">
+                    Cekatan dan bertanggung jawab,
+                    berkontribusi dalam kelancaran sistem
+                    dan kerja tim.
+                </p>
+            </div>
+        </div>
+    </div>
 
 </div>
