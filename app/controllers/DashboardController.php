@@ -194,8 +194,7 @@ class DashboardController {
             header("Location: /login");
             exit;
         }
-        
-        // ⬇️ AMBIL DARI QUERY STRING
+
         $aksi = $_GET['aksi'] ?? null;
         $id   = $_GET['id'] ?? null;
 
@@ -204,26 +203,36 @@ class DashboardController {
             exit;
         }
 
-        $payment   = new Payment();
-        $pendaftar = new Pendaftar();
+        $payment    = new Payment();
+        $pendaftar  = new Pendaftar();
+        $berkas     = new Berkas();
+        $pengumuman = new Pengumuman();
 
         if ($aksi === "lunas") {
 
-            // 1. Update status pembayaran
+            // 1. lunaskan pembayaran
             $payment->updateStatus($id, "lunas");
 
-            // 2. Update status siswa
+            // 2. ambil id pendaftar
             $id_pendaftar = $payment->getPendaftarId($id);
-            if ($id_pendaftar) {
+
+            // 3. cek SYARAT KELULUSAN
+            if (
+                $berkas->isSemuaBerkasValid($id_pendaftar) &&
+                $payment->isLunas($id_pendaftar)
+            ) {
+                // DITERIMA
+                $pendaftar->updateStatusData($id_pendaftar, "diterima");
+                $pengumuman->setStatus($id_pendaftar, "diterima");
+            } else {
+                // belum lengkap
                 $pendaftar->updateStatusData($id_pendaftar, "lengkap");
             }
 
         } elseif ($aksi === "tolak") {
-
             $payment->updateStatus($id, "ditolak");
         }
 
-        // 3. Kembali ke halaman administrasi
         header("Location: /dashboard/administrasi");
         exit;
     }
@@ -250,67 +259,73 @@ class DashboardController {
     }
     // VALIDASI BERKAS (ADMIN)
     public function validBerkas()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
-    }
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
 
-    $id = $_GET['id'] ?? null;
-    if (!$id) {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header("Location: /dashboard/verifikasiBerkas");
+            exit;
+        }
+
+        $berkas     = new Berkas();
+        $pendaftar  = new Pendaftar();
+        $payment    = new Payment();
+        $pengumuman = new Pengumuman();
+
+        // set berkas valid
+        $berkas->updateStatus($id, 'valid');
+
+        // ambil id pendaftar
+        $id_pendaftar = $berkas->getPendaftarId($id);
+
+        // cek kelulusan
+        if (
+            $berkas->isSemuaBerkasValid($id_pendaftar) &&
+            $payment->isLunas($id_pendaftar)
+        ) {
+            $pendaftar->updateStatusData($id_pendaftar, "diterima");
+            $pengumuman->setStatus($id_pendaftar, "diterima");
+        } else {
+            $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
+        }
+
         header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
-
-    $berkas    = new Berkas();
-    $pendaftar = new Pendaftar();
-
-    // 1. set berkas valid
-    $berkas->updateStatus($id, 'valid');
-
-    // 2. ambil id_pendaftar
-    $id_pendaftar = $berkas->getPendaftarId($id);
-
-    // 3. update status siswa (ENUM VALID)
-    if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
-        $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
-    } else {
-        $pendaftar->updateStatusData($id_pendaftar, "lengkap");
-    }
-
-    header("Location: /dashboard/verifikasiBerkas");
-    exit;
-}
 
     // INVALID BERKAS (ADMIN) 
     public function invalidBerkas()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
-    }
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
 
-    $id = $_GET['id'] ?? null;
-    if (!$id) {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header("Location: /dashboard/verifikasiBerkas");
+            exit;
+        }
+
+        $berkas    = new Berkas();
+        $pendaftar = new Pendaftar();
+
+        // 1. set berkas invalid
+        $berkas->updateStatus($id, 'invalid');
+
+        // 2. ambil id_pendaftar
+        $id_pendaftar = $berkas->getPendaftarId($id);
+
+        // 3. kembalikan ke status VALID ENUM
+        $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+
         header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
-
-    $berkas    = new Berkas();
-    $pendaftar = new Pendaftar();
-
-    // 1. set berkas invalid
-    $berkas->updateStatus($id, 'invalid');
-
-    // 2. ambil id_pendaftar
-    $id_pendaftar = $berkas->getPendaftarId($id);
-
-    // 3. kembalikan ke status VALID ENUM
-    $pendaftar->updateStatusData($id_pendaftar, "lengkap");
-
-    header("Location: /dashboard/verifikasiBerkas");
-    exit;
-}
 
 
     // PENGATURAN ADMIN
@@ -438,22 +453,22 @@ class DashboardController {
         exit;
     }
     // ===============================
-// PENGUMUMAN ADMIN
-// ===============================
-public function pengumuman()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
+    // PENGUMUMAN ADMIN
+    // ===============================
+    public function pengumuman()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $pengumuman = new Pengumuman();
+        $list = $pengumuman->getAll(); // JOIN pendaftar
+
+        extract(['list' => $list]);
+
+        $content = __DIR__ . '/../views/admin/pengumuman.php';
+        require __DIR__ . '/../views/admin/layout_admin.php';
     }
-
-    $pengumuman = new Pengumuman();
-    $list = $pengumuman->getAll(); // semua pengumuman siswa
-
-    extract(['list' => $list]);
-
-    $content = __DIR__ . '/../views/admin/pengumuman.php';
-    require __DIR__ . '/../views/admin/layout_admin.php';
-}
 
 }
