@@ -91,7 +91,7 @@ class BerkasController {
         $nama = $jenis . "_" . $id_pendaftar . "_" . time() . "." . $ext;
 
         $pathServer = $uploadDir . $nama;
-        $pathDB     = "/public/uploads/berkas/" . $nama;
+        $pathDB = $nama;
 
         // ================= PROSES UPLOAD =================
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $pathServer)) {
