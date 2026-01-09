@@ -123,7 +123,7 @@ class Pendaftar extends Database {
 
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param(
-        "issssssssssiiissiiisss",
+        "issssssssssiiissii s ss",
         $id_pengguna,
         $d['nik'],
         $d['nisn'],
