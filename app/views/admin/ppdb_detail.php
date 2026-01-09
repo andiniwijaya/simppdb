@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/css/ppdb_detail.css">
+<link rel="stylesheet" href="<?= $base ?>/public/assets/css/ppdb_detail.css">
+
 
 <h3>Detail PPDB</h3>
 
