@@ -1,70 +1,61 @@
-.bio-hero {
-    min-height: 100vh;
-    background: #0b1220;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 80px 10%;
-    color: #fff;
+.bio-container{
+    margin-left:260px; /* WAJIB – SAMAKAN DENGAN SIDEBAR ADMIN */
+    padding:40px;
 }
 
-.bio-text {
-    max-width: 500px;
+/* NAVBAR BIO */
+.bio-nav{
+    display:flex;
+    gap:12px;
+    margin-bottom:30px;
 }
 
-.bio-text h5 {
-    color: #9aa4ff;
-    letter-spacing: 1px;
+.bio-nav button{
+    border:none;
+    background:#e9ecef;
+    padding:10px 20px;
+    border-radius:20px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.bio-text h1 {
-    font-size: 48px;
-    font-weight: 700;
+.bio-nav button:hover{
+    background:#0d6efd;
+    color:#fff;
 }
 
-.bio-text h4 {
-    color: #6ce3ff;
-    margin-bottom: 15px;
+.bio-nav .active{
+    background:#0d6efd;
+    color:#fff;
 }
 
-.bio-text p {
-    color: #cfd3ff;
-    line-height: 1.7;
+/* BIO CONTENT */
+.bio-hero{
+    display:flex;
+    align-items:center;
+    gap:60px;
 }
 
-.bio-social a {
-    display: inline-block;
-    margin-right: 12px;
-    color: #6ce3ff;
-    font-size: 20px;
-    transition: 0.3s;
+.bio-text{
+    flex:1;
 }
 
-.bio-social a:hover {
-    color: #fff;
+.bio-text h1{
+    font-size:36px;
+    font-weight:700;
 }
 
-.btn-bio {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 28px;
-    background: #6ce3ff;
-    color: #000;
-    border-radius: 30px;
-    font-weight: 600;
-    text-decoration: none;
+.bio-text p{
+    margin-top:15px;
+    line-height:1.7;
+    color:#444;
 }
 
-.bio-photo {
-    position: relative;
-}
-
-.bio-photo img {
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow:
-        0 0 25px rgba(108,227,255,0.8),
-        0 0 60px rgba(108,227,255,0.5);
+.bio-photo img{
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
 }
