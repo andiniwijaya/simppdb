@@ -30,11 +30,11 @@ $uri  = $_SERVER['REQUEST_URI'];
        class="sidebar-link <?= (strpos($uri, '/dashboard/administrasi') !== false ? 'active' : '') ?>">
         <i class="bi bi-folder-check me-2"></i> Administrasi
     </a>
+]   <a href="<?= $base ?>/dashboard/verifikasiBerkas"
+        class="sidebar-link <?= (strpos($uri, '/dashboard/verifikasiBerkas') !== false ? 'active' : '') ?>">
+            <i class="bi bi-folder-check me-2"></i> Verifikasi Berkas
+    </a>
 
-        <a href="<?= $base ?>/siswa/berkas_pendaftar"
-   class="sidebar-link <?= (strpos($uri, '/siswa/berkas_pendaftar') !== false ? 'active' : '') ?>">
-    <i class="bi bi-cloud-upload me-2"></i> Berkas
-</a>
 
     <a href="<?= $base ?>/dashboard/pengumuman" 
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengumuman') !== false ? 'active' : '') ?>">

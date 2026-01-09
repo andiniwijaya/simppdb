@@ -132,23 +132,22 @@ class Berkas extends Database {
     }
 
     // ================= AMBIL SEMUA BERKAS (ADMIN) =================
-    public function getAllForAdmin()
-    {
-        $sql = "
-            SELECT 
+  public function getAllForAdmin()
+{
+    $sql = "SELECT 
                 b.id_berkas,
-                b.jenis_berkas,
-                b.lokasi_berkas,
-                b.status_berkas,
-                b.uploaded_at,
+                b.id_pendaftar,
+                b.nama_file,
+                b.status,
                 p.nama_lengkap
-            FROM berkas_pendaftar b
+            FROM berkas b
             JOIN pendaftar p ON b.id_pendaftar = p.id_pendaftar
-            ORDER BY b.uploaded_at DESC
-        ";
+            ORDER BY b.id_berkas DESC";
 
-        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-    }
+    $result = $this->conn->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+}
+
 
     // ================= UPDATE STATUS BERKAS =================
     public function updateStatus($id_berkas, $status)

@@ -23,10 +23,10 @@ $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');
 
-// PERBAIKAN: Ubah route agar cocok dengan link di view
-$router->get('/dashboard/verifikasi_berkas', 'DashboardController@verifikasiBerkas');
-$router->get('/dashboard/validBerkas', 'DashboardController@validBerkas');  // Ganti dari /admin/berkas/valid
-$router->get('/dashboard/invalidBerkas', 'DashboardController@invalidBerkas');  // Ganti dari /admin/berkas/invalid
+$router->get('/dashboard/verifikasiBerkas', 'DashboardController@verifikasiBerkas');
+$router->get('/dashboard/validBerkas', 'DashboardController@validBerkas');
+$router->get('/dashboard/invalidBerkas', 'DashboardController@invalidBerkas');
+
 
 $router->get('/admin/ppdb', 'DashboardController@index');
 $router->get('/admin/ppdb/detail', 'DashboardController@detail');
