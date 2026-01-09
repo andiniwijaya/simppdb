@@ -27,7 +27,10 @@
 
 <td>
 <?php if(!empty($row["bukti_transfer"])): ?>
-    <a href="<?= $base ?>/uploads/<?= $row["bukti_transfer"] ?>" target="_blank">Lihat</a>
+    <a href="<?= $base ?>/public/uploads/pembayaran/<?= $row["bukti_transfer"] ?>" target="_blank">
+    Lihat
+</a>
+
 <?php else: ?>
     -
 <?php endif; ?>
