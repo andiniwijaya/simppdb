@@ -9,12 +9,36 @@ $base = Config::base_url();
 
     <!-- ================= NAVBAR BIO ================= -->
     <div class="bio-nav">
-        <button class="active" onclick="showBio('silvia', this)">Andini</button>
-        <button onclick="showBio('andini', this)">Silvia</button>
+        <button class="active" onclick="showBio('silvia', this)">Silvia</button>
+        <button onclick="showBio('andini', this)">Andini</button>
         <button onclick="showBio('mutiara', this)">Mutiara</button>
         <button onclick="showBio('winda', this)">Winda</button>
         <button onclick="showBio('sundari', this)">Sundari</button>
     </div>
+
+    <!-- ================= BIO CONTENT ================= -->
+    <section class="bio-hero">
+
+        <div class="bio-text">
+            <h5>Hello, It’s Me</h5>
+            <h1 id="bio-name">Silvia Agustina</h1>
+            <h4 id="bio-role">Mahasiswi RPL</h4>
+
+            <p id="bio-desc">
+                Saya adalah mahasiswa yang memiliki minat kuat sebagai system analyst,
+                khususnya dalam analisis kebutuhan sistem, perancangan alur proses,
+                dan pemodelan sistem informasi.
+            </p>
+        </div>
+
+        <div class="bio-photo">
+            <img id="bio-photo" src="<?= $base ?>/public/img/bio/silvia.png">
+        </div>
+
+    </section>
+
+</div>
+
 <script>
 const dataBio = {
         andini: {
