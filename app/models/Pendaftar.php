@@ -269,9 +269,7 @@ class Pendaftar extends Database {
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
-    // ===============================
 // DELETE DATA PPDB (ADMIN)
-// ===============================
 public function delete($id)
 {
     $id = (int)$id;
@@ -283,5 +281,6 @@ public function delete($id)
 
     return $stmt->execute();
 }
+
 
 }

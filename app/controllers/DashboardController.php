@@ -327,79 +327,57 @@ class DashboardController {
         return;
     }
 
-    // ===============================
-    // DETAIL DATA PPDB (ADMIN)
-    // ===============================
-    public function detailPPDB($id)
+    // DETAIL DATA
+    public function detail()
     {
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
+        if (!isset($_GET['id'])) {
+            header("Location: /admin/ppdb");
             exit;
         }
 
         $pendaftar = new Pendaftar();
-        $data = $pendaftar->getById($id);
+        $data = $pendaftar->getById((int)$_GET['id']);
 
-        if (!$data) {
-            echo "Data tidak ditemukan";
+        require __DIR__ . '/../views/admin/ppdb_detail.php';
+    }
+    // FORM EDIT
+
+    public function edit()
+    {
+        if (!isset($_GET['id'])) {
+            header("Location: /admin/ppdb");
             exit;
         }
 
-        extract(["data" => $data]);
+        $pendaftar = new Pendaftar();
+        $data = $pendaftar->getById((int)$_GET['id']);
 
-        require __DIR__ . '/../views/admin/detail_ppdb.php';
+        require __DIR__ . '/../views/admin/ppdb_edit.php';
     }
 
-    // FORM EDIT DATA PPDB (ADMIN)
-    public function editPPDB()
+    // UPDATE DATA (DARI ADMIN)
+    public function update()
     {
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
+        if (!isset($_POST['id_pendaftar'])) {
+            header("Location: /admin/ppdb");
             exit;
         }
-
-        if (!isset($_GET['id'])) {
-            echo "ID tidak ditemukan";
-            exit;
-        }
-
-        $id = (int) $_GET['id'];
 
         $pendaftar = new Pendaftar();
-        $data = $pendaftar->getFormDataByUserId($id);
 
-        if (!$data) {
-            echo "Data tidak ditemukan";
-            exit;
-        }
+        $pendaftar->updateByAdmin(
+            (int)$_POST['id_pendaftar'],
+            [
+                'nama_lengkap' => $_POST['nama_lengkap'],
+                'nisn'         => $_POST['nisn'],
+                'asal_sekolah' => $_POST['asal_sekolah'],
+                'status_data'  => $_POST['status_data']
+            ]
+        );
 
-        extract(["data" => $data]);
-
-        require __DIR__ . '/../views/admin/edit_ppdb.php';
-    }
-
-    // UPDATE DATA PPDB (ADMIN)
-    public function updatePPDB()
-    {
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
-            exit;
-        }
-
-        if (!isset($_GET['id'])) {
-            echo "ID tidak ditemukan";
-            exit;
-        }
-
-        $id = (int) $_GET['id'];
-
-        $pendaftar = new Pendaftar();
-        $pendaftar->updateByAdmin($id, $_POST);
-
-        header("Location: /dashboard/data_ppdb");
+        header("Location: /admin/ppdb");
         exit;
     }
-
     // DELETE DATA PPDB (ADMIN)
     public function deletePPDB()
     {
