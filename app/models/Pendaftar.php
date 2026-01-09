@@ -157,24 +157,42 @@ class Pendaftar extends Database {
         private function update($id, $d)
 {
     $this->sanitizeEnum($d);
-    // CAST KE VARIABEL 
-    $anak_ke         = (int)$d['anak_ke'];
-    $jumlah_saudara  = (int)$d['jumlah_saudara'];
-    $tinggi_badan    = (int)$d['tinggi_badan'];
-    $berat_badan     = (int)$d['berat_badan'];
-    $tahun_lulus     = (int)$d['tahun_lulus'];
-    $id_pendaftar    = (int)$id;
+
+    // CAST
+    $anak_ke        = (int)$d['anak_ke'];
+    $jumlah_saudara = (int)$d['jumlah_saudara'];
+    $tinggi_badan   = (int)$d['tinggi_badan'];
+    $berat_badan    = (int)$d['berat_badan'];
+    $tahun_lulus    = (string)$d['tahun_lulus']; // YEAR WAJIB STRING
+    $id_pendaftar   = (int)$id;
 
     $sql = "UPDATE pendaftar SET
-        nik=?, nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
-        tanggal_lahir=?, agama=?, alamat=?, status_tinggal=?, asal_sekolah=?,
-        anak_ke=?, jumlah_saudara=?, status_anak=?, yatim_status=?, bahasa_rumah=?,
-        tinggi_badan=?, berat_badan=?, penyakit=?, tahun_lulus=?, nomor_hp=?, email=?
+        nik=?,
+        nisn=?,
+        nama_lengkap=?,
+        jenis_kelamin=?,
+        tempat_lahir=?,
+        tanggal_lahir=?,
+        agama=?,
+        alamat=?,
+        status_tinggal=?,
+        asal_sekolah=?,
+        anak_ke=?,
+        jumlah_saudara=?,
+        status_anak=?,
+        yatim_status=?,
+        bahasa_rumah=?,
+        tinggi_badan=?,
+        berat_badan=?,
+        penyakit=?,
+        tahun_lulus=?,
+        nomor_hp=?,
+        email=?
         WHERE id_pendaftar=?";
 
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param(
-        "ssssssssssii" . "sss" . "ii" . "s" . "i" . "ss" . "i",
+        "ssssssssssiiissiiisssi",
         $d['nik'],
         $d['nisn'],
         $d['nama_lengkap'],
@@ -187,8 +205,8 @@ class Pendaftar extends Database {
         $d['asal_sekolah'],
         $anak_ke,
         $jumlah_saudara,
-        $d['status_anak'],
-        $d['yatim_status'],
+        $d['status_anak'],   // ENUM ✅
+        $d['yatim_status'],  // ENUM ✅
         $d['bahasa_rumah'],
         $tinggi_badan,
         $berat_badan,
@@ -201,6 +219,7 @@ class Pendaftar extends Database {
 
     return $stmt->execute();
 }
+
 
      //STATUS DATA SISWA
     public function updateStatusData($id_pendaftar, $status)
