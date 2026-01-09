@@ -6,7 +6,6 @@ require_once __DIR__ . '/../models/Payment.php';
 require_once __DIR__ . '/../models/Berkas.php';
 require_once __DIR__ . '/../models/Pengumuman.php';
 
-
 class DashboardController {
 
     public function index() {
@@ -106,8 +105,6 @@ class DashboardController {
             return;
         }
 
-
-
         // DASHBOARD ADMIN
         if($role === "admin"){
 
@@ -148,7 +145,6 @@ class DashboardController {
     }
 
     //KELEMBAGAAN ADMIN
-
     public function kelembagaan() {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
@@ -177,7 +173,7 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-        //Administrasi Admin
+    //Administrasi Admin
     public function administrasi() {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
             header("Location: /login");
@@ -191,113 +187,138 @@ class DashboardController {
 
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
-        public function verifikasibayar()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
-    }
-    
 
-    // ⬇️ AMBIL DARI QUERY STRING
-    $aksi = $_GET['aksi'] ?? null;
-    $id   = $_GET['id'] ?? null;
+    public function verifikasibayar()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+        
+        // ⬇️ AMBIL DARI QUERY STRING
+        $aksi = $_GET['aksi'] ?? null;
+        $id   = $_GET['id'] ?? null;
 
-    if (!$aksi || !$id) {
+        if (!$aksi || !$id) {
+            header("Location: /dashboard/administrasi");
+            exit;
+        }
+
+        $payment   = new Payment();
+        $pendaftar = new Pendaftar();
+
+        if ($aksi === "lunas") {
+
+            // 1. Update status pembayaran
+            $payment->updateStatus($id, "lunas");
+
+            // 2. Update status siswa
+            $id_pendaftar = $payment->getPendaftarId($id);
+            if ($id_pendaftar) {
+                $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+            }
+
+        } elseif ($aksi === "tolak") {
+
+            $payment->updateStatus($id, "ditolak");
+        }
+
+        // 3. Kembali ke halaman administrasi
         header("Location: /dashboard/administrasi");
         exit;
     }
 
-    $payment   = new Payment();
-    $pendaftar = new Pendaftar();
-
-    if ($aksi === "lunas") {
-
-        // 1. Update status pembayaran
-        $payment->updateStatus($id, "lunas");
-
-        // 2. Update status siswa
-        $id_pendaftar = $payment->getPendaftarId($id);
-        if ($id_pendaftar) {
-            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+    // ===============================
+    // VERIFIKASI BERKAS SISWA (ADMIN)
+    // ===============================
+    public function verifikasiBerkas()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
         }
 
-    } elseif ($aksi === "tolak") {
+        $berkas = new Berkas();
 
-        $payment->updateStatus($id, "ditolak");
+        // ambil SEMUA berkas siswa (semua pendaftar)
+        $list = $berkas->getAllForAdmin();
+
+        extract(["list" => $list]);
+
+        $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
+        require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-    // 3. Kembali ke halaman administrasi
-    header("Location: /dashboard/administrasi");
-    exit;
-}
-        // ===============================
-// VERIFIKASI BERKAS SISWA (ADMIN)
-// ===============================
-public function verifikasiBerkas()
-{
-    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /login");
-        exit;
-    }
-
-    $berkas = new Berkas();
-
-    // ambil SEMUA berkas siswa (semua pendaftar)
-    $list = $berkas->getAllForAdmin();
-
-    extract(["list" => $list]);
-
-    $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
-    require __DIR__ . '/../views/admin/layout_admin.php';
-}
-
-
-// VALIDASI BERKAS
-
+    // ===============================
+    // VALIDASI BERKAS (ADMIN)
+    // ===============================
     public function validBerkas()
-{
-    if ($_SESSION["role"] !== "admin") {
-        header("Location: /login");
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header("Location: /dashboard/verifikasiBerkas");
+            exit;
+        }
+
+        $berkas = new Berkas();
+        $pendaftar = new Pendaftar();
+
+        // 1. Update status berkas menjadi 'valid'
+        $berkas->updateStatus($id, 'valid');
+
+        // 2. Ambil id_pendaftar dari berkas
+        $id_pendaftar = $berkas->getPendaftarId($id);
+
+        // 3. Update status_data siswa berdasarkan kondisi berkas keseluruhan
+        if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
+            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+        } else {
+            // Jika belum semua valid, set ke "menunggu" atau tetap "belum_lengkap"
+            $pendaftar->updateStatusData($id_pendaftar, "menunggu");
+        }
+
+        header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
 
-    $id = $_GET['id'] ?? null;
-    if (!$id) {
-        header("Location: /dashboard/verifikasi_berkas");
+    // ===============================
+    // INVALID BERKAS (ADMIN) - BARU DITAMBAHKAN
+    // ===============================
+    public function invalidBerkas()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header("Location: /dashboard/verifikasiBerkas");
+            exit;
+        }
+
+        $berkas = new Berkas();
+        $pendaftar = new Pendaftar();
+
+        // 1. Update status berkas menjadi 'invalid'
+        $berkas->updateStatus($id, 'invalid');
+
+        // 2. Ambil id_pendaftar dari berkas
+        $id_pendaftar = $berkas->getPendaftarId($id);
+
+        // 3. Update status_data siswa ke "menunggu" atau "belum_lengkap" karena ada invalid
+        $pendaftar->updateStatusData($id_pendaftar, "menunggu");
+
+        header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
-
-    $db = new Database();
-    $berkas = new Berkas();
-    $pendaftar = new Pendaftar();
-
-    // 1️⃣ update status berkas
-    $sql = "UPDATE berkas_pendaftar SET status_berkas='valid' WHERE id_berkas=?";
-    $stmt = $db->conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-
-    // 2️⃣ ambil id_pendaftar dari berkas
-    $q = $db->conn->query(
-        "SELECT id_pendaftar FROM berkas_pendaftar WHERE id_berkas=$id"
-    );
-    $row = $q->fetch_assoc();
-    $id_pendaftar = $row['id_pendaftar'];
-
-    // 3️⃣ cek apakah semua berkas sudah VALID
-    if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
-        $pendaftar->updateStatusData($id_pendaftar, "lengkap");
-    }
-
-    header("Location: /dashboard/verifikasi_berkas");
-    exit;
-}
-
-
 
     // PENGATURAN ADMIN
-
     public function pengaturan()
     {
         if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
@@ -310,9 +331,8 @@ public function verifikasiBerkas()
         require __DIR__ . '/../views/admin/layout_admin.php';
         return;
     }
- 
 
-        // ===============================
+    // ===============================
     // DETAIL DATA PPDB (ADMIN)
     // ===============================
     public function detailPPDB($id)
@@ -336,57 +356,57 @@ public function verifikasiBerkas()
     }
 
     // FORM EDIT DATA PPDB (ADMIN)
-        public function editPPDB()
-        {
-            if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-                header("Location: /login");
-                exit;
-            }
-
-            if (!isset($_GET['id'])) {
-                echo "ID tidak ditemukan";
-                exit;
-            }
-
-            $id = (int) $_GET['id'];
-
-            $pendaftar = new Pendaftar();
-            $data = $pendaftar->getFormDataByUserId($id);
-
-            if (!$data) {
-                echo "Data tidak ditemukan";
-                exit;
-            }
-
-            extract(["data" => $data]);
-
-            require __DIR__ . '/../views/admin/edit_ppdb.php';
+    public function editPPDB()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
         }
 
-    // UPDATE DATA PPDB (ADMIN)
-        public function updatePPDB()
-        {
-            if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-                header("Location: /login");
-                exit;
-            }
-
-            if (!isset($_GET['id'])) {
-                echo "ID tidak ditemukan";
-                exit;
-            }
-
-            $id = (int) $_GET['id'];
-
-            $pendaftar = new Pendaftar();
-            $pendaftar->updateByAdmin($id, $_POST);
-
-            header("Location: /dashboard/data_ppdb");
+        if (!isset($_GET['id'])) {
+            echo "ID tidak ditemukan";
             exit;
+        }
+
+        $id = (int) $_GET['id'];
+
+        $pendaftar = new Pendaftar();
+        $data = $pendaftar->getFormDataByUserId($id);
+
+        if (!$data) {
+            echo "Data tidak ditemukan";
+            exit;
+        }
+
+        extract(["data" => $data]);
+
+        require __DIR__ . '/../views/admin/edit_ppdb.php';
     }
 
-        // DELETE DATA PPDB (ADMIN)
-            public function deletePPDB()
+    // UPDATE DATA PPDB (ADMIN)
+    public function updatePPDB()
+    {
+        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /login");
+            exit;
+        }
+
+        if (!isset($_GET['id'])) {
+            echo "ID tidak ditemukan";
+            exit;
+        }
+
+        $id = (int) $_GET['id'];
+
+        $pendaftar = new Pendaftar();
+        $pendaftar->updateByAdmin($id, $_POST);
+
+        header("Location: /dashboard/data_ppdb");
+        exit;
+    }
+
+    // DELETE DATA PPDB (ADMIN)
+    public function deletePPDB()
     {
         if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login");
@@ -407,46 +427,41 @@ public function verifikasiBerkas()
         exit;
     }
 
-        // EXPORT EXCEL DATA PPDB LENGKAP
-
-        public function exportPPDBLengkap()
-        {
-            if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
-                header("Location: /login");
-                exit;
-            }
-
-            $pendaftar = new Pendaftar();
-            $list = $pendaftar->getAllLengkap();
-
-            extract(["list" => $list]);
-
-            // view khusus excel (tanpa layout)
-            require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
-            exit;
-        }
-        // ===============================
-        // CETAK / EXPORT DATA PPDB LENGKAP
-        // ===============================
-        public function cetakPPDB()
-        {
-            if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
-                header("Location: /login");
-                exit;
-            }
-
-            $pendaftar = new Pendaftar();
-            $list = $pendaftar->getAllLengkap();
-
-            extract(["list" => $list]);
-
-            // view khusus excel (tanpa layout)
-            require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+    // EXPORT EXCEL DATA PPDB LENGKAP
+    public function exportPPDBLengkap()
+    {
+        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+            header("Location: /login");
             exit;
         }
 
+        $pendaftar = new Pendaftar();
+        $list = $pendaftar->getAllLengkap();
 
+        extract(["list" => $list]);
 
+        // view khusus excel (tanpa layout)
+        require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+        exit;
+    }
 
+    // ===============================
+    // CETAK / EXPORT DATA PPDB LENGKAP
+    // ===============================
+    public function cetakPPDB()
+    {
+        if(!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin"){
+            header("Location: /login");
+            exit;
+        }
 
+        $pendaftar = new Pendaftar();
+        $list = $pendaftar->getAllLengkap();
+
+        extract(["list" => $list]);
+
+        // view khusus excel (tanpa layout)
+        require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
+        exit;
+    }
 }

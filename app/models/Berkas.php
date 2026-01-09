@@ -32,7 +32,7 @@ class Berkas extends Database {
                 VALUES (?, ?, ?)";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("iss", $id_pendaftar, $jenis, $lokasi);
+        $stmt->bind_param("iss", $id_pengguna, $jenis, $lokasi);
         return $stmt->execute();
     }
 
@@ -92,42 +92,42 @@ class Berkas extends Database {
         // ✅ SEMUA WAJIB ADA & VALID / MENUNGGU VALIDASI
         return "lengkap";
     }
+
     public function isSemuaBerkasValid($id_pendaftar)
-{
-    $wajib = [
-        'kartu_keluarga',
-        'ktp_ayah',
-        'ktp_ibu',
-        'ijazah_sd',
-        'surat_keterangan_lulus',
-        'akta_kelahiran',
-        'pas_foto'
-    ];
+    {
+        $wajib = [
+            'kartu_keluarga',
+            'ktp_ayah',
+            'ktp_ibu',
+            'ijazah_sd',
+            'surat_keterangan_lulus',
+            'akta_kelahiran',
+            'pas_foto'
+        ];
 
-    $sql = "
-        SELECT jenis_berkas, status_berkas
-        FROM berkas_pendaftar
-        WHERE id_pendaftar = ?
-    ";
+        $sql = "
+            SELECT jenis_berkas, status_berkas
+            FROM berkas_pendaftar
+            WHERE id_pendaftar = ?
+        ";
 
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id_pendaftar);
-    $stmt->execute();
-    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_pendaftar);
+        $stmt->execute();
+        $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-    $map = [];
-    foreach ($rows as $r) {
-        $map[$r['jenis_berkas']] = $r['status_berkas'];
+        $map = [];
+        foreach ($rows as $r) {
+            $map[$r['jenis_berkas']] = $r['status_berkas'];
+        }
+
+        foreach ($wajib as $jenis) {
+            if (!isset($map[$jenis])) return false;
+            if ($map[$jenis] !== 'valid') return false;
+        }
+
+        return true;
     }
-
-    foreach ($wajib as $jenis) {
-        if (!isset($map[$jenis])) return false;
-        if ($map[$jenis] !== 'valid') return false;
-    }
-
-    return true;
-}
-
 
     // ================= HITUNG PROGRESS (%) =================
     public function getProgress($id_pendaftar){
@@ -162,19 +162,38 @@ class Berkas extends Database {
     }
 
     // AMBIL SEMUA BERKAS UNTUK ADMIN
-public function getAllForAdmin()
-{
-    $sql = "
-        SELECT 
-            b.*, 
-            p.nama_lengkap
-        FROM berkas_pendaftar b
-        JOIN pendaftar p 
-            ON b.id_pendaftar = p.id_pendaftar
-        ORDER BY b.uploaded_at DESC
-    ";
+    public function getAllForAdmin()
+    {
+        $sql = "
+            SELECT 
+                b.*, 
+                p.nama_lengkap
+            FROM berkas_pendaftar b
+            JOIN pendaftar p 
+                ON b.id_pendaftar = p.id_pendaftar
+            ORDER BY b.uploaded_at DESC
+        ";
 
-    return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-}
+        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    }
 
+    // UPDATE STATUS BERKAS - BARU DITAMBAHKAN
+    public function updateStatus($id_berkas, $status)
+    {
+        $sql = "UPDATE berkas_pendaftar SET status_berkas=? WHERE id_berkas=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("si", $status, $id_berkas);
+        return $stmt->execute();
+    }
+
+    // AMBIL ID_PENDAFTAR DARI ID_BERKAS - BARU DITAMBAHKAN
+    public function getPendaftarId($id_berkas)
+    {
+        $sql = "SELECT id_pendaftar FROM berkas_pendaftar WHERE id_berkas=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id_berkas);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result ? $result['id_pendaftar'] : null;
+    }
 }
