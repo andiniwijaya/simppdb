@@ -30,7 +30,7 @@ $uri  = $_SERVER['REQUEST_URI'];
        class="sidebar-link <?= (strpos($uri, '/dashboard/administrasi') !== false ? 'active' : '') ?>">
         <i class="bi bi-folder-check me-2"></i> Administrasi
     </a>
-]   <a href="<?= $base ?>/dashboard/verifikasiBerkas"
+  <a href="<?= $base ?>/dashboard/verifikasiBerkas"
         class="sidebar-link <?= (strpos($uri, '/dashboard/verifikasiBerkas') !== false ? 'active' : '') ?>">
             <i class="bi bi-folder-check me-2"></i> Verifikasi Berkas
     </a>
