@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     // =============================
-    // AMBIL TOMBOL TAB
+    // TAB NAVIGATION
     // =============================
     const tabSiswa = document.querySelector('[data-bs-target="#tabSiswa"]');
     const tabOrtu  = document.querySelector('[data-bs-target="#tabOrtu"]');
@@ -10,10 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function switchTab(tabButton){
         if(tabButton){
             tabButton.click();
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     }
 
@@ -22,11 +19,10 @@ document.addEventListener("DOMContentLoaded", function() {
     window.switchToWali  = () => switchTab(tabWali);
 
     // =============================
-    // VALIDASI FORM
+    // VALIDASI & ALERT SEMUA FORM
     // =============================
-    const form = document.getElementById("formPendaftar");
+    document.querySelectorAll(".formPendaftar").forEach(form => {
 
-    if(form){
         form.addEventListener("submit", function(e){
 
             const required = form.querySelectorAll("[required]");
@@ -41,18 +37,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            // ❌ JIKA MASIH ADA KOSONG
+            // ❌ masih ada kosong
             if(empty){
                 alert("Masih ada kolom wajib yang kosong.");
                 e.preventDefault();
                 return;
             }
 
-            // ✅ JIKA SEMUA VALID
-            alert("✅ Data berhasil disimpan!");
-            // form akan tetap dikirim ke server
+            // =============================
+            // ALERT SIMPAN / UPDATE
+            // =============================
+            const mode = form.querySelector('[name="mode"]');
+
+            if(mode && mode.value === "update"){
+                alert("✅ Data berhasil diupdate!");
+            } else {
+                alert("✅ Data berhasil disimpan!");
+            }
         });
-    }
+
+    });
 
     // =============================
     // HAPUS INVALID SAAT DIKETIK

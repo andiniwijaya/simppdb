@@ -81,8 +81,9 @@ if (!empty($ortu)) {
 <!-- ===================== TAB SISWA ===================== -->
 <div class="tab-pane fade <?= ($_GET['tab'] ?? 'siswa')=='siswa'?'show active':'' ?>" id="tabSiswa">
 
-<form method="post" action="/siswa/formulir/simpan">
+<form method="post" action="/siswa/formulir/simpan" class="formPendaftar">
 <input type="hidden" name="save" value="siswa">
+<input type="hidden" name="mode" value="<?= $hasSiswa ? 'update' : 'simpan' ?>">
 
 <div class="card p-4 shadow-sm mb-4">
 <h5 class="fw-bold mb-3">Data Siswa</h5>
