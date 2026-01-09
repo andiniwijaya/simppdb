@@ -45,7 +45,7 @@ class Pengumuman extends Database {
         SELECT 
             p.id_pendaftar,
             p.nama_lengkap,
-            pg.status
+            pg.status_penerimaan
         FROM pengumuman pg
         JOIN pendaftar p 
             ON p.id_pendaftar = pg.id_pendaftar
