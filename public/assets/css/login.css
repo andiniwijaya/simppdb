@@ -1,5 +1,6 @@
 *{
     font-family:'Poppins',sans-serif;
+    box-sizing: border-box;
 }
 
 body{
@@ -7,36 +8,43 @@ body{
     min-height:100vh;
 }
 
-/* WRAPPER */
+/* ================= WRAPPER ================= */
 .login-wrapper{
     display:flex;
     min-height:100vh;
 }
 
-/* ============================
-   LEFT PANEL DESKTOP
-   ============================ */
-  .left-panel {
-    flex: 1;
-    background: url('../../img/login_bg3.png');
-    background-size: contain;  
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #000;     
+/* ================= LEFT PANEL ================= */
+.left-panel{
+    flex:1;
+    position: relative;
+    overflow: hidden;
 
-    color: #fff;
-    padding: 70px;
-    padding-top: 120px;
+    background: url('../../img/login_bg3.png') center center / cover no-repeat;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    color:#fff;
+    padding:50px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
 }
 
-/* ============================
-   RIGHT PANEL DESKTOP
-   ============================ */
+/* overlay tipis biar teks kebaca */
+.left-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,0.35);
+}
+
+.left-panel > *{
+    position:relative;
+    z-index:1;
+}
+
+/* ================= RIGHT PANEL ================= */
 .right-panel{
     flex:1;
     background:#f8f9fa;
@@ -46,14 +54,14 @@ body{
     padding:20px;
 }
 
-/* LOGIN BOX */
+/* ================= LOGIN CARD ================= */
 .login-card{
     width:420px;
     max-width:100%;
     background:#fff;
     padding:35px;
-    border-radius:10px;
-    box-shadow:0 6px 20px rgba(0,0,0,.15);
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
 .btn-login{
@@ -65,66 +73,36 @@ body{
     background:#0b5ed7;
 }
 
-
-
-/* ============================
-   RESPONSIVE MODE
-   MOBILE BELOW 768px
-   ============================ */
-
-@media(max-width: 768px){
-
-    /* Layout jadi kolom */
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
     .login-wrapper{
         flex-direction:column;
     }
 
-    /* Panel kiri jadi banner kecil di atas */
     .left-panel{
-        flex:none;
-        height:200px;
-        padding:30px 20px;
-        text-align:center;
+        height:220px;
+        padding:30px;
         align-items:center;
+        text-align:center;
     }
 
-    /* Panel kanan isi form push ke bawah */
     .right-panel{
-        flex:none;
-        padding:25px 15px;
         justify-content:flex-start;
+        padding:20px;
     }
 
-    /* Card width mengikuti layar HP */
     .login-card{
+        margin-top:-80px;
         width:100%;
         max-width:360px;
-        padding:25px 20px;
-        margin:auto;
-        margin-top:-70px;
-        border-radius:12px;
-    }
-
-    /* Text size adjust */
-    .left-panel h2{
-        font-size:24px;
+        padding:25px;
     }
 }
 
-/* ============================
-   EXTRA TINY SCREEN
-   BELOW 440px
-   ============================ */
-
-@media(max-width: 440px){
-
+@media(max-width:440px){
     .login-card{
         max-width:300px;
-        padding:20px 15px;
-    }
-
-    .left-panel{
-        height:170px;
+        padding:20px;
     }
 
     body{
