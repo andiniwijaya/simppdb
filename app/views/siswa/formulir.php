@@ -155,18 +155,27 @@ if (!empty($ortu)) {
     </div>
 </div>
 
-<div class="row mb-3">
+            <div class="row mb-3">
     <div class="col-md-4">
         <label>Status Anak</label>
+
         <select name="status_anak" class="form-control" required>
-            <option value="" disabled <?= empty($siswa['status_anak'])?'selected':'' ?>>
-                -- Pilih Status Anak --
+            <option value="kandung"
+                <?= ($siswa['status_anak'] ?? 'kandung') == 'kandung' ? 'selected' : '' ?>>
+                kandung
             </option>
-            <option value="kandung" <?= ($siswa['status_anak'] ?? '')=='kandung'?'selected':'' ?>>kandung</option>
-            <option value="tiri" <?= ($siswa['status_anak'] ?? '')=='tiri'?'selected':'' ?>>tiri</option>
-            <option value="angkat" <?= ($siswa['status_anak'] ?? '')=='angkat'?'selected':'' ?>>angkat</option>
+            <option value="tiri"
+                <?= ($siswa['status_anak'] ?? '') == 'tiri' ? 'selected' : '' ?>>
+                tiri
+            </option>
+            <option value="angkat"
+                <?= ($siswa['status_anak'] ?? '') == 'angkat' ? 'selected' : '' ?>>
+                angkat
+            </option>
         </select>
+
     </div>
+</div>
 
     <div class="col-md-4">
         <label>Status Yatim</label>
