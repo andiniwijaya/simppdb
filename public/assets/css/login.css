@@ -16,12 +16,13 @@ body{
 /* ============================
    LEFT PANEL DESKTOP
    ============================ */
-    .left-panel {
+  .left-panel {
     flex: 1;
     background: url('../../img/login_bg3.png');
-    background-size: cover;
-    background-position: center;
+    background-size: contain;  
+    background-position: center top;
     background-repeat: no-repeat;
+    background-color: #000;     
 
     color: #fff;
     padding: 70px;
