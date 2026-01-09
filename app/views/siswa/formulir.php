@@ -155,34 +155,39 @@ if (!empty($ortu)) {
     </div>
 </div>
 
-            <select name="status_anak" required>
-    <option value="">-- Pilih Status Anak --</option>
-    <option value="kandung">Anak Kandung</option>
-    <option value="tiri">Anak Tiri</option>
-    <option value="angkat">Anak Angkat</option>
-</select>
-
+            <div class="row mb-3">
+    <div class="col-md-4">
+        <label class="form-label">Status Anak</label>
+        <select name="status_anak" class="form-control" required>
+            <option value="">-- Pilih --</option>
+            <option value="kandung" <?= ($siswa['status_anak'] ?? '')=='kandung'?'selected':'' ?>>Kandung</option>
+            <option value="tiri" <?= ($siswa['status_anak'] ?? '')=='tiri'?'selected':'' ?>>Tiri</option>
+            <option value="angkat" <?= ($siswa['status_anak'] ?? '')=='angkat'?'selected':'' ?>>Angkat</option>
+        </select>
+    </div>
 
     <div class="col-md-4">
-        <label>Status Yatim</label>
+        <label class="form-label">Status Yatim</label>
         <select name="yatim_status" class="form-control" required>
-            <option value=""></option>
+            <option value="">-- Pilih --</option>
             <?php
             $ys = ['bukan','yatim','piatu','yatim_piatu'];
             foreach ($ys as $v) {
-                $sel = ($siswa['yatim_status'] ?? '')==$v?'selected':'';
-                echo "<option value=\"$v\" $sel>$v</option>";
+                $sel = ($siswa['yatim_status'] ?? '') == $v ? 'selected' : '';
+                echo "<option value=\"$v\" $sel>" . ucfirst(str_replace('_',' ',$v)) . "</option>";
             }
             ?>
         </select>
     </div>
 
     <div class="col-md-4">
-        <label>Bahasa Sehari-hari</label>
+        <label class="form-label">Bahasa Sehari-hari</label>
         <input type="text" name="bahasa_rumah" class="form-control" required
                value="<?= $siswa['bahasa_rumah'] ?? '' ?>">
     </div>
 </div>
+
+      
 
 <div class="mb-3">
     <label>Alamat</label>
