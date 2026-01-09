@@ -26,14 +26,20 @@ $uri  = $_SERVER['REQUEST_URI'];
         <i class="bi bi-journal-text me-2"></i> Data PPDB
     </a>
 
-    <a href="<?= $base ?>/dashboard/administrasi" 
-       class="sidebar-link <?= (strpos($uri, '/dashboard/administrasi') !== false ? 'active' : '') ?>">
-        <i class="bi bi-folder-check me-2"></i> Administrasi
-    </a>
-  <a href="<?= $base ?>/dashboard/verifikasiBerkas"
-        class="sidebar-link <?= (strpos($uri, '/dashboard/verifikasiBerkas') !== false ? 'active' : '') ?>">
-            <i class="bi bi-folder-check me-2"></i> Verifikasi Berkas
-    </a>
+        <a href="<?= $base ?>/dashboard/kelolaUser"
+        class="sidebar-link <?= (strpos($uri, '/dashboard/kelolaUser') !== false ? 'active' : '') ?>">
+            <i class="bi bi-people me-2"></i> Kelola User
+        </a>
+
+
+        <a href="<?= $base ?>/dashboard/administrasi" 
+            class="sidebar-link <?= (strpos($uri, '/dashboard/administrasi') !== false ? 'active' : '') ?>">
+                <i class="bi bi-folder-check me-2"></i> Administrasi
+            </a>
+        <a href="<?= $base ?>/dashboard/verifikasiBerkas"
+                class="sidebar-link <?= (strpos($uri, '/dashboard/verifikasiBerkas') !== false ? 'active' : '') ?>">
+                    <i class="bi bi-folder-check me-2"></i> Verifikasi Berkas
+            </a>
 
     <a href="<?= $base ?>/dashboard/pengumuman" 
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengumuman') !== false ? 'active' : '') ?>">
