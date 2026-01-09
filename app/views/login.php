@@ -18,10 +18,10 @@ $base = Config::base_url();
 <div class="login-wrapper">
 
     <!-- ================= LEFT PANEL ================== -->
-    <div class="left-panel">
-        <h2 class="fw-bold">SIM-PPDB</h2>
-        <p class="mt-2">Sistem Informasi Penerimaan Peserta Didik Baru</p>
-    </div>
+<div class="left-panel">
+    <h2 class="fw-bold">SIM-PPDB</h2>
+    <p>Sistem Informasi Penerimaan Peserta Didik Baru</p>
+</div>
 
     <!-- ================= RIGHT PANEL ================= -->
     <div class="right-panel">
