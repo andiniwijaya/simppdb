@@ -99,10 +99,12 @@ if (!empty($ortu)) {
 </div>
 
 <div class="row mb-3">
-    <div class="col-md-6">
-        <label>Nama Lengkap</label>
-        <input type="text" name="nama_lengkap" class="form-control" required
-               value="<?= $siswa['nama_lengkap'] ?? '' ?>">
+    <input type="text"
+       name="nama_lengkap"
+       class="form-control"
+       <?= $isReadOnly ? 'readonly' : '' ?>
+       value="<?= $siswa['nama_lengkap'] ?? '' ?>">
+
     </div>
     <div class="col-md-3">
         <label>Tempat Lahir</label>
@@ -156,27 +158,29 @@ if (!empty($ortu)) {
 <div class="row mb-3">
     <div class="col-md-4">
         <label>Status Anak</label>
-        <select name="status_anak" class="form-control" required>
-            <option value="" disabled <?= empty($siswa['status_anak'])?'selected':'' ?>>
-                -- Pilih Status Anak --
-            </option>
+            <select name="status_anak"
+        class="form-control"
+        <?= $isReadOnly ? 'disabled' : '' ?>>
+
             <option value="kandung" <?= ($siswa['status_anak'] ?? '')=='kandung'?'selected':'' ?>>kandung</option>
             <option value="tiri" <?= ($siswa['status_anak'] ?? '')=='tiri'?'selected':'' ?>>tiri</option>
             <option value="angkat" <?= ($siswa['status_anak'] ?? '')=='angkat'?'selected':'' ?>>angkat</option>
         </select>
-    </div>
+
+        <?php if($isReadOnly): ?>
+            <input type="hidden" name="status_anak" value="<?= $siswa['status_anak'] ?>">
+        <?php endif; ?>
 
     <div class="col-md-4">
         <label>Status Yatim</label>
-        <select name="yatim_status" class="form-control" required>
-            <option value=""></option>
-            <?php
-            $ys = ['bukan','yatim','piatu','yatim_piatu'];
-            foreach ($ys as $v) {
-                $sel = ($siswa['yatim_status'] ?? '')==$v?'selected':'';
-                echo "<option value=\"$v\" $sel>$v</option>";
-            }
-            ?>
+            <select name="yatim_status"
+        class="form-control"
+        <?= $isReadOnly ? 'disabled' : '' ?>>
+
+<?php if($isReadOnly): ?>
+<input type="hidden" name="yatim_status" value="<?= $siswa['yatim_status'] ?>">
+<?php endif; ?>
+
         </select>
     </div>
 
@@ -201,15 +205,14 @@ if (!empty($ortu)) {
 
     <div class="col-md-3">
         <label>Status Tinggal</label>
-        <select name="status_tinggal" class="form-control" required>
-            <option value=""></option>
-            <?php
-            $st = ['bersama_ortu','wali','kost','asrama','lainnya'];
-            foreach ($st as $v) {
-                $sel = ($siswa['status_tinggal'] ?? '')==$v?'selected':'';
-                echo "<option value=\"$v\" $sel>$v</option>";
-            }
-            ?>
+        <select name="status_tinggal"
+        class="form-control"
+        <?= $isReadOnly ? 'disabled' : '' ?>>
+
+<?php if($isReadOnly): ?>
+<input type="hidden" name="status_tinggal" value="<?= $siswa['status_tinggal'] ?>">
+<?php endif; ?>
+
         </select>
     </div>
 
