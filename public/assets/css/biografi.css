@@ -1,10 +1,8 @@
 .bio-container{
-    margin-left:calc(220px + 20px);
-    padding:30px 40px;
+    margin-left: 200px;   
+    padding: 30px;
 }
 
-
-/* NAVBAR BIO */
 .bio-nav{
     display:flex;
     gap:12px;
