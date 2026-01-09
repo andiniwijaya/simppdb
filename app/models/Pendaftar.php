@@ -137,9 +137,9 @@ class Pendaftar extends Database {
     $d['asal_sekolah'],
     $anak_ke,
     $jumlah_saudara,
-    $d['status_anak'],   // ✅ STRING
-    $d['yatim_status'],  // ✅ STRING
-    $d['bahasa_rumah'],  // ✅ STRING
+    $d['status_anak'],
+    $d['yatim_status'],
+    $d['bahasa_rumah'],
     $tinggi_badan,
     $berat_badan,
     $d['penyakit'],
