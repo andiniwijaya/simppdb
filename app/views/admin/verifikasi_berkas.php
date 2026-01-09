@@ -1,46 +1,113 @@
 <?php
-// Tampilkan pesan sukses/error jika ada
-if (isset($_SESSION['success'])) {
-    echo '<div style="color: green; margin-bottom: 10px;">' . htmlspecialchars($_SESSION['success']) . '</div>';
-    unset($_SESSION['success']);  // Hapus session agar tidak muncul lagi
-}
-if (isset($_SESSION['error'])) {
-    echo '<div style="color: red; margin-bottom: 10px;">' . htmlspecialchars($_SESSION['error']) . '</div>';
-    unset($_SESSION['error']);  // Hapus session agar tidak muncul lagi
-}
+/**
+ * Asumsi dari controller:
+ * ----------------------------------
+ * $list : array daftar berkas siswa
+ * $base : base url
+ *
+ * Field minimal per item $row:
+ * - id_berkas
+ * - nama_lengkap
+ * - jenis_berkas
+ * - file_berkas
+ * - tanggal_upload
+ * - status_berkas (menunggu | valid | ditolak)
+ */
 ?>
 
-<h2>Verifikasi Berkas Siswa</h2>
+<h2>Verifikasi Berkas PPDB</h2>
 
-<?php if (empty($list)): ?>
-    <p>Tidak ada berkas yang perlu diverifikasi.</p>
+<div class="pengaturan-wrapper">
+<table class="pengaturan-table">
+
+<thead>
+<tr>
+    <th>Nama Siswa</th>
+    <th>Jenis Berkas</th>
+    <th>Tanggal Upload</th>
+    <th>Berkas</th>
+    <th>Status</th>
+    <th>Aksi</th>
+</tr>
+</thead>
+
+<tbody>
+<?php if (!empty($list)): ?>
+<?php foreach ($list as $row): ?>
+<tr>
+
+    <!-- Nama -->
+    <td><?= htmlspecialchars($row['nama_lengkap'] ?? '-') ?></td>
+
+    <!-- Jenis Berkas -->
+    <td><?= htmlspecialchars(ucfirst(str_replace('_',' ', $row['jenis_berkas'] ?? '-'))) ?></td>
+
+    <!-- Tanggal -->
+    <td>
+        <?= !empty($row['tanggal_upload'])
+            ? date('d-m-Y', strtotime($row['tanggal_upload']))
+            : '-' ?>
+    </td>
+
+    <!-- File -->
+    <td>
+        <?php if (!empty($row['file_berkas'])): ?>
+            <a href="<?= $base ?>/uploads/berkas/<?= $row['file_berkas'] ?>"
+               target="_blank">
+                Lihat
+            </a>
+        <?php else: ?>
+            -
+        <?php endif; ?>
+    </td>
+
+    <!-- Status -->
+    <td>
+        <?php if ($row['status_berkas'] === 'valid'): ?>
+            <span style="color:green;font-weight:bold;">✔ Valid</span>
+
+        <?php elseif ($row['status_berkas'] === 'ditolak'): ?>
+            <span style="color:red;font-weight:bold;">✖ Ditolak</span>
+
+        <?php else: ?>
+            <span style="color:orange;font-weight:bold;">⏳ Menunggu</span>
+        <?php endif; ?>
+    </td>
+
+    <!-- Aksi -->
+    <td style="text-align:center;">
+    <?php if ($row['status_berkas'] === 'menunggu'): ?>
+
+        <a href="<?= $base ?>/dashboard/verifikasi_berkas?aksi=valid&id=<?= $row['id_berkas'] ?>"
+           onclick="return confirm('Yakin berkas ini VALID?')"
+           style="color:green;font-weight:bold;">
+           ✔ Valid
+        </a>
+
+        |
+
+        <a href="<?= $base ?>/dashboard/verifikasi_berkas?aksi=tolak&id=<?= $row['id_berkas'] ?>"
+           onclick="return confirm('Yakin berkas ini DITOLAK?')"
+           style="color:red;font-weight:bold;">
+           ✖ Tolak
+        </a>
+
+    <?php else: ?>
+        -
+    <?php endif; ?>
+    </td>
+
+</tr>
+<?php endforeach; ?>
+
 <?php else: ?>
-    <table class="pengaturan-table">
-    <tr>
-        <th>Nama</th>
-        <th>Jenis Berkas</th>
-        <th>File</th>
-        <th>Status</th>
-        <th>Aksi</th>
-    </tr>
+<tr>
+    <td colspan="6" style="text-align:center;">
+        Belum ada data berkas
+    </td>
+</tr>
+<?php endif; ?>
+</tbody>
 
-    <?php foreach ($list as $b): ?>
-    <tr>
-        <td><?= htmlspecialchars($b['nama_lengkap']) ?></td>
-        <td><?= htmlspecialchars($b['jenis_berkas']) ?></td>
-        <td>
-            <a href="<?= htmlspecialchars($b['lokasi_berkas']) ?>" target="_blank">Lihat</a>
-        </td>
-        <td><?= htmlspecialchars($b['status_berkas']) ?></td>
-        <td>
-            <?php if ($b['status_berkas'] !== 'valid'): ?>
-                <a href="/dashboard/validBerkas?id=<?= htmlspecialchars($b['id_berkas']) ?>" onclick="return confirm('Apakah Anda yakin ingin memvalidasi berkas ini?')">✔ Valid</a> |
-                <a href="/dashboard/invalidBerkas?id=<?= htmlspecialchars($b['id_berkas']) ?>" onclick="return confirm('Apakah Anda yakin ingin menandai berkas ini sebagai invalid?')">✖ Invalid</a>
-            <?php else: ?>
-                ✔ Valid
-            <?php endif ?>
-        </td>
-    </tr>
-    <?php endforeach ?>
-    </table>
-<?php endif ?>
+</table>
+</div>
