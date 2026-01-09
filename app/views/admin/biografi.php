@@ -59,7 +59,7 @@ const dataBio = {
         desc: "Saya berperan sebagai Programmer yang fokus pada pengembangan fitur aplikasi, penulisan kode program, serta perbaikan bug agar sistem berjalan stabil dan optimal sesuai dengan rancangan yang telah ditentukan.",
         foto: "<?= $base ?>/public/img/bio/mutiara.png",
         ig: "https://instagram.com/mutiara",
-        github: "https://github.com/mutiara",
+        github: "",
         linkedin: ""
     },
     silvia: {
@@ -68,8 +68,8 @@ const dataBio = {
         desc: "Saya memiliki minat kuat sebagai System Analyst, khususnya dalam analisis kebutuhan sistem, perancangan alur proses bisnis, pemodelan sistem informasi, serta menjembatani kebutuhan pengguna dengan tim pengembang.",
         foto: "<?= $base ?>/public/img/bio/silvia.png",
         ig: "https://www.instagram.com/shakipiya/?utm_source=ig_web_button_share_sheet",
-        github: "https://github.com/silvia",
-        linkedin: "https://linkedin.com"
+        github: "",
+        linkedin: ""
     },
     sundari: {
         nama: "Sundari Rosdiana",
@@ -86,7 +86,7 @@ const dataBio = {
         desc: "Saya tertarik pada pengembangan aplikasi web, khususnya pada desain antarmuka, pengalaman pengguna, serta pembuatan tampilan yang responsif dan mudah digunakan.",
         foto: "<?= $base ?>/public/img/bio/winda.png",
         ig: "https://www.instagram.com/wnd_arynt/?utm_source=ig_web_button_share_sheet",
-        github: "https://github.com/winda",
+        github: "",
         linkedin: ""
     }
 };
