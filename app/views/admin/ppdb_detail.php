@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/ppdb_detail.css">
+
 <h3>Detail PPDB</h3>
 
 <table class="table">
