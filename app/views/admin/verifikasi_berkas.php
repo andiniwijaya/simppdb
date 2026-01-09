@@ -1,113 +1,60 @@
-<?php
-/**
- * Asumsi dari controller:
- * ----------------------------------
- * $list : array daftar berkas siswa
- * $base : base url
- *
- * Field minimal per item $row:
- * - id_berkas
- * - nama_lengkap
- * - jenis_berkas
- * - file_berkas
- * - tanggal_upload
- * - status_berkas (menunggu | valid | ditolak)
- */
-?>
-
 <h2>Verifikasi Berkas PPDB</h2>
 
 <div class="pengaturan-wrapper">
 <table class="pengaturan-table">
+    <tr>
+        <th>Nama Siswa</th>
+        <th>Jenis Berkas</th>
+        <th>File</th>
+        <th>Tanggal Upload</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
 
-<thead>
-<tr>
-    <th>Nama Siswa</th>
-    <th>Jenis Berkas</th>
-    <th>Tanggal Upload</th>
-    <th>Berkas</th>
-    <th>Status</th>
-    <th>Aksi</th>
-</tr>
-</thead>
+    <?php if (!empty($list)): ?>
+        <?php foreach ($list as $row): ?>
+        <tr>
+            <td><?= htmlspecialchars($row['nama_lengkap']) ?></td>
 
-<tbody>
-<?php if (!empty($list)): ?>
-<?php foreach ($list as $row): ?>
-<tr>
+            <td><?= htmlspecialchars($row['jenis_berkas']) ?></td>
 
-    <!-- Nama -->
-    <td><?= htmlspecialchars($row['nama_lengkap'] ?? '-') ?></td>
+            <td>
+                <a href="/uploads/berkas/<?= $row['nama_file'] ?>" target="_blank">
+                    Lihat
+                </a>
+            </td>
 
-    <!-- Jenis Berkas -->
-    <td><?= htmlspecialchars(ucfirst(str_replace('_',' ', $row['jenis_berkas'] ?? '-'))) ?></td>
+            <td><?= date('d-m-Y', strtotime($row['tanggal_upload'])) ?></td>
 
-    <!-- Tanggal -->
-    <td>
-        <?= !empty($row['tanggal_upload'])
-            ? date('d-m-Y', strtotime($row['tanggal_upload']))
-            : '-' ?>
-    </td>
+            <td>
+                <?php if ($row['status'] === 'valid'): ?>
+                    <span style="color:green">✔ Valid</span>
+                <?php elseif ($row['status'] === 'invalid'): ?>
+                    <span style="color:red">✖ Ditolak</span>
+                <?php else: ?>
+                    <span style="color:orange">Menunggu</span>
+                <?php endif; ?>
+            </td>
 
-    <!-- File -->
-    <td>
-        <?php if (!empty($row['file_berkas'])): ?>
-            <a href="<?= $base ?>/uploads/berkas/<?= $row['file_berkas'] ?>"
-               target="_blank">
-                Lihat
-            </a>
-        <?php else: ?>
-            -
-        <?php endif; ?>
-    </td>
+            <td>
+                <a href="/dashboard/validBerkas?id=<?= $row['id_berkas'] ?>"
+                   class="btn btn-sm btn-success">
+                    Valid
+                </a>
 
-    <!-- Status -->
-    <td>
-        <?php if ($row['status_berkas'] === 'valid'): ?>
-            <span style="color:green;font-weight:bold;">✔ Valid</span>
-
-        <?php elseif ($row['status_berkas'] === 'ditolak'): ?>
-            <span style="color:red;font-weight:bold;">✖ Ditolak</span>
-
-        <?php else: ?>
-            <span style="color:orange;font-weight:bold;">⏳ Menunggu</span>
-        <?php endif; ?>
-    </td>
-
-    <!-- Aksi -->
-    <td style="text-align:center;">
-    <?php if ($row['status_berkas'] === 'menunggu'): ?>
-
-        <a href="<?= $base ?>/dashboard/verifikasi_berkas?aksi=valid&id=<?= $row['id_berkas'] ?>"
-           onclick="return confirm('Yakin berkas ini VALID?')"
-           style="color:green;font-weight:bold;">
-           ✔ Valid
-        </a>
-
-        |
-
-        <a href="<?= $base ?>/dashboard/verifikasi_berkas?aksi=tolak&id=<?= $row['id_berkas'] ?>"
-           onclick="return confirm('Yakin berkas ini DITOLAK?')"
-           style="color:red;font-weight:bold;">
-           ✖ Tolak
-        </a>
-
+                <a href="/dashboard/invalidBerkas?id=<?= $row['id_berkas'] ?>"
+                   class="btn btn-sm btn-danger">
+                    Tolak
+                </a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
     <?php else: ?>
-        -
+        <tr>
+            <td colspan="6" class="text-center">
+                Belum ada berkas diupload
+            </td>
+        </tr>
     <?php endif; ?>
-    </td>
-
-</tr>
-<?php endforeach; ?>
-
-<?php else: ?>
-<tr>
-    <td colspan="6" style="text-align:center;">
-        Belum ada data berkas
-    </td>
-</tr>
-<?php endif; ?>
-</tbody>
-
 </table>
 </div>

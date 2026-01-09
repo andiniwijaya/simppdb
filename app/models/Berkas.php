@@ -4,19 +4,20 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Berkas extends Database {
 
-    //  AMBIL SEMUA BERKAS SISWA 
-    public function getAll($id_pendaftar){
-        $sql = "SELECT * FROM berkas_pendaftar
-                WHERE id_pendaftar = ?";
+    // ================= AMBIL SEMUA BERKAS SISWA =================
+    public function getAll($id_pendaftar)
+    {
+        $sql = "SELECT * FROM berkas_pendaftar WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    //  CEK DUPLIKASI JENIS BERKAS 
-    public function getByJenis($id_pendaftar, $jenis){
-        $sql = "SELECT id_berkas FROM berkas_pendaftar
+    // ================= CEK DUPLIKASI JENIS BERKAS =================
+    public function getByJenis($id_pendaftar, $jenis)
+    {
+        $sql = "SELECT id_berkas FROM berkas_pendaftar 
                 WHERE id_pendaftar = ? AND jenis_berkas = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("is", $id_pendaftar, $jenis);
@@ -24,25 +25,21 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    //  INSERT BERKAS 
-    public function insert($id_pendaftar, $jenis, $lokasi){
-
-        $sql = "INSERT INTO berkas_pendaftar
-                (id_pendaftar, jenis_berkas, lokasi_berkas)
-                VALUES (?, ?, ?)";
+    // ================= INSERT BERKAS =================
+    public function insert($id_pendaftar, $jenis, $lokasi)
+    {
+        $sql = "INSERT INTO berkas_pendaftar 
+                (id_pendaftar, jenis_berkas, lokasi_berkas, status_berkas)
+                VALUES (?, ?, ?, 'menunggu')";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("iss", $id_pengguna, $jenis, $lokasi);
+        $stmt->bind_param("iss", $id_pendaftar, $jenis, $lokasi);
         return $stmt->execute();
     }
 
-    //  CEK STATUS LENGKAP BERKAS
-    public function getStatusLengkap($id_pendaftar) {
-
-        /**
-         *  KIP TIDAK WAJIB
-         *  KTP HARUS AYAH + IBU
-         */
+    // ================= CEK STATUS KELENGKAPAN =================
+    public function getStatusLengkap($id_pendaftar)
+    {
         $wajib = [
             'kartu_keluarga',
             'ktp_ayah',
@@ -53,46 +50,30 @@ class Berkas extends Database {
             'pas_foto'
         ];
 
-        $sql = "
-            SELECT jenis_berkas, status_berkas
-            FROM berkas_pendaftar
-            WHERE id_pendaftar = ?
-        ";
-
+        $sql = "SELECT jenis_berkas, status_berkas 
+                FROM berkas_pendaftar 
+                WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
         $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        // ❌ BELUM UPLOAD SAMA SEKALI
-        if (count($rows) === 0) {
-            return "belum";
-        }
+        if (count($rows) === 0) return "belum";
 
-        // mapping: jenis_berkas => status_berkas
         $map = [];
         foreach ($rows as $r) {
             $map[$r['jenis_berkas']] = $r['status_berkas'];
         }
 
-        // ❌ CEK SEMUA BERKAS WAJIB
         foreach ($wajib as $jenis) {
-
-            // belum diupload
-            if (!isset($map[$jenis])) {
-                return "menunggu";
-            }
-
-            // sudah ada tapi invalid
-            if ($map[$jenis] === 'invalid') {
-                return "menunggu";
-            }
+            if (!isset($map[$jenis])) return "menunggu";
+            if ($map[$jenis] === 'invalid') return "menunggu";
         }
 
-        // ✅ SEMUA WAJIB ADA & VALID / MENUNGGU VALIDASI
         return "lengkap";
     }
 
+    // ================= CEK SEMUA VALID =================
     public function isSemuaBerkasValid($id_pendaftar)
     {
         $wajib = [
@@ -105,12 +86,9 @@ class Berkas extends Database {
             'pas_foto'
         ];
 
-        $sql = "
-            SELECT jenis_berkas, status_berkas
-            FROM berkas_pendaftar
-            WHERE id_pendaftar = ?
-        ";
-
+        $sql = "SELECT jenis_berkas, status_berkas 
+                FROM berkas_pendaftar 
+                WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
@@ -130,8 +108,8 @@ class Berkas extends Database {
     }
 
     // ================= HITUNG PROGRESS (%) =================
-    public function getProgress($id_pendaftar){
-
+    public function getProgress($id_pendaftar)
+    {
         $wajib = [
             'kartu_keluarga',
             'ktp_ayah',
@@ -142,42 +120,37 @@ class Berkas extends Database {
             'pas_foto'
         ];
 
-        $sql = "
-            SELECT jenis_berkas
-            FROM berkas_pendaftar
-            WHERE id_pendaftar = ?
-        ";
-
+        $sql = "SELECT jenis_berkas FROM berkas_pendaftar WHERE id_pendaftar = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_pendaftar);
         $stmt->execute();
         $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         $uploaded = array_column($rows, 'jenis_berkas');
-
         $done = count(array_intersect($wajib, $uploaded));
-        $total = count($wajib);
-
-        return round(($done / $total) * 100);
+        return round(($done / count($wajib)) * 100);
     }
 
-    // AMBIL SEMUA BERKAS UNTUK ADMIN
+    // ================= AMBIL SEMUA BERKAS (ADMIN) =================
     public function getAllForAdmin()
     {
         $sql = "
             SELECT 
-                b.*, 
+                b.id_berkas,
+                b.jenis_berkas,
+                b.lokasi_berkas,
+                b.status_berkas,
+                b.uploaded_at,
                 p.nama_lengkap
             FROM berkas_pendaftar b
-            JOIN pendaftar p 
-                ON b.id_pendaftar = p.id_pendaftar
+            JOIN pendaftar p ON b.id_pendaftar = p.id_pendaftar
             ORDER BY b.uploaded_at DESC
         ";
 
         return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
 
-    // UPDATE STATUS BERKAS - BARU DITAMBAHKAN
+    // ================= UPDATE STATUS BERKAS =================
     public function updateStatus($id_berkas, $status)
     {
         $sql = "UPDATE berkas_pendaftar SET status_berkas=? WHERE id_berkas=?";
@@ -186,14 +159,14 @@ class Berkas extends Database {
         return $stmt->execute();
     }
 
-    // AMBIL ID_PENDAFTAR DARI ID_BERKAS - BARU DITAMBAHKAN
+    // ================= AMBIL ID PENDAFTAR DARI BERKAS =================
     public function getPendaftarId($id_berkas)
     {
         $sql = "SELECT id_pendaftar FROM berkas_pendaftar WHERE id_berkas=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id_berkas);
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_assoc();
-        return $result ? $result['id_pendaftar'] : null;
+        $row = $stmt->get_result()->fetch_assoc();
+        return $row ? $row['id_pendaftar'] : null;
     }
 }
