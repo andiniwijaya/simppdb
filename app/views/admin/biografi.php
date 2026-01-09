@@ -49,7 +49,7 @@ const dataBio = {
         reminder: "Project Manager",
         desc: "Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam pengembangan sistem informasi. Saya bertanggung jawab mengatur alur kerja tim, menyusun perencanaan proyek, mengoordinasikan tugas, serta memastikan setiap tahapan pengembangan berjalan sesuai target dan kebutuhan pengguna.",
         foto: "<?= $base ?>/public/img/bio/andini.png",
-        ig: "https://instagram.com/andini",
+        ig: "https://www.instagram.com/ann.wijay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
         github: "",
         linkedin: ""
     },
@@ -67,7 +67,7 @@ const dataBio = {
         reminder: "System Analyst",
         desc: "Saya memiliki minat kuat sebagai System Analyst, khususnya dalam analisis kebutuhan sistem, perancangan alur proses bisnis, pemodelan sistem informasi, serta menjembatani kebutuhan pengguna dengan tim pengembang.",
         foto: "<?= $base ?>/public/img/bio/silvia.png",
-        ig: "https://instagram.com/silvia",
+        ig: "https://www.instagram.com/shakipiya/?utm_source=ig_web_button_share_sheet",
         github: "https://github.com/silvia",
         linkedin: "https://linkedin.com"
     },
@@ -76,7 +76,7 @@ const dataBio = {
         reminder: "System Documentation",
         desc: "Saya fokus pada dokumentasi sistem, penyusunan laporan, serta pendokumentasian alur kerja aplikasi agar mudah dipahami dan digunakan sebagai referensi pengembangan selanjutnya.",
         foto: "<?= $base ?>/public/img/bio/sundari.png",
-        ig: "",
+        ig: "https://www.instagram.com/dianadariii?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
         github: "",
         linkedin: ""
     },
@@ -85,7 +85,7 @@ const dataBio = {
         reminder: "Web Developer",
         desc: "Saya tertarik pada pengembangan aplikasi web, khususnya pada desain antarmuka, pengalaman pengguna, serta pembuatan tampilan yang responsif dan mudah digunakan.",
         foto: "<?= $base ?>/public/img/bio/winda.png",
-        ig: "https://instagram.com/winda",
+        ig: "https://www.instagram.com/wnd_arynt/?utm_source=ig_web_button_share_sheet",
         github: "https://github.com/winda",
         linkedin: ""
     }
