@@ -3,64 +3,101 @@
    =============================== */
 
 .ppdb-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #082a5c;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #0b2e5f;
+    letter-spacing: .3px;
 }
 
+/* CARD */
 .ppdb-form-wrapper {
-    background: #ffffff;
-    padding: 25px;
-    max-width: 600px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
+    padding: 28px;
+    max-width: 640px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    border: 1px solid #eef2f7;
+    animation: fadeInUp .35s ease;
 }
 
+/* ANIMASI HALUS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FORM GROUP */
 .ppdb-form-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .ppdb-form-group label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-weight: 600;
     margin-bottom: 6px;
-    color: #333;
+    color: #344054;
+    font-size: 14px;
 }
 
+/* INPUT */
 .ppdb-form-group input,
 .ppdb-form-group select {
     width: 100%;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
     font-size: 14px;
+    background: #ffffff;
+    transition: all .2s ease;
+}
+
+.ppdb-form-group input::placeholder {
+    color: #98a2b3;
 }
 
 .ppdb-form-group input:focus,
 .ppdb-form-group select:focus {
     outline: none;
     border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13,110,253,.15);
 }
 
+/* BUTTON */
 .ppdb-btn {
-    padding: 10px 16px;
-    border-radius: 6px;
+    padding: 11px 18px;
+    border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
     border: none;
     cursor: pointer;
+    font-size: 14px;
+    transition: all .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
+/* PRIMARY */
 .ppdb-btn-primary {
-    background: #0d6efd;
+    background: linear-gradient(135deg, #0d6efd, #084298);
     color: white;
 }
 
 .ppdb-btn-primary:hover {
-    background: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(13,110,253,.35);
 }
 
+/* SECONDARY */
 .ppdb-btn-secondary {
     background: #6c757d;
     color: white;
@@ -70,8 +107,17 @@
     background: #5c636a;
 }
 
+/* BUTTON GROUP */
 .ppdb-btn-group {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* DETAIL MODE (READONLY) */
+.ppdb-form-group.readonly input {
+    background: #f9fafb;
+    border-color: #e4e7ec;
+    color: #475467;
+    cursor: not-allowed;
 }
