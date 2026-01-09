@@ -45,11 +45,11 @@ class Pengumuman extends Database {
         SELECT 
             p.id_pendaftar,
             p.nama_lengkap,
-            pg.status_penerimaan
+            MAX(pg.status_penerimaan) AS status_penerimaan
         FROM pengumuman pg
         JOIN pendaftar p 
             ON p.id_pendaftar = pg.id_pendaftar
-        ORDER BY pg.id_pengumuman DESC
+        GROUP BY p.id_pendaftar, p.nama_lengkap
     ";
 
     $stmt = $this->conn->prepare($sql);

@@ -12,9 +12,9 @@
 <tr>
     <td><?= htmlspecialchars($row['nama_lengkap']) ?></td>
     <td>
-        <?php if($row['status'] === 'diterima'): ?>
+        <?php if($row['status_penerimaan'] === 'diterima'): ?>
             <span style="color:green;font-weight:bold;">🎉 DITERIMA</span>
-        <?php elseif($row['status'] === 'ditolak'): ?>
+        <?php elseif($row['status_penerimaan'] === 'ditolak'): ?>
             <span style="color:red;font-weight:bold;">❌ DITOLAK</span>
         <?php else: ?>
             <span style="color:orange;">⏳ MENUNGGU</span>
