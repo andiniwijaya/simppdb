@@ -281,6 +281,16 @@ public function delete($id)
 
     return $stmt->execute();
 }
+public function getById($id_pendaftar)
+{
+    $sql = "SELECT * FROM pendaftar WHERE id_pendaftar = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_assoc();
+}
+
 
 
 }
