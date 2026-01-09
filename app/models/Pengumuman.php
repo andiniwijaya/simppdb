@@ -39,4 +39,23 @@ class Pengumuman extends Database {
         $stmt->bind_param("i", $id_pendaftar);
         return $stmt->execute();
     }
+    public function getAll()
+{
+    $sql = "
+        SELECT 
+            p.id_pendaftar,
+            p.nama_lengkap,
+            pg.status
+        FROM pengumuman pg
+        JOIN pendaftar p 
+            ON p.id_pendaftar = pg.id_pendaftar
+        ORDER BY pg.id_pengumuman DESC
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 }
