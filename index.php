@@ -35,6 +35,8 @@ $router->post('/admin/ppdb/update', 'DashboardController@update');
 $router->get('/admin/ppdb/delete', 'DashboardController@delete');
 
 $router->get('/admin/ppdb/cetak', 'DashboardController@cetakPPDB');
+$router->get('/dashboard/pengumuman', 'DashboardController@pengumuman');
+
 
 $router->get('/siswa/formulir', 'FormulirController@index');
 $router->post('/siswa/formulir/simpan', 'FormulirController@simpan');

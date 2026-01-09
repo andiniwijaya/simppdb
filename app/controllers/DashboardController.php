@@ -437,4 +437,23 @@ class DashboardController {
         require __DIR__ . '/../views/admin/cetak_ppdb_excel.php';
         exit;
     }
+    // ===============================
+// PENGUMUMAN ADMIN
+// ===============================
+public function pengumuman()
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    $pengumuman = new Pengumuman();
+    $list = $pengumuman->getAll(); // semua pengumuman siswa
+
+    extract(['list' => $list]);
+
+    $content = __DIR__ . '/../views/admin/pengumuman.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+}
+
 }

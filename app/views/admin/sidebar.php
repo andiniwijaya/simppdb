@@ -36,6 +36,11 @@ $uri  = $_SERVER['REQUEST_URI'];
     <i class="bi bi-cloud-upload me-2"></i> Berkas
 </a>
 
+    <a href="<?= $base ?>/dashboard/pengumuman" 
+       class="sidebar-link <?= (strpos($uri, '/dashboard/pengumuman') !== false ? 'active' : '') ?>">
+        <i class="bi bi-megaphone me-2"></i> Pengumuman
+    </a>
+
     <a href="<?= $base ?>/dashboard/pengaturan" 
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengaturan') !== false ? 'active' : '') ?>">
         <i class="bi bi-gear-wide-connected me-2"></i> Pengaturan
