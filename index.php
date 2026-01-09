@@ -15,7 +15,6 @@ $router->post('/login', 'AuthController@processLogin');
 $router->get('/register', 'AuthController@register');
 $router->post('/register', 'AuthController@processRegister');
 
-
 //halaman dashboard
 $router->get('/dashboard', 'DashboardController@index');
 $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
@@ -24,27 +23,21 @@ $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');
 
+// PERBAIKAN: Ubah route agar cocok dengan link di view
 $router->get('/dashboard/verifikasi_berkas', 'DashboardController@verifikasiBerkas');
-$router->get('/admin/berkas/valid', 'DashboardController@validBerkas');
-$router->get('/admin/berkas/invalid', 'DashboardController@invalidBerkas');
-
+$router->get('/dashboard/validBerkas', 'DashboardController@validBerkas');  // Ganti dari /admin/berkas/valid
+$router->get('/dashboard/invalidBerkas', 'DashboardController@invalidBerkas');  // Ganti dari /admin/berkas/invalid
 
 $router->get('/admin/ppdb', 'AdminPPDBController@index');
 $router->get('/admin/ppdb/edit', 'DashboardController@editPPDB');
 $router->post('/admin/ppdb/update', 'DashboardController@updatePPDB');
 $router->get('/admin/ppdb/delete', 'DashboardController@deletePPDB');
 
-
-
 $router->get('/admin/ppdb/cetak', 'DashboardController@cetakPPDB');
-
-
-
 
 $router->get('/siswa/formulir', 'FormulirController@index');
 $router->post('/siswa/formulir/simpan', 'FormulirController@simpan');
 $router->get('/siswa/formulir/cetak', 'FormulirController@cetak');
-
 
 $router->get("/siswa/berkas_pendaftar", "BerkasController@index");
 $router->post("/siswa/berkas/upload", "BerkasController@upload");
@@ -59,7 +52,6 @@ $router->post('/forgot', 'AuthController@processForgot');
 
 $router->get('/reset', 'AuthController@resetForm');
 $router->post('/reset', 'AuthController@processReset');
-
 
 $router->get('/logout', 'LogoutController@index');
 
