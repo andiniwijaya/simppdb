@@ -35,7 +35,6 @@ $uri  = $_SERVER['REQUEST_URI'];
             <i class="bi bi-folder-check me-2"></i> Verifikasi Berkas
     </a>
 
-
     <a href="<?= $base ?>/dashboard/pengumuman" 
        class="sidebar-link <?= (strpos($uri, '/dashboard/pengumuman') !== false ? 'active' : '') ?>">
         <i class="bi bi-megaphone me-2"></i> Pengumuman
