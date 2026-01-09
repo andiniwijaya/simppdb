@@ -191,31 +191,32 @@ class Pendaftar extends Database {
         WHERE id_pendaftar=?";
 
     $stmt = $this->conn->prepare($sql);
+    
     $stmt->bind_param(
-        "ssssssssssiiissiiisssi",
-        $d['nik'],
-        $d['nisn'],
-        $d['nama_lengkap'],
-        $d['jenis_kelamin'],
-        $d['tempat_lahir'],
-        $d['tanggal_lahir'],
-        $d['agama'],
-        $d['alamat'],
-        $d['status_tinggal'],
-        $d['asal_sekolah'],
-        $anak_ke,
-        $jumlah_saudara,
-        $d['status_anak'],   // ENUM ✅
-        $d['yatim_status'],  // ENUM ✅
-        $d['bahasa_rumah'],
-        $tinggi_badan,
-        $berat_badan,
-        $d['penyakit'],
-        $tahun_lulus,
-        $d['nomor_hp'],
-        $d['email'],
-        $id_pendaftar
-    );
+    "ssssssssssiiisssiiisssi",
+    $d['nik'],
+    $d['nisn'],
+    $d['nama_lengkap'],
+    $d['jenis_kelamin'],
+    $d['tempat_lahir'],
+    $d['tanggal_lahir'],
+    $d['agama'],
+    $d['alamat'],
+    $d['status_tinggal'],
+    $d['asal_sekolah'],
+    $anak_ke,
+    $jumlah_saudara,
+    $d['status_anak'],   // s
+    $d['yatim_status'],  // s
+    $d['bahasa_rumah'],  // s
+    $tinggi_badan,
+    $berat_badan,
+    $d['penyakit'],
+    $tahun_lulus,
+    $d['nomor_hp'],
+    $d['email'],
+    $id_pendaftar
+);
 
     return $stmt->execute();
 }
