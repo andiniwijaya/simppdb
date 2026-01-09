@@ -1,0 +1,70 @@
+.bio-hero {
+    min-height: 100vh;
+    background: #0b1220;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 10%;
+    color: #fff;
+}
+
+.bio-text {
+    max-width: 500px;
+}
+
+.bio-text h5 {
+    color: #9aa4ff;
+    letter-spacing: 1px;
+}
+
+.bio-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.bio-text h4 {
+    color: #6ce3ff;
+    margin-bottom: 15px;
+}
+
+.bio-text p {
+    color: #cfd3ff;
+    line-height: 1.7;
+}
+
+.bio-social a {
+    display: inline-block;
+    margin-right: 12px;
+    color: #6ce3ff;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.bio-social a:hover {
+    color: #fff;
+}
+
+.btn-bio {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 28px;
+    background: #6ce3ff;
+    color: #000;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.bio-photo {
+    position: relative;
+}
+
+.bio-photo img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+        0 0 25px rgba(108,227,255,0.8),
+        0 0 60px rgba(108,227,255,0.5);
+}
