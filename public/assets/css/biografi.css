@@ -1,5 +1,5 @@
 .bio-container{
-    margin-left:260px; /* WAJIB – SAMAKAN DENGAN SIDEBAR ADMIN */
+    margin-left:260px; /* SAMAKAN DENGAN SIDEBAR ADMIN */
     padding:40px;
 }
 
@@ -13,18 +13,14 @@
 .bio-nav button{
     border:none;
     background:#e9ecef;
-    padding:10px 20px;
-    border-radius:20px;
+    padding:10px 22px;
+    border-radius:25px;
     font-weight:600;
     cursor:pointer;
     transition:.3s;
 }
 
-.bio-nav button:hover{
-    background:#0d6efd;
-    color:#fff;
-}
-
+.bio-nav button:hover,
 .bio-nav .active{
     background:#0d6efd;
     color:#fff;
@@ -41,17 +37,29 @@
     flex:1;
 }
 
+.bio-text h5{
+    color:#0d6efd;
+    font-weight:600;
+}
+
 .bio-text h1{
     font-size:36px;
     font-weight:700;
 }
 
+.bio-text h4{
+    margin-top:5px;
+    font-weight:600;
+    color:#555;
+}
+
 .bio-text p{
     margin-top:15px;
-    line-height:1.7;
+    line-height:1.8;
     color:#444;
 }
 
+/* FOTO */
 .bio-photo img{
     width:260px;
     height:260px;
@@ -59,28 +67,29 @@
     object-fit:cover;
     box-shadow:0 15px 30px rgba(0,0,0,.2);
 }
-.bio-social {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
+
+/* SOCIAL */
+.bio-social{
+    margin-top:20px;
+    display:flex;
+    gap:15px;
 }
 
-.bio-social a {
-    width: 42px;
-    height: 42px;
-    background: #f1f3f5;
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    transition: all .3s ease;
+.bio-social a{
+    width:42px;
+    height:42px;
+    background:#f1f3f5;
+    color:#333;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    transition:.3s;
 }
 
-.bio-social a:hover {
-    background: #0d6efd;
-    color: #fff;
-    transform: translateY(-3px);
+.bio-social a:hover{
+    background:#0d6efd;
+    color:#fff;
+    transform:translateY(-4px);
 }
-

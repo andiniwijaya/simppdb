@@ -24,77 +24,102 @@ $base = Config::base_url();
             <h1 id="bio-name">Andini Wijayanti</h1>
             <h4 id="bio-role">Project Manager</h4>
 
-            <p id="bio-desc">
-                Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam
-                pengembangan sistem informasi. Saya bertanggung jawab dalam mengatur
-                alur kerja tim, menyusun perencanaan proyek, serta memastikan setiap
-                tahapan pengembangan berjalan sesuai target. Saya juga aktif dalam
-                komunikasi antara tim teknis dan pengguna agar sistem yang dibangun
-                sesuai dengan kebutuhan.
-            </p>
+            <p id="bio-desc"></p>
+
+            <!-- SOCIAL -->
+            <div class="bio-social">
+                <a id="bio-ig" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a id="bio-github" target="_blank"><i class="bi bi-github"></i></a>
+                <a id="bio-linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+            </div>
         </div>
 
         <div class="bio-photo">
-            <img id="bio-photo" src="<?= $base ?>/public/img/bio/andini.png" alt="Andini">
+            <img id="bio-photo" src="<?= $base ?>/public/img/bio/andini.png" alt="Foto">
         </div>
 
     </section>
 
 </div>
+
 <script>
 const dataBio = {
     andini: {
         nama: "Andini Wijayanti",
-        role: "Project Manager",
-        desc: "Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam pengembangan sistem informasi. Saya bertanggung jawab dalam mengatur alur kerja tim, menyusun perencanaan proyek, serta memastikan setiap tahapan pengembangan berjalan sesuai target.",
+        reminder: "Project Manager",
+        desc: "Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam pengembangan sistem informasi. Saya bertanggung jawab mengatur alur kerja tim, menyusun perencanaan proyek, mengoordinasikan tugas, serta memastikan setiap tahapan pengembangan berjalan sesuai target dan kebutuhan pengguna.",
         foto: "<?= $base ?>/public/img/bio/andini.png",
         ig: "https://instagram.com/andini",
-        github: "#",
-        linkedin: "#"
+        github: "",
+        linkedin: ""
     },
-
     mutiara: {
         nama: "Mutiara Botani",
-        role: "Programmer",
-        desc: "Saya berperan sebagai Programmer yang fokus pada implementasi sistem, pengembangan fitur, serta perbaikan bug agar aplikasi berjalan optimal.",
+        reminder: "Programmer",
+        desc: "Saya berperan sebagai Programmer yang fokus pada pengembangan fitur aplikasi, penulisan kode program, serta perbaikan bug agar sistem berjalan stabil dan optimal sesuai dengan rancangan yang telah ditentukan.",
         foto: "<?= $base ?>/public/img/bio/mutiara.png",
         ig: "https://instagram.com/mutiara",
         github: "https://github.com/mutiara",
-        linkedin: "#"
+        linkedin: ""
     },
-
     silvia: {
         nama: "Silvia Agustina",
-        role: "System Analyst",
-        desc: "Saya memiliki minat kuat sebagai System Analyst, khususnya dalam analisis kebutuhan sistem, perancangan alur proses, dan pemodelan sistem informasi.",
+        reminder: "System Analyst",
+        desc: "Saya memiliki minat kuat sebagai System Analyst, khususnya dalam analisis kebutuhan sistem, perancangan alur proses bisnis, pemodelan sistem informasi, serta menjembatani kebutuhan pengguna dengan tim pengembang.",
         foto: "<?= $base ?>/public/img/bio/silvia.png",
         ig: "https://instagram.com/silvia",
         github: "https://github.com/silvia",
-        linkedin: "https://linkedin.com/in/silvia"
+        linkedin: "https://linkedin.com"
     },
-
     sundari: {
         nama: "Sundari Rosdiana",
-        role: "System Documentation",
-        desc: "Saya fokus pada dokumentasi sistem, pembuatan laporan, dan pendokumentasian alur kerja aplikasi secara terstruktur.",
+        reminder: "System Documentation",
+        desc: "Saya fokus pada dokumentasi sistem, penyusunan laporan, serta pendokumentasian alur kerja aplikasi agar mudah dipahami dan digunakan sebagai referensi pengembangan selanjutnya.",
         foto: "<?= $base ?>/public/img/bio/sundari.png",
-        ig: "https://instagram.com/sundari",
-        github: "#",
-        linkedin: "#"
+        ig: "",
+        github: "",
+        linkedin: ""
     },
-
     winda: {
         nama: "Winda Aryanti",
-        role: "Web Developer",
-        desc: "Saya tertarik pada pengembangan aplikasi web, khususnya desain antarmuka dan pengalaman pengguna yang responsif.",
+        reminder: "Web Developer",
+        desc: "Saya tertarik pada pengembangan aplikasi web, khususnya pada desain antarmuka, pengalaman pengguna, serta pembuatan tampilan yang responsif dan mudah digunakan.",
         foto: "<?= $base ?>/public/img/bio/winda.png",
         ig: "https://instagram.com/winda",
         github: "https://github.com/winda",
-        linkedin: "#"
+        linkedin: ""
     }
 };
 
 function showBio(key, el) {
-    document.getElementById("bio-name").innerText = dataBio[key].nama;
-    document.getElementById("bio-role").innerText = dataBio[key].role;
-    document
+    const d = dataBio[key];
+
+    document.getElementById("bio-name").innerText = d.nama;
+    document.getElementById("bio-role").innerText = d.reminder;
+    document.getElementById("bio-desc").innerText = d.desc;
+    document.getElementById("bio-photo").src = d.foto;
+
+    setLink("bio-ig", d.ig);
+    setLink("bio-github", d.github);
+    setLink("bio-linkedin", d.linkedin);
+
+    document.querySelectorAll(".bio-nav button")
+        .forEach(btn => btn.classList.remove("active"));
+    el.classList.add("active");
+}
+
+function setLink(id, url) {
+    const el = document.getElementById(id);
+    if (url) {
+        el.href = url;
+        el.style.display = "flex";
+    } else {
+        el.style.display = "none";
+    }
+}
+
+/* DEFAULT LOAD */
+document.addEventListener("DOMContentLoaded", () => {
+    showBio("andini", document.querySelector(".bio-nav button"));
+});
+</script>
