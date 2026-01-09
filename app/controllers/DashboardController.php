@@ -248,75 +248,70 @@ class DashboardController {
         $content = __DIR__ . '/../views/admin/verifikasi_berkas.php';
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
-
-    // ===============================
     // VALIDASI BERKAS (ADMIN)
-    // ===============================
     public function validBerkas()
-    {
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
-            exit;
-        }
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
 
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            header("Location: /dashboard/verifikasiBerkas");
-            exit;
-        }
-
-        $berkas = new Berkas();
-        $pendaftar = new Pendaftar();
-
-        // 1. Update status berkas menjadi 'valid'
-        $berkas->updateStatus($id, 'valid');
-
-        // 2. Ambil id_pendaftar dari berkas
-        $id_pendaftar = $berkas->getPendaftarId($id);
-
-        // 3. Update status_data siswa berdasarkan kondisi berkas keseluruhan
-        if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
-            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
-        } else {
-            // Jika belum semua valid, set ke "menunggu" atau tetap "belum_lengkap"
-            $pendaftar->updateStatusData($id_pendaftar, "menunggu");
-        }
-
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
         header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
 
-    // ===============================
-    // INVALID BERKAS (ADMIN) - BARU DITAMBAHKAN
-    // ===============================
+    $berkas    = new Berkas();
+    $pendaftar = new Pendaftar();
+
+    // 1. set berkas valid
+    $berkas->updateStatus($id, 'valid');
+
+    // 2. ambil id_pendaftar
+    $id_pendaftar = $berkas->getPendaftarId($id);
+
+    // 3. update status siswa (ENUM VALID)
+    if ($berkas->isSemuaBerkasValid($id_pendaftar)) {
+        $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
+    } else {
+        $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+    }
+
+    header("Location: /dashboard/verifikasiBerkas");
+    exit;
+}
+
+    // INVALID BERKAS (ADMIN) 
     public function invalidBerkas()
-    {
-        if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login");
-            exit;
-        }
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
 
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            header("Location: /dashboard/verifikasiBerkas");
-            exit;
-        }
-
-        $berkas = new Berkas();
-        $pendaftar = new Pendaftar();
-
-        // 1. Update status berkas menjadi 'invalid'
-        $berkas->updateStatus($id, 'invalid');
-
-        // 2. Ambil id_pendaftar dari berkas
-        $id_pendaftar = $berkas->getPendaftarId($id);
-
-        // 3. Update status_data siswa ke "menunggu" atau "belum_lengkap" karena ada invalid
-        $pendaftar->updateStatusData($id_pendaftar, "menunggu");
-
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
         header("Location: /dashboard/verifikasiBerkas");
         exit;
     }
+
+    $berkas    = new Berkas();
+    $pendaftar = new Pendaftar();
+
+    // 1. set berkas invalid
+    $berkas->updateStatus($id, 'invalid');
+
+    // 2. ambil id_pendaftar
+    $id_pendaftar = $berkas->getPendaftarId($id);
+
+    // 3. kembalikan ke status VALID ENUM
+    $pendaftar->updateStatusData($id_pendaftar, "lengkap");
+
+    header("Location: /dashboard/verifikasiBerkas");
+    exit;
+}
+
 
     // PENGATURAN ADMIN
     public function pengaturan()
