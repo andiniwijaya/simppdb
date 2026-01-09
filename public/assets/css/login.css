@@ -16,20 +16,21 @@ body{
 /* ============================
    LEFT PANEL DESKTOP
    ============================ */
-.left-panel{
-    flex:1;
-    background:
-        linear-gradient(135deg, rgba(91,92,226,.35), rgba(111,123,247,.45)),
-        url('../../img/login_bg.png');
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    color:#fff;
-    padding:70px;
-    display:flex;
+    .left-panel {
+    flex: 1;
+    background: url('../../img/login_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #fff;
+    padding: 70px;
+    padding-top: 120px;
+
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    justify-content:center;
-    align-items:flex-start;
+    align-items: flex-start;
 }
 
 /* ============================
