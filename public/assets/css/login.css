@@ -122,14 +122,5 @@ body{
         font-size:14px;
  
    }
-   @media(max-width:768px){
-    .left-panel{
-        height:260px;
-        padding:20px;
-        text-align:center;
-        align-items:center;
-        background-size: cover; /* mobile boleh cover */
-    }
-}
-
+   
 }
