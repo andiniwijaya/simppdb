@@ -12,11 +12,9 @@ $base = Config::base_url();
         <h4>Mahasiswi RPL</h4>
 
         <p>
-            Saya adalah mahasiswa yang memiliki minat kuat sebagai system analyst. 
-            Saya tertarik pada proses analisis kebutuhan sistem, perancangan alur bisnis, pemodelan sistem informasi,
-             serta penerjemahan kebutuhan pengguna ke dalam spesifikasi sistem yang terstruktur. 
-             Saya terbiasa berpikir analitis, sistematis, dan detail dalam memahami permasalahan, serta berusaha memberikan solusi yang efektif dan efisien melalui perancangan sistem yang tepat.
-              Minat ini mendorong saya untuk terus mempelajari pengembangan sistem informasi, dokumentasi sistem, dan perancangan aplikasi yang berorientasi pada kebutuhan pengguna.
+             Saya adalah mahasiswa yang memiliki minat sebagai system analyst,
+              khususnya dalam analisis kebutuhan sistem,
+              perancangan alur proses, dan pemodelan sistem informasi.
         </p>
 
         <div class="bio-social">
