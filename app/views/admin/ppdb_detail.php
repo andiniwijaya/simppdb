@@ -23,7 +23,10 @@ $base = Config::base_url();
     <tr><th>Tanggal Daftar</th><td><?= $data['tanggal_daftar'] ?></td></tr>
 </table>
 
-<a href="<?= $base ?>/admin/ppdb" class="btn btn-secondary">Kembali</a>
+<a href="<?= $base ?>/dashboard/data_ppdb" class="btn btn-secondary">
+    Kembali
+</a>
+
 
 </body>
 </html>
