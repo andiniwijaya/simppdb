@@ -36,7 +36,9 @@
                         <td><?= $no++ ?></td>
                         <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
                         <td><?= htmlspecialchars($u['email']) ?></td>
-                        <td class="text-muted">********</td>
+                        <td style="font-size:12px; word-break: break-all;">
+                         <?= htmlspecialchars($u['kata_sandi']) ?>
+                            </td>
                         <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
                         <td>
                             <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
