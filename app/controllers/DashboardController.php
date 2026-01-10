@@ -503,5 +503,43 @@ public function users()
     require __DIR__ . '/../views/admin/layout_admin.php';
 }
 
+public function user()
+{
+    if ($_SESSION['role'] !== 'admin') {
+        header("Location: /dashboard");
+        exit;
+    }
+
+    require_once __DIR__ . '/../models/User.php';
+    $user = new User();
+
+    $users = $user->getAll();
+
+    $content = __DIR__ . '/../views/admin/user.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+}
+public function deleteUser()
+{
+    if ($_SESSION['role'] !== 'admin') {
+        header("Location: /dashboard");
+        exit;
+    }
+
+    if (!isset($_GET['id'])) {
+        header("Location: /dashboard/users");
+        exit;
+    }
+
+    require_once __DIR__ . '/../models/User.php';
+    $user = new User();
+
+    $user->delete((int)$_GET['id']);
+
+    header("Location: /dashboard/users");
+    exit;
+}
+
+
+
 
 }

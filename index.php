@@ -21,6 +21,15 @@ $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
 $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
 $router->get('/dashboard/users', 'DashboardController@users');
 
+$router->get('/dashboard/user/create', 'DashboardController@createUser');
+$router->post('/dashboard/user/store', 'DashboardController@storeUser');
+
+$router->get('/dashboard/user/edit', 'DashboardController@editUser');
+$router->post('/dashboard/user/update', 'DashboardController@updateUser');
+
+$router->get('/dashboard/user/delete', 'DashboardController@deleteUser');
+
+
 $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');

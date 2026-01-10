@@ -49,4 +49,11 @@ class User {
         return $this->conn->query($sql);
     }
 
+public function delete($id)
+{
+    $stmt = $this->conn->prepare("DELETE FROM pengguna WHERE id_pengguna=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+}
 }
