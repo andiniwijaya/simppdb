@@ -46,22 +46,24 @@ class User {
     // =============================
     // AMBIL SEMUA USER (ADMIN)
     // =============================
-    public function getAll()
-    {
-        $sql = "
-            SELECT 
-                id_pengguna,
-                nama_pengguna,
-                email,
-                dibuat_pada
-            FROM pengguna
-            ORDER BY dibuat_pada DESC
-        ";
+public function getAll()
+{
+    $sql = "
+        SELECT 
+            id_pengguna,
+            nama_pengguna,
+            email,
+            kata_sandi,
+            dibuat_pada
+        FROM pengguna
+        ORDER BY dibuat_pada DESC
+    ";
 
-        return $this->conn
-                    ->query($sql)
-                    ->fetch_all(MYSQLI_ASSOC);
-    }
+    return $this->conn
+                ->query($sql)
+                ->fetch_all(MYSQLI_ASSOC);
+}
+
 
     // =============================
     // HAPUS USER
