@@ -1,7 +1,7 @@
-<h3 class="page-title">Verifikasi Berkas Pendaftar</h3>
+<h3>Verifikasi Berkas Pendaftar</h3>
 
-<div class="card-wrapper">
-<table class="ppdb-table">
+<div class="table-box">
+<table class="table-admin">
 <thead>
 <tr>
     <th>Nama Siswa</th>
@@ -22,11 +22,9 @@
 <td><?= ucwords(str_replace('_',' ', $row['jenis_berkas'])) ?></td>
 
 <td>
-<a href="<?= $row['lokasi_berkas'] ?>" target="_blank">
+<a href="<?= $row['lokasi_berkas'] ?>" target="_blank" class="link-view">
     Lihat Berkas
 </a>
-
-
 </td>
 
 <td>
@@ -44,17 +42,19 @@ if ($status === 'valid') {
 
 <td>
 <?php if ($status === 'menunggu'): ?>
-    <a href="/dashboard/validBerkas?id=<?= $row['id_berkas'] ?>" 
-       class="btn btn-success"
-       onclick="return confirm('Validkan berkas ini?')">
-       ✓ Valid
-    </a>
+    <div class="action-group">
+        <a href="/dashboard/validBerkas?id=<?= $row['id_berkas'] ?>" 
+           class="btn btn-success"
+           onclick="return confirm('Validkan berkas ini?')">
+           ✓ Valid
+        </a>
 
-    <a href="/dashboard/invalidBerkas?id=<?= $row['id_berkas'] ?>" 
-       class="btn btn-danger"
-       onclick="return confirm('Tolak berkas ini?')">
-       ✕ Invalid
-    </a>
+        <a href="/dashboard/invalidBerkas?id=<?= $row['id_berkas'] ?>" 
+           class="btn btn-danger"
+           onclick="return confirm('Tolak berkas ini?')">
+           ✕ Invalid
+        </a>
+    </div>
 <?php else: ?>
     <span class="text-muted">-</span>
 <?php endif; ?>
