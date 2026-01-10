@@ -16,7 +16,7 @@
 <tr>
     <td><?= $no++ ?></td>
     <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
-    <td><?= $u['nisn'] ?></td>
+    <td><?= $u['kata_sandi'] ?></td>
     <td><?= $u['email'] ?></td>
     <td><?= $u['dibuat_pada'] ?></td>
 </tr>
