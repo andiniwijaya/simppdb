@@ -63,6 +63,7 @@ $base = Config::base_url();
                     <input type="password"
                            name="password"
                            class="form-control pe-5"
+                           placeholder="Masukan Kata Sandi"
                            id="passField"
                            minlength="8"
                            required>
