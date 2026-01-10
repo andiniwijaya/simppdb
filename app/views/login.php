@@ -14,15 +14,9 @@ $base = Config::base_url();
 
 <body>
 
-<!-- ================= LOGIN SUCCESS ALERT DATA ================= -->
-<?php if(isset($_SESSION['login_success'])): ?>
-    <div id="login-success" data-nama="<?= htmlspecialchars($_SESSION['login_success']) ?>"></div>
-    <?php unset($_SESSION['login_success']); ?>
-<?php endif; ?>
-
 <!-- ================= LOGIN ERROR DATA ================= -->
 <?php if(isset($_GET["error"])): ?>
-    <div id="login-error" data-type="<?= $_GET['error']; ?>"></div>
+    <div id="login-error" data-type="<?= htmlspecialchars($_GET['error']) ?>"></div>
 <?php endif; ?>
 
 <div class="login-wrapper">
