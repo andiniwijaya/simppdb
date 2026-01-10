@@ -58,7 +58,7 @@ const dataBio = {
         reminder: "Programmer",
         desc: "Saya berperan sebagai Programmer yang fokus pada pengembangan fitur aplikasi, penulisan kode program, serta perbaikan bug agar sistem berjalan stabil dan optimal sesuai dengan rancangan yang telah ditentukan.",
         foto: "<?= $base ?>/public/img/bio/mutiara.png",
-        ig: "https://instagram.com/mutiara",
+        ig: "https://www.instagram.com/mutiarabotani/",
         github: "",
         linkedin: ""
     },
