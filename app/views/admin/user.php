@@ -12,7 +12,7 @@
 <div class="container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Kelola User</h4>
+        <h4 class="mb-0">Kelola User</h4>
         <a href="/dashboard/user/create" class="btn btn-primary">
             + Tambah User
         </a>
@@ -31,32 +31,28 @@
         <tbody>
             <?php if (!empty($users)): ?>
                 <?php $no = 1; foreach ($users as $u): ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
-                    <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td>
-                    </td>
-                    <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
-                    <td>
-                        <!-- EDIT -->
-                        <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
-                           class="btn btn-sm btn-warning">
-                            Edit
-                        </a>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
+                        <td><?= htmlspecialchars($u['email']) ?></td>
+                        <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
+                        <td>
+                            <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
+                               class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
 
-                        <!-- DELETE -->
-                        <a href="/dashboard/user/delete?id=<?= $u['id_pengguna'] ?>"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Yakin ingin menghapus user ini?')">
-                            Hapus
-                        </a>
-                    </td>
-                </tr>
+                            <a href="/dashboard/user/delete?id=<?= $u['id_pengguna'] ?>"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Yakin ingin menghapus user ini?')">
+                                Hapus
+                            </a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6" class="text-center text-muted">
+                    <td colspan="5" class="text-center text-muted">
                         Data user belum tersedia
                     </td>
                 </tr>
