@@ -5,8 +5,8 @@
 body {
     margin: 0;
     font-family: Poppins, sans-serif;
-    background: #f4f6f8;
-    color: #2f343a;
+    background: #f5f7fa;
+    color: #333;
 }
 
 * {
@@ -19,7 +19,7 @@ body {
 
 .sidebar{
     width:260px;
-    background:#1f3a5f; /* biru kalem */
+    background:#1f3a5f; /* sidebar biru kalem */
     height:100vh;
     padding-top:20px;
     position:fixed;
@@ -48,6 +48,7 @@ body {
     margin:4px 0 0 0;
     font-size:15px;
     font-weight:600;
+    letter-spacing:0.4px;
 }
 
 .brand small{
@@ -67,15 +68,17 @@ body {
     border-left:4px solid transparent;
 }
 
+/* HOVER */
 .sidebar-link:hover{
     background:rgba(255,255,255,.12);
-    border-left:4px solid #9db7d5;
+    border-left:4px solid #c7dbef;
     padding-left:28px;
 }
 
+/* ACTIVE */
 .sidebar-link.active{
     background:rgba(255,255,255,.2);
-    border-left:4px solid #c7dbef;
+    border-left:4px solid #e2ecf7;
     padding-left:28px;
     font-weight:600;
 }
@@ -98,6 +101,7 @@ body {
     padding:12px 24px;
     color:#ffb4b4 !important;
     font-weight:700;
+    letter-spacing:0.4px;
 }
 
 .logout-link:hover{
@@ -115,23 +119,25 @@ body {
 }
 
 /* ======================================================
-   CONTENT
+   CONTENT WRAPPER
    ====================================================== */
 
 .content {
     padding: 35px;
     margin-left: 260px;
+    z-index: 10;
     position: relative;
 }
 
 /* ======================================================
-   DASHBOARD STATISTIC
+   DASHBOARD - STATISTIC BOX
    ====================================================== */
 
 .stat-row {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 .stat-card {
@@ -139,73 +145,75 @@ body {
     min-width: 220px;
     padding: 22px 28px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-radius: 14px;
+    justify-content: space-between;
+    border-radius: 16px;
     color: white;
+    font-weight: 600;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    transition: .2s;
+    transition: 0.2s;
 }
 
-.stat-card:hover{
-    transform: translateY(-4px);
+.stat-card:hover {
+    transform: translateY(-5px);
 }
 
-.stat-card.blue   { background:#4b6b8a; }
-.stat-card.green  { background:#4c7a70; }
-.stat-card.purple { background:#6b5b95; }
-.stat-card.red    { background:#8a4b4b; }
+.stat-card.purple { background: #6b5b95; }
+.stat-card.blue   { background: #4b6b8a; }
+.stat-card.green  { background: #4c7a70; }
+.stat-card.red    { background: #8a4b4b; }
 
-.stat-info h3{
-    margin:0;
-    font-size:34px;
+.stat-info h3 {
+    margin: 0;
+    font-size: 36px;
 }
 
-.stat-info p{
-    margin:0;
-    opacity:.85;
+.stat-info p {
+    margin: 0;
+    opacity: 0.85;
 }
 
-.stat-icon{
-    font-size:38px;
+.stat-icon {
+    font-size: 38px;
 }
 
 /* ======================================================
    TABLE
    ====================================================== */
 
-.table-box{
-    background:white;
-    padding:15px;
-    border-radius:12px;
-    margin-top:10px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.05);
+.table-box {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
 }
 
-.table-admin{
-    width:100%;
-    border-collapse:collapse;
-    font-size:15px;
+.table-admin {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
 }
 
-.table-admin thead tr{
-    background:#eef2f6;
+.table-admin thead tr {
+    background: #eef2f6;
 }
 
-.table-admin th{
-    padding:12px;
-    text-align:left;
-    font-weight:600;
-    color:#2f343a;
+.table-admin th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    color: #333;
 }
 
-.table-admin td{
-    padding:12px;
-    border-bottom:1px solid #e5e7eb;
+.table-admin td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 
-.table-admin tr:hover{
-    background:#f9fafb;
+.table-admin tr:hover {
+    background: #f8fbff;
+    transition: 0.2s;
 }
 
 /* ======================================================
@@ -216,7 +224,7 @@ body {
     background:white;
     padding:25px;
     border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
     margin-top:20px;
 }
 
@@ -224,19 +232,21 @@ body {
     display:flex;
     gap:15px;
     margin-bottom:25px;
-    border-bottom:2px solid #e5e7eb;
+    padding-left:0;
+    border-bottom:2px solid #eee;
     padding-bottom:10px;
 }
 
 .kelembagaan-nav li{
     list-style:none;
     padding:10px 20px;
-    background:#e8edf3;
+    background:#edf2f7;
     border-radius:6px;
     cursor:pointer;
     font-weight:600;
-    color:#1f3a5f;
     transition:.2s;
+    color:#1f3a5f;
+    font-size:15px;
 }
 
 .kelembagaan-nav li:hover,
@@ -245,22 +255,83 @@ body {
     color:white;
 }
 
+.kelembagaan-content{
+    padding:5px;
+}
+
 .kelembagaan-page{
     display:none;
 }
+
 .kelembagaan-page.show{
     display:block;
 }
 
 /* ======================================================
-   PENGATURAN
+   FORM & PENGATURAN TABLE
+   ====================================================== */
+
+.form-table,
+.pengaturan-table {
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+.form-table th,
+.pengaturan-table th{
+    width:220px;
+    padding:12px 15px;
+    background:#f1f5f9;
+    color:#1f3a5f;
+    font-weight:700;
+    border-bottom:1px solid #e6edf5;
+    font-size:15px;
+}
+
+.form-table td,
+.pengaturan-table td{
+    padding:12px 15px;
+    background:white;
+    border-bottom:1px solid #eef2f7;
+    font-size:15px;
+}
+
+.form-table tr:hover td,
+.pengaturan-table tr:hover td{
+    background:#fafbff;
+}
+
+/* ======================================================
+   RESPONSIVE TABLE
+   ====================================================== */
+
+@media (max-width:900px){
+    .form-table th,
+    .form-table td,
+    .pengaturan-table th,
+    .pengaturan-table td{
+        display:block;
+        width:100%;
+    }
+
+    .form-table tr,
+    .pengaturan-table tr{
+        margin-bottom:10px;
+        display:block;
+        border-bottom:2px solid #eee;
+    }
+}
+
+/* ======================================================
+   PENGATURAN STYLE
    ====================================================== */
 
 .pengaturan-wrapper{
     background:white;
     padding:25px;
     border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
     margin-top:20px;
 }
 
@@ -268,18 +339,21 @@ body {
     display:flex;
     gap:15px;
     margin-bottom:25px;
-    border-bottom:2px solid #e5e7eb;
+    padding-left:0;
+    border-bottom:2px solid #eee;
     padding-bottom:10px;
 }
 
 .pengaturan-nav li{
     list-style:none;
     padding:10px 20px;
-    background:#e8edf3;
+    background:#edf2f7;
     border-radius:6px;
     cursor:pointer;
     font-weight:600;
+    transition:.2s;
     color:#1f3a5f;
+    font-size:15px;
 }
 
 .pengaturan-nav li:hover,
@@ -288,28 +362,109 @@ body {
     color:white;
 }
 
+.pengaturan-content{
+    padding:5px;
+}
+
+.pengaturan-page{
+    display:none;
+}
+
+.pengaturan-page.show{
+    display:block;
+}
+
+/* ======================================================
+   PENGUMUMAN
+   ====================================================== */
+
+.pengumuman-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pengumuman-table th,
+.pengumuman-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.pengumuman-table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #0f172a;
+}
+
 /* ======================================================
    STATUS BADGE
    ====================================================== */
 
-.status-badge{
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:600;
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.status-menunggu{
-    background:#fef3c7;
-    color:#92400e;
+.status-menunggu {
+    background: #fff7ed;
+    color: #9a3412;
 }
 
-.status-diterima{
-    background:#dcfce7;
-    color:#166534;
+.status-diterima {
+    background: #ecfdf5;
+    color: #166534;
 }
 
-.status-ditolak{
-    background:#fee2e2;
-    color:#991b1b;
+.status-ditolak {
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+/* ======================================================
+   BADGE & BUTTON
+   ====================================================== */
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-success { background: #dcfce7; color: #166534; }
+.badge-danger  { background: #fee2e2; color: #991b1b; }
+.badge-warning { background: #fef3c7; color: #92400e; }
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.btn-success { background: #16a34a; color: #fff; }
+.btn-danger  { background: #dc2626; color: #fff; }
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.link-view {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+}
+
+.text-muted {
+    color: #999;
 }
