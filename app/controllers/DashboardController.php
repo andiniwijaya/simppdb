@@ -486,11 +486,21 @@ public function biografi()
         $content = __DIR__ . '/../views/admin/pengumuman.php';
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
-    public function users()
+public function users()
 {
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
+    }
+
     $user = new User();
-    $data['users'] = $user->getAll();
-    $this->view('admin/users', $data);
+    $users = $user->getAll();
+
+    // kirim ke view
+    extract(['users' => $users]);
+
+    $content = __DIR__ . '/../views/admin/users.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
 }
 
 
