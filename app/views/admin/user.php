@@ -15,11 +15,10 @@
 <?php $no=1; foreach($users as $u): ?>
 <tr>
     <td><?= $no++ ?></td>
-    <td><?= htmlspecialchars($u['username']) ?></td>
+    <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
     <td><?= $u['nisn'] ?></td>
     <td><?= $u['email'] ?></td>
-    <td><?= ucfirst($u['role']) ?></td>
-    <td><?= $u['created_at'] ?></td>
+    <td><?= $u['dibuat_pada'] ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
