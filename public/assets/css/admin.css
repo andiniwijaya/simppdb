@@ -193,7 +193,34 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 15px;
+     table-layout: fixed; 
+
 }
+.table-admin th:nth-child(1),
+.table-admin td:nth-child(1) {
+    width: 20%;
+}
+
+.table-admin th:nth-child(2),
+.table-admin td:nth-child(2) {
+    width: 22%;
+}
+
+.table-admin th:nth-child(3),
+.table-admin td:nth-child(3) {
+    width: 15%;
+}
+
+.table-admin th:nth-child(4),
+.table-admin td:nth-child(4) {
+    width: 15%;
+}
+
+.table-admin th:nth-child(5),
+.table-admin td:nth-child(5) {
+    width: 28%;
+}
+
 
 .table-admin thead tr {
     background: #eef2f6;
@@ -214,6 +241,7 @@ body {
 .table-admin tr:hover {
     background: #f8fbff;
     transition: 0.2s;
+
 }
 
 /* ======================================================
@@ -468,3 +496,12 @@ body {
 .text-muted {
     color: #999;
 }
+.action-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.table-admin td:nth-child(4) {
+    text-align: center;
+}
+
