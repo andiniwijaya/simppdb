@@ -12,24 +12,37 @@ class Router {
         $this->routes['POST'][$uri] = $action;
     }
 
-    public function run(){
+   public function run(){
 
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $method = $_SERVER['REQUEST_METHOD'];
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        $route = $this->routes[$method][$uri] ?? null;
+ 
+    $basePath = '/sim_ppdb';
 
-        if(!$route){
-            echo "404";
-            exit;
-        }
-
-        list($controller, $method) = explode('@', $route);
-
-        require_once __DIR__ . '/../app/controllers/' . $controller . '.php';
-
-        $object = new $controller;
-
-        return $object->$method();
+    if (strpos($uri, $basePath) === 0) {
+        $uri = substr($uri, strlen($basePath));
     }
+
+    if ($uri === '') {
+        $uri = '/';
+    }
+
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    $route = $this->routes[$method][$uri] ?? null;
+
+    if(!$route){
+        echo "404";
+        exit;
+    }
+
+    list($controller, $methodName) = explode('@', $route);
+
+    require_once __DIR__ . '/../app/controllers/' . $controller . '.php';
+
+    $object = new $controller;
+
+    return $object->$methodName();
+}
+
 }

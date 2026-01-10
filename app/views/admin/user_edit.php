@@ -18,7 +18,8 @@
         </a>
     </div>
 
-    <form action="/index.php?url=dashboard/user/update" method="post">
+    <form action="/dashboard/user/update" method="post">
+
 
         <input type="hidden" name="id" value="<?= $data['id_pengguna'] ?>">
 
