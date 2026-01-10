@@ -36,7 +36,8 @@
                     <td><?= $no++ ?></td>
                     <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
-
+                    <td>
+                    </td>
                     <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
                     <td>
                         <!-- EDIT -->
