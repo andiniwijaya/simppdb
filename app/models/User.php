@@ -9,7 +9,7 @@ class User {
     public function __construct()
     {
         $db = new Database();
-        $this->conn = $db->conn;
+        $this->conn = $db->conn; // MYSQLI
     }
 
     // =============================
@@ -44,26 +44,67 @@ class User {
     }
 
     // =============================
-    // AMBIL SEMUA USER (ADMIN)
+    // AMBIL SEMUA USER
     // =============================
-public function getAll()
-{
-    $sql = "
-        SELECT 
-            id_pengguna,
-            nama_pengguna,
-            email,
-            kata_sandi,
-            dibuat_pada
-        FROM pengguna
-        ORDER BY dibuat_pada DESC
-    ";
+    public function getAll()
+    {
+        $sql = "
+            SELECT 
+                id_pengguna,
+                nama_pengguna,
+                email,
+                kata_sandi,
+                dibuat_pada
+            FROM pengguna
+            ORDER BY dibuat_pada DESC
+        ";
 
-    return $this->conn
-                ->query($sql)
-                ->fetch_all(MYSQLI_ASSOC);
-}
+        return $this->conn
+                    ->query($sql)
+                    ->fetch_all(MYSQLI_ASSOC);
+    }
 
+    // =============================
+    // AMBIL USER BY ID (EDIT)
+    // =============================
+    public function getById($id)
+    {
+        $sql = "SELECT * FROM pengguna WHERE id_pengguna = ? LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // =============================
+    // UPDATE USER
+    // =============================
+    public function update($id, $data)
+    {
+        $fields = [];
+        $values = [];
+        $types  = "";
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = ?";
+            $values[] = $value;
+            $types   .= "s";
+        }
+
+        $types .= "i";
+        $values[] = $id;
+
+        $sql = "
+            UPDATE pengguna
+            SET " . implode(", ", $fields) . "
+            WHERE id_pengguna = ?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param($types, ...$values);
+        return $stmt->execute();
+    }
 
     // =============================
     // HAPUS USER
