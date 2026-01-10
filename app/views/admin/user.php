@@ -36,11 +36,7 @@
                     <td><?= $no++ ?></td>
                     <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
-                    <td>
-                        <span class="badge bg-<?= $u['peran'] === 'admin' ? 'danger' : 'primary' ?>">
-                            <?= htmlspecialchars($u['peran']) ?>
-                        </span>
-                    </td>
+
                     <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
                     <td>
                         <!-- EDIT -->
