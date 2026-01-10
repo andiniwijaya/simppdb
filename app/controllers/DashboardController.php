@@ -503,7 +503,7 @@ class DashboardController {
         exit;
  
         }
-        public function editUser()
+      public function editUser()
 {
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
         header("Location: /login");
@@ -518,11 +518,10 @@ class DashboardController {
     $user = new User();
     $data = $user->getById((int)$_GET['id']);
 
-    extract(['data' => $data]);
-
-    $content = __DIR__ . '/../views/admin/user_edit.php';
-    require __DIR__ . '/../views/admin/layout_admin.php';
+    // LANGSUNG LOAD VIEW
+    require __DIR__ . '/../views/admin/user_edit.php';
 }
+
     public function updateUser()
 {
     if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
