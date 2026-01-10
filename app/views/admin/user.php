@@ -24,6 +24,7 @@
                 <th width="5%">No</th>
                 <th>Nama Pengguna</th>
                 <th>Email</th>
+                <th>Kata Sandi</th>
                 <th>Dibuat Pada</th>
                 <th width="20%">Aksi</th>
             </tr>
@@ -35,6 +36,7 @@
                         <td><?= $no++ ?></td>
                         <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
                         <td><?= htmlspecialchars($u['email']) ?></td>
+                        <td class="text-muted">********</td>
                         <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
                         <td>
                             <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
@@ -52,7 +54,7 @@
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="5" class="text-center text-muted">
+                    <td colspan="6" class="text-center text-muted">
                         Data user belum tersedia
                     </td>
                 </tr>
