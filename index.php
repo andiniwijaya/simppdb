@@ -19,6 +19,8 @@ $router->post('/register', 'AuthController@processRegister');
 $router->get('/dashboard', 'DashboardController@index');
 $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
 $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
+$router->get('/dashboard/users', 'DashboardController@users');
+
 $router->get('/dashboard/pengaturan', 'DashboardController@pengaturan');
 $router->get('/dashboard/administrasi', 'DashboardController@administrasi');
 $router->get('/dashboard/verifikasibayar', 'DashboardController@verifikasibayar');

@@ -485,5 +485,12 @@ public function biografi()
         $content = __DIR__ . '/../views/admin/pengumuman.php';
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
+    public function users()
+{
+    $user = new User();
+    $data['users'] = $user->getAll();
+    $this->view('admin/users', $data);
+}
+
 
 }
