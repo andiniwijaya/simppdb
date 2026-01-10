@@ -24,7 +24,6 @@
                 <th width="5%">No</th>
                 <th>Nama Pengguna</th>
                 <th>Email</th>
-                <th>Peran</th>
                 <th>Dibuat Pada</th>
                 <th width="20%">Aksi</th>
             </tr>
