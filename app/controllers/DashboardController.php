@@ -486,38 +486,33 @@ public function biografi()
         $content = __DIR__ . '/../views/admin/pengumuman.php';
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
-public function users()
-{
-    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-        header("Location: /login");
+    public function createUser()
+    {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+            header("Location: /login");
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: /dashboard/users");
+            exit;
+        }
+
+        $user = new User();
+
+        $data = [
+            'nama'       => $_POST['nama'] ?? '',
+            'email'      => $_POST['email'] ?? '',
+            'kata_sandi' => password_hash($_POST['kata_sandi'] ?? '', PASSWORD_DEFAULT),
+            'role'       => $_POST['role'] ?? 'admin'
+        ];
+
+        $user->create($data);
+
+        header("Location: /dashboard/users");
         exit;
     }
 
-    $user = new User();
-    $users = $user->getAll();
-
-    // kirim ke view
-    extract(['users' => $users]);
-
-    $content = __DIR__ . '/../views/admin/user.php';
-    require __DIR__ . '/../views/admin/layout_admin.php';
-}
-
-public function user()
-{
-    if ($_SESSION['role'] !== 'admin') {
-        header("Location: /dashboard");
-        exit;
-    }
-
-    require_once __DIR__ . '/../models/User.php';
-    $user = new User();
-
-    $users = $user->getAll();
-
-    $content = __DIR__ . '/../views/admin/user.php';
-    require __DIR__ . '/../views/admin/layout_admin.php';
-}
 public function deleteUser()
 {
     if ($_SESSION['role'] !== 'admin') {
