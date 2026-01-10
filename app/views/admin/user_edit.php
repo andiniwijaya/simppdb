@@ -8,7 +8,7 @@
         <input type="text"
                name="nama"
                class="form-control"
-               value="<?= htmlspecialchars($data['nama']) ?>"
+               value="<?= htmlspecialchars($data['nama_pengguna']) ?>"
                required>
     </div>
 
@@ -36,7 +36,7 @@
         <label>Dibuat Pada</label>
         <input type="text"
                class="form-control"
-               value="<?= $data['created_at'] ?>"
+               value="<?= $data['dibuat_pada'] ?>"
                disabled>
     </div>
 
