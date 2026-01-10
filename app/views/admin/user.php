@@ -4,11 +4,10 @@
 <thead>
 <tr>
     <th>No</th>
-    <th>Username</th>
-    <th>NISN</th>
+    <th>nama_pengguna</th>
+    <th>kata_sandi</th>
     <th>Email</th>
-    <th>Role</th>
-    <th>Tanggal Daftar</th>
+    <th>dibuat_pada</th>
 </tr>
 </thead>
 <tbody>
