@@ -44,7 +44,7 @@ $base = Config::base_url();
 
 <!-- ================= AUDIO BACKGROUND ================= -->
 <audio id="bg-music" loop>
-    <source src="<?= $base ?>/public/audio/background.mp3" type="audio/mpeg">
+    <source src="<?= $base ?>/public/background.mp3" type="audio/mpeg">
 </audio>
 
 <script>
