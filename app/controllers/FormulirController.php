@@ -80,7 +80,8 @@ class FormulirController {
             $ortu->saveIbu($id_pendaftar, $_POST);
 
             // update status_data (lengkap / belum_lengkap)
-            $pendaftar->updateStatusData($id_pendaftar);
+           $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
+
 
             header("Location: /siswa/formulir?tab=ortu&saved=1");
             exit;
