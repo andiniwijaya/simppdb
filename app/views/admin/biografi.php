@@ -42,6 +42,11 @@ $base = Config::base_url();
 
 </div>
 
+<!-- ================= AUDIO BACKGROUND ================= -->
+<audio id="bg-music" loop>
+    <source src="<?= $base ?>/public/audio/background.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const dataBio = {
     andini: {
@@ -49,14 +54,14 @@ const dataBio = {
         reminder: "Project Manager",
         desc: "Saya adalah mahasiswi RPL yang berperan sebagai Project Manager dalam pengembangan sistem informasi. Saya bertanggung jawab mengatur alur kerja tim, menyusun perencanaan proyek, mengoordinasikan tugas, serta memastikan setiap tahapan pengembangan berjalan sesuai target dan kebutuhan pengguna.",
         foto: "<?= $base ?>/public/img/bio/andini.png",
-        ig: "https://www.instagram.com/ann.wijay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        ig: "https://www.instagram.com/ann.wijay",
         github: "",
         linkedin: ""
     },
     mutiara: {
         nama: "Mutiara Botani",
         reminder: "Programmer",
-        desc: "Saya berperan sebagai Programmer yang fokus pada pengembangan fitur aplikasi, penulisan kode program, serta perbaikan bug agar sistem berjalan stabil dan optimal sesuai dengan rancangan yang telah ditentukan.",
+        desc: "Saya berperan sebagai Programmer yang fokus pada pengembangan fitur aplikasi, penulisan kode program, serta perbaikan bug agar sistem berjalan stabil dan optimal.",
         foto: "<?= $base ?>/public/img/bio/mutiara.png",
         ig: "https://www.instagram.com/mutiarabotani/",
         github: "",
@@ -67,25 +72,25 @@ const dataBio = {
         reminder: "System Analyst",
         desc: "Saya memiliki minat kuat sebagai System Analyst, khususnya dalam analisis kebutuhan sistem, perancangan alur proses bisnis, pemodelan sistem informasi, serta menjembatani kebutuhan pengguna dengan tim pengembang.",
         foto: "<?= $base ?>/public/img/bio/silvia.png",
-        ig: "https://www.instagram.com/shakipiya/?utm_source=ig_web_button_share_sheet",
+        ig: "https://www.instagram.com/shakipiya/",
         github: "",
         linkedin: ""
     },
     sundari: {
         nama: "Sundari Rosdiana",
         reminder: "System Documentation",
-        desc: "Saya fokus pada dokumentasi sistem, penyusunan laporan, serta pendokumentasian alur kerja aplikasi agar mudah dipahami dan digunakan sebagai referensi pengembangan selanjutnya.",
+        desc: "Saya fokus pada dokumentasi sistem, penyusunan laporan, serta pendokumentasian alur kerja aplikasi agar mudah dipahami.",
         foto: "<?= $base ?>/public/img/bio/sundari.png",
-        ig: "https://www.instagram.com/dianadariii?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        ig: "https://www.instagram.com/dianadariii",
         github: "",
         linkedin: ""
     },
     winda: {
         nama: "Winda Aryanti",
         reminder: "Web Developer",
-        desc: "Saya tertarik pada pengembangan aplikasi web, khususnya pada desain antarmuka, pengalaman pengguna, serta pembuatan tampilan yang responsif dan mudah digunakan.",
+        desc: "Saya tertarik pada pengembangan aplikasi web, khususnya pada desain antarmuka dan pengalaman pengguna.",
         foto: "<?= $base ?>/public/img/bio/winda.png",
-        ig: "https://www.instagram.com/wnd_arynt/?utm_source=ig_web_button_share_sheet",
+        ig: "https://www.instagram.com/wnd_arynt/",
         github: "",
         linkedin: ""
     }
@@ -106,6 +111,8 @@ function showBio(key, el) {
     document.querySelectorAll(".bio-nav button")
         .forEach(btn => btn.classList.remove("active"));
     el.classList.add("active");
+
+    playMusicOnce();
 }
 
 function setLink(id, url) {
@@ -115,6 +122,18 @@ function setLink(id, url) {
         el.style.display = "flex";
     } else {
         el.style.display = "none";
+    }
+}
+
+/* ================= MUSIC CONTROL ================= */
+const bgMusic = document.getElementById("bg-music");
+let musicPlayed = false;
+
+function playMusicOnce() {
+    if (!musicPlayed) {
+        bgMusic.volume = 0.4;
+        bgMusic.play().catch(() => {});
+        musicPlayed = true;
     }
 }
 
