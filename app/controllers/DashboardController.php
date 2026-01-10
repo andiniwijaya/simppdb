@@ -499,7 +499,7 @@ public function users()
     // kirim ke view
     extract(['users' => $users]);
 
-    $content = __DIR__ . '/../views/admin/users.php';
+    $content = __DIR__ . '/../views/admin/user.php';
     require __DIR__ . '/../views/admin/layout_admin.php';
 }
 
