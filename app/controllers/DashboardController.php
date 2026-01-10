@@ -538,19 +538,16 @@ class DashboardController {
     $user = new User();
 
     $data = [
-        'nama'  => $_POST['nama'],
-        'email' => $_POST['email']
-    ];
+    'nama_pengguna' => $_POST['nama_pengguna'],
+    'email'         => $_POST['email']
+];
 
-    // password hanya diupdate jika diisi
-    if (!empty($_POST['kata_sandi'])) {
-        $data['kata_sandi'] = password_hash(
-            $_POST['kata_sandi'],
-            PASSWORD_DEFAULT
-        );
-    }
+if (!empty($_POST['kata_sandi'])) {
+    $data['kata_sandi'] = password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT);
+}
 
-    $user->update((int)$_POST['id'], $data);
+$user->update((int)$_POST['id'], $data);
+
 
     header("Location: /dashboard/users");
     exit;
