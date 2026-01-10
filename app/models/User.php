@@ -43,7 +43,7 @@ class User {
     }
       public function getAll()
     {
-        $sql = "SELECT id, username, nisn, email, role, created_at
+        $sql = "SELECT id_pengguna, nama_pengguna, kata_sandi, email, dibuat_pada
                 FROM pengguna
                 ORDER BY created_at DESC";
         return $this->conn->query($sql);
