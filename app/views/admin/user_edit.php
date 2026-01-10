@@ -1,13 +1,31 @@
-<h4 class="mb-3">✏️ Edit User</h4>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
 
-<form action="/dashboard/updateUser" method="post">
-    <input type="hidden" name="id" value="<?= $data['id_pengguna'] ?>">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle">
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">✏️ Edit User</h4>
+        <a href="/dashboard/users" class="btn btn-secondary">
+            ← Kembali
+        </a>
+    </div>
+
+    <form action="/dashboard/updateUser" method="post">
+
+        <input type="hidden" name="id" value="<?= $data['id_pengguna'] ?>">
+
+        <table class="table table-bordered table-striped align-middle">
             <tbody>
                 <tr>
-                    <th width="30%">Nama Pengguna</th>
+                    <th width="25%">Nama Pengguna</th>
                     <td>
                         <input type="text"
                                name="nama_pengguna"
@@ -46,20 +64,26 @@
                     <td>
                         <input type="text"
                                class="form-control"
-                               value="<?= $data['dibuat_pada'] ?>"
+                               value="<?= htmlspecialchars($data['dibuat_pada']) ?>"
                                disabled>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <button type="submit" class="btn btn-primary">
+                            💾 Simpan Perubahan
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <div class="d-flex justify-content-between mt-3">
-        <a href="/dashboard/users" class="btn btn-secondary">
-            ← Kembali
-        </a>
-        <button type="submit" class="btn btn-primary">
-            💾 Simpan Perubahan
-        </button>
-    </div>
-</form>
+    </form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
