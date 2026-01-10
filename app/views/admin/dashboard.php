@@ -2,16 +2,14 @@
 $base = Config::base_url();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Dashboard Admin PPDB</title>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin PPDB</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="<?= $base ?>/public/assets/css/admin.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/admin.css">
 </head>
 
 <body>
@@ -31,7 +29,9 @@ $base = Config::base_url();
                 <h3><?= $jumlah ?></h3>
                 <p>Pendaftar Baru</p>
             </div>
-            <div class="stat-icon"><i class="bi bi-inbox"></i></div>
+            <div class="stat-icon">
+                <i class="bi bi-inbox"></i>
+            </div>
         </div>
 
         <div class="stat-card blue">
@@ -39,7 +39,9 @@ $base = Config::base_url();
                 <h3><?= $menunggu ?></h3>
                 <p>Menunggu Validasi</p>
             </div>
-            <div class="stat-icon"><i class="bi bi-clock-history"></i></div>
+            <div class="stat-icon">
+                <i class="bi bi-clock-history"></i>
+            </div>
         </div>
 
         <div class="stat-card green">
@@ -47,7 +49,9 @@ $base = Config::base_url();
                 <h3><?= $valid ?></h3>
                 <p>Data Valid</p>
             </div>
-            <div class="stat-icon"><i class="bi bi-check-all"></i></div>
+            <div class="stat-icon">
+                <i class="bi bi-check-all"></i>
+            </div>
         </div>
 
         <div class="stat-card red">
@@ -55,23 +59,22 @@ $base = Config::base_url();
                 <h3><?= $tolak ?></h3>
                 <p>Data Ditolak</p>
             </div>
-            <div class="stat-icon"><i class="bi bi-x-circle"></i></div>
+            <div class="stat-icon">
+                <i class="bi bi-x-circle"></i>
+            </div>
         </div>
 
     </div>
 
-            <div class="progress">
-                <div class="progress-bar red" style="width: <?= $persen_tolak ?>%"></div>
-            </div>
-        </div>
-
+    <!-- ================= PROGRESS BAR ================= -->
+    <div class="progress">
+        <div class="progress-bar red" style="width: <?= $persen_tolak ?>%"></div>
     </div>
 
     <!-- ================= TABLE TERBARU ================= -->
     <h3 style="margin-top:30px; margin-bottom:15px;">Pendaftar Terbaru</h3>
 
     <div class="table-box">
-
         <table class="table-admin">
             <thead>
                 <tr>
@@ -83,26 +86,25 @@ $base = Config::base_url();
             </thead>
 
             <tbody>
-            <?php if (!empty($latest) && is_array($latest)): ?>
-                <?php foreach ($latest as $row): ?>
+                <?php if (!empty($latest) && is_array($latest)): ?>
+                    <?php foreach ($latest as $row): ?>
+                        <tr>
+                            <td><?= $row["nama_lengkap"] ?></td>
+                            <td><?= $row["nisn"] ?></td>
+                            <td><?= $row["status_data"] ?></td>
+                            <td><?= $row["tanggal_daftar"] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <tr>
-                        <td><?= $row["nama_lengkap"] ?></td>
-                        <td><?= $row["nisn"] ?></td>
-                        <td><?= $row["status_data"] ?></td>
-                        <td><?= $row["tanggal_daftar"] ?></td>
+                        <td colspan="4" style="text-align:center;color:#777;">
+                            Belum ada data pendaftar terbaru.
+                        </td>
                     </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="4" style="text-align:center;color:#777;">
-                        Belum ada data pendaftar terbaru.
-                    </td>
-                </tr>
-            <?php endif; ?>
+                <?php endif; ?>
             </tbody>
 
         </table>
-
     </div>
 
 </div>
