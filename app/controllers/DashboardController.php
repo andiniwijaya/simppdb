@@ -501,5 +501,61 @@ class DashboardController {
 
         header("Location: /dashboard/users");
         exit;
+ 
+        }
+        public function editUser()
+{
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
     }
+
+    if (!isset($_GET['id'])) {
+        header("Location: /dashboard/users");
+        exit;
+    }
+
+    $user = new User();
+    $data = $user->getById((int)$_GET['id']);
+
+    extract(['data' => $data]);
+
+    $content = __DIR__ . '/../views/admin/user_edit.php';
+    require __DIR__ . '/../views/admin/layout_admin.php';
+}
+    public function updateUser()
+{
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: /dashboard/users");
+        exit;
+    }
+
+    $user = new User();
+
+    $data = [
+        'nama'  => $_POST['nama'],
+        'email' => $_POST['email']
+    ];
+
+    // password hanya diupdate jika diisi
+    if (!empty($_POST['kata_sandi'])) {
+        $data['kata_sandi'] = password_hash(
+            $_POST['kata_sandi'],
+            PASSWORD_DEFAULT
+        );
+    }
+
+    $user->update((int)$_POST['id'], $data);
+
+    header("Location: /dashboard/users");
+    exit;
+}
+
+
+
 }
