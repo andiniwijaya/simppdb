@@ -45,7 +45,7 @@ class User {
     {
         $sql = "SELECT id_pengguna, nama_pengguna, kata_sandi, email, dibuat_pada
                 FROM pengguna
-                ORDER BY created_at DESC";
+                ORDER BY dibuat_pada DESC";
         return $this->conn->query($sql);
     }
 
