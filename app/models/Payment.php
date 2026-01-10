@@ -183,5 +183,23 @@ public function getPendaftarId($id_pembayaran)
     $row = $stmt->get_result()->fetch_assoc();
     return $row['id_pendaftar'] ?? null;
 }
+public function isLunas($id_pendaftar)
+{
+    $sql = "
+        SELECT IFNULL(SUM(jumlah), 0) AS total
+        FROM pembayaran
+        WHERE id_pendaftar = ?
+          AND status_bayar = 'lunas'
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pendaftar);
+    $stmt->execute();
+
+    $row = $stmt->get_result()->fetch_assoc();
+
+    return ((int)$row['total'] >= self::TOTAL_INFAQ);
+}
+
 
 }
