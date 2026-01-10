@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../models/Pendaftar.php';
 require_once __DIR__ . '/../models/Upload.php';
+require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Payment.php';
 require_once __DIR__ . '/../models/Berkas.php';
 require_once __DIR__ . '/../models/Pengumuman.php';
