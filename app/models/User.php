@@ -27,7 +27,6 @@ class User {
 
     return $this->conn->insert_id;
 }
-ARI USERNAME
     public function findByUsername($username)
     {
         $sql = "SELECT * FROM pengguna WHERE nama_pengguna = ? LIMIT 1";
