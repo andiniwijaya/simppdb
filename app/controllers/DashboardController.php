@@ -437,36 +437,37 @@ class DashboardController {
         exit;
     }
 
-   public function pengumuman()
+        public function pengumuman()
 {
     if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
         header("Location: /login");
         exit;
     }
-    // LOAD MODEL
+
     $pengumuman = new Pengumuman();
     $pendaftar  = new Pendaftar();
-    $berkas     = new Berkas();
-    $payment    = new Payment();
 
-    // AMBIL SEMUA DATA PENGUMUMAN
+    // Ambil semua pengumuman
     $list = $pengumuman->getAll();
 
-    // AUTO UPDATE STATUS
+    // 🔁 SINKRON DENGAN STATUS PENDAFTAR
     foreach ($list as $row) {
 
         $id_pendaftar = $row['id_pendaftar'];
 
-        // cek berkas & pembayaran
-        $status_upload = $berkas->getStatusLengkap($id_pendaftar);
-        $status_bayar  = $payment->isLunas($id_pendaftar);
+        // ambil status final pendaftar
+        $data = $pendaftar->getById($id_pendaftar);
 
-        // JIKA SYARAT LENGKAP → DITERIMA
-        if ($status_upload === "lengkap" && $status_bayar) {
-            $pengumuman->setStatus($id_pendaftar, "diterima");
+        if ($data && $data['status_data'] === 'diterima') {
+            $pengumuman->setStatus($id_pendaftar, 'diterima');
+        }
+
+        if ($data && $data['status_data'] === 'ditolak') {
+            $pengumuman->setStatus($id_pendaftar, 'ditolak');
         }
     }
-    // AMBIL ULANG SETELAH UPDATE
+
+    // ambil ulang setelah sinkron
     $list = $pengumuman->getAll();
 
     extract(['list' => $list]);
@@ -474,7 +475,6 @@ class DashboardController {
     $content = __DIR__ . '/../views/admin/pengumuman.php';
     require __DIR__ . '/../views/admin/layout_admin.php';
 }
-
 
     public function users()
     {
