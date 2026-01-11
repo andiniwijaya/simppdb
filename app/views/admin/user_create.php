@@ -10,7 +10,8 @@
 <div class="container mt-4">
     <h4>Tambah User</h4>
 
-    <form action="/dashboard/user/store" method="post">
+    
+<form method="POST" action="<?= $base ?>/dashboard/user/store">
 
         <div class="mb-3">
             <label>Username</label>
