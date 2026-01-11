@@ -70,6 +70,4 @@ public function setStatus($id_pendaftar, $status)
     return $stmt->execute();
 }
 
-
-
 }
