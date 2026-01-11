@@ -34,7 +34,7 @@
                 <?php $no = 1; foreach ($users as $u): ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= htmlspecialchars($u['nama_pengguna']) ?></td>
+                       <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
                         <td><?= htmlspecialchars($u['email']) ?></td>
                         <td style="font-size:12px; word-break: break-all;">
                          <?= htmlspecialchars($u['kata_sandi']) ?>

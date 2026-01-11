@@ -597,20 +597,21 @@ public function createUserForm()
         empty($_POST['email']) ||
         empty($_POST['password'])
     ) {
-        die("Form belum lengkap");
+        die("Form tidak lengkap");
     }
 
     $user = new User();
 
     $user->create([
-        'nama_pengguna' => $_POST['username'],
-        'kata_sandi'    => password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'nama_pengguna' => $_POST['username'],  
         'email'         => $_POST['email'],
-        'peran'         => 'siswa' // default
+        'kata_sandi'    => password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'peran'         => 'siswa'
     ]);
 
     header("Location: /dashboard/users");
     exit;
+
 }
 
 }
