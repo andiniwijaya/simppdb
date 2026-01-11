@@ -15,7 +15,7 @@ $base = Config::base_url();
 <body>
   <?php if (!empty($_SESSION['login_success'])): ?>
 <script>
-    alert("🎉 Login berhasil!\nSelamat datang, <?= $_SESSION['nama_pengguna']; ?>");
+    alert("✔  Login berhasil!\nSelamat datang, <?= $_SESSION['nama_pengguna']; ?>");
     window.location.href = "/dashboard";
 </script>
 <?php unset($_SESSION['login_success']); ?>
