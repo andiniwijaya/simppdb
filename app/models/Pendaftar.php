@@ -278,17 +278,6 @@ public function getById($id_pendaftar)
 
     return $stmt->get_result()->fetch_assoc();
 }
-public function getByIdPendaftar($id_pendaftar)
-{
-    $stmt = $this->conn->prepare("
-        SELECT * FROM pendaftar
-        WHERE id_pendaftar = ?
-        LIMIT 1
-    ");
-    $stmt->bind_param("i", $id_pendaftar);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-}
 
 
 

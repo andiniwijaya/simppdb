@@ -447,15 +447,16 @@ class DashboardController {
     $pengumuman = new Pengumuman();
     $pendaftar  = new Pendaftar();
 
-    // ambil semua pengumuman
+    // Ambil semua pengumuman
     $list = $pengumuman->getAll();
 
+    // 🔁 SINKRON DENGAN STATUS PENDAFTAR
     foreach ($list as $row) {
 
         $id_pendaftar = $row['id_pendaftar'];
 
-        // ⬇️ PAKAI METHOD YANG BENAR
-        $data = $pendaftar->getByIdPendaftar($id_pendaftar);
+        // ambil status final pendaftar
+        $data = $pendaftar->getById($id_pendaftar);
 
         if ($data && $data['status_data'] === 'diterima') {
             $pengumuman->setStatus($id_pendaftar, 'diterima');
@@ -466,6 +467,7 @@ class DashboardController {
         }
     }
 
+    // ambil ulang setelah sinkron
     $list = $pengumuman->getAll();
 
     extract(['list' => $list]);
@@ -473,6 +475,22 @@ class DashboardController {
     $content = __DIR__ . '/../views/admin/pengumuman.php';
     require __DIR__ . '/../views/admin/layout_admin.php';
 }
+
+    public function users()
+    {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+            header("Location: /login");
+            exit;
+        }
+
+        $user = new User();
+        $users = $user->getAll();
+
+        extract(['users' => $users]);
+
+        $content = __DIR__ . '/../views/admin/user.php';
+        require __DIR__ . '/../views/admin/layout_admin.php';
+    }
 
     // CREATE USER
     public function createUser()
