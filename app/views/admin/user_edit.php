@@ -8,13 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <?php if (!empty($_SESSION['alert_update'])): ?>
-    <script>
-        alert("✅ Data berhasil diperbarui");
-    </script>
-    <?php unset($_SESSION['alert_update']); ?>
-<?php endif; ?>
 
+<?php if (!empty($_SESSION['alert_update'])): ?>
+<script>
+    alert("✅ Data berhasil diperbarui");
+</script>
+<?php unset($_SESSION['alert_update']); endif; ?>
 
 <div class="container mt-4">
 
@@ -27,18 +26,19 @@
 
     <form action="/dashboard/user/update" method="post">
 
-
-        <input type="hidden" name="id" value="<?= $data['id_pengguna'] ?>">
+        <!-- ID USER -->
+        <input type="hidden" name="id" value="<?= htmlspecialchars($data['id_pengguna']) ?>">
 
         <table class="table table-bordered table-striped align-middle">
             <tbody>
+
                 <tr>
                     <th width="25%">Nama Pengguna</th>
                     <td>
                         <input type="text"
                                name="nama_pengguna"
                                class="form-control"
-                               value="<?= htmlspecialchars($data['nama_pengguna']) ?>"
+                               value="<?= htmlspecialchars($data['nama_pengguna'] ?? '') ?>"
                                required>
                     </td>
                 </tr>
@@ -49,13 +49,13 @@
                         <input type="email"
                                name="email"
                                class="form-control"
-                               value="<?= htmlspecialchars($data['email']) ?>"
+                               value="<?= htmlspecialchars($data['email'] ?? '') ?>"
                                required>
                     </td>
                 </tr>
 
                 <tr>
-                    <th>Kata Sandi Baru</th>
+                    <th>Password Baru</th>
                     <td>
                         <input type="password"
                                name="kata_sandi"
@@ -72,7 +72,7 @@
                     <td>
                         <input type="text"
                                class="form-control"
-                               value="<?= htmlspecialchars($data['dibuat_pada']) ?>"
+                               value="<?= htmlspecialchars($data['dibuat_pada'] ?? '-') ?>"
                                disabled>
                     </td>
                 </tr>
@@ -85,6 +85,7 @@
                         </button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 
