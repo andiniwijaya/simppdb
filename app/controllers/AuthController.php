@@ -138,15 +138,17 @@ class AuthController {
             header("Location: /login?error=password");
             exit;
         }
-            $_SESSION["user_id"]       = $row["id_pengguna"];
-            $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
-            $_SESSION["role"]          = $row["peran"];
-            $_SESSION["login_success"] = $row["nama_pengguna"];
+    $_SESSION["user_id"]       = $row["id_pengguna"];
+$_SESSION["nama_pengguna"] = $row["nama_pengguna"];
+$_SESSION["role"]          = $row["peran"];
 
-            header("Location: /dashboard");
-            exit;
+// FLAG ALERT
+$_SESSION["login_success"] = true;
+
+// BALIK KE LOGIN (BUAT TAMPIL ALERT)
+header("Location: /login");
+exit;
     }
-
 
     /* -----------------------------
        FORGOT PASSWORD PROCESS
