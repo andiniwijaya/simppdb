@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 
 class PembayaranController {
 
-    // ================= HALAMAN PEMBAYARAN =================
+    // HALAMAN PEMBAYARAN
     public function index(){
 
         if(!isset($_SESSION["user_id"])){
@@ -37,7 +37,7 @@ class PembayaranController {
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    // ================= UPLOAD PEMBAYARAN =================
+    //UPLOAD PEMBAYARAN 
     public function upload(){
 
         if(!isset($_SESSION["user_id"])){
@@ -64,26 +64,26 @@ class PembayaranController {
         $data = $pendaftar->getFormDataByUserId($_SESSION["user_id"]);
         $id_pendaftar = $data["id_pendaftar"];
 
-        // ================= FOLDER KHUSUS PEMBAYARAN =================
+        // FOLDER KHUSUS PEMBAYARAN
         $uploadDir = __DIR__ . "/../../public/uploads/pembayaran/";
 
         if(!is_dir($uploadDir)){
             mkdir($uploadDir, 0777, true);
         }
 
-        // ================= NAMA FILE AMAN =================
+        //  NAMA FILE AMAN
         $ext  = pathinfo($_FILES["bukti"]["name"], PATHINFO_EXTENSION);
         $nama = "bayar_" . $id_pendaftar . "_" . time() . "." . $ext;
 
         $pathServer = $uploadDir . $nama;
         $pathDB = $nama;
 
-        // ================= UPLOAD =================
+        // UPLOAD
         if(!move_uploaded_file($_FILES["bukti"]["tmp_name"], $pathServer)){
             die("Gagal mengunggah bukti pembayaran");
         }
 
-        // ================= SIMPAN DB =================
+        // SIMPAN DB \
         $payment->insert(
             $id_pendaftar,
             $jumlah,

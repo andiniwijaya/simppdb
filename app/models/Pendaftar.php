@@ -6,7 +6,7 @@ class Pendaftar extends Database {
 
              private function sanitizeEnum(&$d)
 {
-    // ===== status_anak =====
+    // status_anak
     $map_status_anak = [
         'kandung' => 'kandung',
         'Kandung' => 'kandung',
@@ -22,26 +22,26 @@ class Pendaftar extends Database {
         $d['status_anak'] = $map_status_anak[$d['status_anak']];
     }
 
-    // ===== yatim_status =====
+    //yatim_status
     $enum_yatim = ['bukan','yatim','piatu','yatim_piatu'];
     if (!isset($d['yatim_status']) || !in_array($d['yatim_status'], $enum_yatim)) {
         $d['yatim_status'] = 'bukan';
     }
 
-    // ===== jenis_kelamin =====
+    // jenis_kelamin
     $enum_jk = ['Laki-laki','Perempuan'];
     if (!isset($d['jenis_kelamin']) || !in_array($d['jenis_kelamin'], $enum_jk)) {
         $d['jenis_kelamin'] = 'Laki-laki';
     }
 
-    // ===== status_tinggal =====
+    // status_tinggal
     $enum_tinggal = ['bersama_ortu','wali','kost','asrama','lainnya'];
     if (!isset($d['status_tinggal']) || !in_array($d['status_tinggal'], $enum_tinggal)) {
         $d['status_tinggal'] = 'bersama_ortu';
     }
 }
 
-        //get id pendaftar
+    //get id pendaftar
     public function getId($id_pengguna)
     {
         $stmt = $this->conn->prepare(
@@ -65,9 +65,7 @@ class Pendaftar extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    /* ===============================
-     * SIMPAN / UPDATE DATA SISWA
-     * =============================== */
+     //SIMPAN / UPDATE DATA SISWA
     public function saveSiswa($id_pengguna, $d)
     {
         $this->sanitizeEnum($d);
@@ -80,16 +78,11 @@ class Pendaftar extends Database {
         return $this->insert($id_pengguna, $d);
     }
 
-    /* ===============================
-     * INSERT DATA
-     * =============================== */
+     //INSERT DATA
         private function insert($id_pengguna, $d)
 {
     $this->sanitizeEnum($d);
-
-    // ===============================
     // CAST KE VARIABEL (WAJIB!)
-    // ===============================
     $id_pengguna     = (int)$id_pengguna;
     $anak_ke         = (int)$d['anak_ke'];
     $jumlah_saudara  = (int)$d['jumlah_saudara'];
@@ -150,12 +143,10 @@ class Pendaftar extends Database {
     );
 
     return $stmt->execute();
-}
-
-
+    }
         //update data
         private function update($id, $d)
-{
+    {
     $this->sanitizeEnum($d);
 
     // CAST
@@ -228,10 +219,7 @@ class Pendaftar extends Database {
         $stmt->bind_param("si", $status, $id_pendaftar);
         return $stmt->execute();
     }
-
-    /* ===============================
-     * UTIL ADMIN
-     * =============================== */
+     //UTIL ADMIN
     public function countAll()
     {
         $r = $this->conn->query("SELECT COUNT(*) total FROM pendaftar")->fetch_assoc();

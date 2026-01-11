@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 
 class BerkasController {
 
-    // ================= HALAMAN BERKAS SISWA =================
+    // HALAMAN BERKAS SISWA
     public function index()
     {
         // CEK LOGIN
@@ -19,24 +19,23 @@ class BerkasController {
         $berkasModel    = new Berkas();
         $pendaftarModel = new Pendaftar();
 
-        // ================= AMBIL DATA PENDAFTAR =================
+        //AMBIL DATA PENDAFTAR
         $pendaftar = $pendaftarModel->getFormDataByUserId($id_pengguna);
 
-        // ❗ CEK YANG BENAR: HARUS ADA id_pendaftar
         if (!$pendaftar || empty($pendaftar['id_pendaftar'])) {
             die("Lengkapi formulir siswa terlebih dahulu.");
         }
 
         $id_pendaftar = (int) $pendaftar['id_pendaftar'];
 
-        // ================= DATA BERKAS SISWA =================
+        //DATA BERKAS SISWA 
         $list = $berkasModel->getAll($id_pendaftar);
 
-        // ================= STATUS & PROGRESS =================
+        // STATUS & PROGRESS
         $statusBerkas   = $berkasModel->getStatusLengkap($id_pendaftar);
         $progressBerkas = $berkasModel->getProgress($id_pendaftar);
 
-        // ================= TAMPILKAN VIEW =================
+        //TAMPILKAN VIEW 
         ob_start();
         require __DIR__ . '/../views/siswa/berkas.php';
         $content = ob_get_clean();
@@ -44,7 +43,7 @@ class BerkasController {
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    // ================= UPLOAD BERKAS SISWA =================
+    // UPLOAD BERKAS SISWA
     public function upload()
     {
         // CEK LOGIN
@@ -72,28 +71,28 @@ class BerkasController {
 
         $id_pendaftar = (int) $pendaftar['id_pendaftar'];
 
-        // ================= CEK DUPLIKASI BERKAS =================
+        // CEK DUPLIKASI BERKAS
         if ($berkasModel->getByJenis($id_pendaftar, $jenis)) {
             $_SESSION["error"] = "Berkas ini sudah diunggah.";
             header("Location: /siswa/berkas_pendaftar");
             exit;
         }
 
-        // ================= FOLDER UPLOAD =================
+        // FOLDER UPLOAD
         $uploadDir = __DIR__ . "/../../public/uploads/berkas/";
 
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
 
-        // ================= NAMA FILE =================
+        //NAMA FILE
         $ext  = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
         $nama = $jenis . "_" . $id_pendaftar . "_" . time() . "." . $ext;
 
         $pathServer = $uploadDir . $nama;
         $pathDB = $nama;
 
-        // ================= PROSES UPLOAD =================
+        // PROSES UPLOAD
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $pathServer)) {
 
             // SIMPAN KE DATABASE

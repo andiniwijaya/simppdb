@@ -6,10 +6,7 @@ class OrangTua extends Database {
     public function __construct() {
         parent::__construct();
     }
-
-    // ===============================
     // CEK DATA EXIST
-    // ===============================
     private function exist($id_pendaftar, $jenis) {
         $sql = "SELECT id_orang_tua
                 FROM orang_tua
@@ -22,10 +19,7 @@ class OrangTua extends Database {
 
         return $stmt->get_result()->num_rows > 0;
     }
-
-    // ===============================
     // INSERT DATA
-    // ===============================
     private function insert($id_pendaftar, $jenis, $d) {
         $map = strtolower($jenis);
 
@@ -36,7 +30,7 @@ class OrangTua extends Database {
 
         $stmt = $this->conn->prepare($sql);
 
-        // ===== WAJIB: PINDAH KE VARIABEL =====
+        // WAJIB: PINDAH KE VARIABEL
         $nama           = $d["nama_$map"] ?? null;
         $pendidikan     = $d["pendidikan_$map"] ?? null;
         $pekerjaan      = $d["pekerjaan_$map"] ?? null;
@@ -62,10 +56,7 @@ class OrangTua extends Database {
 
         return $stmt->execute();
     }
-
-    // ===============================
     // UPDATE DATA
-    // ===============================
     private function update($id_pendaftar, $jenis, $d) {
         $map = strtolower($jenis);
 
@@ -108,20 +99,14 @@ class OrangTua extends Database {
 
         return $stmt->execute();
     }
-
-    // ===============================
     // SAVE (AUTO INSERT / UPDATE)
-    // ===============================
     private function save($id_pendaftar, $jenis, $d) {
         if ($this->exist($id_pendaftar, $jenis)) {
             return $this->update($id_pendaftar, $jenis, $d);
         }
         return $this->insert($id_pendaftar, $jenis, $d);
     }
-
-    // ===============================
     // PUBLIC SAVE
-    // ===============================
     public function saveAyah($id, $d) {
         return $this->save($id, "Ayah", $d);
     }
@@ -133,10 +118,7 @@ class OrangTua extends Database {
     public function saveWali($id, $d) {
         return $this->save($id, "Wali", $d);
     }
-
-    // ===============================
     // GET DATA AYAH + IBU
-    // ===============================
     public function getOrtuByPendaftar($id_pendaftar) {
         $sql = "SELECT *
                 FROM orang_tua
@@ -157,9 +139,7 @@ class OrangTua extends Database {
         return $data;
     }
 
-    // ===============================
     // GET DATA WALI
-    // ===============================
     public function getWaliByPendaftar($id_pendaftar) {
         $sql = "SELECT *
                 FROM orang_tua

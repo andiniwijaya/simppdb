@@ -33,9 +33,7 @@ class AuthController {
         require __DIR__ . '/../views/reset_password.php';
     }
 
-    /* -----------------------------
-       REGISTER PROCESS
-    ------------------------------*/
+    //REGISTER PROCESS
     public function processRegister(){
 
         $db        = new Database;
@@ -93,10 +91,7 @@ class AuthController {
         header("Location: /login?register_ok");
         exit;
     }
-
-    /* -----------------------------
-       LOGIN PROCESS
-    ------------------------------*/
+    //LOGIN PROCESS
     public function processLogin(){
 
         $db = new Database;
@@ -138,21 +133,18 @@ class AuthController {
             header("Location: /login?error=password");
             exit;
         }
-    $_SESSION["user_id"]       = $row["id_pengguna"];
-$_SESSION["nama_pengguna"] = $row["nama_pengguna"];
-$_SESSION["role"]          = $row["peran"];
+        $_SESSION["user_id"]       = $row["id_pengguna"];
+        $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
+        $_SESSION["role"]          = $row["peran"];
 
-// FLAG ALERT
-$_SESSION["login_success"] = true;
+        // FLAG ALERT
+        $_SESSION["login_success"] = true;
 
-// BALIK KE LOGIN (BUAT TAMPIL ALERT)
-header("Location: /login");
-exit;
-    }
-
-    /* -----------------------------
-       FORGOT PASSWORD PROCESS
-    ------------------------------*/
+        // BALIK KE LOGIN 
+        header("Location: /login");
+        exit;
+         }
+    //FORGOT PASSWORD PROCESS
     public function processForgot(){
 
         $db = new Database;
@@ -176,10 +168,7 @@ exit;
         header("Location: /reset"); 
         exit;
     }
-
-    /* -----------------------------
-       RESET PASSWORD PROCESS
-    ------------------------------*/
+    //RESET PASSWORD PROCESS
     public function processReset(){
 
         if(!isset($_SESSION["reset_id"])){

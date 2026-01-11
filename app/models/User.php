@@ -11,10 +11,7 @@ class User {
         $db = new Database();
         $this->conn = $db->conn; // MYSQLI
     }
-
-    // =============================
     // INSERT USER BARU
-    // =============================
     public function insert($username, $email, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -30,10 +27,7 @@ class User {
 
         return $this->conn->insert_id;
     }
-
-    // =============================
     // CARI USERNAME
-    // =============================
     public function findByUsername($username)
     {
         $sql = "SELECT * FROM pengguna WHERE nama_pengguna = ? LIMIT 1";
@@ -42,10 +36,7 @@ class User {
         $stmt->execute();
         return $stmt->get_result();
     }
-
-    // =============================
     // AMBIL SEMUA USER
-    // =============================
     public function getAll()
     {
         $sql = "
@@ -63,10 +54,7 @@ class User {
                     ->query($sql)
                     ->fetch_all(MYSQLI_ASSOC);
     }
-
-    // =============================
     // AMBIL USER BY ID (EDIT)
-    // =============================
     public function getById($id)
     {
         $sql = "SELECT * FROM pengguna WHERE id_pengguna = ? LIMIT 1";
@@ -76,10 +64,7 @@ class User {
 
         return $stmt->get_result()->fetch_assoc();
     }
-
-    // =============================
     // UPDATE USER
-    // =============================
     public function update($id, $data)
     {
         $fields = [];
@@ -105,10 +90,7 @@ class User {
         $stmt->bind_param($types, ...$values);
         return $stmt->execute();
     }
-
-    // =============================
     // HAPUS USER
-    // =============================
     public function delete($id)
     {
         $stmt = $this->conn->prepare(

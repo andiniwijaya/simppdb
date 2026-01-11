@@ -32,7 +32,7 @@ class DashboardController {
             $berkas    = new Berkas();
             $payment   = new Payment();
 
-            // ===== DATA SISWA =====
+            // DATA SISWA
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
 
             if (!$siswa) {
@@ -45,14 +45,14 @@ class DashboardController {
 
             $id_pendaftar = (int) $siswa["id_pendaftar"];
 
-            // ===== STATUS UPLOAD =====
+            //STATUS UPLOAD
             $status_upload = "belum";
 
             if ($id_pendaftar > 0) {
                 $status_upload = $berkas->getStatusLengkap($id_pendaftar);
             }
 
-            // ===== STATUS PEMBAYARAN =====
+            //STATUS PEMBAYARAN
             $paymentData = ["status_bayar" => "belum"];
 
             if ($id_pendaftar > 0) {
@@ -62,7 +62,7 @@ class DashboardController {
                 }
             }
 
-            // ===== PROGRESS =====
+            // PROGRESS
             $progress = 0;
 
             if (!empty($siswa["nama_lengkap"])) {
@@ -87,7 +87,7 @@ class DashboardController {
                 $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
             }
 
-            // ===== KIRIM KE VIEW =====
+            // KIRIM KE VIEW
             $data = [
                 "siswa"         => $siswa,
                 "status_upload" => $status_upload,
@@ -457,9 +457,7 @@ class DashboardController {
         require __DIR__ . '/../views/admin/layout_admin.php';
     }
 
-    // ===============================
-    // CREATE USER (FIX ERROR)
-    // ===============================
+    // CREATE USER
     public function createUser()
     {
         if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
