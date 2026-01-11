@@ -14,6 +14,8 @@ $router->post('/login', 'AuthController@processLogin');
 
 $router->get('/register', 'AuthController@register');
 $router->post('/register', 'AuthController@processRegister');
+$router->post('/register/process', 'AuthController@processRegister');
+
 
 //halaman dashboard
 $router->get('/dashboard', 'DashboardController@index');

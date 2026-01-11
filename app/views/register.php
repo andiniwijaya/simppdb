@@ -27,8 +27,8 @@
     </div>
 
     <div class="register-body">
+    <form method="POST" action="<?= $base ?>/register/process">
 
-      <form method="POST" action="<?= $base ?>/register">
 
         <label class="mt-1">Nama Pengguna</label>
         <input type="text" name="username" class="form-control"
