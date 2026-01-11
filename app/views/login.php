@@ -13,6 +13,13 @@ $base = Config::base_url();
 </head>
 
 <body>
+    <?php if (!empty($_SESSION['login_success'])): ?>
+    <script>
+        alert("🎉 Login berhasil!\nSelamat datang, <?= $_SESSION['login_success']; ?>");
+    </script>
+    <?php unset($_SESSION['login_success']); ?>
+<?php endif; ?>
+
 
 <!-- ================= LOGIN ERROR DATA ================= -->
 <?php if(isset($_GET["error"])): ?>
