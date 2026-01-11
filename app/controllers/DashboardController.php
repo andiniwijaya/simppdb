@@ -542,10 +542,8 @@ class DashboardController {
 
     $user->update((int)$_POST['id'], $data);
 
-    // 🔔 FLASH MESSAGE
-    $_SESSION['success'] = "Data user berhasil diperbarui";
-
-    header("Location: /dashboard/users");
+    $_SESSION['alert_update'] = true;
+    header("Location: /dashboard/user/edit?id=" . $_POST['id']);
     exit;
 }
 
