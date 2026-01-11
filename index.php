@@ -20,8 +20,9 @@ $router->get('/dashboard', 'DashboardController@index');
 $router->get('/dashboard/kelembagaan', 'DashboardController@kelembagaan');
 $router->get('/dashboard/data_ppdb', 'DashboardController@dataPPDB');
 $router->get('/dashboard/users', 'DashboardController@users');
-$router->get('/dashboard/user/create', 'DashboardController@createUserForm');
-$router->post('/dashboard/user/store', 'DashboardController@createUser');
+$router->get('/dashboard/user/create', 'DashboardController@createUser');
+$router->post('/dashboard/user/store', 'DashboardController@storeUser');
+
 
 $router->get('/dashboard/user/edit', 'DashboardController@editUser');
 $router->post('/dashboard/user/update', 'DashboardController@updateUser');
