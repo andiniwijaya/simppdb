@@ -8,6 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <?php if (!empty($_SESSION['alert_update'])): ?>
+    <script>
+        alert("✅ Data berhasil diperbarui");
+    </script>
+    <?php unset($_SESSION['alert_update']); ?>
+<?php endif; ?>
+
 
 <div class="container mt-4">
 

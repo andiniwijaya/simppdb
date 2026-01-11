@@ -529,29 +529,25 @@ class DashboardController {
         exit;
     }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: /dashboard/users");
-        exit;
-    }
-
     $user = new User();
 
     $data = [
-    'nama_pengguna' => $_POST['nama_pengguna'],
-    'email'         => $_POST['email']
-];
+        'nama_pengguna' => $_POST['nama_pengguna'],
+        'email'         => $_POST['email']
+    ];
 
-if (!empty($_POST['kata_sandi'])) {
-    $data['kata_sandi'] = password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT);
-}
+    if (!empty($_POST['kata_sandi'])) {
+        $data['kata_sandi'] = password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT);
+    }
 
-$user->update((int)$_POST['id'], $data);
+    $user->update((int)$_POST['id'], $data);
 
+    // 🔔 FLASH MESSAGE
+    $_SESSION['success'] = "Data user berhasil diperbarui";
 
     header("Location: /dashboard/users");
     exit;
 }
-
 
 
 }
