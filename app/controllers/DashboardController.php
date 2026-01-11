@@ -579,6 +579,15 @@ class DashboardController {
     header("Location: /dashboard/user/edit?id=" . $_POST['id']);
     exit;
 }
+public function createUserForm()
+{
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
+    }
+
+    require __DIR__ . '/../views/admin/user_create.php';
+}
 
 
 }
