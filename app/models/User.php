@@ -99,4 +99,25 @@ class User {
         $stmt->bind_param("i", $id);
         $stmt->execute();
     }
+    public function create($data)
+{
+    $sql = "
+        INSERT INTO pengguna 
+        (nama_pengguna, nisn, email, kata_sandi, peran)
+        VALUES (?, ?, ?, ?, ?)
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param(
+        "sssss",
+        $data['nama_pengguna'],
+        $data['nisn'],
+        $data['email'],
+        $data['kata_sandi'],
+        $data['role']
+    );
+
+    return $stmt->execute();
+}
+
 }
