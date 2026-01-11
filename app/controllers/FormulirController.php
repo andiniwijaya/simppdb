@@ -66,7 +66,7 @@ class FormulirController {
         }
 
         // ambil id_pendaftar (wajib untuk ortu / wali)
-        $id_pendaftar = $pendaftar->getId($user_id);
+        $id_pendaftar = $pendaftar->getById($user_id);
 
         if ($id_pendaftar == 0) {
             header("Location: /siswa/formulir?tab=siswa&error=lengkapi_data_siswa");
