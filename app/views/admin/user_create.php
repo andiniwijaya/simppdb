@@ -1,42 +1,36 @@
-<?php $base = Config::base_url(); ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Tambah User</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Tambah User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container mt-4" style="max-width:600px">
+<div class="container mt-4">
+    <h4>Tambah User</h4>
 
-<h4 class="mb-3">➕ Tambah User</h4>
+    <form action="/dashboard/user/store" method="post">
 
-<form method="POST" action="<?= $base ?>/dashboard/user/store">
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
 
-    <label>Nama Pengguna</label>
-    <input type="text" name="nama_pengguna" class="form-control" required>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
 
-    <label class="mt-2">Email</label>
-    <input type="email" name="email" class="form-control" required>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
 
-    <label class="mt-2">Kata Sandi</label>
-    <input type="password" name="kata_sandi" class="form-control" minlength="8" required>
-
-    <label class="mt-2">Peran</label>
-    <select name="peran" class="form-control" required>
-        <option value="admin">Admin</option>
-        <option value="siswa">Siswa</option>
-    </select>
-
-    <button class="btn btn-primary mt-3 w-100">
-        Simpan
-    </button>
-
-</form>
-
+        <button class="btn btn-primary">Simpan</button>
+        <a href="/dashboard/users" class="btn btn-secondary">Batal</a>
+    </form>
 </div>
+
 </body>
 </html>
