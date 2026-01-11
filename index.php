@@ -26,6 +26,8 @@ $router->post('/dashboard/user/store', 'DashboardController@storeUser');
 
 $router->get('/dashboard/user/edit', 'DashboardController@editUser');
 $router->post('/dashboard/user/update', 'DashboardController@updateUser');
+$router->post('/dashboard/updateUser', 'DashboardController@updateUser');
+
 
 $router->get('/dashboard/user/delete', 'DashboardController@deleteUser');
 
