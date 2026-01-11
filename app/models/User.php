@@ -103,18 +103,17 @@ class User {
 {
     $sql = "
         INSERT INTO pengguna 
-        (nama_pengguna, nisn, email, kata_sandi, peran)
-        VALUES (?, ?, ?, ?, ?)
+        (nama_pengguna, kata_sandi, email, peran)
+        VALUES (?, ?, ?, ?)
     ";
 
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param(
-        "sssss",
+        "ssss",
         $data['nama_pengguna'],
-        $data['nisn'],
-        $data['email'],
         $data['kata_sandi'],
-        $data['role']
+        $data['email'],
+        $data['peran']
     );
 
     return $stmt->execute();

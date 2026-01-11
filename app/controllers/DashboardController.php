@@ -586,8 +586,31 @@ public function createUserForm()
         exit;
     }
 
-    require __DIR__ . '/../views/admin/user_create.php';
-}
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: /dashboard/users");
+        exit;
+    }
 
+    // VALIDASI
+    if (
+        empty($_POST['username']) ||
+        empty($_POST['email']) ||
+        empty($_POST['password'])
+    ) {
+        die("Form belum lengkap");
+    }
+
+    $user = new User();
+
+    $user->create([
+        'nama_pengguna' => $_POST['username'],
+        'kata_sandi'    => password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'email'         => $_POST['email'],
+        'peran'         => 'siswa' // default
+    ]);
+
+    header("Location: /dashboard/users");
+    exit;
+}
 
 }

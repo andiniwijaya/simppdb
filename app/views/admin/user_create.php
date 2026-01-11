@@ -3,77 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Tambah User</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container mt-5" style="max-width:600px">
+<div class="container mt-4">
+    <h4>Tambah User</h4>
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Tambah User</h5>
+    <form method="POST" action="/dashboard/user/create">
+
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" required>
         </div>
 
-        <div class="card-body">
-            <form action="/dashboard/user/store" method="post">
-
-                <!-- USERNAME -->
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text"
-                           name="username"
-                           class="form-control"
-                           placeholder="contoh: admin01"
-                           required>
-                </div>
-
-                <!-- NISN -->
-                <div class="mb-3">
-                    <label class="form-label">NISN</label>
-                    <input type="text"
-                           name="nisn"
-                           class="form-control"
-                           placeholder="Nomor Induk Siswa"
-                           required>
-                </div>
-
-                <!-- EMAIL -->
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email"
-                           name="email"
-                           class="form-control"
-                           placeholder="user@email.com"
-                           required>
-                </div>
-
-                <!-- PASSWORD -->
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password"
-                           name="password"
-                           class="form-control"
-                           placeholder="Minimal 8 karakter"
-                           minlength="8"
-                           required>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                    <a href="/dashboard/users" class="btn btn-secondary">
-                        Kembali
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        Simpan User
-                    </button>
-                </div>
-
-            </form>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
         </div>
-    </div>
 
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button class="btn btn-primary">Simpan</button>
+        <a href="/dashboard/users" class="btn btn-secondary">Batal</a>
+    </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
