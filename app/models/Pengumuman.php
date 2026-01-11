@@ -57,5 +57,18 @@ class Pengumuman extends Database {
 
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+public function setStatus($id_pendaftar, $status)
+{
+    $sql = "
+        UPDATE pengumuman
+        SET status_penerimaan = ?
+        WHERE id_pendaftar = ?
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("si", $status, $id_pendaftar);
+    return $stmt->execute();
+}
+
 
 }

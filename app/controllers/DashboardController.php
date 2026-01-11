@@ -79,13 +79,25 @@ class DashboardController {
 
             // PENGUMUMAN
             $pengumuman = new Pengumuman();
-
             $status_pengumuman = "menunggu";
 
-            if($id_pendaftar > 0){
+            if ($id_pendaftar > 0) {
+
+                // pastikan data pengumuman ada
                 $pengumuman->createIfNotExists($id_pendaftar);
+
+            // CEK SYARAT KELULUSAN
+            if (
+                $status_upload === "lengkap" &&
+                $paymentData["status_bayar"] === "lunas"
+            ) {
+                // AUTO DITERIMA
+                $pengumuman->setStatus($id_pendaftar, "diterima");
+                $status_pengumuman = "diterima";
+            } else {
                 $status_pengumuman = $pengumuman->getStatusByPendaftar($id_pendaftar);
             }
+        }
 
             // KIRIM KE VIEW
             $data = [
