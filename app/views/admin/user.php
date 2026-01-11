@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Kelola User</title>
 
-    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -30,37 +29,36 @@
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($users)): ?>
-                <?php $no = 1; foreach ($users as $u): ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                       <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
-                        <td><?= htmlspecialchars($u['email']) ?></td>
-                        <td style="font-size:12px; word-break: break-all;">
-                         <?= htmlspecialchars($u['kata_sandi']) ?>
-                            </td>
-                        <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
-                        <td>
-                            <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
-                               class="btn btn-sm btn-warning">
-                                Edit
-                            </a>
-
-                            <a href="/dashboard/user/delete?id=<?= $u['id_pengguna'] ?>"
-                               class="btn btn-sm btn-danger"
-                               onclick="return confirm('Yakin ingin menghapus user ini?')">
-                                Hapus
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+        <?php if (!empty($users)): ?>
+            <?php $no = 1; foreach ($users as $u): ?>
                 <tr>
-                    <td colspan="6" class="text-center text-muted">
-                        Data user belum tersedia
+                    <td><?= $no++ ?></td>
+                    <td><?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td style="font-size:12px; word-break: break-all;">
+                        <?= htmlspecialchars($u['kata_sandi']) ?>
+                    </td>
+                    <td><?= htmlspecialchars($u['dibuat_pada']) ?></td>
+                    <td>
+                        <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
+                           class="btn btn-sm btn-warning">
+                            Edit
+                        </a>
+                        <a href="/dashboard/user/delete?id=<?= $u['id_pengguna'] ?>"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Yakin ingin menghapus user ini?')">
+                            Hapus
+                        </a>
                     </td>
                 </tr>
-            <?php endif; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    Data user belum tersedia
+                </td>
+            </tr>
+        <?php endif; ?>
         </tbody>
     </table>
 
