@@ -494,28 +494,50 @@ class DashboardController {
 
     // CREATE USER
     public function createUser()
-    {
-        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-            header("Location: /login");
-            exit;
-        }
+{
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
+    }
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header("Location: /dashboard/users");
-            exit;
-        }
+    require __DIR__ . '/../views/admin/user_create.php';
+}
+    public function storeUser()
+{
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        header("Location: /login");
+        exit;
+    }
 
-        $user = new User();
-        $user->create([
-            'nama'       => $_POST['nama'],
-            'email'      => $_POST['email'],
-            'kata_sandi' => password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT),
-            'role'       => $_POST['role']
-        ]);
-
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header("Location: /dashboard/users");
         exit;
     }
+
+    if (
+        empty($_POST['nama_pengguna']) ||
+        empty($_POST['email']) ||
+        empty($_POST['kata_sandi']) ||
+        empty($_POST['peran'])
+    ) {
+        die("Form tidak lengkap");
+    }
+
+    $user = new User();
+
+    $user->create([
+        'nama_pengguna' => $_POST['nama_pengguna'],
+        'email'         => $_POST['email'],
+        'kata_sandi'    => password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT),
+        'peran'         => $_POST['peran']
+    ]);
+
+    header("Location: /dashboard/users");
+    exit;
+}
+
+
+
 
     public function deleteUser()
     {
@@ -579,39 +601,6 @@ class DashboardController {
     header("Location: /dashboard/user/edit?id=" . $_POST['id']);
     exit;
 }
-public function createUserForm()
-{
-    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-        header("Location: /login");
-        exit;
-    }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: /dashboard/users");
-        exit;
-    }
-
-    // VALIDASI
-    if (
-        empty($_POST['username']) ||
-        empty($_POST['email']) ||
-        empty($_POST['password'])
-    ) {
-        die("Form tidak lengkap");
-    }
-
-    $user = new User();
-
-    $user->create([
-        'nama_pengguna' => $_POST['username'],  
-        'email'         => $_POST['email'],
-        'kata_sandi'    => password_hash($_POST['password'], PASSWORD_DEFAULT),
-        'peran'         => 'siswa'
-    ]);
-
-    header("Location: /dashboard/users");
-    exit;
-
-}
 
 }

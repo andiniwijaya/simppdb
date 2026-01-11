@@ -10,8 +10,7 @@
 <div class="container mt-4">
     <h4>Tambah User</h4>
 
-    <form method="POST" action="/dashboard/user/create">
-
+    <form action="/dashboard/user/store" method="post">
         <div class="mb-3">
             <label>Username</label>
             <input type="text" name="username" class="form-control" required>
