@@ -19,7 +19,8 @@
         <div class="card-body">
 
             <form method="POST" action="/dashboard/user/store">
-
+                
+              <input type="hidden" name="peran" value="user">
                 <!-- NAMA PENGGUNA -->
                 <div class="mb-3">
                     <label for="nama_pengguna" class="form-label">Nama Pengguna</label>
