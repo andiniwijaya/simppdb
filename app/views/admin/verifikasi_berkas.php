@@ -53,7 +53,7 @@ $base = Config::base_url();
 
                                         <!-- LINK BERKAS -->
                                         <td>
-                                            <a href="/uploads/berkas/<?= htmlspecialchars($row['lokasi_berkas'] ?? '', ENT_QUOTES, 'UTF-8') ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="/public/uploads/berkas/<?= htmlspecialchars($row['lokasi_berkas'] ?? '', ENT_QUOTES, 'UTF-8') ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="bi bi-eye"></i> Lihat
                                             </a>
                                         </td>
