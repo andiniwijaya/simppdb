@@ -40,70 +40,79 @@ class AuthController {
     /* =========================
        REGISTER PROCESS
     ========================== */
+        public function processRegister(){
 
-    public function processRegister(){
+    $db        = new Database();
+    $user      = new User();
+    $pendaftar = new Pendaftar();
 
-        $db        = new Database;
-        $user      = new User;
-        $pendaftar = new Pendaftar;
+    $username = trim($_POST["username"]);
+    $nisn     = trim($_POST["nisn"]);
+    $email    = trim($_POST["email"]);
+    $pass     = trim($_POST["password"]);
+    $confirm  = trim($_POST["confirm_password"]);
 
-        $username = trim($_POST["username"]);
-        $nisn     = trim($_POST["nisn"]);
-        $email    = trim($_POST["email"]);
-        $pass     = trim($_POST["password"]);
-        $confirm  = trim($_POST["confirm_password"]);
-
-        if(strlen($username) < 3){ 
-            header("Location: /register?error=username_length");
-            exit;
-        }
-
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ 
-            header("Location: /register?error=email_invalid");
-            exit;
-        }
-
-        if($pass !== $confirm){ 
-            header("Location: /register?error=password_mismatch");
-            exit;
-        }
-
-        if(strlen($pass) < 8){ 
-            header("Location: /register?error=password_short");
-            exit;
-        }
-
-        // username exist
-        if($user->findByUsername($username)->num_rows > 0){
-            header("Location: /register?error=username_used");
-            exit;
-        }
-
-        // email exist
-        $cekEmail = $db->conn->query("
-            SELECT id_pengguna 
-            FROM pengguna 
-            WHERE email='$email' 
-            LIMIT 1
-        ");
-        if($cekEmail->num_rows > 0){
-            header("Location: /register?error=email_used");
-            exit;
-        }
-
-        // nisn exist
-        if($pendaftar->nisnExists($nisn)){
-            header("Location: /register?error=nisn_used");
-            exit;
-        }
-
-        // insert user
-        $user->insert($username, $email, $pass);
-
-        $_SESSION['success'] = 'Registrasi berhasil, silakan login';
-        header("Location: /login");
+    // VALIDASI
+    if(strlen($username) < 3){
+        header("Location: /register?error=username_length");
         exit;
     }
+
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        header("Location: /register?error=email_invalid");
+        exit;
+    }
+
+    if($pass !== $confirm){
+        header("Location: /register?error=password_mismatch");
+        exit;
+    }
+
+    if(strlen($pass) < 8){
+        header("Location: /register?error=password_short");
+        exit;
+    }
+
+    // username sudah dipakai
+    if($user->findByUsername($username)->num_rows > 0){
+        header("Location: /register?error=username_used");
+        exit;
+    }
+
+    // email sudah dipakai
+    $stmt = $db->conn->prepare(
+        "SELECT id_pengguna FROM pengguna WHERE email = ? LIMIT 1"
+    );
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    if($stmt->get_result()->num_rows > 0){
+        header("Location: /register?error=email_used");
+        exit;
+    }
+
+    // nisn sudah dipakai
+    if($pendaftar->nisnExists($nisn)){
+        header("Location: /register?error=nisn_used");
+        exit;
+    }
+
+    // =========================
+    // INI BAGIAN YANG DITAMBAHKAN
+    // =========================
+
+    // 1. insert ke tabel pengguna
+    $user_id = $user->insert($username, $email, $pass);
+
+    // 2. insert NISN ke tabel pendaftar
+    $pendaftar->insertBasic($user_id, $nisn);
+
+    // =========================
+
+    $_SESSION['success'] = 'Registrasi berhasil, silakan login';
+    header("Location: /login");
+    exit;
+}
+
 
     /* =========================
        LOGIN PROCESS
