@@ -606,17 +606,23 @@ public function delete()
 }
 public function hapusPembayaran()
 {
-    $id = $_GET['id'] ?? null;
-
-    if ($id) {
-        require_once __DIR__ . "/../models/Payment.php";
-        $payment = new Payment();
-        $payment->delete($id);
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
     }
 
-        header("Location: " . Config::base_url() . "/dashboard/administrasi");
-exit;
+    $id = $_GET['id'] ?? null;
 
+    if (!$id || !is_numeric($id)) {
+        header("Location: /dashboard/administrasi");
+        exit;
+    }
+
+    $payment = new Payment();
+    $payment->delete((int)$id);
+
+    header("Location: /dashboard/administrasi");
+    exit;
 }
 
 
