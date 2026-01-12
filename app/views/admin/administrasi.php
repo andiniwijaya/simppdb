@@ -45,32 +45,32 @@
         <span style="color:orange;font-weight:bold;">⏳ Menunggu</span>
     <?php endif; ?>
     </td>
-
+    <!-- HAPUS -->
     <a href="<?= $base ?>/dashboard/pembayaran/hapus?id=<?= $row['id_pembayaran'] ?>"
-        onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
-        style="color:red;font-weight:bold;">
-        🗑 Hapus
-        </a>
-
+       onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
+       style="color:red;font-weight:bold;margin-right:8px;">
+       🗑 Hapus
+    </a>
 
     <?php if($row["status_bayar"] === "menunggu"): ?>
-    <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row['id_pembayaran'] ?>"
-    onclick="return confirm('Yakin pembayaran ini LUNAS?')"
-    style="color:green;font-weight:bold;">
-    ✔ Valid
-    </a>
 
+        <!-- VALID -->
+        <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row['id_pembayaran'] ?>"
+           onclick="return confirm('Yakin pembayaran ini LUNAS?')"
+           style="color:green;font-weight:bold;margin-right:8px;">
+           ✔ Valid
+        </a>
 
-    <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row['id_pembayaran'] ?>"
-    onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
-    style="color:red;font-weight:bold;">
-    ✖ Tolak
-    </a>
-
-    <?php else: ?>
+        <!-- TOLAK -->
+        <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row['id_pembayaran'] ?>"
+           onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
+           style="color:red;font-weight:bold;">
+           ✖ Tolak
+        </a>
 
     <?php endif; ?>
-    </td>
+</td>
+
 
     </tr>
     <?php endforeach; else: ?>
