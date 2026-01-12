@@ -242,8 +242,9 @@ class DashboardController {
                 $berkas->isSemuaBerkasValid($id_pendaftar) &&
                 $payment->isLunas($id_pendaftar)
             ) {
-                $pendaftar->updateStatusData($id_pendaftar, "diterima");
+               $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
                 $pengumuman->setStatus($id_pendaftar, "diterima");
+
             } else {
                 $pendaftar->updateStatusData($id_pendaftar, "lengkap");
             }
@@ -297,8 +298,10 @@ class DashboardController {
             $berkas->isSemuaBerkasValid($id_pendaftar) &&
             $payment->isLunas($id_pendaftar)
         ) {
-            $pendaftar->updateStatusData($id_pendaftar, "diterima");
+            $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
             $pengumuman->setStatus($id_pendaftar, "diterima");
+
+            
         } else {
             $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
         }
