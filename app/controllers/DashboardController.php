@@ -557,7 +557,7 @@ class DashboardController {
     $user->create([
         'nama_pengguna' => $_POST['nama_pengguna'],
         'email'         => $_POST['email'],
-        'NISN'         => $_POST['NISN'],
+        'nisn'         => $_POST['nisn'],
         'kata_sandi'    => password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT),
         'peran'         => $_POST['peran']
     ]);
