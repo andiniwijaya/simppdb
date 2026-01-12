@@ -12,21 +12,22 @@ class User {
         $this->conn = $db->conn; // MYSQLI
     }
     // INSERT USER BARU
-  public function insert($username, $email, $password)
+    public function insert($nisn, $username, $email, $password)
 {
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "
-        INSERT INTO pengguna (nama_pengguna, email, kata_sandi, peran)
-        VALUES (?, ?, ?, 'siswa')
+        INSERT INTO pengguna (nisn, nama_pengguna, email, kata_sandi, peran)
+        VALUES (?, ?, ?, ?, 'siswa')
     ";
 
     $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("sss", $username, $email, $hash);
+    $stmt->bind_param("ssss", $nisn, $username, $email, $hash);
     $stmt->execute();
 
     return $this->conn->insert_id;
 }
+
     public function findByUsername($username)
     {
         $sql = "SELECT * FROM pengguna WHERE nama_pengguna = ? LIMIT 1";
