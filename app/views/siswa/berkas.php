@@ -82,7 +82,7 @@ foreach($berkasList as $key => $title):
 
 <td>
 <?php if(!$sudahUpload): ?>
-<form action="/siswa/berkas/upload" method="post" enctype="multipart/form-data">
+<form action="/public/uploads/berkas" method="post" enctype="multipart/form-data">
     <input type="hidden" name="jenis_berkas" value="<?= $key ?>">
     <input type="file" name="file" class="form-control" required>
 <?php else: ?>
