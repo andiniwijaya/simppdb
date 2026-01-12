@@ -609,8 +609,9 @@ public function hapusPembayaran()
     $id = $_GET['id'] ?? null;
 
     if ($id) {
-        $paymentModel = $this->model("Payment");
-        $paymentModel->delete($id);
+        require_once __DIR__ . "/../models/Payment.php";
+        $payment = new Payment();
+        $payment->delete($id);
     }
 
     header("Location: " . Config::base_url() . "/dashboard/verifikasi");
