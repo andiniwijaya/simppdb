@@ -1,4 +1,20 @@
 <?php $base = Config::base_url(); ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- BOOTSTRAP CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- BOOTSTRAP ICON -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- CSS PROJECT -->
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/kelembagaan.css">
+</head>
+<body>
 
 <h2 style="margin-bottom:20px; font-weight:700;">Profil Lembaga</h2>
 
