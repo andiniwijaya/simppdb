@@ -545,7 +545,7 @@ class DashboardController {
     if (
         empty($_POST['nama_pengguna']) ||
         empty($_POST['email']) ||
-        empty($_POST['NISN']) ||
+        empty($_POST['nisn']) ||
         empty($_POST['kata_sandi']) ||
         empty($_POST['peran'])
     ) {
