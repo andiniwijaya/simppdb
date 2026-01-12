@@ -87,13 +87,15 @@ if (!empty($ortu)) {
 
 <div class="card p-4 shadow-sm mb-4">
 <h5 class="fw-bold mb-3">Data Siswa</h5>
-
 <div class="row mb-3">
     <div class="col-md-6">
         <label>NIK</label>
         <input type="text" name="nik" maxlength="16" class="form-control" required
                value="<?= $siswa['nik'] ?? '' ?>">
-            <div class="row mb-3">
+    </div>
+</div>
+
+<div class="row mb-3">
     <div class="col-md-6">
         <label>NISN</label>
         <input type="text"
@@ -102,6 +104,7 @@ if (!empty($ortu)) {
                placeholder="Masukkan NISN"
                required>
     </div>
+</div>
 
 <div class="row mb-3">
     <div class="col-md-6">
@@ -109,11 +112,13 @@ if (!empty($ortu)) {
         <input type="text" name="nama_lengkap" class="form-control" required
                value="<?= $siswa['nama_lengkap'] ?? '' ?>">
     </div>
+
     <div class="col-md-3">
         <label>Tempat Lahir</label>
         <input type="text" name="tempat_lahir" class="form-control" required
                value="<?= $siswa['tempat_lahir'] ?? '' ?>">
     </div>
+
     <div class="col-md-3">
         <label>Tanggal Lahir</label>
         <input type="date" name="tanggal_lahir" class="form-control" required
@@ -158,7 +163,7 @@ if (!empty($ortu)) {
     </div>
 </div>
 
-            <div class="row mb-3">
+<div class="row mb-3">
     <div class="col-md-4">
         <label class="form-label">Status Anak</label>
         <select name="status_anak" class="form-control" required>
