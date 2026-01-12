@@ -604,6 +604,20 @@ public function delete()
 {
     $this->deletePPDB();
 }
+public function hapusPembayaran()
+{
+    $id = $_GET['id'] ?? null;
+
+    if ($id) {
+        $paymentModel = $this->model("Payment");
+        $paymentModel->delete($id);
+    }
+
+    header("Location: " . Config::base_url() . "/dashboard/verifikasi");
+    exit;
+}
+
+
 
 
 }
