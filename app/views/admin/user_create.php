@@ -20,7 +20,7 @@
 
             <form method="POST" action="/dashboard/user/store">
                 
-              <input type="hidden" name="peran" value="user">
+              <input type="hidden" name="peran" value="siswa">
                 <!-- NAMA PENGGUNA -->
                 <div class="mb-3">
                     <label for="nama_pengguna" class="form-label">Nama Pengguna</label>
