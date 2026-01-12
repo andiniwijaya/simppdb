@@ -69,6 +69,7 @@ function esc($value)
 
                             <a href="/dashboard/deletePPDB?id=<?= $row['id_pendaftar'] ?>"
                               onclick="return confirm('Yakin ingin menghapus data ini?')">
+                              </a>
 
                     </td>
                 </tr>
