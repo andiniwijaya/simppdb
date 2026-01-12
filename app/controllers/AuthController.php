@@ -170,8 +170,6 @@ class AuthController {
         $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
         $_SESSION["role"]          = $row["peran"];
 
-        // ALERT LOGIN BERHASIL
-        $_SESSION["success"] = "Login berhasil. Selamat datang!";
 
         // redirect sesuai role
         if ($_SESSION["role"] === 'admin') {
