@@ -11,25 +11,32 @@ $wali  : data wali (array / null)
 
 $hasSiswa = !empty($siswa);
 
-// mapping ayah & ibu
+// Mapping data Ayah & Ibu
 $ayah = $ibu = null;
 if (!empty($ortu)) {
     foreach ($ortu as $o) {
-        if ($o['jenis'] === 'Ayah') $ayah = $o;
-        if ($o['jenis'] === 'Ibu')  $ibu  = $o;
+        if ($o['jenis'] === 'Ayah') {
+            $ayah = $o;
+        }
+        if ($o['jenis'] === 'Ibu') {
+            $ibu = $o;
+        }
     }
 }
 ?>
 
 <div class="formulir-page">
-<div class="content">
+    <div class="content">
 
-<?php if (!empty($_SESSION['success_ortu'])): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Berhasil!</strong> Data orang tua berhasil disimpan.
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-<?php unset($_SESSION['success_ortu']); endif; ?>
+        <?php if (!empty($_SESSION['success_ortu'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berhasil!</strong> Data orang tua berhasil disimpan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <?php unset($_SESSION['success_ortu']); ?>
+        <?php endif; ?>
+
+
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 
