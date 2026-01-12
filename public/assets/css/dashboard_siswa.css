@@ -43,27 +43,31 @@ body{
 }
 
 /* ================= CONTAINER UTAMA ================= */
-/* 🔥 INI KUNCI UTAMA AGAR TIDAK MEPET SIDEBAR */
+/* 🔧 Diperbaiki: jarak atas & pinggir */
 .container-fluid{
-    padding-left:300px !important;   /* 240 sidebar + jarak aman */
-    padding-right:40px;
+    padding-left:300px !important;   /* jarak dari sidebar */
+    padding-right:48px;              /* jarak kanan */
+    padding-top:48px;                /* jarak atas */
     max-width:100% !important;
 }
 
 /* ================= CONTENT ================= */
+/* reset padding agar wrapper yang mengatur jarak */
 .content{
-    padding:30px 20px;
+    padding:0;
     min-height:100vh;
     background:#e9eff7;
 }
 
 /* ================= WRAPPER HALAMAN ================= */
+/* 🔧 Diperbaiki: tengah + jarak kiri kanan */
 .wrapper{
     background:#ffffff;
-    padding:32px 36px;
+    padding:36px 40px;               /* jarak dalam lebih lega */
     border-radius:16px;
     box-shadow:0 8px 22px rgba(0,0,0,0.08);
     max-width:1000px;
+    margin:0 auto;                   /* jarak kiri & kanan */
 }
 
 /* ================= CARD ================= */
@@ -129,12 +133,7 @@ table td{
     }
 
     .container-fluid{
-        padding-left:0 !important;
-        padding-right:0;
-    }
-
-    .content{
-        padding:20px;
+        padding:20px !important;     /* jarak atas & pinggir di mobile */
     }
 
     .wrapper{
