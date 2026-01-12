@@ -99,8 +99,10 @@ class User {
         $stmt->bind_param("i", $id);
         $stmt->execute();
     }
-   public function create($data)
+ public function create($data)
 {
+    $peran = 'siswa'; // PAKSA ENUM AMAN
+
     $sql = "
         INSERT INTO pengguna 
         (nisn, nama_pengguna, email, kata_sandi, peran)
@@ -114,10 +116,9 @@ class User {
         $data['nama_pengguna'],
         $data['email'],
         $data['kata_sandi'],
-        $data['peran']
+        $peran
     );
 
     return $stmt->execute();
 }
-
 }
