@@ -93,13 +93,15 @@ if (!empty($ortu)) {
         <label>NIK</label>
         <input type="text" name="nik" maxlength="16" class="form-control" required
                value="<?= $siswa['nik'] ?? '' ?>">
-    </div>
+            <div class="row mb-3">
     <div class="col-md-6">
         <label>NISN</label>
-        <input type="text" name="nisn" maxlength="10" class="form-control" required
-               value="<?= $siswa['nisn'] ?? '' ?>">
+        <input type="text"
+               name="nisn"
+               class="form-control"
+               placeholder="Masukkan NISN"
+               required>
     </div>
-</div>
 
 <div class="row mb-3">
     <div class="col-md-6">

@@ -34,6 +34,8 @@ class DashboardController {
 
             // DATA SISWA
             $siswa = $pendaftar->getFormDataByUserId($id_pengguna);
+            unset($siswa['nisn']);
+
 
             if (!$siswa) {
                 $siswa = [
