@@ -4,7 +4,8 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 require_once __DIR__ . '/../models/OrangTua.php';
 
 class FormulirController {
-    // HALAMAN FORMULIR
+
+    // ===================== HALAMAN FORMULIR =====================
     public function index() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -15,16 +16,14 @@ class FormulirController {
         $pendaftar = new Pendaftar();
         $ortu      = new OrangTua();
 
-        // ambil data siswa (pendaftar)
+        // ambil data siswa
         $siswa = $pendaftar->getFormDataByUserId($user_id);
+        $id_pendaftar = $siswa['id_pendaftar'] ?? 0;
 
-        $id_pendaftar = $siswa ? $siswa['id_pendaftar'] : 0;
-
-        // ambil data orang tua & wali jika siswa sudah ada
+        // ambil data orang tua & wali
         $ortuData = $id_pendaftar ? $ortu->getOrtuByPendaftar($id_pendaftar) : [];
         $waliData = $id_pendaftar ? $ortu->getWaliByPendaftar($id_pendaftar) : null;
 
-        // kirim ke view
         $data = [
             "siswa" => $siswa,
             "ortu"  => $ortuData,
@@ -40,7 +39,7 @@ class FormulirController {
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    // SIMPAN FORMULIR
+    // ===================== SIMPAN FORMULIR =====================
     public function simpan() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -56,7 +55,7 @@ class FormulirController {
         $pendaftar = new Pendaftar();
         $ortu      = new OrangTua();
 
-        // SIMPAN DATA SISWA
+        // ---------- SIMPAN DATA SISWA ----------
         if ($_POST["save"] === "siswa") {
 
             $pendaftar->saveSiswa($user_id, $_POST);
@@ -65,35 +64,34 @@ class FormulirController {
             exit;
         }
 
-        // ambil id_pendaftar (wajib untuk ortu / wali)
-        $id_pendaftar = $pendaftar->getById($user_id);
+        // ---------- AMBIL ID PENDAFTAR (WAJIB ANGKA) ----------
+        $dataSiswa = $pendaftar->getFormDataByUserId($user_id);
+        $id_pendaftar = $dataSiswa['id_pendaftar'] ?? 0;
 
         if ($id_pendaftar == 0) {
             header("Location: /siswa/formulir?tab=siswa&error=lengkapi_data_siswa");
             exit;
         }
 
-        // SIMPAN DATA ORANG TUA (AYAH & IBU)
+        // ---------- SIMPAN DATA ORANG TUA ----------
         if ($_POST["save"] === "ortu") {
 
             $ortu->saveAyah($id_pendaftar, $_POST);
             $ortu->saveIbu($id_pendaftar, $_POST);
 
-            // update status_data (lengkap / belum_lengkap)
-           $pendaftar->updateStatusData($id_pendaftar, "terverifikasi");
-
+            // status hanya LENGKAP, verifikasi oleh admin
+            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
 
             header("Location: /siswa/formulir?tab=ortu&saved=1");
             exit;
         }
 
-        // SIMPAN DATA WALI
+        // ---------- SIMPAN DATA WALI ----------
         if ($_POST["save"] === "wali") {
 
             $ortu->saveWali($id_pendaftar, $_POST);
 
-            // update status_data (lengkap / belum_lengkap)
-            $pendaftar->updateStatusData($id_pendaftar);
+            $pendaftar->updateStatusData($id_pendaftar, "lengkap");
 
             header("Location: /siswa/formulir?tab=wali&saved=1");
             exit;
@@ -104,7 +102,7 @@ class FormulirController {
         exit;
     }
 
-    // CETAK FORMULIR
+    // ===================== CETAK FORMULIR =====================
     public function cetak() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -115,7 +113,8 @@ class FormulirController {
         $pendaftar = new Pendaftar();
         $ortu      = new OrangTua();
 
-        $id_pendaftar = $pendaftar->getId($user_id);
+        $siswa = $pendaftar->getFormDataByUserId($user_id);
+        $id_pendaftar = $siswa['id_pendaftar'] ?? 0;
 
         if ($id_pendaftar == 0) {
             header("Location: /siswa/formulir");
@@ -123,7 +122,7 @@ class FormulirController {
         }
 
         $data = [
-            "siswa" => $pendaftar->getFormDataByUserId($user_id),
+            "siswa" => $siswa,
             "ortu"  => $ortu->getOrtuByPendaftar($id_pendaftar),
             "wali"  => $ortu->getWaliByPendaftar($id_pendaftar)
         ];
