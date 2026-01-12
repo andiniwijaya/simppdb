@@ -1,18 +1,23 @@
 <?php
 $base = Config::base_url();
+
+function esc($v)
+{
+    return htmlspecialchars($v ?? '', ENT_QUOTES, 'UTF-8');
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Verifikasi Berkas Pendaftar</title>
+    <meta charset="UTF-8">
+    <title>Verifikasi Berkas Pendaftar</title>
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
@@ -45,32 +50,43 @@ $base = Config::base_url();
                     <tbody>
                     <?php if (!empty($list)): ?>
                         <?php foreach ($list as $row): ?>
+
+                        <?php
+                        // ===== PATH BERKAS =====
+                        $file     = $row['lokasi_berkas'] ?? '';
+                        $urlFile  = $file ? '/uploads/berkas/' . $file : '';
+                        $realPath = $_SERVER['DOCUMENT_ROOT'] . $urlFile;
+                        ?>
+
                         <tr>
 
                             <!-- NAMA -->
                             <td class="fw-semibold">
-                                <?= htmlspecialchars($row['nama_lengkap']) ?>
+                                <?= esc($row['nama_lengkap']) ?>
                             </td>
 
                             <!-- JENIS BERKAS -->
                             <td>
-                                <?= ucwords(str_replace('_', ' ', $row['jenis_berkas'])) ?>
+                                <?= esc(ucwords(str_replace('_', ' ', $row['jenis_berkas'] ?? ''))) ?>
                             </td>
 
                             <!-- LINK BERKAS -->
                             <td>
-                                <a href="<?= $row['lokasi_berkas'] ?>"
-                                   target="_blank"
-                                   class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                    Lihat
-                                </a>
+                                <?php if ($file && file_exists($realPath)): ?>
+                                    <a href="<?= esc($urlFile) ?>"
+                                       target="_blank"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i> Lihat
+                                    </a>
+                                <?php else: ?>
+                                    <span class="text-danger small">File tidak ditemukan</span>
+                                <?php endif; ?>
                             </td>
 
                             <!-- STATUS -->
                             <td class="text-center">
                                 <?php
-                                $status = $row['status_berkas'];
+                                $status = $row['status_berkas'] ?? 'menunggu';
                                 if ($status === 'valid') {
                                     echo '<span class="badge bg-success">VALID</span>';
                                 } elseif ($status === 'invalid') {
@@ -85,13 +101,13 @@ $base = Config::base_url();
                             <td class="text-center">
                                 <?php if ($status === 'menunggu'): ?>
                                     <div class="btn-group btn-group-sm">
-                                        <a href="/dashboard/validBerkas?id=<?= $row['id_berkas'] ?>"
+                                        <a href="/dashboard/validBerkas?id=<?= esc($row['id_berkas']) ?>"
                                            class="btn btn-success"
                                            onclick="return confirm('Validkan berkas ini?')">
                                             <i class="bi bi-check-lg"></i>
                                         </a>
 
-                                        <a href="/dashboard/invalidBerkas?id=<?= $row['id_berkas'] ?>"
+                                        <a href="/dashboard/invalidBerkas?id=<?= esc($row['id_berkas']) ?>"
                                            class="btn btn-danger"
                                            onclick="return confirm('Tolak berkas ini?')">
                                             <i class="bi bi-x-lg"></i>

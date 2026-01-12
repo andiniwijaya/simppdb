@@ -7,10 +7,7 @@ class Payment extends Database
      * Total infaq yang harus dibayar siswa
      */
     const TOTAL_INFAQ = 500000;
-
-    // ==================================================
     // DASHBOARD ADMIN
-    // ==================================================
 
     // Hitung total data pembayaran
     public function count()
@@ -23,7 +20,6 @@ class Payment extends Database
     }
 
     // Ambil semua pembayaran (ADMINISTRASI ADMIN)
-    // ✅ SUDAH JOIN ke tabel pendaftar
     public function getAllPayments()
     {
         $sql = "
@@ -44,10 +40,7 @@ class Payment extends Database
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
-    // ==================================================
     // PEMBAYARAN SISWA
-    // ==================================================
 
     // Total nominal yang sudah dibayar (status lunas)
     public function getTotalBayar($id_pendaftar)
@@ -111,10 +104,7 @@ class Payment extends Database
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
-    // ==================================================
     // DASHBOARD SISWA
-    // ==================================================
 
     // Ambil pembayaran terakhir siswa
     public function lastPayment($id_pendaftar)
@@ -139,10 +129,7 @@ class Payment extends Database
     {
         return $this->getTotalBayar($id_pendaftar);
     }
-
-    // ==================================================
     // SIMPAN PEMBAYARAN
-    // ==================================================
 
     // Simpan pembayaran (cicilan)
     public function insert($id_pendaftar, $jumlah, $bukti)
@@ -159,47 +146,42 @@ class Payment extends Database
 
         return $stmt->execute();
     }
-    // ===============================
-// UPDATE STATUS PEMBAYARAN
-// ===============================
-public function updateStatus($id_pembayaran, $status)
-{
-    $sql = "UPDATE pembayaran SET status_bayar = ? WHERE id_pembayaran = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("si", $status, $id_pembayaran);
-    return $stmt->execute();
-}
+        // UPDATE STATUS PEMBAYARAN
+        public function updateStatus($id_pembayaran, $status)
+        {
+            $sql = "UPDATE pembayaran SET status_bayar = ? WHERE id_pembayaran = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("si", $status, $id_pembayaran);
+            return $stmt->execute();
+        }
+        // AMBIL ID PENDAFTAR DARI PEMBAYARAN
+        public function getPendaftarId($id_pembayaran)
+        {
+            $sql = "SELECT id_pendaftar FROM pembayaran WHERE id_pembayaran = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $id_pembayaran);
+            $stmt->execute();
 
-// ===============================
-// AMBIL ID PENDAFTAR DARI PEMBAYARAN
-// ===============================
-public function getPendaftarId($id_pembayaran)
-{
-    $sql = "SELECT id_pendaftar FROM pembayaran WHERE id_pembayaran = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id_pembayaran);
-    $stmt->execute();
+            $row = $stmt->get_result()->fetch_assoc();
+            return $row['id_pendaftar'] ?? null;
+        }
+        public function isLunas($id_pendaftar)
+        {
+            $sql = "
+                SELECT IFNULL(SUM(jumlah), 0) AS total
+                FROM pembayaran
+                WHERE id_pendaftar = ?
+                AND status_bayar = 'lunas'
+            ";
 
-    $row = $stmt->get_result()->fetch_assoc();
-    return $row['id_pendaftar'] ?? null;
-}
-public function isLunas($id_pendaftar)
-{
-    $sql = "
-        SELECT IFNULL(SUM(jumlah), 0) AS total
-        FROM pembayaran
-        WHERE id_pendaftar = ?
-          AND status_bayar = 'lunas'
-    ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $id_pendaftar);
+            $stmt->execute();
 
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $id_pendaftar);
-    $stmt->execute();
+            $row = $stmt->get_result()->fetch_assoc();
 
-    $row = $stmt->get_result()->fetch_assoc();
-
-    return ((int)$row['total'] >= self::TOTAL_INFAQ);
-}
+            return ((int)$row['total'] >= self::TOTAL_INFAQ);
+        }
 
 
-}
+        }
