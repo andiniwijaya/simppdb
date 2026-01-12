@@ -42,7 +42,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Unggah Bukti Pembayaran</label>
+                <label class="form-label">Kirim Bukti Pembayaran</label>
                 <input 
                     type="file" 
                     name="bukti" 
