@@ -72,7 +72,7 @@ $base = Config::base_url();
                         Simpan Perubahan
                     </button>
 
-                    <a href="/dashboard/data_ppdb" class="btn btn-secondary">
+                    <a href="data_ppdb.php" class="btn btn-secondary">
                         Kembali
                     </a>
                 </div>

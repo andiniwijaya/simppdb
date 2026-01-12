@@ -369,7 +369,8 @@ class DashboardController {
     public function update()
     {
         if (!isset($_POST['id_pendaftar'])) {
-            header("Location: /admin/ppdb");
+            // Setelah update berhasil
+            header("Location: data_ppdb.php");
             exit;
         }
 
@@ -535,9 +536,6 @@ class DashboardController {
     header("Location: /dashboard/users");
     exit;
 }
-
-
-
 
     public function deleteUser()
     {
