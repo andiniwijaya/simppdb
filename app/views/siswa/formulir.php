@@ -316,8 +316,10 @@ if (!empty($ortu)) {
 <textarea class="form-control" name="alamat_rumah_ibu" placeholder="Alamat"><?= $ibu['alamat_rumah'] ?? '' ?></textarea>
 
 </div>
+<button class="btn btn-primary w-100 mb-5" onclick="alert('Data orang tua berhasil disimpan')">
+    Simpan Data Orang Tua
+</button>
 
-<button class="btn btn-primary w-100 mb-5">Simpan Data Orang Tua</button>
 </form>
 </div>
 
