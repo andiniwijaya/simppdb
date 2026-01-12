@@ -96,12 +96,9 @@ class AuthController {
         exit;
     }
 
-    // =========================
-    // INI BAGIAN YANG DITAMBAHKAN
-    // =========================
-
     // 1. insert ke tabel pengguna
-    $user_id = $user->insert($username, $email, $pass);
+    $user_id = $user->insert($nisn, $username, $email, $pass);
+
 
     // 2. insert NISN ke tabel pendaftar
     $pendaftar->insertBasic($user_id, $nisn);
