@@ -287,42 +287,49 @@ if (!empty($ortu)) {
 
 <div class="mb-2">
     <label class="form-label">Nama Ayah</label>
-    <input type="text" class="form-control" name="nama_ayah">
+    <input type="text" class="form-control" name="nama_ayah"
+           value="<?= htmlspecialchars($ayah['nama_orang_tua'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Pendidikan Terakhir</label>
-    <input type="text" class="form-control" name="pendidikan_ayah">
+    <input type="text" class="form-control" name="pendidikan_ayah"
+           value="<?= htmlspecialchars($ayah['pendidikan_terakhir'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Pekerjaan</label>
-    <input type="text" class="form-control" name="pekerjaan_ayah">
+    <input type="text" class="form-control" name="pekerjaan_ayah"
+           value="<?= htmlspecialchars($ayah['pekerjaan'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Penghasilan</label>
-    <input type="text" class="form-control" name="penghasilan_ayah">
+    <input type="text" class="form-control" name="penghasilan_ayah"
+           value="<?= htmlspecialchars($ayah['penghasilan'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">No HP</label>
-    <input type="text" class="form-control" name="hp_ayah">
+    <input type="text" class="form-control" name="hp_ayah"
+           value="<?= htmlspecialchars($ayah['nomor_hp'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Tempat Lahir</label>
-    <input type="text" class="form-control" name="tempat_lahir_ayah">
+    <input type="text" class="form-control" name="tempat_lahir_ayah"
+           value="<?= htmlspecialchars($ayah['tempat_lahir'] ?? '') ?>">
 </div>
 
 <div class="mb-3">
     <label class="form-label">Tanggal Lahir</label>
-    <input type="date" class="form-control" name="tanggal_lahir_ayah">
+    <input type="date" class="form-control" name="tanggal_lahir_ayah"
+           value="<?= htmlspecialchars($ayah['tanggal_lahir'] ?? '') ?>">
 </div>
 
 <div class="mb-3">
     <label class="form-label">Alamat Rumah</label>
-    <textarea class="form-control" name="alamat_rumah_ayah"></textarea>
+    <textarea class="form-control" name="alamat_rumah_ayah"><?= htmlspecialchars($ayah['alamat_rumah'] ?? '') ?></textarea>
 </div>
 
 <!-- ================= DATA IBU ================= -->
@@ -330,42 +337,49 @@ if (!empty($ortu)) {
 
 <div class="mb-2">
     <label class="form-label">Nama Ibu</label>
-    <input type="text" class="form-control" name="nama_ibu">
+    <input type="text" class="form-control" name="nama_ibu"
+           value="<?= htmlspecialchars($ibu['nama_orang_tua'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Pendidikan Terakhir</label>
-    <input type="text" class="form-control" name="pendidikan_ibu">
+    <input type="text" class="form-control" name="pendidikan_ibu"
+           value="<?= htmlspecialchars($ibu['pendidikan_terakhir'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Pekerjaan</label>
-    <input type="text" class="form-control" name="pekerjaan_ibu">
+    <input type="text" class="form-control" name="pekerjaan_ibu"
+           value="<?= htmlspecialchars($ibu['pekerjaan'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Penghasilan</label>
-    <input type="text" class="form-control" name="penghasilan_ibu">
+    <input type="text" class="form-control" name="penghasilan_ibu"
+           value="<?= htmlspecialchars($ibu['penghasilan'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">No HP</label>
-    <input type="text" class="form-control" name="hp_ibu">
+    <input type="text" class="form-control" name="hp_ibu"
+           value="<?= htmlspecialchars($ibu['nomor_hp'] ?? '') ?>">
 </div>
 
 <div class="mb-2">
     <label class="form-label">Tempat Lahir</label>
-    <input type="text" class="form-control" name="tempat_lahir_ibu">
+    <input type="text" class="form-control" name="tempat_lahir_ibu"
+           value="<?= htmlspecialchars($ibu['tempat_lahir'] ?? '') ?>">
 </div>
 
 <div class="mb-3">
     <label class="form-label">Tanggal Lahir</label>
-    <input type="date" class="form-control" name="tanggal_lahir_ibu">
+    <input type="date" class="form-control" name="tanggal_lahir_ibu"
+           value="<?= htmlspecialchars($ibu['tanggal_lahir'] ?? '') ?>">
 </div>
 
 <div class="mb-3">
     <label class="form-label">Alamat Rumah</label>
-    <textarea class="form-control" name="alamat_rumah_ibu"></textarea>
+    <textarea class="form-control" name="alamat_rumah_ibu"><?= htmlspecialchars($ibu['alamat_rumah'] ?? '') ?></textarea>
 </div>
 
 </div>
@@ -376,7 +390,6 @@ if (!empty($ortu)) {
 
 </form>
 </div>
-
 
 <!-- ===================== TAB WALI ====================== -->
 <div class="tab-pane fade <?= ($_GET['tab'] ?? '')=='wali'?'show active':'' ?>" id="tabWali">
