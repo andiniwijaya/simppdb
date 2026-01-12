@@ -287,6 +287,16 @@ public function insertBasic($id_pengguna, $nisn)
     return $stmt->execute();
 }
 
+public function getNisnByUserId($id_pengguna)
+{
+    $stmt = $this->conn->prepare(
+        "SELECT nisn FROM pendaftar WHERE id_pengguna=? LIMIT 1"
+    );
+    $stmt->bind_param("i", $id_pengguna);
+    $stmt->execute();
 
+    $r = $stmt->get_result()->fetch_assoc();
+    return $r['nisn'] ?? null;
+}
 
 }
