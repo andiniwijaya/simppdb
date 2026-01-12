@@ -17,19 +17,42 @@
         </span>
     </div>
 
-    <!-- FORM PEMBAYARAN -->
+    <!-- KIRIM BUKTI PEMBAYARAN -->
     <?php if ($status != "lunas"): ?>
     <div class="card p-4 mb-4">
+        <h5 class="fw-bold mb-3">
+            <i class="bi bi-upload me-1"></i> Kirim Bukti Pembayaran
+        </h5>
+
         <form action="/siswa/pembayaran/upload" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label">Nominal Bayar</label>
-                <input type="number" name="jumlah" class="form-control" required>
+                <input 
+                    type="number" 
+                    name="jumlah" 
+                    class="form-control" 
+                    min="1"
+                    max="<?= max($sisa, 0) ?>"
+                    required
+                >
+                <small class="text-muted">
+                    Maksimal Rp <?= number_format(max($sisa, 0)) ?>
+                </small>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Bukti Transfer</label>
-                <input type="file" name="bukti" class="form-control" required>
+                <label class="form-label">Unggah Bukti Pembayaran</label>
+                <input 
+                    type="file" 
+                    name="bukti" 
+                    class="form-control"
+                    accept="image/*,.pdf"
+                    required
+                >
+                <small class="text-muted">
+                    Format file: JPG, PNG, atau PDF
+                </small>
             </div>
 
             <button class="btn btn-primary w-100">
