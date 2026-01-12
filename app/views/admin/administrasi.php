@@ -48,7 +48,7 @@
 
     <td style="text-align:center;">
     
-    <a href="<?= $base ?>/dashboard/pembayaran/hapus?id=<?= $row['id_pembayaran'] ?>"
+    <a href="<?= $base ?>/admin/administrasi.php/hapus?id=<?= $row['id_pembayaran'] ?>"
        onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
        style="color:red;font-weight:bold;">
         🗑 Hapus
