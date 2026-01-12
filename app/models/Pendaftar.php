@@ -278,6 +278,14 @@ public function getById($id_pendaftar)
 
     return $stmt->get_result()->fetch_assoc();
 }
+public function insertBasic($id_pengguna, $nisn)
+{
+    $stmt = $this->conn->prepare(
+        "INSERT INTO pendaftar (id_pengguna, nisn) VALUES (?, ?)"
+    );
+    $stmt->bind_param("is", $id_pengguna, $nisn);
+    return $stmt->execute();
+}
 
 
 
