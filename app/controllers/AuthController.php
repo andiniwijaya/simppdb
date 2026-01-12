@@ -9,6 +9,10 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 
 class AuthController {
 
+    /* =========================
+       VIEW
+    ========================== */
+
     public function homepage(){
         require __DIR__ . '/../views/home.php';
     }
@@ -33,7 +37,10 @@ class AuthController {
         require __DIR__ . '/../views/reset_password.php';
     }
 
-    //REGISTER PROCESS
+    /* =========================
+       REGISTER PROCESS
+    ========================== */
+
     public function processRegister(){
 
         $db        = new Database;
@@ -51,7 +58,7 @@ class AuthController {
             exit;
         }
 
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){ 
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ 
             header("Location: /register?error=email_invalid");
             exit;
         }
@@ -73,7 +80,12 @@ class AuthController {
         }
 
         // email exist
-        $cekEmail = $db->conn->query("SELECT id_pengguna FROM pengguna WHERE email='$email' LIMIT 1");
+        $cekEmail = $db->conn->query("
+            SELECT id_pengguna 
+            FROM pengguna 
+            WHERE email='$email' 
+            LIMIT 1
+        ");
         if($cekEmail->num_rows > 0){
             header("Location: /register?error=email_used");
             exit;
@@ -86,28 +98,32 @@ class AuthController {
         }
 
         // insert user
-        $user->insert($username,$email,$pass);
+        $user->insert($username, $email, $pass);
 
-        header("Location: /login?register_ok");
+        $_SESSION['success'] = 'Registrasi berhasil, silakan login';
+        header("Location: /login");
         exit;
     }
-    //LOGIN PROCESS
+
+    /* =========================
+       LOGIN PROCESS
+    ========================== */
+
     public function processLogin(){
 
         $db = new Database;
         $login_id = trim($_POST["login_id"]);
         $password = trim($_POST["password"]);
 
-        // check by username
+        // login via username
         $sql = "SELECT * FROM pengguna WHERE nama_pengguna = ? LIMIT 1";
         $stmt = $db->conn->prepare($sql);
-        $stmt->bind_param("s",$login_id);
+        $stmt->bind_param("s", $login_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // if username not found → check NISN login
+        // login via NISN
         if($result->num_rows == 0){
-
             $sql = "
                 SELECT u.*
                 FROM pendaftar p
@@ -115,9 +131,8 @@ class AuthController {
                 WHERE p.nisn = ?
                 LIMIT 1
             ";
-
             $stmt = $db->conn->prepare($sql);
-            $stmt->bind_param("s",$login_id);
+            $stmt->bind_param("s", $login_id);
             $stmt->execute();
             $result = $stmt->get_result();
         }
@@ -129,22 +144,25 @@ class AuthController {
 
         $row = $result->fetch_assoc();
 
-        if(!password_verify($password,$row["kata_sandi"])){
+        if(!password_verify($password, $row["kata_sandi"])){
             header("Location: /login?error=password");
             exit;
         }
+
         $_SESSION["user_id"]       = $row["id_pengguna"];
         $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
         $_SESSION["role"]          = $row["peran"];
 
-        // FLAG ALERT
         $_SESSION["login_success"] = true;
 
-        // BALIK KE LOGIN 
         header("Location: /login");
         exit;
-         }
-    //FORGOT PASSWORD PROCESS
+    }
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================== */
+
     public function processForgot(){
 
         $db = new Database;
@@ -152,7 +170,7 @@ class AuthController {
 
         $sql = "SELECT id_pengguna FROM pengguna WHERE email=? LIMIT 1";
         $stmt = $db->conn->prepare($sql);
-        $stmt->bind_param("s",$email);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $res = $stmt->get_result();
 
@@ -162,13 +180,16 @@ class AuthController {
         }
 
         $row = $res->fetch_assoc();
-
         $_SESSION["reset_id"] = $row["id_pengguna"];
 
-        header("Location: /reset"); 
+        header("Location: /reset");
         exit;
     }
-    //RESET PASSWORD PROCESS
+
+    /* =========================
+       RESET PASSWORD
+    ========================== */
+
     public function processReset(){
 
         if(!isset($_SESSION["reset_id"])){
@@ -177,8 +198,8 @@ class AuthController {
         }
 
         $db = new Database;
-
         $id = $_SESSION["reset_id"];
+
         $p1 = $_POST["password"];
         $p2 = $_POST["confirm"];
 
@@ -187,7 +208,7 @@ class AuthController {
             exit;
         }
 
-        $hash = password_hash($p1,PASSWORD_DEFAULT);
+        $hash = password_hash($p1, PASSWORD_DEFAULT);
 
         $db->conn->query("
             UPDATE pengguna 
