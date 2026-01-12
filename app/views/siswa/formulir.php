@@ -271,57 +271,112 @@ if (!empty($ortu)) {
 
 </form>
 </div>
-
 <!-- ================== TAB ORANG TUA ==================== -->
 <div class="tab-pane fade <?= ($_GET['tab'] ?? '')=='ortu'?'show active':'' ?>" id="tabOrtu">
 
-<form method="post" action="/siswa/formulir/simpan">
+<form method="post"
+      action="/siswa/formulir/simpan"
+      onsubmit="alert('Data orang tua berhasil disimpan')">
+
 <input type="hidden" name="save" value="ortu">
 
 <div class="card p-4 shadow-sm mb-4">
-<h5 class="fw-bold">Data Ayah</h5>
 
-<input class="form-control mb-2" name="nama_ayah" placeholder="Nama Ayah"
-       value="<?= $ayah['nama_orang_tua'] ?? '' ?>">
-<input class="form-control mb-2" name="pendidikan_ayah" placeholder="Pendidikan Terakhir"
-       value="<?= $ayah['pendidikan_terakhir'] ?? '' ?>">
-<input class="form-control mb-2" name="pekerjaan_ayah" placeholder="Pekerjaan"
-       value="<?= $ayah['pekerjaan'] ?? '' ?>">
-<input class="form-control mb-2" name="penghasilan_ayah" placeholder="Penghasilan"
-       value="<?= $ayah['penghasilan'] ?? '' ?>">
-<input class="form-control mb-2" name="hp_ayah" placeholder="No HP"
-       value="<?= $ayah['nomor_hp'] ?? '' ?>">
-<input class="form-control mb-2" name="tempat_lahir_ayah" placeholder="Tempat Lahir"
-       value="<?= $ayah['tempat_lahir'] ?? '' ?>">
-<input type="date" class="form-control mb-2" name="tanggal_lahir_ayah"
-       value="<?= $ayah['tanggal_lahir'] ?? '' ?>">
-<textarea class="form-control mb-3" name="alamat_rumah_ayah" placeholder="Alamat"><?= $ayah['alamat_rumah'] ?? '' ?></textarea>
+<!-- ================= DATA AYAH ================= -->
+<h5 class="fw-bold mb-3">Data Ayah</h5>
 
-<h5 class="fw-bold mt-4">Data Ibu</h5>
+<div class="mb-2">
+    <label class="form-label">Nama Ayah</label>
+    <input type="text" class="form-control" name="nama_ayah">
+</div>
 
-<input class="form-control mb-2" name="nama_ibu" placeholder="Nama Ibu"
-       value="<?= $ibu['nama_orang_tua'] ?? '' ?>">
-<input class="form-control mb-2" name="pendidikan_ibu" placeholder="Pendidikan Terakhir"
-       value="<?= $ibu['pendidikan_terakhir'] ?? '' ?>">
-<input class="form-control mb-2" name="pekerjaan_ibu" placeholder="Pekerjaan"
-       value="<?= $ibu['pekerjaan'] ?? '' ?>">
-<input class="form-control mb-2" name="penghasilan_ibu" placeholder="Penghasilan"
-       value="<?= $ibu['penghasilan'] ?? '' ?>">
-<input class="form-control mb-2" name="hp_ibu" placeholder="No HP"
-       value="<?= $ibu['nomor_hp'] ?? '' ?>">
-<input class="form-control mb-2" name="tempat_lahir_ibu" placeholder="Tempat Lahir"
-       value="<?= $ibu['tempat_lahir'] ?? '' ?>">
-<input type="date" class="form-control mb-2" name="tanggal_lahir_ibu"
-       value="<?= $ibu['tanggal_lahir'] ?? '' ?>">
-<textarea class="form-control" name="alamat_rumah_ibu" placeholder="Alamat"><?= $ibu['alamat_rumah'] ?? '' ?></textarea>
+<div class="mb-2">
+    <label class="form-label">Pendidikan Terakhir</label>
+    <input type="text" class="form-control" name="pendidikan_ayah">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Pekerjaan</label>
+    <input type="text" class="form-control" name="pekerjaan_ayah">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Penghasilan</label>
+    <input type="text" class="form-control" name="penghasilan_ayah">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">No HP</label>
+    <input type="text" class="form-control" name="hp_ayah">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Tempat Lahir</label>
+    <input type="text" class="form-control" name="tempat_lahir_ayah">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Tanggal Lahir</label>
+    <input type="date" class="form-control" name="tanggal_lahir_ayah">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Alamat Rumah</label>
+    <textarea class="form-control" name="alamat_rumah_ayah"></textarea>
+</div>
+
+<!-- ================= DATA IBU ================= -->
+<h5 class="fw-bold mt-4 mb-3">Data Ibu</h5>
+
+<div class="mb-2">
+    <label class="form-label">Nama Ibu</label>
+    <input type="text" class="form-control" name="nama_ibu">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Pendidikan Terakhir</label>
+    <input type="text" class="form-control" name="pendidikan_ibu">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Pekerjaan</label>
+    <input type="text" class="form-control" name="pekerjaan_ibu">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Penghasilan</label>
+    <input type="text" class="form-control" name="penghasilan_ibu">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">No HP</label>
+    <input type="text" class="form-control" name="hp_ibu">
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Tempat Lahir</label>
+    <input type="text" class="form-control" name="tempat_lahir_ibu">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Tanggal Lahir</label>
+    <input type="date" class="form-control" name="tanggal_lahir_ibu">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Alamat Rumah</label>
+    <textarea class="form-control" name="alamat_rumah_ibu"></textarea>
+</div>
 
 </div>
-<button class="btn btn-primary w-100 mb-5" onclick="alert('Data orang tua berhasil disimpan')">
+
+<button type="submit" class="btn btn-primary w-100 mb-5">
     Simpan Data Orang Tua
 </button>
 
 </form>
 </div>
+
 
 <!-- ===================== TAB WALI ====================== -->
 <div class="tab-pane fade <?= ($_GET['tab'] ?? '')=='wali'?'show active':'' ?>" id="tabWali">
