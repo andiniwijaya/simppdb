@@ -3,6 +3,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Profil Lembaga | SIM Sekolah</title>
 
     <!-- BOOTSTRAP CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,6 +16,18 @@
     <!-- CSS PROJECT -->
     <link rel="stylesheet" href="<?= $base ?>/public/assets/css/style.css">
     <link rel="stylesheet" href="<?= $base ?>/public/assets/css/kelembagaan.css">
+
+    <!-- GLOBAL STYLE SENTUHAN ESTETIK -->
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+            background:#eef2f7;
+        }
+
+        h2{
+            letter-spacing:.3px;
+        }
+    </style>
 </head>
 <body>
 
