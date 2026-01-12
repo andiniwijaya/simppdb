@@ -30,6 +30,17 @@
                            required>
                 </div>
 
+                <<div class="mb-3">
+    <label for="nisn" class="form-label">NISN</label>
+    <input
+        type="text"
+        id="nisn"
+        name="nisn"
+        class="form-control"
+        required
+    >
+</div>
+
                 <!-- EMAIL -->
                 <div class="mb-3">
                     <label class="form-label">Email</label>
