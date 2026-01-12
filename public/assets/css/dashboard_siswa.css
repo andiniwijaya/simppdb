@@ -43,16 +43,13 @@ body{
 }
 
 /* ================= CONTAINER UTAMA ================= */
-/* 🔧 Diperbaiki: jarak atas & pinggir */
 .container-fluid{
-    padding-left:300px !important;   /* jarak dari sidebar */
-    padding-right:48px;              /* jarak kanan */
-    padding-top:48px;                /* jarak atas */
+    padding-left:300px !important;   /* dorong dari sidebar */
+    padding-right:40px;
     max-width:100% !important;
 }
 
 /* ================= CONTENT ================= */
-/* reset padding agar wrapper yang mengatur jarak */
 .content{
     padding:0;
     min-height:100vh;
@@ -60,14 +57,16 @@ body{
 }
 
 /* ================= WRAPPER HALAMAN ================= */
-/* 🔧 Diperbaiki: tengah + jarak kiri kanan */
+/* 🔥 INI YANG MEMASTIKAN TIDAK NEMPEL */
 .wrapper{
     background:#ffffff;
-    padding:36px 40px;               /* jarak dalam lebih lega */
+    padding:36px 40px;
     border-radius:16px;
     box-shadow:0 8px 22px rgba(0,0,0,0.08);
     max-width:1000px;
-    margin:0 auto;                   /* jarak kiri & kanan */
+
+    /* 🔥 JARAK ATAS & PINGGIR DIPAKSA */
+    margin:48px auto;
 }
 
 /* ================= CARD ================= */
@@ -133,10 +132,11 @@ table td{
     }
 
     .container-fluid{
-        padding:20px !important;     /* jarak atas & pinggir di mobile */
+        padding:0 !important;
     }
 
     .wrapper{
+        margin:20px;                 /* jarak mobile */
         padding:24px;
         border-radius:14px;
     }
