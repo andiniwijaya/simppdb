@@ -16,7 +16,10 @@ $base = Config::base_url();
 
 <div class="pengaturan-wrapper">
 
-<form method="post" action="/admin/ppdb/update?id=<?= $data['id_pendaftar'] ?>">
+<form method="post" action="/admin/ppdb/update">
+
+    <input type="hidden" name="id_pendaftar"
+           value="<?= $data['id_pendaftar'] ?>">
 
     <div class="form-group">
         <label>Nama Lengkap</label>
@@ -54,16 +57,14 @@ $base = Config::base_url();
         </select>
     </div>
 
-    <br>
-
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary mt-3">
         Simpan Perubahan
     </button>
 
-    <a href="/dashboard/data_ppdb" class="btn btn-secondary">
+    <a href="/dashboard/data_ppdb" class="btn btn-secondary mt-3">
         Kembali
     </a>
-
 </form>
+
 
 </div>
