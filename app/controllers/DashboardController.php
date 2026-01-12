@@ -614,8 +614,9 @@ public function hapusPembayaran()
         $payment->delete($id);
     }
 
-    header("Location: " . Config::base_url() . "/dashboard/verifikasi");
-    exit;
+        header("Location: " . Config::base_url() . "/dashboard/administrasi");
+exit;
+
 }
 
 
