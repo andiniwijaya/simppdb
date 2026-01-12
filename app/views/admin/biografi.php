@@ -14,8 +14,8 @@ $base = Config::base_url();
 
 <body class="bg-light">
     <!-- ================= AUDIO ================= -->
-<audio id="bg-music" loop>
-    <source src="<?= $base ?>/public/background.mp3" type="audio/mpeg">
+<audio id="bg-music" loop> 
+<source src="<?= $base ?>/public/background.mp3" type="audio/mpeg"> 
 </audio>
 
 <!-- NAVBAR -->
