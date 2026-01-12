@@ -1,4 +1,8 @@
-<?php 
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $base = Config::base_url();
 ?>
 <!DOCTYPE html>
@@ -13,18 +17,26 @@ $base = Config::base_url();
 </head>
 
 <body>
-  <?php if (!empty($_SESSION['login_success'])): ?>
+
+<!-- ================= ALERT REGISTER BERHASIL ================= -->
+<?php if (!empty($_SESSION['success'])): ?>
 <script>
-    alert("✔  Login berhasil!\nSelamat datang, <?= $_SESSION['nama_pengguna']; ?>");
+    alert("<?= $_SESSION['success']; ?>");
+</script>
+<?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<!-- ================= ALERT LOGIN BERHASIL ================= -->
+<?php if (!empty($_SESSION['login_success'])): ?>
+<script>
+    alert("✔ Login berhasil!\nSelamat datang, <?= $_SESSION['nama_pengguna']; ?>");
     window.location.href = "/dashboard";
 </script>
 <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
 
-
-
 <!-- ================= LOGIN ERROR DATA ================= -->
-<?php if(isset($_GET["error"])): ?>
+<?php if (isset($_GET["error"])): ?>
     <div id="login-error" data-type="<?= htmlspecialchars($_GET['error']) ?>"></div>
 <?php endif; ?>
 
@@ -49,7 +61,7 @@ $base = Config::base_url();
             <h4 class="text-center fw-bold">Login</h4>
             <p class="text-center mb-4">Masukkan akun kamu</p>
 
-            <!-- FORM -->
+            <!-- ================= FORM LOGIN ================= -->
             <form method="POST" action="<?= $base ?>/login">
 
                 <!-- USERNAME -->
