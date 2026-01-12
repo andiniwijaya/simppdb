@@ -24,14 +24,14 @@ $base = Config::base_url();
             <form method="post" action="/admin/ppdb/update">
 
                 <input type="hidden" name="id_pendaftar"
-                       value="<?= $data['id_pendaftar'] ?>">
+                       value="<?= htmlspecialchars($data['id_pendaftar'] ?? '') ?>">
 
                 <!-- Nama Lengkap -->
                 <div class="mb-3">
                     <label class="form-label">Nama Lengkap</label>
                     <input type="text"
                            name="nama_lengkap"
-                           value="<?= htmlspecialchars($data['nama_lengkap']) ?>"
+                           value="<?= htmlspecialchars($data['nama_lengkap'] ?? '') ?>"
                            class="form-control"
                            required>
                 </div>
@@ -41,7 +41,7 @@ $base = Config::base_url();
                     <label class="form-label">NISN</label>
                     <input type="text"
                            name="nisn"
-                           value="<?= htmlspecialchars($data['nisn']) ?>"
+                           value="<?= htmlspecialchars($data['nisn'] ?? '') ?>"
                            class="form-control"
                            required>
                 </div>
@@ -51,7 +51,7 @@ $base = Config::base_url();
                     <label class="form-label">Asal Sekolah</label>
                     <input type="text"
                            name="asal_sekolah"
-                           value="<?= htmlspecialchars($data['asal_sekolah']) ?>"
+                           value="<?= htmlspecialchars($data['asal_sekolah'] ?? '') ?>"
                            class="form-control"
                            required>
                 </div>
@@ -60,9 +60,18 @@ $base = Config::base_url();
                 <div class="mb-3">
                     <label class="form-label">Status Data</label>
                     <select name="status_data" class="form-select">
-                        <option value="baru" <?= $data['status_data']=='baru'?'selected':'' ?>>Baru</option>
-                        <option value="lengkap" <?= $data['status_data']=='lengkap'?'selected':'' ?>>Lengkap</option>
-                        <option value="ditolak" <?= $data['status_data']=='ditolak'?'selected':'' ?>>Ditolak</option>
+                        <option value="baru"
+                            <?= ($data['status_data'] ?? '') === 'baru' ? 'selected' : '' ?>>
+                            Baru
+                        </option>
+                        <option value="lengkap"
+                            <?= ($data['status_data'] ?? '') === 'lengkap' ? 'selected' : '' ?>>
+                            Lengkap
+                        </option>
+                        <option value="ditolak"
+                            <?= ($data['status_data'] ?? '') === 'ditolak' ? 'selected' : '' ?>>
+                            Ditolak
+                        </option>
                     </select>
                 </div>
 
@@ -72,7 +81,7 @@ $base = Config::base_url();
                         Simpan Perubahan
                     </button>
 
-                    <a href="data_ppdb.php" class="btn btn-secondary">
+                    <a href="/admin/ppdb" class="btn btn-secondary">
                         Kembali
                     </a>
                 </div>
