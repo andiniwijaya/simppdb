@@ -22,55 +22,68 @@
 
                 <!-- NAMA PENGGUNA -->
                 <div class="mb-3">
-                    <label class="form-label">Nama Pengguna</label>
-                    <input type="text"
-                           name="nama_pengguna"
-                           class="form-control"
-                           placeholder="contoh: admin01"
-                           required>
+                    <label for="nama_pengguna" class="form-label">Nama Pengguna</label>
+                    <input
+                        type="text"
+                        id="nama_pengguna"
+                        name="nama_pengguna"
+                        class="form-control"
+                        placeholder="contoh: admin01"
+                        required
+                    >
                 </div>
 
+                <!-- NISN -->
                 <div class="mb-3">
-    <label for="nisn" class="form-label">NISN</label>
-    <input
-        type="text"
-        id="nisn"
-        name="nisn"
-        class="form-control"
-        required
-    >
-</div>
+                    <label for="nisn" class="form-label">NISN</label>
+                    <input
+                        type="text"
+                        id="nisn"
+                        name="nisn"
+                        class="form-control"
+                        required
+                    >
+                </div>
 
                 <!-- EMAIL -->
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email"
-                           name="email"
-                           class="form-control"
-                           placeholder="user@email.com"
-                           required>
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="user@email.com"
+                        required
+                    >
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password"
-                           name="kata_sandi"
-                           class="form-control"
-                           placeholder="Minimal 8 karakter"
-                           minlength="8"
-                           required>
+                    <label for="kata_sandi" class="form-label">Password</label>
+                    <input
+                        type="password"
+                        id="kata_sandi"
+                        name="kata_sandi"
+                        class="form-control"
+                        placeholder="Minimal 8 karakter"
+                        minlength="8"
+                        required
+                    >
                 </div>
 
                 <!-- KONFIRMASI PASSWORD -->
                 <div class="mb-3">
-                    <label class="form-label">Konfirmasi Password</label>
-                    <input type="password"
-                           name="konfirmasi"
-                           class="form-control"
-                           placeholder="Ulangi password"
-                           minlength="8"
-                           required>
+                    <label for="konfirmasi" class="form-label">Konfirmasi Password</label>
+                    <input
+                        type="password"
+                        id="konfirmasi"
+                        name="konfirmasi"
+                        class="form-control"
+                        placeholder="Ulangi password"
+                        minlength="8"
+                        required
+                    >
                 </div>
 
                 <div class="d-flex justify-content-between">

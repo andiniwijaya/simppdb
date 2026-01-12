@@ -545,6 +545,7 @@ class DashboardController {
     if (
         empty($_POST['nama_pengguna']) ||
         empty($_POST['email']) ||
+        empty($_POST['NISN']) ||
         empty($_POST['kata_sandi']) ||
         empty($_POST['peran'])
     ) {
@@ -556,6 +557,7 @@ class DashboardController {
     $user->create([
         'nama_pengguna' => $_POST['nama_pengguna'],
         'email'         => $_POST['email'],
+        'NISN'         => $_POST['NISN'],
         'kata_sandi'    => password_hash($_POST['kata_sandi'], PASSWORD_DEFAULT),
         'peran'         => $_POST['peran']
     ]);
