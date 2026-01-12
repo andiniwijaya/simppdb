@@ -598,6 +598,10 @@ class DashboardController {
     header("Location: /dashboard/user/edit?id=" . $_POST['id']);
     exit;
 }
+public function delete()
+{
+    $this->deletePPDB();
+}
 
 
 }
