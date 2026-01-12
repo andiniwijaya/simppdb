@@ -29,34 +29,6 @@ $base = Config::base_url();
 <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
-<!-- ================= ALERT LOGIN BERHASIL ================= -->
-<?php if (!empty($_SESSION['login_success'])): ?>
-<script>
-    alert("✔ Login berhasil!\nSelamat datang, <?= addslashes($_SESSION['nama_pengguna']); ?>");
-
-    // redirect setelah alert ditutup (1 detik)
-    setTimeout(function () {
-        window.location.href = "<?= $base ?>/dashboard";
-    }, 1000);
-</script>
-<?php unset($_SESSION['login_success']); ?>
-<?php endif; ?>
-
-<!-- ================= LOGIN ERROR ================= -->
-<?php if (isset($_GET['error'])): ?>
-<script>
-    let errorType = "<?= htmlspecialchars($_GET['error']); ?>";
-
-    if (errorType === "wrong_password") {
-        alert("❌ Password salah!");
-    } else if (errorType === "user_not_found") {
-        alert("❌ Akun tidak ditemukan!");
-    } else {
-        alert("❌ Login gagal!");
-    }
-</script>
-<?php endif; ?>
-
 <div class="login-wrapper">
 
     <!-- ================= LEFT PANEL ================= -->
