@@ -27,6 +27,8 @@ $router->post('/dashboard/user/store', 'DashboardController@storeUser');
 $router->get('/admin/dashboard', 'DashboardController@index');
 $router->get('/siswa/dashboard', 'DashboardController@index');
 $router->get('/dashboard/pembayaran/hapus', 'DashboardController@hapusPembayaran');
+$router->get('/dashboard/hapusPembayaran', 'DashboardController@hapusPembayaran');
+
 
 
 
