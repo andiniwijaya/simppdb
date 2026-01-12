@@ -12,13 +12,7 @@ $siswa             = $siswa ?? [
     "nisn"         => "-"
 ];
 ?>
-<?php if (isset($_SESSION['login_success'])): ?>
-<div class="alert alert-success alert-dismissible fade show mb-4">
-    <i class="bi bi-check-circle me-2"></i>
-    Login berhasil, selamat datang <b><?= htmlspecialchars($_SESSION['nama_pengguna']) ?></b> 👋
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-<?php unset($_SESSION['login_success']); endif; ?>
+
 
 
 <h3 class="fw-bold mb-3">

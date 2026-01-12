@@ -40,6 +40,7 @@ class AuthController {
     /* =========================
        REGISTER PROCESS
     ========================== */
+
     public function processRegister(){
 
         $db        = new Database();
@@ -96,27 +97,27 @@ class AuthController {
             exit;
         }
 
-        // 1. insert ke tabel pengguna
+        // insert ke tabel pengguna
         $user_id = $user->insert($nisn, $username, $email, $pass);
 
-        // 2. insert NISN ke tabel pendaftar
+        // insert ke tabel pendaftar
         $pendaftar->insertBasic($user_id, $nisn);
 
-        // Set session user_id untuk konteks verifikasi NISN (meskipun ini mungkin tidak diperlukan di register, tapi dibiarkan sesuai instruksi)
+        // set session user
         $_SESSION['user_id'] = $user_id;
 
-        // Kode verifikasi NISN ini tampaknya salah tempat (mungkin dari metode lain seperti verifikasi formulir siswa), tapi dibiarkan tanpa dihapus sesuai instruksi. Perbaikan: tambahkan set session di atas agar tidak error.
-       $nisn_input = trim($_POST['nisn']);
-    $nisn_db = $pendaftar->getNisnByUserId($_SESSION['user_id']);
+        // verifikasi nisn (tetap dibiarkan sesuai struktur sebelumnya)
+        $nisn_input = trim($_POST['nisn']);
+        $nisn_db    = $pendaftar->getNisnByUserId($_SESSION['user_id']);
 
         if ($nisn_db !== null && $nisn_input !== $nisn_db) {
-    header("Location: /siswa/formulir?error=nisn_tidak_sesuai");
-    exit;
-}
+            header("Location: /siswa/formulir?error=nisn_tidak_sesuai");
+            exit;
+        }
 
-        // =========================
-
+        // ALERT REGISTRASI BERHASIL (DITAMPILKAN DI LOGIN)
         $_SESSION['success'] = 'Registrasi berhasil, silakan login';
+
         header("Location: /login");
         exit;
     }
@@ -127,7 +128,7 @@ class AuthController {
 
     public function processLogin(){
 
-        $db = new Database;
+        $db = new Database();
         $login_id = trim($_POST["login_id"]);
         $password = trim($_POST["password"]);
 
@@ -169,9 +170,10 @@ class AuthController {
         $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
         $_SESSION["role"]          = $row["peran"];
 
-        $_SESSION["login_success"] = true;
+        // ALERT LOGIN BERHASIL
+        $_SESSION["success"] = "Login berhasil. Selamat datang!";
 
-        // Perbaikan: Redirect berdasarkan role setelah login sukses, bukan kembali ke /login (yang akan loop).
+        // redirect sesuai role
         if ($_SESSION["role"] === 'admin') {
             header("Location: /admin/dashboard");
         } else {
@@ -186,7 +188,7 @@ class AuthController {
 
     public function processForgot(){
 
-        $db = new Database;
+        $db = new Database();
         $email = trim($_POST["email"]);
 
         $sql = "SELECT id_pengguna FROM pengguna WHERE email=? LIMIT 1";
@@ -218,7 +220,7 @@ class AuthController {
             exit;
         }
 
-        $db = new Database;
+        $db = new Database();
         $id = $_SESSION["reset_id"];
 
         $p1 = $_POST["password"];
@@ -231,14 +233,16 @@ class AuthController {
 
         $hash = password_hash($p1, PASSWORD_DEFAULT);
 
-        // Perbaikan: Gunakan prepared statement untuk keamanan, hindari SQL injection meskipun $id dari session.
-        $stmt = $db->conn->prepare("UPDATE pengguna SET kata_sandi = ? WHERE id_pengguna = ?");
+        $stmt = $db->conn->prepare(
+            "UPDATE pengguna SET kata_sandi = ? WHERE id_pengguna = ?"
+        );
         $stmt->bind_param("si", $hash, $id);
         $stmt->execute();
 
         unset($_SESSION["reset_id"]);
 
-        header("Location: /login?reset_ok");
+        $_SESSION['success'] = 'Password berhasil direset, silakan login';
+        header("Location: /login");
         exit;
     }
 }
