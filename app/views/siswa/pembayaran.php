@@ -6,16 +6,25 @@
         <i class="bi bi-cash-coin me-2"></i> Pembayaran Infaq Yayasan
     </h3>
 
-    <!-- INFO PEMBAYARAN -->
-    <div class="card p-4 mb-4">
-        <p><b>Total Infaq:</b> Rp 500.000</p>
-        <p><b>Sudah Dibayar:</b> Rp <?= number_format($totalBayar) ?></p>
-        <p><b>Sisa:</b> Rp <?= number_format(max($sisa, 0)) ?></p>
+        <!-- INFO PEMBAYARAN -->
+<div class="card p-4 mb-4">
+    <p><b>Total Infaq:</b> Rp 500.000</p>
+    <p><b>Sudah Dibayar:</b> Rp <?= number_format($totalBayar) ?></p>
+    <p><b>Sisa:</b> Rp <?= number_format(max($sisa, 0)) ?></p>
 
-        <span class="badge bg-<?= $status == "lunas" ? "success" : "warning" ?>">
-            <?= strtoupper($status) ?>
-        </span>
-    </div>
+    <hr>
+
+    <p><b>Rekening Pembayaran:</b></p>
+    <p>
+        Bank BRI<br>
+        No. Rekening: <b>1234-01-000567-53-1</b><br>
+        Atas Nama: <b>SMP PGRI Arjasari</b>
+    </p>
+
+    <span class="badge bg-<?= $status == "lunas" ? "success" : "warning" ?>">
+        <?= strtoupper($status) ?>
+    </span>
+</div>
 
     <!-- FORM PEMBAYARAN -->
     <?php if ($status != "lunas"): ?>
