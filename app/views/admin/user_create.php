@@ -30,7 +30,7 @@
                            required>
                 </div>
 
-                <<div class="mb-3">
+                <div class="mb-3">
     <label for="nisn" class="form-label">NISN</label>
     <input
         type="text"
