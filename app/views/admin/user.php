@@ -17,36 +17,39 @@ $base = Config::base_url();
 
 <body class="bg-light">
 
-<div class="container-fluid mt-4">
+<div class="container-fluid px-4 mt-4">
 
     <!-- ================= HEADER ================= -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold mb-0">Kelola User</h4>
-            <small class="text-muted">Manajemen akun pengguna sistem</small>
+            <h3 class="fw-bold mb-1">Kelola User</h3>
+            <div class="text-muted small">
+                Manajemen akun pengguna sistem PPDB
+            </div>
         </div>
 
-        <a href="/dashboard/user/create" class="btn btn-primary">
-            <i class="bi bi-person-plus"></i>
+        <a href="/dashboard/user/create" class="btn btn-primary btn-sm">
+            <i class="bi bi-person-plus me-1"></i>
             Tambah User
         </a>
     </div>
 
     <!-- ================= CARD ================= -->
-    <div class="card shadow-sm border-0">
+    <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
 
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-borderless table-hover align-middle mb-0">
 
-                    <thead class="table-light">
-                        <tr>
-                            <th width="5%">No</th>
+                    <!-- TABLE HEAD -->
+                    <thead class="bg-light border-bottom">
+                        <tr class="text-uppercase small text-muted">
+                            <th width="4%">#</th>
                             <th>Nama Pengguna</th>
                             <th>Email</th>
-                            <th>Kata Sandi</th>
-                            <th>Dibuat Pada</th>
-                            <th width="18%" class="text-center">Aksi</th>
+                            <th>Password</th>
+                            <th>Dibuat</th>
+                            <th width="14%" class="text-center">Aksi</th>
                         </tr>
                     </thead>
 
@@ -55,34 +58,46 @@ $base = Config::base_url();
                         <?php $no = 1; foreach ($users as $u): ?>
                         <tr>
 
-                            <td><?= $no++ ?></td>
+                            <td class="text-muted"><?= $no++ ?></td>
 
-                            <td class="fw-semibold">
-                                <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
+                            <!-- USERNAME -->
+                            <td>
+                                <div class="fw-semibold">
+                                    <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
+                                </div>
+                                <div class="small text-muted">
+                                    ID: <?= $u['id_pengguna'] ?>
+                                </div>
                             </td>
 
+                            <!-- EMAIL -->
                             <td>
                                 <?= htmlspecialchars($u['email']) ?>
                             </td>
 
-                            <td style="font-size:12px; word-break: break-all;">
-                                <span class="text-muted">
-                                    <?= htmlspecialchars($u['kata_sandi']) ?>
+                            <!-- PASSWORD -->
+                            <td>
+                                <span class="badge bg-secondary-subtle text-dark">
+                                    terenkripsi
                                 </span>
                             </td>
 
-                            <td>
+                            <!-- CREATED -->
+                            <td class="text-muted small">
                                 <?= htmlspecialchars($u['dibuat_pada']) ?>
                             </td>
 
+                            <!-- ACTION -->
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm">
                                     <a href="/dashboard/user/edit?id=<?= $u['id_pengguna'] ?>"
-                                       class="btn btn-warning">
+                                       class="btn btn-outline-warning"
+                                       title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <a href="/dashboard/user/delete?id=<?= $u['id_pengguna'] ?>"
-                                       class="btn btn-danger"
+                                       class="btn btn-outline-danger"
+                                       title="Hapus"
                                        onclick="return confirm('Yakin ingin menghapus user ini?')">
                                         <i class="bi bi-trash"></i>
                                     </a>
@@ -93,8 +108,8 @@ $base = Config::base_url();
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="text-center text-muted py-4">
-                                <i class="bi bi-people fs-4 d-block mb-1"></i>
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                <i class="bi bi-people fs-1 d-block mb-2"></i>
                                 Data user belum tersedia
                             </td>
                         </tr>
