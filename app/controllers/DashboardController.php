@@ -372,26 +372,49 @@ class DashboardController {
     }
 
     public function update()
-    {
-        if (!isset($_POST['id_pendaftar'])) {
-            header("Location: /admin/ppdb");
-            exit;
-        }
-
-        $pendaftar = new Pendaftar();
-        $pendaftar->updateByAdmin(
-            (int)$_POST['id_pendaftar'],
-            [
-                'nama_lengkap' => $_POST['nama_lengkap'],
-                'nisn'         => $_POST['nisn'],
-                'asal_sekolah' => $_POST['asal_sekolah'],
-                'status_data'  => $_POST['status_data']
-            ]
-        );
-
+{
+    if (!isset($_POST['id_pendaftar'])) {
         header("Location: /admin/ppdb");
         exit;
     }
+
+    // ===============================
+    // VALIDASI STATUS_DATA (WAJIB)
+    // ===============================
+    $allowedStatus = [
+        'baru',
+        'lengkap',
+        'terverifikasi',
+        'diterima',
+        'ditolak'
+    ];
+
+    $status_data = $_POST['status_data'] ?? 'baru';
+
+    // jika null / kosong / tidak valid
+    if (!in_array($status_data, $allowedStatus)) {
+        $status_data = 'baru';
+    }
+
+    // ===============================
+    // AMANKAN DATA LAIN
+    // ===============================
+    $data = [
+        'nama_lengkap' => trim($_POST['nama_lengkap'] ?? ''),
+        'nisn'         => trim($_POST['nisn'] ?? ''),
+        'asal_sekolah' => trim($_POST['asal_sekolah'] ?? ''),
+        'status_data'  => $status_data
+    ];
+
+    $pendaftar = new Pendaftar();
+    $pendaftar->updateByAdmin(
+        (int)$_POST['id_pendaftar'],
+        $data
+    );
+
+    header("Location: /admin/ppdb");
+    exit;
+}
 
     public function deletePPDB()
     {
