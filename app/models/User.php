@@ -99,20 +99,21 @@ class User {
         $stmt->bind_param("i", $id);
         $stmt->execute();
     }
-    public function create($data)
+   public function create($data)
 {
     $sql = "
         INSERT INTO pengguna 
-        (nama_pengguna, kata_sandi, email, peran)
-        VALUES (?, ?, ?, ?)
+        (nisn, nama_pengguna, email, kata_sandi, peran)
+        VALUES (?, ?, ?, ?, ?)
     ";
 
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param(
-        "ssss",
+        "sssss",
+        $data['nisn'],
         $data['nama_pengguna'],
-        $data['kata_sandi'],
         $data['email'],
+        $data['kata_sandi'],
         $data['peran']
     );
 
