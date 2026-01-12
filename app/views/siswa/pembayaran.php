@@ -12,7 +12,7 @@
             <div class="col-md-4 mb-2">
                 <div class="p-3 bg-light rounded">
                     <small class="text-muted">Total Infaq</small>
-                    <h6 class="fw-bold mt-1">Rp 500.000</h6>
+                    <h6 class="fw-bold mt-1">Rp 500000</h6>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
