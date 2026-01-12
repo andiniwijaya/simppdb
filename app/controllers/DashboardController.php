@@ -384,7 +384,7 @@ class DashboardController {
             ]
         );
 
-        header("Location: data_ppdb.php");
+        header("Location: /admin/ppdb");
         exit;
     }
 
