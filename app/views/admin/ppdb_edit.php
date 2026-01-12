@@ -57,23 +57,28 @@ $base = Config::base_url();
                 </div>
 
                 <!-- Status Data -->
-                <div class="mb-3">
-                    <label class="form-label">Status Data</label>
-                    <select name="status_data" class="form-select">
-                        <option value="baru"
-                            <?= ($data['status_data'] ?? '') === 'baru' ? 'selected' : '' ?>>
-                            Baru
-                        </option>
-                        <option value="lengkap"
-                            <?= ($data['status_data'] ?? '') === 'lengkap' ? 'selected' : '' ?>>
-                            Lengkap
-                        </option>
-                        <option value="ditolak"
-                            <?= ($data['status_data'] ?? '') === 'ditolak' ? 'selected' : '' ?>>
-                            Ditolak
-                        </option>
-                    </select>
-                </div>
+<div class="mb-3">
+    <label class="form-label">Status Data</label>
+    <select name="status_data" class="form-select">
+
+        <option value="belum_lengkap"
+            <?= ($data['status_data'] ?? '') === 'belum_lengkap' ? 'selected' : '' ?>>
+            Belum Lengkap
+        </option>
+
+        <option value="lengkap"
+            <?= ($data['status_data'] ?? '') === 'lengkap' ? 'selected' : '' ?>>
+            Lengkap
+        </option>
+
+        <option value="terverifikasi"
+            <?= ($data['status_data'] ?? '') === 'terverifikasi' ? 'selected' : '' ?>>
+            Terverifikasi
+        </option>
+
+    </select>
+</div>
+
 
                 <!-- Tombol -->
                 <div class="d-flex gap-2 mt-4">
