@@ -182,6 +182,15 @@ class Payment extends Database
 
             return ((int)$row['total'] >= self::TOTAL_INFAQ);
         }
+        // HAPUS PEMBAYARAN
+public function delete($id_pembayaran)
+{
+    $sql = "DELETE FROM pembayaran WHERE id_pembayaran = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $id_pembayaran);
+    return $stmt->execute();
+}
+
 
 
         }

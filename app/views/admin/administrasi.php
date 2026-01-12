@@ -46,26 +46,36 @@
     <?php endif; ?>
     </td>
 
-    <td style="text-align:center;">
-    <?php if($row["status_bayar"] === "menunggu"): ?>
+        <td style="text-align:center;">
+
+<?php if ($row["status_bayar"] === "menunggu"): ?>
+
     <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row['id_pembayaran'] ?>"
-    onclick="return confirm('Yakin pembayaran ini LUNAS?')"
-    style="color:green;font-weight:bold;">
-    ✔ Valid
+       onclick="return confirm('Yakin pembayaran ini LUNAS?')"
+       style="color:green;font-weight:bold;">
+        ✔ Valid
     </a>
-
     |
-
     <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row['id_pembayaran'] ?>"
-    onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
-    style="color:red;font-weight:bold;">
-    ✖ Tolak
+       onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
+       style="color:red;font-weight:bold;">
+        ✖ Tolak
+    </a>
+    |
+    <a href="<?= $base ?>/dashboard/pembayaran/hapus?id=<?= $row['id_pembayaran'] ?>"
+       onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
+       style="color:gray;font-weight:bold;">
+        🗑 Hapus
     </a>
 
-    <?php else: ?>
+<?php else: ?>
 
-    <?php endif; ?>
-    </td>
+    <span style="color:#999;">-</span>
+
+<?php endif; ?>
+
+</td>
+
 
     </tr>
     <?php endforeach; else: ?>

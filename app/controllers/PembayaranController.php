@@ -94,4 +94,27 @@ class PembayaranController {
         header("Location: /siswa/pembayaran");
         exit;
     }
+    public function hapusPembayaran()
+{
+    if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+        header("Location: /login");
+        exit;
+    }
+
+    if (!isset($_GET['id'])) {
+        header("Location: /dashboard/administrasi");
+        exit;
+    }
+
+    $id = (int) $_GET['id'];
+
+    $payment = new Payment();
+    $payment->delete($id);
+
+    $_SESSION['success'] = "Pembayaran berhasil dihapus";
+
+    header("Location: /dashboard/administrasi");
+    exit;
+}
+
 }

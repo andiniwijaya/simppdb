@@ -26,6 +26,8 @@ $router->post('/dashboard/user/store', 'DashboardController@storeUser');
 // ALIAS DASHBOARD BERDASARKAN ROLE (ANTI 404)
 $router->get('/admin/dashboard', 'DashboardController@index');
 $router->get('/siswa/dashboard', 'DashboardController@index');
+$router->get('/dashboard/pembayaran/hapus', 'DashboardController@hapusPembayaran');
+
 
 
 
