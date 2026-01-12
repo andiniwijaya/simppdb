@@ -24,6 +24,16 @@ if (!empty($ortu)) {
 <div class="formulir-page">
 <div class="content">
 
+<?php if (!empty($_SESSION['success_ortu'])): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> Data orang tua berhasil disimpan.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php unset($_SESSION['success_ortu']); endif; ?>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+
 <div class="d-flex justify-content-between align-items-center mb-3">
 
     <div>
