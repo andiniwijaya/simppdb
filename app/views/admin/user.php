@@ -24,7 +24,7 @@ $base = Config::base_url();
         <div>
             <h3 class="fw-bold mb-1">Kelola User</h3>
             <div class="text-muted small">
-                Manajemen akun pengguna sistem PPDB
+                Manajemen akun pengguna sistem
             </div>
         </div>
 
@@ -39,17 +39,17 @@ $base = Config::base_url();
         <div class="card-body p-0">
 
             <div class="table-responsive">
-                <table class="table table-borderless table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0">
 
                     <!-- TABLE HEAD -->
-                    <thead class="bg-light border-bottom">
-                        <tr class="text-uppercase small text-muted">
-                            <th width="4%">#</th>
+                    <thead class="table-light">
+                        <tr class="text-muted small text-uppercase">
+                            <th width="5%">No</th>
                             <th>Nama Pengguna</th>
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>Dibuat</th>
-                            <th width="14%" class="text-center">Aksi</th>
+                            <th>Kata Sandi</th>
+                            <th>Dibuat Pada</th>
+                            <th width="18%" class="text-center">Aksi</th>
                         </tr>
                     </thead>
 
@@ -61,13 +61,8 @@ $base = Config::base_url();
                             <td class="text-muted"><?= $no++ ?></td>
 
                             <!-- USERNAME -->
-                            <td>
-                                <div class="fw-semibold">
-                                    <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
-                                </div>
-                                <div class="small text-muted">
-                                    ID: <?= $u['id_pengguna'] ?>
-                                </div>
+                            <td class="fw-semibold">
+                                <?= htmlspecialchars($u['nama_pengguna'] ?? '-') ?>
                             </td>
 
                             <!-- EMAIL -->
@@ -75,11 +70,11 @@ $base = Config::base_url();
                                 <?= htmlspecialchars($u['email']) ?>
                             </td>
 
-                            <!-- PASSWORD -->
-                            <td>
-                                <span class="badge bg-secondary-subtle text-dark">
-                                    terenkripsi
-                                </span>
+                            <!-- PASSWORD (ISI TETAP ADA) -->
+                            <td style="max-width:260px;">
+                                <code class="text-muted small d-block text-break">
+                                    <?= htmlspecialchars($u['kata_sandi']) ?>
+                                </code>
                             </td>
 
                             <!-- CREATED -->
