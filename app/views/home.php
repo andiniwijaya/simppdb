@@ -73,8 +73,13 @@ $base = Config::base_url();
 <section id="profil" class="container py-5">
     <h2 class="section-title text-center">Tentang Sekolah</h2>
     <p class="text-center">
-        SMP PGRI Arjasari berdiri sejak tahun 1976 dan berkomitmen
-        mencetak generasi yang unggul, berkarakter, dan berprestasi.
+        SMP PGRI Arjasari berdiri sejak tahun 1976 dan berkomitmen.
+        Dibantu dengan para pendidik  profesional dan ahli,
+        kami terus menghasilkan pendidikan yang berkarakter bagi para siswa.
+        Berbagai prestasi baik di tingkat daerah maupun nasional telah di torehkan
+        atas nama SMP PGRI ARJASARI. Kami terus berkomitmen untuk mengashilkan generasi 
+        bangsa yang cerdas dan terampil.
+        
     </p>
 </section>
 
@@ -234,7 +239,7 @@ $base = Config::base_url();
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="info-card">
-                <h5>🗓 Jadwal</h5>
+                <h5>🗓 Jadwal Pendaftaran</h5>
                 <p>Gelombang 1: Jan – Mar<br>Gelombang 2: Apr – Jun</p>
             </div>
         </div>
@@ -249,7 +254,9 @@ $base = Config::base_url();
         <div class="col-md-4 mb-4">
             <div class="info-card">
                 <h5>📞 Kontak</h5>
-                <p>0821-2873-5795</p>
+                <p>0821-2873-5795 (Ibu Desi)</p>
+                <p>0812-2837-7141 (Bpk.Deni)</p>
+                <p>0857-2260-9598(Bpk.Deni)</p>
             </div>
         </div>
     </div>
