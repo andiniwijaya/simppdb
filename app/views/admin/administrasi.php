@@ -46,13 +46,12 @@
     <?php endif; ?>
     </td>
 
-    <td style="text-align:center;">
-    
-        <a href="<?= $base ?>/dashboard/hapusPembayaran?id=<?= $row['id_pembayaran'] ?>"
-   onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
-   style="color:red;font-weight:bold;">
-    🗑 Hapus
-</a>
+    <a href="<?= $base ?>/dashboard/pembayaran/hapus?id=<?= $row['id_pembayaran'] ?>"
+        onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
+        style="color:red;font-weight:bold;">
+        🗑 Hapus
+        </a>
+
 
     <?php if($row["status_bayar"] === "menunggu"): ?>
     <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=lunas&id=<?= $row['id_pembayaran'] ?>"
