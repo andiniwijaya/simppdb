@@ -97,6 +97,12 @@ if (!empty($ortu)) {
 
 <div class="row mb-3">
     <div class="col-md-6">
+        <label>NIK</label>
+        <input type="text" name="nik" maxlength="16" class="form-control" required
+               value="<?= $siswa['nik'] ?? '' ?>">
+    </div>
+
+    <div class="col-md-6">
         <label>NISN</label>
         <input type="text"
                name="nisn"
@@ -195,7 +201,7 @@ if (!empty($ortu)) {
     </div>
 </div>
 
-      
+
 
 <div class="mb-3">
     <label>Alamat</label>
