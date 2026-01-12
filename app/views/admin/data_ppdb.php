@@ -67,11 +67,9 @@ function esc($value)
                             Edit
                         </a>
 
-                        <a href="/admin/ppdb/delete?id=<?= esc($row['id_pendaftar'] ?? '') ?>"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Yakin ingin menghapus data ini?')">
-                            Hapus
-                        </a>
+                            <a href="/dashboard/deletePPDB?id=<?= $row['id_pendaftar'] ?>"
+                              onclick="return confirm('Yakin ingin menghapus data ini?')">
+
                     </td>
                 </tr>
             <?php endforeach; ?>
