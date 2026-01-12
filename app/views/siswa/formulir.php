@@ -87,13 +87,7 @@ if (!empty($ortu)) {
 
 <div class="card p-4 shadow-sm mb-4">
 <h5 class="fw-bold mb-3">Data Siswa</h5>
-<div class="row mb-3">
-    <div class="col-md-6">
-        <label>NIK</label>
-        <input type="text" name="nik" maxlength="16" class="form-control" required
-               value="<?= $siswa['nik'] ?? '' ?>">
-    </div>
-</div>
+
 
 <div class="row mb-3">
     <div class="col-md-6">
