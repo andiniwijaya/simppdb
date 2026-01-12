@@ -8,12 +8,15 @@ $base = Config::base_url();
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Portal Login | PPDB Online</title>
+    <meta charset="UTF-8">
+    <title>Portal Login | PPDB Online</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="<?= $base ?>/public/assets/css/login.css?v=<?= time() ?>">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<?= $base ?>/public/assets/css/login.css?v=<?= time() ?>">
 </head>
 
 <body>
@@ -21,7 +24,7 @@ $base = Config::base_url();
 <!-- ================= ALERT REGISTER BERHASIL ================= -->
 <?php if (!empty($_SESSION['success'])): ?>
 <script>
-    alert("<?= $_SESSION['success']; ?>");
+    alert("<?= addslashes($_SESSION['success']); ?>");
 </script>
 <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
@@ -29,15 +32,29 @@ $base = Config::base_url();
 <!-- ================= ALERT LOGIN BERHASIL ================= -->
 <?php if (!empty($_SESSION['login_success'])): ?>
 <script>
-    alert("✔ Login berhasil!\nSelamat datang, <?= $_SESSION['nama_pengguna']; ?>");
-    window.location.href = "/dashboard";
+    alert("✔ Login berhasil!\nSelamat datang, <?= addslashes($_SESSION['nama_pengguna']); ?>");
+
+    // redirect setelah alert ditutup (1 detik)
+    setTimeout(function () {
+        window.location.href = "<?= $base ?>/dashboard";
+    }, 1000);
 </script>
 <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
 
-<!-- ================= LOGIN ERROR DATA ================= -->
-<?php if (isset($_GET["error"])): ?>
-    <div id="login-error" data-type="<?= htmlspecialchars($_GET['error']) ?>"></div>
+<!-- ================= LOGIN ERROR ================= -->
+<?php if (isset($_GET['error'])): ?>
+<script>
+    let errorType = "<?= htmlspecialchars($_GET['error']); ?>";
+
+    if (errorType === "wrong_password") {
+        alert("❌ Password salah!");
+    } else if (errorType === "user_not_found") {
+        alert("❌ Akun tidak ditemukan!");
+    } else {
+        alert("❌ Login gagal!");
+    }
+</script>
 <?php endif; ?>
 
 <div class="login-wrapper">
@@ -84,7 +101,7 @@ $base = Config::base_url();
                     <input type="password"
                            name="password"
                            class="form-control pe-5"
-                           placeholder="Masukan Kata Sandi"
+                           placeholder="Masukkan Kata Sandi"
                            id="passField"
                            minlength="8"
                            required>
@@ -101,7 +118,7 @@ $base = Config::base_url();
                     </i>
 
                     <small class="text-muted">
-                        *Password Minimal 8 karakter
+                        *Password minimal 8 karakter
                     </small>
                 </div>
 
@@ -126,11 +143,13 @@ $base = Config::base_url();
                 </div>
 
             </form>
+
         </div>
     </div>
 
 </div>
 
+<!-- JS -->
 <script src="<?= $base ?>/public/assets/js/login.js"></script>
 </body>
 </html>
