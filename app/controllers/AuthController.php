@@ -102,10 +102,8 @@ class AuthController {
         // 2. insert NISN ke tabel pendaftar
         $pendaftar->insertBasic($user_id, $nisn);
 
-        // Set session user_id untuk konteks verifikasi NISN (meskipun ini mungkin tidak diperlukan di register, tapi dibiarkan sesuai instruksi)
         $_SESSION['user_id'] = $user_id;
 
-        // Kode verifikasi NISN ini tampaknya salah tempat (mungkin dari metode lain seperti verifikasi formulir siswa), tapi dibiarkan tanpa dihapus sesuai instruksi. Perbaikan: tambahkan set session di atas agar tidak error.
         $nisn_input = trim($_POST['nisn']);
         $nisn_db    = $pendaftar->getFormDataByUserId($_SESSION['user_id']);
 
@@ -113,8 +111,6 @@ class AuthController {
             header("Location: /siswa/formulir?error=nisn_tidak_sesuai");
             exit;
         }
-
-        // =========================
 
         $_SESSION['success'] = 'Registrasi berhasil, silakan login';
         header("Location: /login");
@@ -168,15 +164,10 @@ class AuthController {
         $_SESSION["user_id"]       = $row["id_pengguna"];
         $_SESSION["nama_pengguna"] = $row["nama_pengguna"];
         $_SESSION["role"]          = $row["peran"];
-
         $_SESSION["login_success"] = true;
 
-        // Perbaikan: Redirect berdasarkan role setelah login sukses, bukan kembali ke /login (yang akan loop).
-        if ($_SESSION["role"] === 'admin') {
-            header("Location: /admin/dashboard");
-        } else {
-            header("Location: /siswa/dashboard");
-        }
+        // ✅ PERBAIKAN UTAMA (SESUAI ROUTER)
+        header("Location: /dashboard");
         exit;
     }
 
@@ -231,8 +222,9 @@ class AuthController {
 
         $hash = password_hash($p1, PASSWORD_DEFAULT);
 
-        // Perbaikan: Gunakan prepared statement untuk keamanan, hindari SQL injection meskipun $id dari session.
-        $stmt = $db->conn->prepare("UPDATE pengguna SET kata_sandi = ? WHERE id_pengguna = ?");
+        $stmt = $db->conn->prepare(
+            "UPDATE pengguna SET kata_sandi = ? WHERE id_pengguna = ?"
+        );
         $stmt->bind_param("si", $hash, $id);
         $stmt->execute();
 
