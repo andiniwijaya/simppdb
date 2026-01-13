@@ -329,6 +329,50 @@ public function getNisnByUserId($id_pengguna)
     $r = $stmt->get_result()->fetch_assoc();
     return $r['nisn'] ?? null;
 }
+// ==============================
+// EXPORT DATA PPDB LENGKAP
+// ==============================
+public function getDataLengkapExport()
+{
+    $sql = "
+        SELECT 
+            p.id_pendaftar,
+            p.nama_lengkap,
+            p.nisn,
+            p.asal_sekolah,
+            p.status_data,
+            p.tanggal_daftar,
+
+            ayah.nama_orang_tua AS nama_ayah,
+            ayah.nomor_hp AS hp_ayah,
+
+            ibu.nama_orang_tua AS nama_ibu,
+            ibu.nomor_hp AS hp_ibu,
+
+            wali.nama_orang_tua AS nama_wali,
+            wali.nomor_hp AS hp_wali
+
+        FROM pendaftar p
+
+        LEFT JOIN orang_tua ayah 
+            ON ayah.id_pendaftar = p.id_pendaftar 
+            AND ayah.jenis = 'Ayah'
+
+        LEFT JOIN orang_tua ibu 
+            ON ibu.id_pendaftar = p.id_pendaftar 
+            AND ibu.jenis = 'Ibu'
+
+        LEFT JOIN orang_tua wali 
+            ON wali.id_pendaftar = p.id_pendaftar 
+            AND wali.jenis = 'Wali'
+
+        ORDER BY p.tanggal_daftar DESC
+    ";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 
 
 }
