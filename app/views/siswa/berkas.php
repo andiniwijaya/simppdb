@@ -131,9 +131,10 @@ foreach($berkasList as $key => $title):
 <tr>
     <td><?= ucwords(str_replace("_"," ",$b["jenis_berkas"])) ?></td>
     <td>
-        <a href="<?= $b["lokasi_berkas"] ?>" target="_blank">
-            Lihat
-        </a>
+            <a href="<?= Config::base_url() . '/' . $b["lokasi_berkas"] ?>" target="_blank">
+             Lihat
+            </a>
+
     </td>
     <td>
         <?php if($b["status_berkas"] === "valid"): ?>
