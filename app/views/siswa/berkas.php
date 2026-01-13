@@ -131,9 +131,13 @@ foreach($berkasList as $key => $title):
 <tr>
     <td><?= ucwords(str_replace("_"," ",$b["jenis_berkas"])) ?></td>
     <td>
-            <a href="<?= Config::base_url() . '/' . $b["lokasi_berkas"] ?>" target="_blank">
-             Lihat
+            <a href="<?= Config::base_url() . '/' . $b['lokasi_berkas'] ?>" 
+             target="_blank" 
+            class="btn btn-sm btn-primary">
+            Lihat
             </a>
+
+
 
     </td>
     <td>
