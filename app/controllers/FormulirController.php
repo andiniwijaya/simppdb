@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/OrangTua.php';
 
 class FormulirController {
 
-    // ===================== HALAMAN FORMULIR =====================
+    // HALAMAN FORMULIR
     public function index() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -39,7 +39,7 @@ class FormulirController {
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    // ===================== SIMPAN FORMULIR =====================
+    //  SIMPAN FORMULIR
     public function simpan() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -55,16 +55,28 @@ class FormulirController {
         $pendaftar = new Pendaftar();
         $ortu      = new OrangTua();
 
-        // ---------- SIMPAN DATA SISWA ----------
+        //  SIMPAN DATA SISWA 
         if ($_POST["save"] === "siswa") {
 
-            $pendaftar->saveSiswa($user_id, $_POST);
+            $data = [
+    'nama_lengkap' => trim($_POST['nama_lengkap'] ?? ''),
+    'nisn'         => trim($_POST['nisn'] ?? ''),
+    'asal_sekolah' => trim($_POST['asal_sekolah'] ?? '')
+];
+
+// VALIDASI NISN
+if (!preg_match('/^[0-9]{10}$/', $data['nisn'])) {
+    die("NISN harus 10 digit angka");
+}
+
+$pendaftar->saveSiswa($user_id, $data);
+
 
             header("Location: /siswa/formulir?tab=siswa&saved=1");
             exit;
         }
 
-        // ---------- AMBIL ID PENDAFTAR (WAJIB ANGKA) ----------
+        // AMBIL ID PENDAFTAR (WAJIB ANGKA) 
         $dataSiswa = $pendaftar->getFormDataByUserId($user_id);
         $id_pendaftar = $dataSiswa['id_pendaftar'] ?? 0;
 
@@ -73,7 +85,7 @@ class FormulirController {
             exit;
         }
 
-        // ---------- SIMPAN DATA ORANG TUA ----------
+        //  SIMPAN DATA ORANG TUA 
         if ($_POST["save"] === "ortu") {
 
             $ortu->saveAyah($id_pendaftar, $_POST);
@@ -86,7 +98,7 @@ class FormulirController {
             exit;
         }
 
-        // ---------- SIMPAN DATA WALI ----------
+        //  SIMPAN DATA WALI 
         if ($_POST["save"] === "wali") {
 
             $ortu->saveWali($id_pendaftar, $_POST);
@@ -102,7 +114,7 @@ class FormulirController {
         exit;
     }
 
-    // ===================== CETAK FORMULIR =====================
+    //  CETAK FORMULIR 
     public function cetak() {
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");

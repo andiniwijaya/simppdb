@@ -20,19 +20,13 @@
 <?php foreach ($list as $row): ?>
 <tr>
 
-    <!-- NAMA -->
     <td><?= htmlspecialchars($row["nama_lengkap"] ?? "-") ?></td>
 
-    <!-- JUMLAH -->
     <td>Rp <?= number_format($row["jumlah"], 0, ",", ".") ?></td>
-
-    <!-- TANGGAL -->
+>
     <td><?= date("d-m-Y", strtotime($row["tanggal_bayar"])) ?></td>
 
-    <!-- JENIS -->
     <td>Infaq PPDB</td>
-
-    <!-- BUKTI -->
     <td>
         <?php if (!empty($row["bukti_transfer"])): ?>
             <a href="<?= $base ?>/public/uploads/pembayaran/<?= $row["bukti_transfer"] ?>" target="_blank">
@@ -42,8 +36,6 @@
             -
         <?php endif; ?>
     </td>
-
-    <!-- STATUS -->
     <td>
         <?php if ($row["status_bayar"] === "lunas"): ?>
             <span style="color:green;font-weight:bold;">✔ Lunas</span>
@@ -53,10 +45,8 @@
             <span style="color:orange;font-weight:bold;">⏳ Menunggu</span>
         <?php endif; ?>
     </td>
-
-    <!-- AKSI -->
     <td>
-        <!-- HAPUS -->
+
         <a href="<?= $base ?>/dashboard/pembayaran/hapus?id=<?= $row['id_pembayaran'] ?>"
            onclick="return confirm('Yakin HAPUS pembayaran ini? Data tidak bisa dikembalikan!')"
            style="color:red;font-weight:bold;margin-right:8px;">
@@ -72,7 +62,6 @@
                ✔ Valid
             </a>
 
-            <!-- TOLAK -->
             <a href="<?= $base ?>/dashboard/verifikasibayar?aksi=tolak&id=<?= $row['id_pembayaran'] ?>"
                onclick="return confirm('Yakin pembayaran ini DITOLAK?')"
                style="color:red;font-weight:bold;">

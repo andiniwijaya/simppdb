@@ -14,12 +14,9 @@ $base = Config::base_url();
 
 <body class="bg-light">
 
-<!-- ================= AUDIO ================= -->
 <audio id="bg-music" loop>
     <source src="<?= $base ?>/public/background.mp3" type="audio/mpeg">
 </audio>
-
-<!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-expand bg-white shadow-sm sticky-top">
     <div class="container justify-content-center gap-2">
         <a class="btn btn-outline-primary btn-sm bio-link" href="#andini">Andini</a>
@@ -32,7 +29,6 @@ $base = Config::base_url();
 
 <div class="container py-5">
 
-    <!-- ANDINI -->
     <section id="andini" class="row align-items-center mb-5">
         <div class="col-md-7">
             <h6 class="text-primary">Hello, It’s Me</h6>
@@ -56,7 +52,6 @@ $base = Config::base_url();
         </div>
     </section>
 
-    <!-- MUTIARA -->
     <section id="mutiara" class="row align-items-center mb-5 flex-md-row-reverse">
         <div class="col-md-7">
             <h6 class="text-primary">Hello, It’s Me</h6>
@@ -79,7 +74,6 @@ $base = Config::base_url();
         </div>
     </section>
 
-    <!-- SILVIA -->
     <section id="silvia" class="row align-items-center mb-5">
         <div class="col-md-7">
             <h6 class="text-primary">Hello, It’s Me</h6>
@@ -102,7 +96,6 @@ $base = Config::base_url();
         </div>
     </section>
 
-    <!-- SUNDARI -->
     <section id="sundari" class="row align-items-center mb-5 flex-md-row-reverse">
         <div class="col-md-7">
             <h6 class="text-primary">Hello, It’s Me</h6>
@@ -125,7 +118,6 @@ $base = Config::base_url();
         </div>
     </section>
 
-    <!-- WINDA -->
     <section id="winda" class="row align-items-center">
         <div class="col-md-7">
             <h6 class="text-primary">Hello, It’s Me</h6>
@@ -149,12 +141,11 @@ $base = Config::base_url();
 
 </div>
 
-<!-- ================= AUDIO SCRIPT (KUNCI) ================= -->
 <script>
 const bgMusic = document.getElementById("bg-music");
 let played = false;
 
-// audio dipicu SAAT KLIK NAVBAR (user gesture)
+// audio dipicu SAAT KLIK NAVBAR 
 document.querySelectorAll(".bio-link").forEach(link => {
     link.addEventListener("click", () => {
         if (!played) {

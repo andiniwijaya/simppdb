@@ -190,8 +190,4 @@ public function delete($id_pembayaran)
     $stmt->bind_param("i", $id_pembayaran);
     return $stmt->execute();
 }
-
-
-
-
         }

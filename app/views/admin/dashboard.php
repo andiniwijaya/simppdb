@@ -21,7 +21,6 @@ $base = Config::base_url();
     <h2>Dashboard Admin</h2>
     <p>Halo, <b><?= $_SESSION["nama_pengguna"] ?></b></p>
 
-    <!-- ================= TOP STAT BAR ================= -->
     <div class="stat-row">
 
         <div class="stat-card purple">
@@ -66,12 +65,10 @@ $base = Config::base_url();
 
     </div>
 
-    <!-- ================= PROGRESS BAR ================= -->
     <div class="progress">
         <div class="progress-bar red" style="width: <?= $persen_tolak ?>%"></div>
     </div>
 
-    <!-- ================= TABLE TERBARU ================= -->
     <h3 style="margin-top:30px; margin-bottom:15px;">Pendaftar Terbaru</h3>
 
     <div class="table-box">

@@ -5,9 +5,7 @@ require_once __DIR__ . '/../models/Pendaftar.php';
 
 class BerkasController
 {
-    /* ===============================
-       HALAMAN BERKAS SISWA
-    =============================== */
+       //HALAMAN BERKAS SISWA
     public function index()
     {
         // CEK LOGIN
@@ -45,9 +43,7 @@ class BerkasController
         require __DIR__ . '/../views/siswa/layout_siswa.php';
     }
 
-    /* ===============================
-       UPLOAD BERKAS SISWA
-    =============================== */
+       //UPLOAD BERKAS SISWA
     public function upload()
     {
         // CEK LOGIN
@@ -85,10 +81,7 @@ class BerkasController
             header("Location: /siswa/berkas_pendaftar");
             exit;
         }
-
-        /* ===============================
-           SETTING UPLOAD
-        =============================== */
+           //SETTING UPLOAD
 
         // FOLDER SERVER
         $uploadDir = __DIR__ . "/../../public/uploads/berkas/";
@@ -121,10 +114,7 @@ class BerkasController
         $pathServer = $uploadDir . $namaFile;
         $pathDB = $namaFile;
 
-
-        /* ===============================
-           PROSES UPLOAD
-        =============================== */
+           //PROSES UPLOAD
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $pathServer)) {
 
             $berkasModel->insert(

@@ -377,10 +377,7 @@ class DashboardController {
         header("Location: /admin/ppdb");
         exit;
     }
-
-    // ===============================
     // VALIDASI STATUS_DATA (WAJIB)
-    // ===============================
     $allowedStatus = [
         'baru',
         'lengkap',
@@ -395,10 +392,7 @@ class DashboardController {
     if (!in_array($status_data, $allowedStatus)) {
         $status_data = 'baru';
     }
-
-    // ===============================
     // AMANKAN DATA LAIN
-    // ===============================
     $data = [
         'nama_lengkap' => trim($_POST['nama_lengkap'] ?? ''),
         'nisn'         => trim($_POST['nisn'] ?? ''),
@@ -479,7 +473,7 @@ public function cetakPPDB()
     // Ambil semua pengumuman
     $list = $pengumuman->getAll();
 
-    // 🔁 SINKRON DENGAN STATUS PENDAFTAR
+    //  SINKRON DENGAN STATUS PENDAFTAR
     foreach ($list as $row) {
 
         $id_pendaftar = $row['id_pendaftar'];
@@ -653,8 +647,6 @@ public function hapusPembayaran()
     header("Location: /dashboard/administrasi");
     exit;
 }
-
-
 
 
 }

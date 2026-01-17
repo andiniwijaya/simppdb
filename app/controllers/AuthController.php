@@ -8,10 +8,7 @@ require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Pendaftar.php';
 
 class AuthController {
-
-    /* =========================
-       VIEW
-    ========================== */
+       //VIEW
 
     public function homepage(){
         require __DIR__ . '/../views/home.php';
@@ -36,10 +33,7 @@ class AuthController {
         }
         require __DIR__ . '/../views/reset_password.php';
     }
-
-    /* =========================
-       REGISTER PROCESS
-    ========================== */
+       //REGISTER PROCESS
 
     public function processRegister(){
 
@@ -115,16 +109,13 @@ class AuthController {
             exit;
         }
 
-        // ALERT REGISTRASI BERHASIL (DITAMPILKAN DI LOGIN)
+        // ALERT REGISTRASI BERHASIL 
         $_SESSION['success'] = 'Registrasi berhasil, silakan login';
 
         header("Location: /login");
         exit;
     }
-
-    /* =========================
-       LOGIN PROCESS
-    ========================== */
+       //LOGIN PROCESS
 
     public function processLogin(){
 
@@ -180,9 +171,7 @@ class AuthController {
         exit;
     }
 
-    /* =========================
-       FORGOT PASSWORD
-    ========================== */
+       //FORGOT PASSWORD
 
     public function processForgot(){
 
@@ -206,10 +195,7 @@ class AuthController {
         header("Location: /reset");
         exit;
     }
-
-    /* =========================
-       RESET PASSWORD
-    ========================== */
+       //RESET PASSWORD
 
     public function processReset(){
 

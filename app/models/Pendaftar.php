@@ -68,7 +68,6 @@ class Pendaftar extends Database {
      //SIMPAN / UPDATE DATA SISWA
     public function saveSiswa($id_pengguna, $d)
 {
-    // ===== TAMBAHAN INI =====
     if (!isset($d['nisn'])) {
         throw new Exception("NISN tidak ditemukan");
     }
@@ -78,8 +77,6 @@ class Pendaftar extends Database {
     if (!preg_match('/^[0-9]{10}$/', $d['nisn'])) {
         throw new Exception("NISN harus 10 digit angka");
     }
-    // =======================
-
     $this->sanitizeEnum($d);
 
     $existId = $this->getId($id_pengguna);
@@ -169,7 +166,7 @@ class Pendaftar extends Database {
     $jumlah_saudara = (int)$d['jumlah_saudara'];
     $tinggi_badan   = (int)$d['tinggi_badan'];
     $berat_badan    = (int)$d['berat_badan'];
-    $tahun_lulus    = (string)$d['tahun_lulus']; // YEAR WAJIB STRING
+    $tahun_lulus    = (string)$d['tahun_lulus']; 
     $id_pendaftar   = (int)$id;
 
     $sql = "UPDATE pendaftar SET
@@ -253,9 +250,7 @@ class Pendaftar extends Database {
 
         public function updateByAdmin($id, $data)
 {
-    // =========================
     // VALIDASI STATUS ENUM
-    // =========================
     $allowedStatus = [
         'belum_lengkap',
         'lengkap',
@@ -264,14 +259,11 @@ class Pendaftar extends Database {
 
     $status_data = $data['status_data'] ?? 'belum_lengkap';
 
-    // jika status tidak valid, paksa default
     if (!in_array($status_data, $allowedStatus, true)) {
         $status_data = 'belum_lengkap';
     }
 
-    // =========================
     // QUERY UPDATE
-    // =========================
     $sql = "UPDATE pendaftar 
             SET nama_lengkap = ?, 
                 nisn = ?, 
@@ -346,9 +338,7 @@ public function getNisnByUserId($id_pengguna)
     $r = $stmt->get_result()->fetch_assoc();
     return $r['nisn'] ?? null;
 }
-// ==============================
 // EXPORT DATA PPDB LENGKAP
-// ==============================
 public function getDataLengkapExport()
 {
     $sql = "
@@ -389,7 +379,5 @@ public function getDataLengkapExport()
     $result = $this->conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
-
-
 
 }

@@ -83,7 +83,7 @@ class PembayaranController {
             die("Gagal mengunggah bukti pembayaran");
         }
 
-        // SIMPAN DB \
+        // SIMPAN DB 
         $payment->insert(
             $id_pendaftar,
             $jumlah,
