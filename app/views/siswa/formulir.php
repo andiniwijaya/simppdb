@@ -266,7 +266,7 @@ if (!empty($ortu)) {
 </div>
 
 <button class="btn btn-primary w-100 mb-5">
-    <?= $hasSiswa ? 'Update Data Diri' : 'Simpan Data Diri' ?>
+    <?= $hasSiswa ? 'Simpan Data Diri' : 'Update Data Diri' ?>
 </button>
 
 </form>
