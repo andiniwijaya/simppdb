@@ -103,6 +103,7 @@ if (!empty($ortu)) {
                class="form-control"
                placeholder="Masukkan NISN"
                required>
+               value="<?= $siswa['nisn'] ?? '' ?>">
     </div>
 </div>
 
