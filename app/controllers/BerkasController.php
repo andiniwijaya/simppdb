@@ -119,7 +119,8 @@ class BerkasController
 
         // PATH SERVER & DB
         $pathServer = $uploadDir . $namaFile;
-        $pathDB     = "public/uploads/berkas/" . $namaFile;
+        $pathDB = $namaFile;
+
 
         /* ===============================
            PROSES UPLOAD
