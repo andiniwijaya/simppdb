@@ -105,6 +105,7 @@ if (!empty($ortu)) {
            value="<?= htmlspecialchars($siswa['nisn'] ?? '') ?>"
            required>
 </div>
+</div>
 
 
 <div class="row mb-3">
