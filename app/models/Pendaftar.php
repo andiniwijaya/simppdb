@@ -67,16 +67,29 @@ class Pendaftar extends Database {
 
      //SIMPAN / UPDATE DATA SISWA
     public function saveSiswa($id_pengguna, $d)
-    {
-        $this->sanitizeEnum($d);
-
-        $existId = $this->getId($id_pengguna);
-        if ($existId > 0) {
-            return $this->update($existId, $d);
-        }
-
-        return $this->insert($id_pengguna, $d);
+{
+    // ===== TAMBAHAN INI =====
+    if (!isset($d['nisn'])) {
+        throw new Exception("NISN tidak ditemukan");
     }
+
+    $d['nisn'] = trim($d['nisn']);
+
+    if (!preg_match('/^[0-9]{10}$/', $d['nisn'])) {
+        throw new Exception("NISN harus 10 digit angka");
+    }
+    // =======================
+
+    $this->sanitizeEnum($d);
+
+    $existId = $this->getId($id_pengguna);
+    if ($existId > 0) {
+        return $this->update($existId, $d);
+    }
+
+    return $this->insert($id_pengguna, $d);
+}
+
 
      //INSERT DATA
         private function insert($id_pengguna, $d)
@@ -115,6 +128,8 @@ class Pendaftar extends Database {
     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     $stmt = $this->conn->prepare($sql);
+    $d['nisn'] = substr(trim($d['nisn']), 0, 10);
+
 
     $stmt->bind_param(
         "issssssssssiisssiissss",  // 22 karakter: i + 10s + 2i + 3s + 2i + 4s
@@ -182,6 +197,8 @@ class Pendaftar extends Database {
         WHERE id_pendaftar=?";
 
     $stmt = $this->conn->prepare($sql);
+    $d['nisn'] = substr(trim($d['nisn']), 0, 10);
+
     
     $stmt->bind_param(
         "ssssssssssiisssiissssi",  // 23 karakter: 10s + 2i + 3s + 2i + 5s + 1i
