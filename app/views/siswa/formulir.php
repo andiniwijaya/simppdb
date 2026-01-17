@@ -96,16 +96,16 @@ if (!empty($ortu)) {
                value="<?= $siswa['nik'] ?? '' ?>">
     </div>
 
-    <div class="col-md-6">
-        <label>NISN</label>
-        <input type="text"
-               name="nisn"
-               class="form-control"
-               placeholder="Masukkan NISN"
-               required>
-               value="<?= $siswa['nisn'] ?? '' ?>">
-    </div>
+        <div class="col-md-6">
+    <label>NISN</label>
+    <input type="text"
+           name="nisn"
+           class="form-control"
+           placeholder="Masukkan NISN"
+           value="<?= htmlspecialchars($siswa['nisn'] ?? '') ?>"
+           required>
 </div>
+
 
 <div class="row mb-3">
     <div class="col-md-6">
