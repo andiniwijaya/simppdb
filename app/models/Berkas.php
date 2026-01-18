@@ -4,7 +4,7 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class Berkas extends Database {
 
-    // ================= AMBIL SEMUA BERKAS SISWA =================
+    //AMBIL SEMUA BERKAS SISWA
     public function getAll($id_pendaftar)
     {
         $sql = "SELECT * FROM berkas_pendaftar WHERE id_pendaftar = ?";
@@ -14,7 +14,7 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    // ================= CEK DUPLIKASI JENIS BERKAS =================
+    // CEK DUPLIKASI JENIS BERKAS
     public function getByJenis($id_pendaftar, $jenis)
     {
         $sql = "SELECT id_berkas FROM berkas_pendaftar 
@@ -25,7 +25,7 @@ class Berkas extends Database {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // ================= INSERT BERKAS =================
+    // INSERT BERKAS
     public function insert($id_pendaftar, $jenis, $lokasi)
     {
         $sql = "INSERT INTO berkas_pendaftar 
@@ -37,7 +37,7 @@ class Berkas extends Database {
         return $stmt->execute();
     }
 
-    // ================= CEK STATUS KELENGKAPAN =================
+    // CEK STATUS KELENGKAPAN
     public function getStatusLengkap($id_pendaftar)
     {
         $wajib = [
@@ -73,7 +73,7 @@ class Berkas extends Database {
         return "lengkap";
     }
 
-    // ================= CEK SEMUA VALID =================
+    //CEK SEMUA VALID
     public function isSemuaBerkasValid($id_pendaftar)
     {
         $wajib = [
@@ -107,7 +107,7 @@ class Berkas extends Database {
         return true;
     }
 
-    // ================= HITUNG PROGRESS (%) =================
+    //  HITUNG PROGRESS (%)
     public function getProgress($id_pendaftar)
     {
         $wajib = [
@@ -131,7 +131,7 @@ class Berkas extends Database {
         return round(($done / count($wajib)) * 100);
     }
 
-    // ================= AMBIL SEMUA BERKAS (ADMIN) =================
+    //AMBIL SEMUA BERKAS (ADMIN)
         public function getAllForAdmin()
     {
         $sql = "SELECT 
@@ -151,7 +151,7 @@ class Berkas extends Database {
         return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     }
 
-    // ================= UPDATE STATUS BERKAS =================
+    // UPDATE STATUS BERKAS
     public function updateStatus($id_berkas, $status)
     {
         $sql = "UPDATE berkas_pendaftar SET status_berkas=? WHERE id_berkas=?";
@@ -160,7 +160,7 @@ class Berkas extends Database {
         return $stmt->execute();
     }
 
-    // ================= AMBIL ID PENDAFTAR DARI BERKAS =================
+    // AMBIL ID PENDAFTAR DARI BERKAS
     public function getPendaftarId($id_berkas)
     {
         $sql = "SELECT id_pendaftar FROM berkas_pendaftar WHERE id_berkas=?";
