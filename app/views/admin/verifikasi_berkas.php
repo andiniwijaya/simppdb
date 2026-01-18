@@ -76,7 +76,7 @@ $base = Config::base_url();
                                         <td class="text-center">
                                             <?php if ($status === 'menunggu'): ?>
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="/dashboard/validBerkas?id=<?= $row['id_berkas'] ?>" class="btn btn-success" onclick="return confirm('Validkan berkas ini?')">
+                                                    <a href="/publi/validBerkas?id=<?= $row['id_berkas'] ?>" class="btn btn-success" onclick="return confirm('Validkan berkas ini?')">
                                                         <i class="bi bi-check-lg"></i>
                                                     </a>
                                                     <a href="/dashboard/invalidBerkas?id=<?= $row['id_berkas'] ?>" class="btn btn-danger" onclick="return confirm('Tolak berkas ini?')">
