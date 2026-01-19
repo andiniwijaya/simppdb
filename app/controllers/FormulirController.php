@@ -69,7 +69,7 @@ class FormulirController {
         'alamat'          => trim($_POST['alamat'] ?? ''),
         'status_tinggal'  => $_POST['status_tinggal'] ?? 'bersama_ortu',
         'asal_sekolah'    => trim($_POST['asal_sekolah'] ?? ''),
-        
+
         'anak_ke'         => $_POST['anak_ke'] !== '' ? (int)$_POST['anak_ke'] : 1,
         'jumlah_saudara'  => $_POST['jumlah_saudara'] !== '' ? (int)$_POST['jumlah_saudara'] : 0,
         'tinggi_badan'    => $_POST['tinggi_badan'] !== '' ? (int)$_POST['tinggi_badan'] : 0,
@@ -137,31 +137,47 @@ class FormulirController {
 
     //  CETAK FORMULIR 
     public function cetak() {
-        if (!isset($_SESSION["user_id"])) {
-            header("Location: /login");
-            exit;
-        }
-
-        $user_id   = $_SESSION["user_id"];
-        $pendaftar = new Pendaftar();
-        $ortu      = new OrangTua();
-
-        $siswa = $pendaftar->getFormDataByUserId($user_id);
-        $id_pendaftar = $siswa['id_pendaftar'] ?? 0;
-
-        if ($id_pendaftar == 0) {
-            header("Location: /siswa/formulir");
-            exit;
-        }
-
-        $data = [
-            "siswa" => $siswa,
-            "ortu"  => $ortu->getOrtuByPendaftar($id_pendaftar),
-            "wali"  => $ortu->getWaliByPendaftar($id_pendaftar)
-        ];
-
-        extract($data);
-
-        require __DIR__ . '/../views/siswa/cetak_formulir.php';
+    if (!isset($_SESSION["user_id"])) {
+        header("Location: /login");
+        exit;
     }
+
+    $user_id   = $_SESSION["user_id"];
+    $pendaftar = new Pendaftar();
+    $ortu      = new OrangTua();
+
+    $siswa = $pendaftar->getFormDataByUserId($user_id);
+    $id_pendaftar = $siswa['id_pendaftar'] ?? 0;
+
+    if ($id_pendaftar == 0) {
+        header("Location: /siswa/formulir");
+        exit;
+    }
+
+    // 🔥 SUSUN ULANG DATA ORANG TUA
+    $ortuRaw = $ortu->getOrtuByPendaftar($id_pendaftar);
+
+    $ortuData = [
+        'ayah' => null,
+        'ibu'  => null
+    ];
+
+    foreach ($ortuRaw as $o) {
+        if ($o['jenis'] === 'Ayah') {
+            $ortuData['ayah'] = $o;
+        } elseif ($o['jenis'] === 'Ibu') {
+            $ortuData['ibu'] = $o;
+        }
+    }
+
+    $data = [
+        "siswa" => $siswa,
+        "ortu"  => $ortuData,
+        "wali"  => $ortu->getWaliByPendaftar($id_pendaftar)
+    ];
+
+    extract($data);
+
+    require __DIR__ . '/../views/siswa/cetak_formulir.php';
+}
 }
