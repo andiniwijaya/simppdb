@@ -69,8 +69,7 @@ class FormulirController {
         'alamat'          => trim($_POST['alamat'] ?? ''),
         'status_tinggal'  => $_POST['status_tinggal'] ?? 'bersama_ortu',
         'asal_sekolah'    => trim($_POST['asal_sekolah'] ?? ''),
-
-        // === FIELD INT NOT NULL (WAJIB ADA) ===
+        
         'anak_ke'         => $_POST['anak_ke'] !== '' ? (int)$_POST['anak_ke'] : 1,
         'jumlah_saudara'  => $_POST['jumlah_saudara'] !== '' ? (int)$_POST['jumlah_saudara'] : 0,
         'tinggi_badan'    => $_POST['tinggi_badan'] !== '' ? (int)$_POST['tinggi_badan'] : 0,
