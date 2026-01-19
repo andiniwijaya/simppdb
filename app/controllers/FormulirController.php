@@ -58,23 +58,45 @@ class FormulirController {
         //  SIMPAN DATA SISWA 
         if ($_POST["save"] === "siswa") {
 
-            $data = [
-    'nama_lengkap' => trim($_POST['nama_lengkap'] ?? ''),
-    'nisn'         => trim($_POST['nisn'] ?? ''),
-    'asal_sekolah' => trim($_POST['asal_sekolah'] ?? '')
-];
+    $data = [
+        'nik'             => trim($_POST['nik'] ?? ''),
+        'nisn'            => trim($_POST['nisn'] ?? ''),
+        'nama_lengkap'    => trim($_POST['nama_lengkap'] ?? ''),
+        'jenis_kelamin'   => $_POST['jenis_kelamin'] ?? 'Laki-laki',
+        'tempat_lahir'    => trim($_POST['tempat_lahir'] ?? ''),
+        'tanggal_lahir'   => $_POST['tanggal_lahir'] ?? '2000-01-01',
+        'agama'           => $_POST['agama'] ?? 'Islam',
+        'alamat'          => trim($_POST['alamat'] ?? ''),
+        'status_tinggal'  => $_POST['status_tinggal'] ?? 'bersama_ortu',
+        'asal_sekolah'    => trim($_POST['asal_sekolah'] ?? ''),
 
-// VALIDASI NISN
-if (!preg_match('/^[0-9]{10}$/', $data['nisn'])) {
-    die("NISN harus 10 digit angka");
+        // === FIELD INT NOT NULL (WAJIB ADA) ===
+        'anak_ke'         => $_POST['anak_ke'] !== '' ? (int)$_POST['anak_ke'] : 1,
+        'jumlah_saudara'  => $_POST['jumlah_saudara'] !== '' ? (int)$_POST['jumlah_saudara'] : 0,
+        'tinggi_badan'    => $_POST['tinggi_badan'] !== '' ? (int)$_POST['tinggi_badan'] : 0,
+        'berat_badan'     => $_POST['berat_badan'] !== '' ? (int)$_POST['berat_badan'] : 0,
+        'tahun_lulus'     => $_POST['tahun_lulus'] !== '' ? (int)$_POST['tahun_lulus'] : 0,
+
+        'status_anak'     => $_POST['status_anak'] ?? 'kandung',
+        'yatim_status'    => $_POST['yatim_status'] ?? 'bukan',
+        'bahasa_rumah'    => trim($_POST['bahasa_rumah'] ?? ''),
+        'penyakit'        => trim($_POST['penyakit'] ?? ''),
+        'nomor_hp'        => trim($_POST['nomor_hp'] ?? ''),
+        'email'           => trim($_POST['email'] ?? '')
+    ];
+
+    // VALIDASI NISN
+    if (!preg_match('/^[0-9]{10}$/', $data['nisn'])) {
+        die("NISN harus 10 digit angka");
+    }
+
+    $pendaftar->saveSiswa($user_id, $data);
+
+    header("Location: /siswa/formulir?tab=siswa&saved=1");
+    exit;
 }
 
-$pendaftar->saveSiswa($user_id, $data);
 
-
-            header("Location: /siswa/formulir?tab=siswa&saved=1");
-            exit;
-        }
 
         // AMBIL ID PENDAFTAR (WAJIB ANGKA) 
         $dataSiswa = $pendaftar->getFormDataByUserId($user_id);
