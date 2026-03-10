@@ -35,11 +35,11 @@ $base = Config::base_url();
             <h2 class="fw-bold">Andini Wijayanti</h2>
             <h5 class="text-muted">Project Manager</h5>
             <p>
-                Saya adalah mahasiswi RPL yang berperan sebagai Project Manager
-                dalam pengembangan sistem informasi PPDB. Saya bertanggung jawab
-                menyusun perencanaan proyek, mengatur pembagian tugas tim,
-                mengoordinasikan komunikasi, serta memastikan setiap tahapan
-                pengembangan sistem berjalan sesuai jadwal dan kebutuhan pengguna.
+                Saya berperan sebagai Project Manager dalam pengembangan 
+                sistem informasi PPDB. Saya bertanggung jawab menyusun
+                perencanaan proyek, mengatur pembagian tugas tim, mengoordinasikan
+                komunikasi, serta memastikan setiap tahapan pengembangan sistem
+                berjalan sesuai jadwal dan kebutuhan pengguna.
             </p>
             <a href="https://www.instagram.com/ann.wijay" target="_blank" class="text-dark fs-4">
                 <i class="bi bi-instagram"></i>
